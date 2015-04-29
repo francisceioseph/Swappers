@@ -32,7 +32,7 @@ public class SplashActivity extends Activity {
 
     private void loadMainClass(){
         Intent intent = new Intent();
-        intent.setClass(SplashActivity.this, MainActivity.class);
+        intent.setClass(SplashActivity.this, LoginActivity.class);
         startActivity(intent);
 
         this.finish();

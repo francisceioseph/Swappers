@@ -12,5 +12,6 @@
     <string name="title_activity_splash">Swappers</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="logo_login_description">Swappers Logo</string>
 
 </resources>
