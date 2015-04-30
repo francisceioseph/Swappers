@@ -13,5 +13,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="logo_login_description">Swappers Logo</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>
