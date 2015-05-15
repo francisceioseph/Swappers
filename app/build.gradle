@@ -1,11 +1,15 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    mavenCentral()
+}
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "br.edu.ifce.swappers.swappers"
-        minSdkVersion 22
+        minSdkVersion 19
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -24,4 +28,12 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.google.android.gms:play-services:6.5.87'
+
+//    Floating action button
+    compile 'com.getbase:floatingactionbutton:1.9.0'
+
+//    Google Navigation Drawer
+    compile 'it.neokree:GoogleNavigationDrawer:0.6'
+
+
 }
