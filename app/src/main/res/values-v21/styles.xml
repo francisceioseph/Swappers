@@ -5,16 +5,21 @@
         <item name="android:colorPrimary">@color/color_primary</item>
         <item name="android:colorPrimaryDark">@color/color_primary_dark</item>
         <item name="android:colorAccent">@color/color_accent</item>
+
+        <item name="android:navigationBarColor">@color/color_primary_dark</item>
+        <item name="android:background">@color/color_background_color</item>
     </style>
 
-    <style name="ToolbarTheme" parent="AppTheme">
-        <item name="android:textColorPrimary">@color/white</item>
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/primary_text_default_material_dark</item>
+        <item name="android:textColorSecondary">@color/background_material_light</item>
 
-        <item name="actionMenuTextColor">@color/abc_primary_text_material_light</item>
-        <item name="android:textColorSecondary">@color/abc_secondary_text_material_light</item>
-
-        <item name="android:popupMenuStyle">@style/Widget.AppCompat.PopupMenu</item>
         <item name="android:background">@color/color_primary_dark</item>
+    </style>
+
+    <style name="ToolbarTheme.Menu" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/abc_primary_text_material_light</item>
+        <item name="android:background">@color/background_material_light</item>
     </style>
 
 </resources>

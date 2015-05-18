@@ -13,6 +13,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="logo_login_description">Swappers Logo</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Books</string>
+    <string name="title_activity_login">Sign In</string>
+    <string name="title_activity_register">Sign Up</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
