@@ -16,19 +16,19 @@
             android:name=".activities.SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme" >
         </activity>
+
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/title_activity_register"
@@ -38,9 +38,31 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.LoginActivity" />
         </activity>
+
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme" >
+        </activity>
+
+        <activity
+            android:name=".activities.DetailBookActivity"
+            android:label="@string/title_activity_detail_book"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".activities.DetailPlaceActivity"
+            android:label="@string/title_activity_detail_place"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
         </activity>
     </application>
 
