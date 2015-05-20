@@ -13,7 +13,7 @@
         <item name="android:textColorPrimary">@color/primary_text_default_material_dark</item>
         <item name="android:textColorSecondary">@color/background_material_light</item>
 
-        <item name="android:background">@color/color_primary_dark</item>
+        <item name="android:background">@color/color_primary</item>
     </style>
 
     <style name="ToolbarTheme.Menu" parent="Theme.AppCompat.Light.NoActionBar">
