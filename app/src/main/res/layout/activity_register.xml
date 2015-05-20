@@ -31,7 +31,8 @@
                 android:layout_height="138dp"
                 android:src="@drawable/ic_person_giant"
                 app:cb_color="@color/white"
-                app:cb_pressedRingWidth="10dp" />
+                app:cb_pressedRingWidth="10dp"
+                android:id="@+id/userPhotoButton" />
 
             <TextView
                 android:layout_width="wrap_content"
