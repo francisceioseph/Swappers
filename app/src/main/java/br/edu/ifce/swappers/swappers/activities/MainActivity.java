@@ -55,6 +55,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         this.addSection(aboutSection);
         this.addSection(settingsSection);
+
+        this.setDefaultSectionLoaded(this.getSectionList().indexOf(booksSection));
     }
 
     private MaterialAccount loadAccount(){
