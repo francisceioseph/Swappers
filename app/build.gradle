@@ -35,4 +35,12 @@ dependencies {
 //    Material Navigation Drawer
     compile 'it.neokree:MaterialNavigationDrawer:1.3.3'
 
+//    Card View
+    compile 'com.android.support:cardview-v7:22.1.1'
+
+//    Circular Image View
+    compile 'de.hdodenhof:circleimageview:1.3.0'
+
+//    Circular Button
+    compile 'com.github.markushi:circlebutton:1.1'
 }

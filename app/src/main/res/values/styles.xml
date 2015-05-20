@@ -7,6 +7,10 @@
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
+    <style name="AppMaterial" parent="Theme.AppCompat.Light">
+
+    </style>
+
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <!--Text Color & Action menu three dots color-->

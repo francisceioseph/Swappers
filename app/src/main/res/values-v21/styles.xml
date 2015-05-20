@@ -14,6 +14,13 @@
         <item name="android:navigationBarColor">@color/color_primary_dark</item>
     </style>
 
+    <style name="AppMaterial" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/color_primary</item>
+        <item name="android:colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="android:colorAccent">@color/color_accent</item>
+        <item name="android:navigationBarColor">@color/color_primary_dark</item>
+    </style>
+
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColorPrimary">@color/primary_text_default_material_dark</item>
         <item name="android:textColorSecondary">@color/background_material_light</item>

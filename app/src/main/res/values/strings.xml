@@ -22,5 +22,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_detail_book">DetailBookActivity</string>
     <string name="title_activity_detail_place">DetailPlaceActivity</string>
+    <string name="logo_description">Swappers Logo</string>
 
 </resources>

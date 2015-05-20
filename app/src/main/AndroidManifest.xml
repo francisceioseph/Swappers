@@ -16,24 +16,30 @@
         <activity
             android:name=".activities.SplashActivity"
             android:label="@string/title_activity_splash"
-            android:theme="@style/AppTheme" >
-
+            android:theme="@style/AppMaterial" >
         </activity>
 
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppMaterial" >
         </activity>
 
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName=".activities.LoginActivity"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppMaterial" >
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.LoginActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -41,11 +47,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
