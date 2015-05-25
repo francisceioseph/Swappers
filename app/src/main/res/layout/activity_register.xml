@@ -32,7 +32,7 @@
                 android:src="@drawable/ic_person_giant"
                 app:cb_color="@color/white"
                 app:cb_pressedRingWidth="10dp"
-                android:id="@+id/userPhotoButton" />
+                android:id="@+id/userPhotoCircleButton" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,7 +76,8 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/nameEditText" />
+                        android:id="@+id/nameEditText"
+                        android:textColor="@color/color_accent_dark" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -91,7 +92,8 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:ems="10"
-                        android:id="@+id/emailEditText" />
+                        android:id="@+id/emailEditText"
+                        android:textColor="@color/color_accent_dark" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -106,7 +108,8 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:ems="10"
-                        android:id="@+id/passwordEditText" />
+                        android:id="@+id/passwordEditText"
+                        android:textColor="@color/color_accent_dark"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -121,7 +124,8 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:ems="10"
-                        android:id="@+id/confimationEditText" />
+                        android:id="@+id/confimationEditText"
+                        android:textColor="@color/color_accent_dark" />
 
                 </LinearLayout>
 
@@ -133,7 +137,8 @@
                 android:background="@color/color_accent_medium"
                 android:textColor="@color/background_material_light"
                 android:layout_margin="10dp"
-                android:text="register now"/>
+                android:text="register now"
+                android:id="@+id/registerButton"/>
 
 
         </LinearLayout>
