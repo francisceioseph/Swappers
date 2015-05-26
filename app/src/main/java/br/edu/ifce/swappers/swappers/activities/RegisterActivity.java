@@ -3,6 +3,7 @@ package br.edu.ifce.swappers.swappers.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,8 +13,9 @@ import android.widget.Button;
 
 import at.markushi.ui.CircleButton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 
-public class RegisterActivity extends AppCompatActivity{
+public class RegisterActivity extends AppCompatActivity implements UserPhotoDialogFragment.UserPhotoDialogListener{
 
     Toolbar toolbar;
     Button  registerButton;
@@ -73,8 +75,8 @@ public class RegisterActivity extends AppCompatActivity{
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Open a Dialog to know if the user wants to open a gallery or a camera
-
+                UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment();
+                dialogFragment.show(getSupportFragmentManager(), "User Photo Dialog Fragment");
             }
         };
 
@@ -122,5 +124,16 @@ public class RegisterActivity extends AppCompatActivity{
 
     private void openCamera(){
         //TODO Open a Camera
+    }
+
+//    Methods from UserPhotoDialogFragment
+    @Override
+    public void onGalleryClick(DialogFragment dialogFragment) {
+        //TODO Open Gallery Here
+    }
+
+    @Override
+    public void onCameraClick(DialogFragment dialogFragment) {
+        //TODO Open Camera Here
     }
 }
