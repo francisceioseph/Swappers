@@ -23,5 +23,6 @@
     <string name="title_activity_detail_book">DetailBookActivity</string>
     <string name="title_activity_detail_place">DetailPlaceActivity</string>
     <string name="logo_description">Swappers Logo</string>
+    <string name="userPhotoDialogTitle">Profile Picture</string>
 
 </resources>

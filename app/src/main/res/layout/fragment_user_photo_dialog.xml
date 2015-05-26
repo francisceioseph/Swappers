@@ -13,13 +13,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Choose from where get your photos"
+        android:text="@string/userPhotoDialogTitle"
         android:id="@+id/textView2"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:textAlignment="gravity" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Select how you want to provide us your profile picture"
+        android:id="@+id/textSelectPicture"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -35,8 +46,8 @@
             android:gravity="center_horizontal">
 
             <at.markushi.ui.CircleButton
-                android:layout_width="138dp"
-                android:layout_height="138dp"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
                 android:src="@drawable/ic_photo_camera"
                 app:cb_color="@color/color_accent_dark"
                 app:cb_pressedRingWidth="10dp"
@@ -59,8 +70,8 @@
             android:gravity="center_horizontal">
 
             <at.markushi.ui.CircleButton
-                android:layout_width="138dp"
-                android:layout_height="138dp"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
                 android:src="@drawable/ic_photo_album"
                 app:cb_color="@color/color_accent_dark"
                 app:cb_pressedRingWidth="10dp"
