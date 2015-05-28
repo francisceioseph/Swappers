@@ -30,7 +30,7 @@
                 android:layout_width="138dp"
                 android:layout_height="138dp"
                 android:src="@drawable/ic_person_giant"
-                android:id="@+id/userPhotoCircleImageView"
+                android:id="@+id/user_photo_circle_image_view"
                 app:border_width="1dp"
                 app:border_color="@color/transparent"/>
 
@@ -76,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/nameEditText"
+                        android:id="@+id/user_name_edit_text"
                         android:textColor="@color/color_accent_dark" />
 
                     <TextView
@@ -92,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:ems="10"
-                        android:id="@+id/emailEditText"
+                        android:id="@+id/user_email_edit_text"
                         android:textColor="@color/color_accent_dark" />
 
                     <TextView
@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:ems="10"
-                        android:id="@+id/passwordEditText"
+                        android:id="@+id/user_password_edit_text"
                         android:textColor="@color/color_accent_dark"/>
 
                     <TextView
@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:ems="10"
-                        android:id="@+id/confimationEditText"
+                        android:id="@+id/user_password_confirmation_edit_text"
                         android:textColor="@color/color_accent_dark" />
 
                 </LinearLayout>

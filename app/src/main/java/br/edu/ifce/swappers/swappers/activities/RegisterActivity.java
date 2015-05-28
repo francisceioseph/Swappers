@@ -6,86 +6,53 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import android.widget.EditText;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.view.View.*;
+import static android.view.View.OnClickListener;
 
 public class RegisterActivity extends AppCompatActivity implements UserPhotoDialogFragment.UserPhotoDialogListener{
 
-    private Toolbar toolbar;
-    private Button  registerButton;
-    private CircleImageView userPhotoCircleImageView;
-
     private static final short CAMERA_INTENT_CODE  = 1015;
     private static final short GALLERY_INTENT_CODE = 1016;
+
+    private Toolbar toolbar;
+    private CircleImageView userPhotoCircleImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        this.toolbar                  = (Toolbar) findViewById(R.id.toolbar);
-        this.registerButton           = (Button)  findViewById(R.id.registerButton);
-        this.userPhotoCircleImageView = (CircleImageView) findViewById(R.id.userPhotoCircleImageView);
-
+        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
         this.setUpActivityToolbar();
-        this.registerButton.setOnClickListener(this.makeRegisterButtonClickListener());
+
+        Button registerButton = (Button) findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(this.makeRegisterButtonClickListener());
+
+        this.userPhotoCircleImageView = (CircleImageView) findViewById(R.id.user_photo_circle_image_view);
         this.userPhotoCircleImageView.setOnClickListener(this.makeUserPhotoCircleButtonClickListener());
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_register, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Bitmap userPhotoBitmap;
 
         if (requestCode == CAMERA_INTENT_CODE && resultCode == RESULT_OK){
-
             userPhotoBitmap = this.retrieveImageFromCameraResult(data);
             this.userPhotoCircleImageView.setImageBitmap(userPhotoBitmap);
         }
         else if (requestCode == GALLERY_INTENT_CODE && resultCode == RESULT_OK) {
-
             userPhotoBitmap = this.retrieveImageFromGalleryResult(data);
             this.userPhotoCircleImageView.setImageBitmap(userPhotoBitmap);
         }
@@ -93,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     private void setUpActivityToolbar(){
         if (this.toolbar != null){
-            setSupportActionBar(toolbar);
+            this.setSupportActionBar(this.toolbar);
         }
     }
 
@@ -116,12 +83,12 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     }
 
     private OnClickListener makeRegisterButtonClickListener(){
-
         OnClickListener clickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (isRegisterFormValid()){
+                    RegisterActivity.this.saveRegisterInformation();
                     RegisterActivity.this.startMainActivity();
                 }
                 else{
@@ -167,7 +134,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     public void onGalleryClick(DialogFragment dialogFragment) {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(galleryIntent, GALLERY_INTENT_CODE);
-
     }
 
     @Override
@@ -181,22 +147,48 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     private Bitmap retrieveImageFromCameraResult(Intent data){
         Bundle extras = data.getExtras();
-        Bitmap imageBitmap = (Bitmap) extras.get("data");
 
-        return imageBitmap;
+        return (Bitmap) extras.get("data");
     }
 
     private Bitmap retrieveImageFromGalleryResult(Intent data){
-        Uri selectedImageUri = data.getData();
-        String[] filePathColumn = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(selectedImageUri, filePathColumn, null, null, null);
+        Uri selectedImageUri;
 
-        cursor.moveToFirst();
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-        String picturePath = cursor.getString(columnIndex);
+        String picturePath;
+        String[] filePathColumn;
+
+        Cursor cursor;
+        int columnIndex;
+
+
+        selectedImageUri = data.getData();
+        filePathColumn = new String[]{ MediaStore.Images.Media.DATA };
+        cursor = getContentResolver().query(selectedImageUri, filePathColumn, null, null, null);
+
+        cursor.moveToFirst()
+        columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        picturePath = cursor.getString(columnIndex);
+
         cursor.close();
 
-        Bitmap image = BitmapFactory.decodeFile(picturePath);
-        return image;
+        return BitmapFactory.decodeFile(picturePath);
+    }
+
+    /*
+    *
+    * Local and Webservice database comunication methods
+    *
+    * */
+
+    private void saveRegisterInformation(){
+        EditText userNameEditText     = (EditText) findViewById(R.id.user_name_edit_text);
+        EditText userEmail            = (EditText) findViewById(R.id.user_email_edit_text);
+        EditText userPasswordEditText = (EditText) findViewById(R.id.user_password_confirmation_edit_text);
+
+        //TODO Save data information on database
+    }
+
+    private void syncToRemoteDatabase(String userName, String userEmail, String userPassword){
+        //TODO Send data to webservice remote database
     }
 }
