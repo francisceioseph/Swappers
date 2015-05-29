@@ -165,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         filePathColumn = new String[]{ MediaStore.Images.Media.DATA };
         cursor = getContentResolver().query(selectedImageUri, filePathColumn, null, null, null);
 
-        cursor.moveToFirst()
+        cursor.moveToFirst();
         columnIndex = cursor.getColumnIndex(filePathColumn[0]);
         picturePath = cursor.getString(columnIndex);
 
