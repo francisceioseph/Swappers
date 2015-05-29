@@ -9,8 +9,8 @@ android {
     buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "br.edu.ifce.swappers.swappers"
-        minSdkVersion 19
-        targetSdkVersion 22
+        minSdkVersion 14
+        targetSdkVersion 20
         versionCode 1
         versionName "1.0"
     }

@@ -1,5 +1,6 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,9 +20,11 @@ import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountListener;
 
-public class MainActivity extends MaterialNavigationDrawer implements MaterialAccountListener{
+public class MainActivity extends Activity {
 
-    @Override
+ /* Posteriormente implentar: extends MaterialNavigationDrawer implements MaterialAccountListener
+
+ @Override
     public void init(Bundle savedInstance) {
 
         MaterialAccount userAccount = this.loadAccount();
@@ -30,7 +33,14 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         this.setAccountListener(this);
 
         this.buildMainMenu();
+    }*/
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_best_books);
     }
+/*
 
     private void buildMainMenu() {
 
@@ -118,5 +128,5 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
