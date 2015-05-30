@@ -41,14 +41,14 @@ public class RecommendationsFragment extends Fragment {
     }
 
     private void initViewComponents(View rootView) {
-        this.nextRecommendationImageButton    = (ImageButton) rootView.findViewById(R.id.next_book_image_button);
-        this.previousRecommendationImageButton  = (ImageButton) rootView.findViewById(R.id.previous_book_image_button);
-        this.seePlacesOnMapsButton        = (Button) rootView.findViewById(R.id.see_places_of_near_book);
+        this.nextRecommendationImageButton      = (ImageButton) rootView.findViewById(R.id.next_recommendation_image_button);
+        this.previousRecommendationImageButton  = (ImageButton) rootView.findViewById(R.id.previous_recommendation_image_button);
+        this.seePlacesOnMapsButton              = (Button) rootView.findViewById(R.id.see_places_of_recommendation);
 
-        this.coverRecommendationCircleImageView = (CircleImageView) rootView.findViewById(R.id.cover_near_book);
+        this.coverRecommendationCircleImageView = (CircleImageView) rootView.findViewById(R.id.cover_recommendation_book);
 
-        this.titleRecommendationTextView        = (TextView) rootView.findViewById(R.id.title_near_book);
-        this.authorsRecommendationTextView      = (TextView) rootView.findViewById(R.id.authors_near_book);
+        this.titleRecommendationTextView        = (TextView) rootView.findViewById(R.id.title_recommendation);
+        this.authorsRecommendationTextView      = (TextView) rootView.findViewById(R.id.authors_recommendation);
     }
 
     private void initViewListeners() {
