@@ -26,6 +26,4 @@ public class RecommendationsFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recomendations, container, false);
     }
-
-
 }

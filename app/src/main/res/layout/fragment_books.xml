@@ -5,9 +5,6 @@
     android:layout_height="match_parent"
     tools:context="br.edu.ifce.swappers.swappers.fragments.principal.BooksFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
     <android.support.v4.app.FragmentTabHost
         android:layout_width="match_parent"
         android:layout_height="match_parent"

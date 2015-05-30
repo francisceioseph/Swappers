@@ -23,10 +23,6 @@ public class BooksFragment extends Fragment {
 
     private FragmentTabHost tabHost;
 
-    private static final int NEAR_BOOKS_TAB_POSITION = 0;
-    private static final int RECOMMENDATIONS_TAB_POSITION = 1;
-
-
     public BooksFragment() {
         // Required empty public constructor
     }
@@ -53,6 +49,13 @@ public class BooksFragment extends Fragment {
         this.stylizeTabsTextView();
 
         return rootView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        this.tabHost = null;
     }
 
     private void stylizeTabsTextView(){
