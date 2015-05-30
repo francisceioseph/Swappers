@@ -14,9 +14,6 @@ import android.widget.Toast;
 import br.edu.ifce.swappers.swappers.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class NearBooksFragment extends Fragment {
 
     ImageButton nextNearBookImageButton;

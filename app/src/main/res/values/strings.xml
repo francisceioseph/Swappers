@@ -29,5 +29,9 @@
     <string name="author_near_book">Book Authors Here</string>
     <string name="previous_near_book_button">previous book</string>
     <string name="next_near_book_button">next_near_book</string>
+    <string name="author_recommendation_book">Recommendation Authors Here</string>
+    <string name="title_recommendation_book">Recommendation Title Here</string>
+    <string name="next_recommendation_button_description">next recommendation</string>
+    <string name="previous_recommendation_button_description">previous recommendation</string>
 
 </resources>
