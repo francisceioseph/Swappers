@@ -1,9 +1,10 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
 
-import android.app.Fragment;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,15 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
+import br.edu.ifce.swappers.swappers.fragments.tabs.books.RecommendationsFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BooksFragment extends Fragment {
 
-    private TabHost tabHost;
+    private FragmentTabHost tabHost;
 
     private static final int NEAR_BOOKS_TAB_POSITION = 0;
     private static final int RECOMMENDATIONS_TAB_POSITION = 1;
@@ -33,20 +36,17 @@ public class BooksFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_books, container, false);
 
-        this.tabHost = (TabHost) rootView.findViewById(R.id.tabHost);
-        this.tabHost.setup();
+        this.tabHost = (FragmentTabHost) rootView.findViewById(R.id.tabHost);
+        this.tabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
 
         TabHost.TabSpec nearBooks       = this.tabHost.newTabSpec("nearBooks");
         TabHost.TabSpec recommendations = this.tabHost.newTabSpec("recommendations");
 
         nearBooks.setIndicator("NEAR BOOKS");
-        nearBooks.setContent(R.id.nearBooks);
-
         recommendations.setIndicator("RECOMMENDATIONS");
-        recommendations.setContent(R.id.recommendations);
 
-        this.tabHost.addTab(nearBooks);
-        this.tabHost.addTab(recommendations);
+        this.tabHost.addTab(nearBooks, NearBooksFragment.class, null);
+        this.tabHost.addTab(recommendations, RecommendationsFragment.class, null);
 
         this.tabHost.setCurrentTab(0);
 
