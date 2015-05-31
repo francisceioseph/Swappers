@@ -24,7 +24,7 @@ public class BooksFragment extends Fragment {
     private FragmentTabHost tabHost;
 
     public BooksFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -32,8 +32,8 @@ public class BooksFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_books, container, false);
 
-        this.tabHost = (FragmentTabHost) rootView.findViewById(R.id.tabHost);
-        this.tabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
+        this.tabHost = (FragmentTabHost) rootView.findViewById(R.id.books_tabHost);
+        this.tabHost.setup(this.getActivity(), this.getChildFragmentManager(), android.R.id.tabcontent);
 
         TabHost.TabSpec nearBooks       = this.tabHost.newTabSpec("nearBooks");
         TabHost.TabSpec recommendations = this.tabHost.newTabSpec("recommendations");
@@ -46,7 +46,7 @@ public class BooksFragment extends Fragment {
 
         this.tabHost.setCurrentTab(0);
 
-        this.stylizeTabsTextView();
+        this.stylizeTabsTextView(this.tabHost);
 
         return rootView;
     }
@@ -58,19 +58,19 @@ public class BooksFragment extends Fragment {
         this.tabHost = null;
     }
 
-    private void stylizeTabsTextView(){
+    private void stylizeTabsTextView(FragmentTabHost tabHost){
         ColorStateList tabTextColors;
         TabWidget tabWidget;
         TextView tabTextView;
         View tabView;
 
-        int tabCount;
+        int tabAmount;
 
-        tabWidget     = this.tabHost.getTabWidget();
+        tabWidget     = tabHost.getTabWidget();
         tabTextColors = this.getResources().getColorStateList(R.color.tab_text_selector);
-        tabCount      = tabWidget.getTabCount();
+        tabAmount     = tabWidget.getTabCount();
 
-        for (int i = 0; i < tabCount; i++){
+        for (int i = 0; i < tabAmount; i++){
             tabView = tabWidget.getChildTabViewAt(i);
             tabTextView = (TextView) tabView.findViewById(android.R.id.title);
             tabTextView.setTextColor(tabTextColors);
