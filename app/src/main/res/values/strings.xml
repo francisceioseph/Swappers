@@ -40,5 +40,7 @@
     <string name="adapter_book_title">Book Title</string>
     <string name="adapter_book_authors">Book Authors</string>
     <string name="adapter_book_publisher">Publisher</string>
+    <string name="setings_personal_info_header">Personal Information</string>
+    <string name="settings_account_header">Account Settings</string>
 
 </resources>
