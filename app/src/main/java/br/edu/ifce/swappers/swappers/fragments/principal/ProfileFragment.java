@@ -52,6 +52,13 @@ public class ProfileFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        this.profileTabHost = null;
+    }
+
     private void stylizeTabsTextView(FragmentTabHost tabHost){
         ColorStateList tabTextColors;
         TabWidget tabWidget;
