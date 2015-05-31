@@ -5,4 +5,5 @@
     <string name="title_near_book">Book Title Here</string>
     <string name="previous_near_book_button">previous book</string>
     <string name="next_near_book_button">next_near_book</string>
+    <string name="profile_cover_photo_description">cover photo of user profile</string>
 </resources>
