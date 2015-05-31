@@ -36,5 +36,9 @@
     <string name="profile_cover_photo_description">cover photo of user profile</string>
     <string name="profile_user_name_content">The Name Of The User</string>
     <string name="profile_user_city_content">The City Name Of The User</string>
+    <string name="adapter_book_cover_description">Book Cover</string>
+    <string name="adapter_book_title">Book Title</string>
+    <string name="adapter_book_authors">Book Authors</string>
+    <string name="adapter_book_publisher">Publisher</string>
 
 </resources>
