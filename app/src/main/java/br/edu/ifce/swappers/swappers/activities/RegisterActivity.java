@@ -10,12 +10,14 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
+import br.edu.ifce.swappers.swappers.webservice.UserService;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.view.View.OnClickListener;
@@ -182,13 +184,21 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     private void saveRegisterInformation(){
         EditText userNameEditText     = (EditText) findViewById(R.id.user_name_edit_text);
-        EditText userEmail            = (EditText) findViewById(R.id.user_email_edit_text);
-        EditText userPasswordEditText = (EditText) findViewById(R.id.user_password_confirmation_edit_text);
+        EditText userEmailEditText    = (EditText) findViewById(R.id.user_email_edit_text);
+        EditText userPasswordEditText = (EditText) findViewById(R.id.user_password_edit_text);
+        EditText userPasswordConfirmationEditText = (EditText) findViewById(R.id.user_password_confirmation_edit_text);
 
+        String userName = userNameEditText.getText().toString();
+        String userEmail = userEmailEditText.getText().toString();
+        String userPassword = userPasswordEditText.getText().toString();
+
+        syncToRemoteDatabase(userName,userEmail,userPassword);
         //TODO Save data information on database
     }
 
     private void syncToRemoteDatabase(String userName, String userEmail, String userPassword){
         //TODO Send data to webservice remote database
+        UserService.authenticateUserWithWS(userName,userEmail,userPassword, getApplicationContext());
+
     }
 }
