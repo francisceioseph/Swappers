@@ -78,7 +78,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     }
 
     private Bitmap loadUserPhoto() {
-        BitmapDrawable userPhotoDrawer = (BitmapDrawable) this.getResources().getDrawable(R.drawable.ic_launcher);
+        BitmapDrawable userPhotoDrawer = (BitmapDrawable) this.getResources().getDrawable(R.drawable.ic_person_giant);
         Bitmap userPhotoBitmap = userPhotoDrawer.getBitmap();
         return userPhotoBitmap;
     }
