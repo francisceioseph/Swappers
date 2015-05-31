@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="userPhotoDialogTitle">Profile Picture</string>
+    <string name="see_places_of_near_book">SEE PLACES ON MAP</string>
+    <string name="title_near_book">Book Title Here</string>
+    <string name="previous_near_book_button">previous book</string>
+    <string name="next_near_book_button">next_near_book</string>
 </resources>

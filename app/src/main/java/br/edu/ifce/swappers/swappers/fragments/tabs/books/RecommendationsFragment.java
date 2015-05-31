@@ -14,25 +14,25 @@ import android.widget.Toast;
 import br.edu.ifce.swappers.swappers.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NearBooksFragment extends Fragment {
+public class RecommendationsFragment extends Fragment {
 
-    ImageButton nextNearBookImageButton;
-    ImageButton previousNearBookImageButton;
+    ImageButton nextRecommendationImageButton;
+    ImageButton previousRecommendationImageButton;
     Button seePlacesOnMapsButton;
 
-    CircleImageView coverNearBookCircleImageView;
+    CircleImageView coverRecommendationCircleImageView;
 
-    TextView titleNearBookTextView;
-    TextView authorsNearBookTextView;
+    TextView titleRecommendationTextView;
+    TextView authorsRecommendationTextView;
 
-    public NearBooksFragment() {
+    public RecommendationsFragment() {
 
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_near_books, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recomendations, container, false);
 
         this.initViewComponents(rootView);
         this.initViewListeners();
@@ -41,19 +41,19 @@ public class NearBooksFragment extends Fragment {
     }
 
     private void initViewComponents(View rootView) {
-        this.nextNearBookImageButton      = (ImageButton) rootView.findViewById(R.id.next_book_image_button);
-        this.previousNearBookImageButton  = (ImageButton) rootView.findViewById(R.id.previous_book_image_button);
-        this.seePlacesOnMapsButton        = (Button) rootView.findViewById(R.id.see_places_of_near_book);
+        this.nextRecommendationImageButton      = (ImageButton) rootView.findViewById(R.id.next_recommendation_image_button);
+        this.previousRecommendationImageButton  = (ImageButton) rootView.findViewById(R.id.previous_recommendation_image_button);
+        this.seePlacesOnMapsButton              = (Button) rootView.findViewById(R.id.see_places_of_recommendation);
 
-        this.coverNearBookCircleImageView = (CircleImageView) rootView.findViewById(R.id.cover_near_book);
+        this.coverRecommendationCircleImageView = (CircleImageView) rootView.findViewById(R.id.cover_recommendation_book);
 
-        this.titleNearBookTextView        = (TextView) rootView.findViewById(R.id.title_near_book);
-        this.authorsNearBookTextView      = (TextView) rootView.findViewById(R.id.authors_near_book);
+        this.titleRecommendationTextView        = (TextView) rootView.findViewById(R.id.title_recommendation);
+        this.authorsRecommendationTextView      = (TextView) rootView.findViewById(R.id.authors_recommendation);
     }
 
     private void initViewListeners() {
-        this.nextNearBookImageButton.setOnClickListener(this.nextNearBookClickListener());
-        this.previousNearBookImageButton.setOnClickListener(this.previousNearBookClickListener());
+        this.nextRecommendationImageButton.setOnClickListener(this.nextRecommendationClickListener());
+        this.previousRecommendationImageButton.setOnClickListener(this.previousRecommendationClickListener());
         this.seePlacesOnMapsButton.setOnClickListener(this.seePlacesOnMapsClickListener());
     }
 
@@ -66,7 +66,7 @@ public class NearBooksFragment extends Fragment {
         };
     }
 
-    private View.OnClickListener previousNearBookClickListener() {
+    private View.OnClickListener previousRecommendationClickListener() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +75,7 @@ public class NearBooksFragment extends Fragment {
         };
     }
 
-    private View.OnClickListener nextNearBookClickListener() {
+    private View.OnClickListener nextRecommendationClickListener() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
