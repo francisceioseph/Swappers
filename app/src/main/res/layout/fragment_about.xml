@@ -5,7 +5,8 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.edu.ifce.swappers.swappers.fragments.principal.AboutFragment">
+    tools:context="br.edu.ifce.swappers.swappers.fragments.principal.AboutFragment"
+    android:background="@drawable/book_background">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,7 +36,8 @@
                 android:id="@+id/textView"
                 android:layout_gravity="center_horizontal"
                 android:textStyle="bold"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,7 +45,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/about_swappers_slogan"
                 android:id="@+id/textView3"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,7 +54,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/about_version_title"
                 android:id="@+id/about_version_text"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,7 +65,8 @@
                 android:id="@+id/title_development_team"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:layout_marginTop="18dp" />
+                android:layout_marginTop="18dp"
+                android:textColor="@color/white" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,7 +105,9 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="@string/about_alessandra_name"
                             android:id="@+id/alessandra_name"
-                            android:layout_gravity="center_horizontal" />
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -126,7 +133,9 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="@string/about_gracyane_name"
                             android:id="@+id/gracyane_name"
-                            android:layout_gravity="center_horizontal" />
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -163,7 +172,9 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="@string/about_francis_name"
                             android:id="@+id/francis_name"
-                            android:layout_gravity="center_horizontal" />
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -189,7 +200,9 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="@string/about_joamila_name"
                             android:id="@+id/joamila_name"
-                            android:layout_gravity="center_horizontal" />
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
