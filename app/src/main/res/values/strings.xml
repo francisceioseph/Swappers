@@ -72,6 +72,13 @@
     <string name="author_best_book">Author Here</string>
     <string name="times_retrieved_books">Retrieved XX times</string>
     <string name="times_donated_books">Donated XX times</string>
+    <string name="swappers_about_name">Swappers</string>
+    <string name="about_swappers_slogan">Donate readings, share dreams</string>
+    <string name="about_develpment_team_title">Development Team</string>
+    <string name="about_alessandra_name">Alessandra Lino</string>
+    <string name="about_gracyane_name">Gracyane Oliveira</string>
+    <string name="about_francis_name">Francisco Souza</string>
+    <string name="about_joamila_name">Joamila Brito</string>
 
 
 </resources>
