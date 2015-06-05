@@ -20,7 +20,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="136dp"
                 android:layout_height="136dp"
-                android:src="@drawable/ic_launcher"
+                android:src="@drawable/ic_launcher_web"
                 android:id="@+id/cover_near_book"
                 app:border_width="1dp"
                 app:border_color="@color/transparent"
@@ -81,7 +81,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="92dp"
                             android:layout_height="92dp"
-                            android:src="@drawable/ic_launcher"
+                            android:src="@drawable/founder_alessandra"
                             android:id="@+id/alessandra_photo"
                             app:border_width="1dp"
                             app:border_color="@color/transparent"/>
@@ -107,7 +107,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="92dp"
                             android:layout_height="92dp"
-                            android:src="@drawable/ic_launcher"
+                            android:src="@drawable/founder_gracyane"
                             android:id="@+id/gracyane_photo"
                             app:border_width="1dp"
                             app:border_color="@color/transparent"/>
@@ -144,8 +144,8 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="92dp"
                             android:layout_height="92dp"
-                            android:src="@drawable/ic_launcher"
-                            android:id="@+id/francisco_photo"
+                            android:src="@drawable/founder_francis"
+                            android:id="@+id/francis_photo"
                             app:border_width="1dp"
                             app:border_color="@color/transparent"/>
 
@@ -154,7 +154,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="@string/about_francis_name"
-                            android:id="@+id/francisco_name"
+                            android:id="@+id/francis_name"
                             android:layout_gravity="center_horizontal" />
 
                     </LinearLayout>
@@ -170,7 +170,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="92dp"
                             android:layout_height="92dp"
-                            android:src="@drawable/ic_launcher"
+                            android:src="@drawable/founder_joamila"
                             android:id="@+id/joamila_photo"
                             app:border_width="1dp"
                             app:border_color="@color/transparent"/>
