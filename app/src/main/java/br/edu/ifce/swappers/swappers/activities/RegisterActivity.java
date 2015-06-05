@@ -32,12 +32,14 @@ import java.util.regex.Pattern;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
+import br.edu.ifce.swappers.swappers.util.RegisterTask;
+import br.edu.ifce.swappers.swappers.util.TaskInterface;
 import br.edu.ifce.swappers.swappers.webservice.UserService;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.view.View.OnClickListener;
 
-public class RegisterActivity extends AppCompatActivity implements UserPhotoDialogFragment.UserPhotoDialogListener{
+public class RegisterActivity extends AppCompatActivity implements UserPhotoDialogFragment.UserPhotoDialogListener,TaskInterface{
 
     private static final short CAMERA_INTENT_CODE  = 1015;
     private static final short GALLERY_INTENT_CODE = 1016;
@@ -86,7 +88,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     * Listener builder methods
     *
     * */
-
     private OnClickListener makeUserPhotoCircleButtonClickListener() {
         OnClickListener clickListener = new OnClickListener() {
             @Override
@@ -130,6 +131,16 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         this.startActivity(mainActivityIntent);
+    }
+
+    @Override
+    public void startNextActivity() {
+        Intent mainActivityIntent = new Intent(this, LoginActivity.class);
+        mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(mainActivityIntent);
+        Toast toast = Toast.makeText(this, "Cadastro efeutado com sucesso. Faça seu Login.", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     /*
@@ -200,8 +211,12 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         String userPasswordConfirmation = userPasswordConfirmationEditText.getText().toString();
         //TODO Save data information on database
         if (validationRegistryUser(userName,userEmail,userPassword,userPasswordConfirmation)){
-            Log.i("ENTRA","entrou");
-            syncToRemoteDatabase(userName, userEmail, userPassword);
+
+            RegisterTask registerTask = new RegisterTask(this,this);
+            registerTask.execute(userName, userEmail, userPassword);
+
+            //Log.i("ENTRA","entrou");
+            //syncToRemoteDatabase(userName, userEmail, userPassword);
         }
     }
 
