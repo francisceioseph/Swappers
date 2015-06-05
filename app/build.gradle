@@ -43,4 +43,7 @@ dependencies {
 
 //    Circular Button
     compile 'com.github.markushi:circlebutton:1.1'
+
+//    WebService
+    compile 'com.loopj.android:android-async-http:1.4.5'
 }

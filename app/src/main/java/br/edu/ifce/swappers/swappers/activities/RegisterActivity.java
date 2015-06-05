@@ -1,5 +1,6 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -10,17 +11,35 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
+import br.edu.ifce.swappers.swappers.util.RegisterTask;
+import br.edu.ifce.swappers.swappers.util.TaskInterface;
+import br.edu.ifce.swappers.swappers.webservice.UserService;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.view.View.OnClickListener;
 
-public class RegisterActivity extends AppCompatActivity implements UserPhotoDialogFragment.UserPhotoDialogListener{
+public class RegisterActivity extends AppCompatActivity implements UserPhotoDialogFragment.UserPhotoDialogListener,TaskInterface{
 
     private static final short CAMERA_INTENT_CODE  = 1015;
     private static final short GALLERY_INTENT_CODE = 1016;
@@ -69,7 +88,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     * Listener builder methods
     *
     * */
-
     private OnClickListener makeUserPhotoCircleButtonClickListener() {
         OnClickListener clickListener = new OnClickListener() {
             @Override
@@ -86,17 +104,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         OnClickListener clickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (isRegisterFormValid()){
-                    RegisterActivity.this.saveRegisterInformation();
-                    RegisterActivity.this.startMainActivity();
-                }
-                else{
-                    RegisterActivity.this.markWrongFields();
-                }
+                 RegisterActivity.this.saveRegisterInformation();
             }
         };
-
         return clickListener;
     }
 
@@ -123,6 +133,15 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         this.startActivity(mainActivityIntent);
     }
 
+    @Override
+    public void startNextActivity() {
+        Intent mainActivityIntent = new Intent(this, LoginActivity.class);
+        mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(mainActivityIntent);
+        Toast toast = Toast.makeText(this, "Cadastro efeutado com sucesso. Faça seu Login.", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
 
     /*
     *
@@ -182,13 +201,116 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     private void saveRegisterInformation(){
         EditText userNameEditText     = (EditText) findViewById(R.id.user_name_edit_text);
-        EditText userEmail            = (EditText) findViewById(R.id.user_email_edit_text);
-        EditText userPasswordEditText = (EditText) findViewById(R.id.user_password_confirmation_edit_text);
+        EditText userEmailEditText    = (EditText) findViewById(R.id.user_email_edit_text);
+        EditText userPasswordEditText = (EditText) findViewById(R.id.user_password_edit_text);
+        EditText userPasswordConfirmationEditText = (EditText) findViewById(R.id.user_password_confirmation_edit_text);
 
+        String userName = userNameEditText.getText().toString();
+        String userEmail = userEmailEditText.getText().toString();
+        String userPassword = userPasswordEditText.getText().toString();
+        String userPasswordConfirmation = userPasswordConfirmationEditText.getText().toString();
         //TODO Save data information on database
+        if (validationRegistryUser(userName,userEmail,userPassword,userPasswordConfirmation)){
+
+            RegisterTask registerTask = new RegisterTask(this,this);
+            registerTask.execute(userName, userEmail, userPassword);
+
+            //Log.i("ENTRA","entrou");
+            //syncToRemoteDatabase(userName, userEmail, userPassword);
+        }
     }
 
     private void syncToRemoteDatabase(String userName, String userEmail, String userPassword){
         //TODO Send data to webservice remote database
+        authenticateUserWithWS(userName, userEmail, userPassword, getApplicationContext());
     }
+
+    private boolean validationRegistryUser(String name, String email, String usePassword, String passwordConfirmation){
+        if(validationNameUser(name)){
+            if (validateEmailWithMasks(email)){
+                if (validatePassword(usePassword,passwordConfirmation)){
+                    return true;
+                }else{return false;}
+            }else{return false;}
+        }else{return false;}
+    }
+
+    private boolean validateEmailWithMasks(String email){
+        Pattern pattern = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
+        Matcher matcher = pattern.matcher(email);
+
+        if(matcher.find()){
+            return true;
+        }else{
+            Toast.makeText(getApplicationContext(), "Email Incorreto!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+    private boolean validatePassword(String pwd , String pwdConfirmation) {
+        if (pwd.length() > 5 && pwdConfirmation.length() > 5) {
+            if (pwd.equals(pwdConfirmation)) {
+                return true;
+            } else {
+                Toast.makeText(getApplicationContext(), "Atenção! Senhas diferentes.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }else{
+            Toast.makeText(getApplicationContext(), "Sua senha tem menos que 6 dígitos!.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+    private boolean validationNameUser(String name){
+        if (name.length()>2){
+            return true;
+        }else{
+            Toast.makeText(getApplicationContext(), "Seu nome deve ter pelo menos 3 letras.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+    public void authenticateUserWithWS(String name, String email, String pwd, Context applicationContext){
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        StringEntity entity = fillParamUser(name,email,pwd);
+        client.post(getApplicationContext(), "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/insert", entity, "application/json", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                if (statusCode == 201) {
+                    RegisterActivity.this.startMainActivity();
+                    Toast.makeText(getApplicationContext(), "Seja bem vindo!", Toast.LENGTH_LONG).show();
+                } else {
+                    //Toast.makeText(getApplicationContext(), "Senha ou usuário incorretos!", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.i("RESPOSTA", error.toString());
+                Log.i("RESPOSTA", String.valueOf(statusCode));
+            }
+        });
+    }
+
+    private static StringEntity  fillParamUser(String name, String email,String pwd) {
+        JSONObject jsonParams = new JSONObject ();
+
+        try {
+            jsonParams.put("username", name);
+            jsonParams.put("email", email);
+            jsonParams.put("password", pwd);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        StringEntity entity = null;
+        try {
+            entity = new StringEntity(jsonParams.toString());
+            entity.setContentType("application/json");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return entity;
+    }
+
 }
