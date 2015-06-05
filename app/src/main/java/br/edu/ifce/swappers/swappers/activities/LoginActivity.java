@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void startRegisterActivity(View view){
         Intent registerActivityIntent = new Intent(this, RegisterActivity.class);
-        registerActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //registerActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         this.startActivity(registerActivityIntent);
     }

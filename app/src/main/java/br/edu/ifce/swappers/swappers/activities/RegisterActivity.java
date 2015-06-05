@@ -81,6 +81,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     private void setUpActivityToolbar(){
         if (this.toolbar != null){
             this.setSupportActionBar(this.toolbar);
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
 
