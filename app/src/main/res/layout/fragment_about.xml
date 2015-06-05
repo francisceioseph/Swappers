@@ -18,62 +18,73 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="136dp"
-                android:layout_height="136dp"
-                android:src="@drawable/ic_launcher_web"
-                android:id="@+id/cover_near_book"
-                app:border_width="1dp"
-                app:border_color="@color/transparent"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/swappers_about_name"
-                android:id="@+id/textView"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textSize="30sp"
-                android:textColor="@color/white" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="136dp"
+                    android:layout_height="136dp"
+                    android:src="@drawable/ic_launcher_web"
+                    android:id="@+id/cover_near_book"
+                    app:border_width="1dp"
+                    app:border_color="@color/transparent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/about_swappers_slogan"
-                android:id="@+id/textView3"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/swappers_about_name"
+                    android:id="@+id/textView"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:textSize="30sp"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/about_version_title"
-                android:id="@+id/about_version_text"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/about_swappers_slogan"
+                    android:id="@+id/textView3"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/about_develpment_team_title"
-                android:id="@+id/title_development_team"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_marginTop="18dp"
-                android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/about_version_title"
+                    android:id="@+id/about_version_text"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/about_develpment_team_title"
+                    android:id="@+id/title_development_team"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="18dp"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:baselineAligned="false"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.5"
+                android:gravity="center_horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -207,9 +218,11 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 
 </FrameLayout>
