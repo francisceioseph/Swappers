@@ -12,4 +12,6 @@
     <color name="color_background_color">#E5E5E5</color>
     <color name="color_background_medium">#b0bec5</color>
 
+    <color name="black_text">#000000</color>
+
 </resources>

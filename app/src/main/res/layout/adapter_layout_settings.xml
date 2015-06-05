@@ -25,6 +25,7 @@
         android:layout_marginRight="16dp"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/adapter_settings_icon_image"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:textColor="@color/black_text"/>
 
 </RelativeLayout>

@@ -43,4 +43,35 @@
     <string name="setings_personal_info_header">Personal Information</string>
     <string name="settings_account_header">Account Settings</string>
 
+    <!-- Tela de Login -->
+    <string name="swappers">Swappers</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="be_a_swapper">Are not you a Swapper?</string>
+    <string name="sign_up">SIGN UP NOW</string>
+
+    <!-- Statistics Fragments -->
+    <string name="month_donator">Month Donators</string>
+    <string name="next_month_donator_button">next_donator_month</string>
+    <string name="previous_month_donator_button">previous_donator_month</string>
+    <string name="name_donator">Name Donator Here</string>
+    <string name="city_donator">City,</string>
+    <string name="age_donator">XX anos</string>
+    <string name="donator_books_donated">Books Donated Here</string>
+
+    <string name="best_places">Best Places</string>
+    <string name="name_hotspot">Name Hotspot Here</string>
+    <string name="address_hotspot">Address Hotspot Here</string>
+    <string name="city_hotspot">City Hostspot</string>
+    <string name="books_retrieved_hotspot">xx books retrieved</string>
+    <string name="donations_received_hotspot">xx donations received</string>
+
+    <string name="best_books">Best Books</string>
+    <string name="title_best_book">Title Book Here</string>
+    <string name="author_best_book">Author Here</string>
+    <string name="times_retrieved_books">Retrieved XX times</string>
+    <string name="times_donated_books">Donated XX times</string>
+
+
 </resources>

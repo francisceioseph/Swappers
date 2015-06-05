@@ -41,6 +41,7 @@ import static android.view.View.OnClickListener;
 
 public class RegisterActivity extends AppCompatActivity implements UserPhotoDialogFragment.UserPhotoDialogListener,TaskInterface{
 
+
     private static final short CAMERA_INTENT_CODE  = 1015;
     private static final short GALLERY_INTENT_CODE = 1016;
 
@@ -312,5 +313,4 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         }
         return entity;
     }
-
 }

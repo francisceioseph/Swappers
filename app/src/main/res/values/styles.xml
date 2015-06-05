@@ -7,7 +7,9 @@
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
+
     <style name="AppMaterial" parent="Theme.AppCompat.Light.NoActionBar">
+
 
     </style>
 

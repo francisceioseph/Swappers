@@ -20,8 +20,7 @@ import br.edu.ifce.swappers.swappers.model.SettingsListItem;
  */
 public class SettingsFragment extends Fragment {
 
-    private ListView settingsPersonalInfoListView;
-    private ListView settingsAccountListView;
+    private ListView settingsListView;
 
     public SettingsFragment() {
 
@@ -34,55 +33,39 @@ public class SettingsFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        ArrayList<SettingsListItem> personalInfoDataSource = this.createPersonalInfoDataSource();
-        ArrayList<SettingsListItem> accountInfoDataSource  = this.createAccountDataSource();
+        ArrayList<SettingsListItem> settingsDataSource = this.createSettingsDataSource();
+        SettingsArrayAdapter personalInfoListViewAdapter = new SettingsArrayAdapter(rootView.getContext(), R.layout.adapter_layout_settings, settingsDataSource);
 
-        SettingsArrayAdapter personalInfoListViewAdapter = new SettingsArrayAdapter(rootView.getContext(), R.layout.adapter_layout_settings, personalInfoDataSource);
-        SettingsArrayAdapter accountInfoListViewAdapter  = new SettingsArrayAdapter(rootView.getContext(), R.layout.adapter_layout_settings, accountInfoDataSource);
-
-        this.settingsPersonalInfoListView = (ListView) rootView.findViewById(R.id.settings_personal_list_view);
-        this.settingsAccountListView      = (ListView) rootView.findViewById(R.id.settings_account_list_view);
-
-        this.settingsPersonalInfoListView.setAdapter(personalInfoListViewAdapter);
-        this.settingsAccountListView.setAdapter(accountInfoListViewAdapter);
+        this.settingsListView = (ListView) rootView.findViewById(R.id.settings_list_view);
+        this.settingsListView.setAdapter(personalInfoListViewAdapter);
 
         return rootView;
     }
 
-    private ArrayList<SettingsListItem> createPersonalInfoDataSource() {
+    private ArrayList<SettingsListItem> createSettingsDataSource() {
         ArrayList<SettingsListItem> dataSource = new ArrayList<SettingsListItem>();
 
         Drawable profilePictureIcon  = this.getResources().getDrawable(R.drawable.ic_portrait);
         Drawable profileCoverIcon    = this.getResources().getDrawable(R.drawable.ic_cover_photo);
         Drawable birthDateIcon       = this.getResources().getDrawable(R.drawable.ic_cake);
         Drawable cityIcon            = this.getResources().getDrawable(R.drawable.ic_location_city);
+        Drawable changePasswordIcon  = this.getResources().getDrawable(R.drawable.ic_lock);
+        Drawable deleteAccountIcon   = this.getResources().getDrawable(R.drawable.ic_delete_black_48dp);
 
         SettingsListItem changeProfilePicture = new SettingsListItem(profilePictureIcon, "Change Profile Picture");
         SettingsListItem changeCoverPicture   = new SettingsListItem(profileCoverIcon, "Change Cover Picture");
         SettingsListItem myBirthDate          = new SettingsListItem(birthDateIcon, "My Birth Date");
         SettingsListItem myCity               = new SettingsListItem(cityIcon, "My City");
+        SettingsListItem changePassword = new SettingsListItem(changePasswordIcon, "Change Account Password");
+        SettingsListItem deleteAccount  = new SettingsListItem(deleteAccountIcon, "Delete Account");
 
         dataSource.add(changeProfilePicture);
         dataSource.add(changeCoverPicture);
         dataSource.add(myBirthDate);
         dataSource.add(myCity);
-
-        return dataSource;
-    }
-
-    private ArrayList<SettingsListItem> createAccountDataSource() {
-        ArrayList<SettingsListItem> dataSource = new ArrayList<SettingsListItem>();
-
-        Drawable changePasswordIcon  = this.getResources().getDrawable(R.drawable.ic_lock);
-        Drawable deleteAccountIcon   = this.getResources().getDrawable(R.drawable.ic_delete_black_48dp);
-
-        SettingsListItem changePassword = new SettingsListItem(changePasswordIcon, "Change Account Password");
-        SettingsListItem deleteAccount  = new SettingsListItem(deleteAccountIcon, "Delete Account");
-
         dataSource.add(changePassword);
         dataSource.add(deleteAccount);
 
         return dataSource;
     }
-
 }
