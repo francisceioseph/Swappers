@@ -36,12 +36,12 @@ public class ReferencedLibrariesActivity extends AppCompatActivity {
     }
 
     private ArrayList<ReferencedComponentItem> createDataSource(){
-        ReferencedComponentItem floatingActionButtonItem      = new ReferencedComponentItem("Floating Action Button", "http://addr");
-        ReferencedComponentItem materialNavigationDrawerItem  = new ReferencedComponentItem("Material Design Navigation drawers", "http://addr");
-        ReferencedComponentItem circularImageViewItem         = new ReferencedComponentItem("Circular Image View", "http://addr");
-        ReferencedComponentItem circularImageButtonItem       = new ReferencedComponentItem("Circular Image Button", "http://addr");
-        ReferencedComponentItem appIntroItem                  = new ReferencedComponentItem("App Intro", "http://addr");
-        ReferencedComponentItem backgroundImageItem           = new ReferencedComponentItem("Background Image", "http://addr");
+        ReferencedComponentItem floatingActionButtonItem      = new ReferencedComponentItem("Floating Action Button", "https://goo.gl/aEY1bV");
+        ReferencedComponentItem materialNavigationDrawerItem  = new ReferencedComponentItem("Material Design Navigation drawers", "https://goo.gl/ykgWB4");
+        ReferencedComponentItem circularImageViewItem         = new ReferencedComponentItem("Circular Image View", "https://goo.gl/MyCNfw");
+        ReferencedComponentItem circularImageButtonItem       = new ReferencedComponentItem("Circular Image Button", "https://goo.gl/ZOucGN");
+        ReferencedComponentItem appIntroItem                  = new ReferencedComponentItem("App Intro", "https://goo.gl/Vyho8J");
+        ReferencedComponentItem backgroundImageItem           = new ReferencedComponentItem("Background Image", "http://goo.gl/Savtu8");
 
         ArrayList<ReferencedComponentItem> references = new ArrayList<>();
         references.add(floatingActionButtonItem);
