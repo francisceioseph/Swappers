@@ -19,13 +19,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Title of Settings Item"
         android:id="@+id/adapter_settings_title_item"
         android:layout_marginRight="16dp"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/adapter_settings_icon_image"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/black_text"/>
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
