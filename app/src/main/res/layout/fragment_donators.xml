@@ -101,7 +101,7 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/month_donator"
         android:textColor="@color/black_text"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginTop="40dp"/>
 
     <ImageButton
