@@ -80,6 +80,7 @@
     <string name="about_francis_name">Francisco Souza</string>
     <string name="about_joamila_name">Joamila Brito</string>
     <string name="about_version_title">version 1.0</string>
+    <string name="title_activity_referenced_libraries">Referenced Components</string>
 
 
 </resources>
