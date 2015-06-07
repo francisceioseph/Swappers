@@ -1,47 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:orientation="vertical"
     android:background="@drawable/book_background"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:gravity="center">
 
 
     <ImageView
-        android:layout_width="149dp"
-        android:layout_height="240dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         android:id="@+id/imageView"
         android:src="@drawable/ic_launcher_web"
-
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="84dp"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3" />
+        android:contentDescription="@string/splash_logo_accessibiity_descriptor" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Swappers"
+        android:text="@string/splash_swappers_title"
         android:id="@+id/textView2"
-        android:textSize="35dp"
-        android:layout_gravity="center_vertical"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:textColor="#ffffffff" />
+        android:textSize="40sp"
+        android:layout_marginTop="5dp"
+        android:textColor="#ffffffff"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Doe leituras, compartilhe sonhos"
+        android:text="@string/splash_swappers_slogan"
         android:id="@+id/textView3"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
-        android:textSize="20dp"
+        android:layout_marginTop="5dp"
+        android:textSize="23sp"
         android:textColor="#ffffffff" />
 
 
-</RelativeLayout>
+</LinearLayout>
