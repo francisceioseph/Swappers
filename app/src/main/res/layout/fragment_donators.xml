@@ -110,27 +110,46 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp" />
 
-    <ImageButton
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:id="@+id/next_donator_image_button"
+    <com.andexert.library.RippleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right|center_vertical"
         android:elevation="5dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/ic_navigate_next"
-        android:background="@color/color_primary_dark"
-        android:contentDescription="@string/next_month_donator_button"/>
 
-    <ImageButton
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:id="@+id/previous_donator_image_button"
+        app:rv_rippleDuration="250"
+        app:rv_centered="true"
+        app:rv_color="@color/color_primary">
+
+        <ImageButton
+            android:id="@+id/next_donator_image_button"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_navigate_next"
+            android:background="@color/color_primary_dark"
+            android:contentDescription="@string/next_month_donator_button"/>
+
+    </com.andexert.library.RippleView>
+
+    <com.andexert.library.RippleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
         android:elevation="5dp"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/ic_navigate_before"
-        android:background="@color/color_primary_dark"
-        android:contentDescription="@string/previous_month_donator_button" />
 
+        app:rv_rippleDuration="250"
+        app:rv_color="@color/color_primary"
+        app:rv_centered="true">
+
+        <ImageButton
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:id="@+id/previous_donator_image_button"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_navigate_before"
+            android:background="@color/color_primary_dark"
+            android:contentDescription="@string/previous_month_donator_button" />
+
+    </com.andexert.library.RippleView>
 
 </FrameLayout>

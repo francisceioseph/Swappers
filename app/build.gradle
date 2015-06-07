@@ -42,4 +42,6 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.5'
     //    App intro
     compile 'com.github.paolorotolo:appintro:1.1.0'
+    //Ripple Efects
+    compile 'com.github.traex.rippleeffect:library:1.3'
 }
