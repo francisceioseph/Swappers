@@ -20,9 +20,7 @@ import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountListener;
 
-public class MainActivity extends Activity {
-
- /* Posteriormente implentar: extends MaterialNavigationDrawer implements MaterialAccountListener
+public class MainActivity extends MaterialNavigationDrawer implements MaterialAccountListener {
 
  @Override
     public void init(Bundle savedInstance) {
@@ -33,14 +31,7 @@ public class MainActivity extends Activity {
         this.setAccountListener(this);
 
         this.buildMainMenu();
-    }*/
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_best_books);
     }
-/*
 
     private void buildMainMenu() {
 
@@ -110,23 +101,4 @@ public class MainActivity extends Activity {
     public void onChangeAccount(MaterialAccount materialAccount) {
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 }

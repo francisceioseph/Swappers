@@ -140,8 +140,10 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     @Override
     public void startNextActivity() {
         Intent mainActivityIntent = new Intent(this, LoginActivity.class);
+
         mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(mainActivityIntent);
+
         Toast toast = Toast.makeText(this, "Cadastro efeutado com sucesso. Faça seu Login.", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
