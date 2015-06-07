@@ -1,9 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="br.edu.ifce.swappers.swappers.activities.LoginActivity"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/book_background"
+    android:backgroundTintMode="multiply">
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,19 +19,159 @@
         app:popupTheme="@style/ToolbarTheme.Menu"
         />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:elevation="4dp"
-        tools:context="br.edu.ifce.swappers.swappers.activities.LoginActivity">
-
-        <TextView android:text="Near Books teste" android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView" />
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-    </RelativeLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cover_login"
 
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/ic_launcher_web"
+                app:border_width="1dp"
+                app:border_color="@color/transparent"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/logo_text_view"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/swappers"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Donate readings, share dreams"
+                android:id="@+id/login_swappers_slogan"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/white" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/login_card_view"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingEnd="10dp"
+                android:paddingStart="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="left"
+                    android:layout_margin="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/email_address"
+                        android:id="@+id/email_text_view"
+                        android:textColor="@color/black_text"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="5dp" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:ems="10"
+                        android:id="@+id/email_edit_text"
+                        android:autoText="false"
+                        android:textColor="@color/color_accent_dark"
+                        android:focusable="true"
+                        android:textIsSelectable="false"
+                        android:visibility="visible"
+                        android:theme="@style/AppTheme" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/password"
+                        android:id="@+id/password_text_view"
+                        android:textColor="@color/black_text"
+                        android:textSize="14sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/password_edit_text"
+                        android:textColor="@color/color_accent_dark"
+                        android:textColorLink="@color/color_accent"
+                        android:textIsSelectable="false"
+                        android:visibility="visible"
+                        android:focusable="true"
+                        android:theme="@style/AppTheme" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_in"
+                android:textColor="@color/white"
+                android:id="@+id/sign_in_button"
+                android:background="@color/color_accent_dark"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:onClick="startMainActivity"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/be_a_swapper"
+                android:id="@+id/sign_up_text_view"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up"
+                android:id="@+id/sign_up_button"
+                android:background="@color/white"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black_text"
+                android:onClick="startRegisterActivity"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

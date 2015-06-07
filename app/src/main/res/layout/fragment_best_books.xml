@@ -1,10 +1,134 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.edu.ifce.swappers.swappers.fragments.tabs.statistics.BestBooksFragment">
+    tools:context="br.edu.ifce.swappers.swappers.fragments.tabs.statistics.BestBooksFragment"
+    android:foregroundGravity="center"
+    android:layout_gravity="center">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <android.support.v7.widget.CardView
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:elevation="4dp"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:layout_margin="5dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:src="@drawable/ic_book"
+                android:id="@+id/cover_best_book"
+                app:border_width="1dp"
+                app:border_color="@color/transparent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:adjustViewBounds="false" />
+
+            <TextView
+                android:id="@+id/best_book_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="@string/title_best_book"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black_text"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/best_book_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="@string/author_best_book"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black_text"
+                android:textSize="18dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/primary_dark_material_light"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:alpha="0.7" />
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/times_retrieved_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:text="@string/times_retrieved_books"
+                    android:layout_marginBottom="5dp"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="@color/black_text"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/times_donated_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:text="@string/times_donated_books"
+                    android:layout_marginBottom="5dp"
+                    android:paddingStart="5dp"
+                    android:password="false"
+                    android:textColor="@color/black_text"
+                    android:textSize="16dp" />
+            </TableRow>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/best_books_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/best_books"
+        android:textColor="@color/black_text"
+        android:textSize="30dp"
+        android:layout_marginTop="40dp"/>
+
+    <ImageButton
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:id="@+id/next_best_book_image_button"
+        android:layout_gravity="right|center_vertical"
+        android:elevation="5dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_navigate_next"
+        android:background="@color/color_primary_dark"
+        android:contentDescription="@string/next_month_donator_button"/>
+
+    <ImageButton
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:id="@+id/previous_best_book_image_button"
+        android:layout_gravity="left|center_vertical"
+        android:elevation="5dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_navigate_before"
+        android:background="@color/color_primary_dark"
+        android:contentDescription="@string/previous_month_donator_button" />
 
 </FrameLayout>

@@ -5,10 +5,13 @@
     <color name="color_primary_dark">#005FB4</color>
 
     <color name="color_accent">#FFD180</color>
-    <color name="orange_A100">#FFAB40</color>
-    <color name="orange_A400">#FB8C00</color>
+    <color name="color_accent_medium">#FFAB40</color>
+    <color name="color_accent_dark">#FB8C00</color>
 
     <color name="white">#FFFFFF</color>
     <color name="color_background_color">#E5E5E5</color>
+    <color name="color_background_medium">#b0bec5</color>
+
+    <color name="black_text">#000000</color>
 
 </resources>
