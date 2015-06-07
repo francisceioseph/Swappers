@@ -9,9 +9,11 @@
 
     <android.support.v7.widget.CardView
         android:layout_height="wrap_content"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:elevation="4dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginRight="32.5dp"
+        android:layout_marginLeft="32.5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,9 +41,11 @@
                 android:gravity="center_horizontal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:text="@string/title_best_book"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/black_text"
-                android:textSize="24dp" />
+                android:textSize="24dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:id="@+id/best_book_author"
@@ -52,14 +56,16 @@
                 android:text="@string/author_best_book"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black_text"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/primary_dark_material_light"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:alpha="0.7" />
@@ -75,11 +81,11 @@
                     android:gravity="center_horizontal"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:text="@string/times_retrieved_books"
-                    android:layout_marginBottom="5dp"
-                    android:paddingStart="7dp"
-                    android:paddingEnd="5dp"
+                    android:layout_marginBottom="10dp"
                     android:textColor="@color/black_text"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp" />
 
                 <TextView
                     android:id="@+id/times_donated_text_view"
@@ -88,11 +94,12 @@
                     android:gravity="center_horizontal"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:text="@string/times_donated_books"
-                    android:layout_marginBottom="5dp"
-                    android:paddingStart="5dp"
+                    android:layout_marginBottom="10dp"
                     android:password="false"
                     android:textColor="@color/black_text"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="5dp" />
             </TableRow>
 
         </LinearLayout>
@@ -107,7 +114,8 @@
         android:text="@string/best_books"
         android:textColor="@color/black_text"
         android:textSize="30dp"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
 
     <ImageButton
         android:layout_width="65dp"
@@ -115,7 +123,7 @@
         android:id="@+id/next_best_book_image_button"
         android:layout_gravity="right|center_vertical"
         android:elevation="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="10dp"
         android:src="@drawable/ic_navigate_next"
         android:background="@color/color_primary_dark"
         android:contentDescription="@string/next_month_donator_button"/>

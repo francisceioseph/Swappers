@@ -1,17 +1,18 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.edu.ifce.swappers.swappers.fragments.tabs.statistics.HotSpotsFragment"
-    android:foregroundGravity="center"
-    android:layout_gravity="center">
+    tools:context="br.edu.ifce.swappers.swappers.fragments.tabs.statistics.HotSpotsFragment">
 
     <android.support.v7.widget.CardView
         android:layout_height="wrap_content"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:elevation="4dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginRight="32.5dp"
+        android:layout_marginLeft="32.5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,9 +39,11 @@
                 android:gravity="center_horizontal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:text="@string/name_hotspot"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/black_text"
-                android:textSize="24dp" />
+                android:textSize="24dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
 
             <TextView
                 android:id="@+id/best_place_address"
@@ -51,7 +54,9 @@
                 android:text="@string/address_hotspot"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black_text"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:id="@+id/best_place_city"
@@ -62,14 +67,16 @@
                 android:text="@string/city_hotspot"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black_text"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/primary_dark_material_light"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:alpha="0.7" />
@@ -86,10 +93,10 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:text="@string/books_retrieved_hotspot"
                     android:layout_marginBottom="5dp"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="5dp"
                     android:textColor="@color/black_text"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:id="@+id/received_hotspot_text_view"
@@ -99,10 +106,11 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:text="@string/donations_received_hotspot"
                     android:layout_marginBottom="5dp"
-                    android:paddingStart="0dp"
                     android:password="false"
                     android:textColor="@color/black_text"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="5dp" />
             </TableRow>
 
         </LinearLayout>
@@ -117,7 +125,8 @@
         android:text="@string/best_places"
         android:textColor="@color/black_text"
         android:textSize="30dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
 
     <ImageButton
         android:layout_width="65dp"
@@ -125,7 +134,7 @@
         android:id="@+id/next_place_image_button"
         android:layout_gravity="right|center_vertical"
         android:elevation="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="10dp"
         android:src="@drawable/ic_navigate_next"
         android:background="@color/color_primary_dark"
         android:contentDescription="@string/next_month_donator_button"/>
