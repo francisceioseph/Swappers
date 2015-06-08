@@ -81,6 +81,9 @@
     <string name="about_joamila_name">Joamila Brito</string>
     <string name="about_version_title">version 1.0</string>
     <string name="title_activity_referenced_libraries">Referenced Components</string>
+    <string name="splash_logo_accessibiity_descriptor">swappers logo</string>
+    <string name="splash_swappers_title">Swappers</string>
+    <string name="splash_swappers_slogan">Doe leituras, compartilhe sonhos</string>
 
 
 </resources>

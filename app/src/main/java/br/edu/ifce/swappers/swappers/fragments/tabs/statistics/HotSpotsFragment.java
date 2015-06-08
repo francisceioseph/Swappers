@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -66,7 +67,7 @@ public class HotSpotsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Loading previous hotspot... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), "Loading previous hotspot... #SQN", Toast.LENGTH_SHORT).show();;
             }
         };
     }
@@ -75,7 +76,7 @@ public class HotSpotsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Loading next hotspot... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), "Loading next hotspot... #SQN", Toast.LENGTH_SHORT).show();;
             }
         };
     }

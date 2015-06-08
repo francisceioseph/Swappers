@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.util.RegisterTask;
+import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.TaskInterface;
 import br.edu.ifce.swappers.swappers.webservice.UserService;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -144,7 +145,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(mainActivityIntent);
 
-        Toast toast = Toast.makeText(this, "Cadastro efeutado com sucesso. Faça seu Login.", Toast.LENGTH_LONG);
+        Toast toast = SwappersToast.makeText(this, "Cadastro efeutado com sucesso. Faça seu Login.", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
@@ -248,7 +249,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         if(matcher.find()){
             return true;
         }else{
-            Toast.makeText(getApplicationContext(), "Email Incorreto!", Toast.LENGTH_LONG).show();
+            SwappersToast.makeText(getApplicationContext(), "Email Incorreto!", Toast.LENGTH_LONG).show();
             return false;
         }
     }
@@ -258,11 +259,11 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
             if (pwd.equals(pwdConfirmation)) {
                 return true;
             } else {
-                Toast.makeText(getApplicationContext(), "Atenção! Senhas diferentes.", Toast.LENGTH_LONG).show();
+                SwappersToast.makeText(getApplicationContext(), "Atenção! Senhas diferentes.", Toast.LENGTH_LONG).show();
                 return false;
             }
         }else{
-            Toast.makeText(getApplicationContext(), "Sua senha tem menos que 6 dígitos!.", Toast.LENGTH_LONG).show();
+            SwappersToast.makeText(getApplicationContext(), "Sua senha tem menos que 6 dígitos!.", Toast.LENGTH_LONG).show();
             return false;
         }
     }
@@ -271,7 +272,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         if (name.length()>2){
             return true;
         }else{
-            Toast.makeText(getApplicationContext(), "Seu nome deve ter pelo menos 3 letras.", Toast.LENGTH_LONG).show();
+            SwappersToast.makeText(getApplicationContext(), "Seu nome deve ter pelo menos 3 letras.", Toast.LENGTH_LONG).show();
             return false;
         }
     }
@@ -286,9 +287,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
                 if (statusCode == 201) {
                     RegisterActivity.this.startMainActivity();
-                    Toast.makeText(getApplicationContext(), "Seja bem vindo!", Toast.LENGTH_LONG).show();
+                    SwappersToast.makeText(getApplicationContext(), "Seja bem vindo!", Toast.LENGTH_LONG).show();
                 } else {
-                    //Toast.makeText(getApplicationContext(), "Senha ou usuário incorretos!", Toast.LENGTH_LONG).show();
+                    //SwappersToast.makeText(getApplicationContext(), "Senha ou usuário incorretos!", Toast.LENGTH_LONG).show();
                 }
             }
             @Override

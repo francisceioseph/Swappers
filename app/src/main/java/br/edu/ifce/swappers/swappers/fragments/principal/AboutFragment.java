@@ -26,6 +26,7 @@ public class AboutFragment extends Fragment {
         this.versionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent referencedComponents = new Intent(getActivity().getApplicationContext(), ReferencedLibrariesActivity.class);
                 getActivity().startActivity(referencedComponents);
             }

@@ -12,6 +12,8 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.andexert.library.RippleView;
+
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.books.RecommendationsFragment;
@@ -29,7 +31,6 @@ public class BooksFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_books, container, false);
 
         this.tabHost = (FragmentTabHost) rootView.findViewById(R.id.books_tabHost);

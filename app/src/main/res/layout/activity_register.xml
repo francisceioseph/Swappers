@@ -83,7 +83,8 @@
                         android:ems="10"
                         android:id="@+id/user_name_edit_text"
                         android:textColor="@color/color_accent_dark"
-                        android:theme="@style/AppTheme"/>
+                        android:theme="@style/AppTheme"
+                        android:hint="Greather than three letters" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -100,7 +101,8 @@
                         android:ems="10"
                         android:id="@+id/user_email_edit_text"
                         android:textColor="@color/color_accent_dark"
-                        android:theme="@style/AppTheme"/>
+                        android:theme="@style/AppTheme"
+                        android:hint="A valid email address" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -117,7 +119,8 @@
                         android:ems="10"
                         android:id="@+id/user_password_edit_text"
                         android:textColor="@color/color_accent_dark"
-                        android:theme="@style/AppTheme"/>
+                        android:theme="@style/AppTheme"
+                        android:hint="Greather than 6 characters" />
 
                     <TextView
                         android:layout_width="wrap_content"

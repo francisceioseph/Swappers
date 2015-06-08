@@ -5,6 +5,7 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorAccent">@color/color_accent</item>
+        <item name="android:textColor">@color/primary_text_default_material_light</item>
     </style>
 
 
@@ -14,8 +15,6 @@
     </style>
 
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-
-        <!--Text Color & Action menu three dots color-->
         <item name="android:textColorPrimary">@color/primary_text_default_material_dark</item>
         <item name="android:textColorSecondary">@color/background_material_light</item>
 
