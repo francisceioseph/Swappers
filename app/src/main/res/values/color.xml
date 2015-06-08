@@ -13,5 +13,6 @@
     <color name="color_background_medium">#b0bec5</color>
 
     <color name="black_text">#000000</color>
+    <color name="color_ripple_register">#FEF6C9</color>
 
 </resources>

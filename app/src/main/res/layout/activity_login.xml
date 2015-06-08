@@ -174,7 +174,8 @@
                 android:layout_marginLeft="10dp"
 
                 app:rv_centered="true"
-                app:rv_rippleDuration="250">
+                app:rv_rippleDuration="250"
+                app:rv_color="@color/color_ripple_register">
 
                 <Button
                     android:id="@+id/sign_up_button"
