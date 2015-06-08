@@ -42,6 +42,7 @@ public class ReferencedLibrariesActivity extends AppCompatActivity {
         ReferencedComponentItem circularImageButtonItem       = new ReferencedComponentItem("Circular Image Button", "https://goo.gl/ZOucGN");
         ReferencedComponentItem appIntroItem                  = new ReferencedComponentItem("App Intro", "https://goo.gl/Vyho8J");
         ReferencedComponentItem backgroundImageItem           = new ReferencedComponentItem("Background Image", "http://goo.gl/Savtu8");
+        ReferencedComponentItem rippleEffectItem              = new ReferencedComponentItem("Ripple Effect", "http://goo.gl/r8ZIWJ");
 
         ArrayList<ReferencedComponentItem> references = new ArrayList<>();
         references.add(floatingActionButtonItem);
@@ -50,6 +51,7 @@ public class ReferencedLibrariesActivity extends AppCompatActivity {
         references.add(circularImageViewItem);
         references.add(appIntroItem);
         references.add(backgroundImageItem);
+        references.add(rippleEffectItem);
 
         return references;
     }
