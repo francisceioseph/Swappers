@@ -1,73 +1,60 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
-import android.content.Context;
-import android.util.Log;
-
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.SyncHttpClient;
-
-import org.apache.http.Header;
-import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by francisco on 29/05/15.
  */
-public enum UserService {
-    INSTANCE;
+public class UserService {
 
-    private static int status;
-    private static final String URL = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login";
+    private static final String URL_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login";
 
-    public static int registerUserWithWS(String name, String email, String pwd, final Context context) {
-        SyncHttpClient client = new SyncHttpClient();
+    public static int registerUserWithWS(String name, String email, String pwd) {
+        int status_code = 0;
+            try {
+                URL url = new URL(URL_SERVICE);
 
-        StringEntity entity = fillParamUser(name, email, pwd);
-        client.post(context.getApplicationContext(), URL, entity, "application/json", new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                JSONObject jsonParam = new JSONObject();
+                jsonParam.put("username", name);
+                jsonParam.put("email", email);
+                jsonParam.put("password", pwd);
 
-                if (statusCode == 201) {
-                    Log.i("RESPONSE",headers.toString());
-                    status = statusCode;
-                } else {
-                    status = statusCode;
-                }
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.connect();
+
+                OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
+                os.write(jsonParam.toString());
+                os.flush();
+
+                status_code = conn.getResponseCode();
+
+                //InputStream response = conn.getInputStream();
+                //String jsonReply = convertStreamToString(response);
+                //Log.i("POST-RESPONSE", conn.getHeaderField("Location"));
+
+                os.close();
+                conn.disconnect();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                status = statusCode;
-                Log.i("RESPOSTA", error.toString());
-                Log.i("RESPOSTA", String.valueOf(statusCode));
-
-            }
-        });
-        return status;
+        return status_code;
     }
-
-    private static StringEntity  fillParamUser(String name, String email,String pwd) {
-        JSONObject  jsonParams = new JSONObject ();
-
-        try {
-            jsonParams.put("username", name);
-            jsonParams.put("email", email);
-            jsonParams.put("password", pwd);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        StringEntity entity = null;
-        try {
-            entity = new StringEntity(jsonParams.toString());
-            entity.setContentType("application/json");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        return entity;
-    }
-
 }

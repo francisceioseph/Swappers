@@ -32,7 +32,7 @@ public class RegisterTask extends AsyncTask<String,String,Integer>{
 
     @Override
     protected Integer doInBackground(String... params) {
-        return UserService.registerUserWithWS(params[0],params[1],params[2],context);
+        return UserService.registerUserWithWS(params[0],params[1],params[2]);
     }
 
     @Override
