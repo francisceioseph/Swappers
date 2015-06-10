@@ -1,6 +1,5 @@
 package br.edu.ifce.swappers.swappers.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -11,7 +10,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -120,24 +118,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     * Validation methods for the form fields
     *
     * */
-
-    private boolean isRegisterFormValid(){
-        //TODO Write a code here to validate the register form.
-
-        return true;
-    }
-
-    private void markWrongFields(){
-        //TODO mark the fields with wrong information.
-    }
-
-    private void startMainActivity(){
-        Intent mainActivityIntent = new Intent(this, MainActivity.class);
-        mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        this.startActivity(mainActivityIntent);
-    }
-
     @Override
     public void startNextActivity() {
         Intent mainActivityIntent = new Intent(this, LoginActivity.class);
@@ -145,7 +125,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(mainActivityIntent);
 
-        Toast toast = SwappersToast.makeText(this, "Cadastro efeutado com sucesso. Faça seu Login.", Toast.LENGTH_LONG);
+        Toast toast = SwappersToast.makeText(this, "Cadastro efetuado com sucesso! Faça seu Login.", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
@@ -205,7 +185,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     * Local and Webservice database comunication methods
     *
     * */
-
     private void saveRegisterInformation(){
         EditText userNameEditText     = (EditText) findViewById(R.id.user_name_edit_text);
         EditText userEmailEditText    = (EditText) findViewById(R.id.user_email_edit_text);
@@ -218,18 +197,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         String userPasswordConfirmation = userPasswordConfirmationEditText.getText().toString();
         //TODO Save data information on database
         if (validationRegistryUser(userName,userEmail,userPassword,userPasswordConfirmation)){
-
             RegisterTask registerTask = new RegisterTask(this,this);
             registerTask.execute(userName, userEmail, userPassword);
-
-            //Log.i("ENTRA","entrou");
-            //syncToRemoteDatabase(userName, userEmail, userPassword);
         }
-    }
-
-    private void syncToRemoteDatabase(String userName, String userEmail, String userPassword){
-        //TODO Send data to webservice remote database
-        authenticateUserWithWS(userName, userEmail, userPassword, getApplicationContext());
     }
 
     private boolean validationRegistryUser(String name, String email, String usePassword, String passwordConfirmation){
@@ -275,48 +245,5 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
             SwappersToast.makeText(getApplicationContext(), "Seu nome deve ter pelo menos 3 letras.", Toast.LENGTH_LONG).show();
             return false;
         }
-    }
-
-    public void authenticateUserWithWS(String name, String email, String pwd, Context applicationContext){
-        AsyncHttpClient client = new AsyncHttpClient();
-
-        StringEntity entity = fillParamUser(name,email,pwd);
-        client.post(getApplicationContext(), "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/insert", entity, "application/json", new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-                if (statusCode == 201) {
-                    RegisterActivity.this.startMainActivity();
-                    SwappersToast.makeText(getApplicationContext(), "Seja bem vindo!", Toast.LENGTH_LONG).show();
-                } else {
-                    //SwappersToast.makeText(getApplicationContext(), "Senha ou usuário incorretos!", Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.i("RESPOSTA", error.toString());
-                Log.i("RESPOSTA", String.valueOf(statusCode));
-            }
-        });
-    }
-
-    private static StringEntity  fillParamUser(String name, String email,String pwd) {
-        JSONObject jsonParams = new JSONObject ();
-
-        try {
-            jsonParams.put("username", name);
-            jsonParams.put("email", email);
-            jsonParams.put("password", pwd);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        StringEntity entity = null;
-        try {
-            entity = new StringEntity(jsonParams.toString());
-            entity.setContentType("application/json");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return entity;
     }
 }
