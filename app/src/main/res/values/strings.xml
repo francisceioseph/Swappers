@@ -84,6 +84,7 @@
     <string name="splash_logo_accessibiity_descriptor">swappers logo</string>
     <string name="splash_swappers_title">Swappers</string>
     <string name="splash_swappers_slogan">Doe leituras, compartilhe sonhos</string>
+    <string name="title_activity_main_activity2">MainActivity2Activity</string>
 
 
 </resources>
