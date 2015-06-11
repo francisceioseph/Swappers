@@ -30,6 +30,7 @@ import java.util.regex.Pattern;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
+import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.RegisterTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.TaskInterface;
@@ -61,7 +62,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         this.userPhotoCircleImageView = (CircleImageView) findViewById(R.id.user_photo_circle_image_view);
         this.userPhotoCircleImageView.setOnClickListener(this.makeUserPhotoCircleButtonClickListener());
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -107,7 +107,14 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         OnClickListener clickListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
-                 RegisterActivity.this.saveRegisterInformation();
+
+                if(AndroidUtils.isNetworkAvailable(getApplicationContext())) {
+                    RegisterActivity.this.saveRegisterInformation();
+                }else {
+                Toast toast = SwappersToast.makeText(getApplicationContext(), "Atenção! Verifique sua conexão!", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                }
             }
         };
         return clickListener;
