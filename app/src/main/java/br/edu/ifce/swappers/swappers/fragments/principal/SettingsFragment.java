@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -38,6 +39,32 @@ public class SettingsFragment extends Fragment {
 
         this.settingsListView = (ListView) rootView.findViewById(R.id.settings_list_view);
         this.settingsListView.setAdapter(personalInfoListViewAdapter);
+
+        this.settingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 1:
+                        //Mudar foto do perfil
+                        break;
+                    case 2:
+                        //Mudar foto de capa
+                        break;
+                    case 3:
+                        //Mudar data de nascimento
+                        break;
+                    case 4:
+                        //Mudar cidade
+                        break;
+                    case 5:
+                        //Mudar senha
+                        break;
+                    case 6:
+                        //Deletar conta
+                        break;
+                }
+            }
+        });
 
         return rootView;
     }

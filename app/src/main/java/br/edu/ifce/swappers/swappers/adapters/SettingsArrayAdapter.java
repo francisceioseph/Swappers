@@ -1,10 +1,12 @@
 package br.edu.ifce.swappers.swappers.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.activities.LoginActivity;
 import br.edu.ifce.swappers.swappers.model.SettingsListItem;
 
 /**
@@ -46,6 +49,8 @@ public class SettingsArrayAdapter extends ArrayAdapter<SettingsListItem> {
 
         viewHolder.getIconImageView().setImageDrawable(item.getIcon());
         viewHolder.getSettingsDescriptionTextView().setText(item.getText());
+
+
 
         return convertView;
     }
