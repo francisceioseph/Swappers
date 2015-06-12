@@ -14,7 +14,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_margin="16dp"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:contentDescription="item icon" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,9 +23,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Title of Settings Item"
         android:id="@+id/adapter_settings_title_item"
-        android:layout_marginRight="16dp"
-        android:layout_centerVertical="true"
+        android:layout_alignTop="@+id/adapter_settings_icon_image"
+        android:layout_toRightOf="@+id/adapter_settings_icon_image"
         android:layout_toEndOf="@+id/adapter_settings_icon_image"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp" />
 
 </RelativeLayout>
