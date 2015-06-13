@@ -1,15 +1,18 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
-import android.util.JsonWriter;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 import br.edu.ifce.swappers.swappers.util.ImageUtil;
@@ -19,18 +22,19 @@ import br.edu.ifce.swappers.swappers.util.ImageUtil;
  */
 public class UserService {
 
-    private static final String URL_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login";
+    private static final String URL_REGISTER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login";
+    private static final String URL_LOGIN_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/dologin";
 
     public static int registerUserWithWS(String name, String email, String pwd,String photo) {
         int status_code = 0;
             try {
-                URL url = new URL(URL_SERVICE);
+                URL url = new URL(URL_REGISTER_SERVICE);
 
                 JSONObject jsonParam = fillParamJson(name, email, pwd, photo);
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(10000);
-                conn.setConnectTimeout(15000);
+                conn.setReadTimeout(15000);
+                conn.setConnectTimeout(25000);
                 conn.setRequestMethod("POST");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
@@ -70,5 +74,66 @@ public class UserService {
             jsonParam.put("photo", ImageUtil.StringToByte(photo));
         }
         return jsonParam;
+    }
+
+    public static boolean checkLoginWS(String email, String pwd){
+        boolean isAllowedLogin = false;
+        URL url =null;
+        HttpURLConnection conn = null;
+
+        try {
+            String urlLogin = buildURLtoLogin(URL_LOGIN_SERVICE,email,pwd);
+            url = new URL(urlLogin);
+
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setDoInput(true);
+
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.connect();
+
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                        conn.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                JSONObject jsonObject = new JSONObject(response.toString());
+                isAllowedLogin = jsonObject.getBoolean("status");
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }finally {
+            conn.disconnect();
+        }
+        return isAllowedLogin;
+    }
+
+    public static String buildURLtoLogin(String url, String email, String pwd){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(url);
+        stringBuilder.append("?");
+        stringBuilder.append("email");
+        stringBuilder.append("=");
+        stringBuilder.append(email);
+        stringBuilder.append("&");
+        stringBuilder.append("password");
+        stringBuilder.append("=");
+        stringBuilder.append(pwd);
+
+        return stringBuilder.toString();
     }
 }

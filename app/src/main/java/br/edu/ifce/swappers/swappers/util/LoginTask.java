@@ -3,22 +3,22 @@ package br.edu.ifce.swappers.swappers.util;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.webservice.UserService;
 
 /**
- * Created by gracyane on 04/06/2015.
+ * Created by gracyane on 12/06/2015.
  */
-public class RegisterTask extends AsyncTask<String,String,Integer>{
+public class LoginTask extends AsyncTask<String,String,Boolean> {
+
     private Context context;
     private ProgressDialog progressDialog;
     private TaskInterface ti;
 
 
-    public RegisterTask(Context context, TaskInterface ti){
+    public LoginTask(Context context, TaskInterface ti){
         this.ti = ti;
         this.context = context;
     }
@@ -31,14 +31,8 @@ public class RegisterTask extends AsyncTask<String,String,Integer>{
     }
 
     @Override
-    protected Integer doInBackground(String... params) {
-
-        if (params.length==4) {
-            return UserService.registerUserWithWS(params[0], params[1], params[2],params[3]);
-        }else {
-            String str = "null";
-            return UserService.registerUserWithWS(params[0], params[1], params[2],str);
-        }
+    protected Boolean doInBackground(String... params) {
+        return UserService.checkLoginWS(params[0], params[1]);
     }
 
     @Override
@@ -46,21 +40,18 @@ public class RegisterTask extends AsyncTask<String,String,Integer>{
     }
 
     @Override
-    protected void onPostExecute(Integer result) {
-        Log.i("STATUSCODE", String.valueOf(result));
+    protected void onPostExecute(Boolean result) {
         Toast toast;
         progressDialog.dismiss();
-        if (result==201) {
+        if (result){
             ti.startNextActivity();
-        }else if(result==500){
-            toast = Toast.makeText(context,"Erro no servidor. Tente novamente mais tarde.",Toast.LENGTH_LONG);
+            toast = SwappersToast.makeText(context,"Login efetuado com sucesso!",Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-        }else if(result==409){
-            toast = Toast.makeText(context,"Atenção! Este email já existe em nosso sistema.",Toast.LENGTH_LONG);
+        }else {
+            toast = SwappersToast.makeText(context,"Atenção! E-mail ou senha incorreto.",Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
-
     }
 }
