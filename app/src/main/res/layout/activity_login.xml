@@ -122,7 +122,8 @@
                         android:textIsSelectable="false"
                         android:visibility="visible"
                         android:focusable="true"
-                        android:theme="@style/AppTheme" />
+                        android:theme="@style/AppTheme"
+                        android:password="true" />
 
                 </LinearLayout>
 

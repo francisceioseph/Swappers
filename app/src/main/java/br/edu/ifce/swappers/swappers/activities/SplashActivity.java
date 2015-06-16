@@ -35,7 +35,5 @@ public class SplashActivity extends Activity {
                 startActivity(intent);
             }
         }, SPLASH_TIME_OUT);
-
-
     }
 }
