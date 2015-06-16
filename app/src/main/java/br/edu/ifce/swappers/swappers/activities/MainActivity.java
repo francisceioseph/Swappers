@@ -1,12 +1,19 @@
 package br.edu.ifce.swappers.swappers.activities;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.principal.AboutFragment;
@@ -31,7 +38,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         this.setAccountListener(this);
 
         this.buildMainMenu();
-    }
+
+}
 
     private void buildMainMenu() {
 

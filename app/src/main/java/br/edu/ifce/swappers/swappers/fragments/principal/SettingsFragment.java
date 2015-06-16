@@ -1,6 +1,8 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
 
+
+import android.app.DatePickerDialog;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,12 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.SettingsArrayAdapter;
+import br.edu.ifce.swappers.swappers.fragments.dialogs.DatePickerFragment;
 import br.edu.ifce.swappers.swappers.model.SettingsListItem;
 
 /**
@@ -22,6 +28,7 @@ import br.edu.ifce.swappers.swappers.model.SettingsListItem;
 public class SettingsFragment extends Fragment {
 
     private ListView settingsListView;
+
 
     public SettingsFragment() {
 
@@ -44,22 +51,24 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 1:
+                    case 0:
                         //Mudar foto do perfil
                         break;
-                    case 2:
+                    case 1:
                         //Mudar foto de capa
                         break;
-                    case 3:
+                    case 2:
                         //Mudar data de nascimento
+
+                        showDatePicker();
                         break;
-                    case 4:
+                    case 3:
                         //Mudar cidade
                         break;
-                    case 5:
+                    case 4:
                         //Mudar senha
                         break;
-                    case 6:
+                    case 5:
                         //Deletar conta
                         break;
                 }
@@ -95,4 +104,35 @@ public class SettingsFragment extends Fragment {
 
         return dataSource;
     }
+
+
+    private void showDatePicker() {
+        DatePickerFragment date = new DatePickerFragment();
+        /**
+         * Set Up Current Date Into dialog
+         */
+        Calendar calender = Calendar.getInstance();
+        Bundle args = new Bundle();
+        args.putInt("year", calender.get(Calendar.YEAR));
+        args.putInt("month", calender.get(Calendar.MONTH));
+        args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
+        date.setArguments(args);
+        /**
+         * Set Call back to capture selected date
+         */
+        date.setCallBack(ondate);
+        date.show(getFragmentManager(), "Date Picker");
+
+
+    }
+
+    DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            Toast.makeText(
+                    getActivity(), "My BirthDate is: " + String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear) + "/" +
+                            String.valueOf(year), Toast.LENGTH_LONG).show();
+        }
+    };
+
 }
