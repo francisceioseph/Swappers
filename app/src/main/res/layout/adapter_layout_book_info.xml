@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_vertical">
 
             <ImageView
@@ -21,21 +21,25 @@
                 android:id="@+id/adapter_book_cover"
                 android:background="@color/accent_material_dark"
                 android:contentDescription="@string/adapter_book_cover_description"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:adjustViewBounds="false" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp">
 
                 <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/adapter_book_title"
-                android:id="@+id/adapter_book_title" />
+                android:id="@+id/adapter_book_title"
+                    android:textStyle="bold" />
 
                 <TextView
                 android:layout_width="wrap_content"
@@ -50,7 +54,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/adapter_book_publisher"
                 android:id="@+id/adapter_book_publisher"
-                    android:layout_marginBottom="15dp" />
+                    android:layout_marginBottom="0dp" />
 
                 <TextView
                 android:layout_width="wrap_content"
@@ -58,7 +62,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="4.7"
                 android:id="@+id/adapter_book_avarage"
-                android:textSize="70sp"
+                android:textSize="50sp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp" />
 
@@ -72,8 +76,9 @@
                 android:paddingStart="0dp"
                 android:indeterminateOnly="false"
                 android:progressTint="@color/color_accent_dark"
-                style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
-                android:rating="0"/>
+                style="?android:attr/ratingBarStyleIndicator"
+                    android:progressDrawable="@drawable/rating_stars"
+                    android:rating="0" />
 
             </LinearLayout>
 
