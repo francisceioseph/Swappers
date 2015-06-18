@@ -73,6 +73,8 @@ public class BooksFragment extends Fragment {
 
         for (int i = 0; i < tabAmount; i++){
             tabView = tabWidget.getChildTabViewAt(i);
+            tabView.setBackgroundResource(R.drawable.tab_indicator);
+
             tabTextView = (TextView) tabView.findViewById(android.R.id.title);
             tabTextView.setTextColor(tabTextColors);
         }
