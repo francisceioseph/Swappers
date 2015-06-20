@@ -37,7 +37,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/place_user_photo"
-                    android:src="@drawable/ic_person_giant"
+                    android:src="@drawable/ic_location_city"
                     app:border_width="1dp"
                     app:border_color="@color/transparent"
                     android:elevation="4dp"
