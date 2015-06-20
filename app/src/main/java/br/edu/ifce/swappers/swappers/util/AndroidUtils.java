@@ -1,8 +1,6 @@
 package br.edu.ifce.swappers.swappers.util;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 

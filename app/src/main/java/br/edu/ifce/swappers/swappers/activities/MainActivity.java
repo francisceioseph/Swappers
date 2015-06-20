@@ -1,6 +1,5 @@
 package br.edu.ifce.swappers.swappers.activities;
 
-import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.fragments.SearchViewFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.AboutFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.BooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;

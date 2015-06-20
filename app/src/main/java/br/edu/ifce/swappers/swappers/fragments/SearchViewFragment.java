@@ -29,15 +29,15 @@ public class SearchViewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_search_view, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
-        ArrayList<Book> books = new ArrayList<>();
+        ArrayList<Book> booksDataSource = new ArrayList<>();
 
         Book book = new Book("A Culpa é das Estrelas", "Shanya", "Shnya", 3.0f, 2.5f);
-        books.add(book);
+        booksDataSource.add(book);
 
         recyclerView.setHasFixedSize(false);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        recyclerView.setAdapter(new BookRecyclerViewAdapter(books));
+        recyclerView.setAdapter(new BookRecyclerViewAdapter(booksDataSource));
 
         return rootView;
     }

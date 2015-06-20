@@ -13,12 +13,10 @@ import android.widget.TextView;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.AvailableBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.profile.DonatedBooksFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.profile.FavoriteBooksFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.profile.RetrievedBooksFragment;
 
 public class DetailPlaceActivity extends AppCompatActivity {
 
+    private FragmentTabHost placeTabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +25,12 @@ public class DetailPlaceActivity extends AppCompatActivity {
 
         this.initToolbar();
         this.initTabHost();
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.placeTabHost = null;
     }
 
     private void initToolbar() {
@@ -42,21 +45,20 @@ public class DetailPlaceActivity extends AppCompatActivity {
     }
 
     private void initTabHost() {
-        FragmentTabHost placeTabHost;
 
-        placeTabHost = (FragmentTabHost) findViewById(R.id.place_tabHost);
-        placeTabHost.setup(this, this.getSupportFragmentManager(), android.R.id.tabcontent);
+        this.placeTabHost = (FragmentTabHost) findViewById(R.id.place_tabHost);
+        this.placeTabHost.setup(this, this.getSupportFragmentManager(), android.R.id.tabcontent);
 
-        TabHost.TabSpec placeInformationTab   = placeTabHost.newTabSpec("placeInformationTab");
-        TabHost.TabSpec availableBooksTab     = placeTabHost.newTabSpec("availableBooksTab");
+        TabHost.TabSpec placeInformationTab   = this.placeTabHost.newTabSpec("placeInformationTab");
+        TabHost.TabSpec availableBooksTab     = this.placeTabHost.newTabSpec("availableBooksTab");
 
         placeInformationTab.setIndicator("INFORMATION");
         availableBooksTab.setIndicator("AVAILABLE BOOKS");
 
-        placeTabHost.addTab(placeInformationTab, InformationFragment.class, null);
-        placeTabHost.addTab(availableBooksTab, AvailableBooksFragment.class, null);
+        this.placeTabHost.addTab(placeInformationTab, InformationFragment.class, null);
+        this.placeTabHost.addTab(availableBooksTab, AvailableBooksFragment.class, null);
 
-        placeTabHost.setCurrentTab(0);
+        this.placeTabHost.setCurrentTab(1);
 
         this.stylizeTabsTextView(placeTabHost);
     }

@@ -12,8 +12,6 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.andexert.library.RippleView;
-
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.books.RecommendationsFragment;
