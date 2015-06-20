@@ -33,9 +33,9 @@
     <string name="title_recommendation_book">Recommendation Title Here</string>
     <string name="next_recommendation_button_description">next recommendation</string>
     <string name="previous_recommendation_button_description">previous recommendation</string>
-    <string name="profile_cover_photo_description">cover photo of user profile</string>
-    <string name="profile_user_name_content">The Name Of The User</string>
-    <string name="profile_user_city_content">The City Name Of The User</string>
+    <string name="place_cover_photo_description">cover photo of user profile</string>
+    <string name="place_name_content">The Name Of The Place</string>
+    <string name="place_city_content">The City Name Of The Place</string>
     <string name="adapter_book_cover_description">Book Cover</string>
     <string name="adapter_book_title">Book Title</string>
     <string name="adapter_book_authors">Book Authors</string>
@@ -87,6 +87,13 @@
     <string name="title_activity_main_activity2">MainActivity2Activity</string>
     <string name="item_icon_description">item icon</string>
     <string name="item_name">Title of Settings Item</string>
+    <string name="information_fragment_address_title">Address</string>
+    <string name="information_fragment_street">Some Street</string>
+    <string name="information_fragment_neighborhood_and_city">Some neighbor and city</string>
+    <string name="information_fragment_state_and_country">Some State and Country</string>
+    <string name="information_fragment_business_hours">Business Hours</string>
+    <string name="information_fragment_business_hours_description">Business Hours Description</string>
+    <string name="place_photo">Place photo</string>
 
 
 </resources>

@@ -30,7 +30,7 @@ public class ProfileFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        this.profileTabHost = (FragmentTabHost) rootView.findViewById(R.id.profile_tabHost);
+        this.profileTabHost = (FragmentTabHost) rootView.findViewById(R.id.place_tabHost);
         this.profileTabHost.setup(this.getActivity(), this.getChildFragmentManager(), android.R.id.tabcontent);
 
         TabHost.TabSpec donatedBooksTab   = this.profileTabHost.newTabSpec("donatedBooksTab");
