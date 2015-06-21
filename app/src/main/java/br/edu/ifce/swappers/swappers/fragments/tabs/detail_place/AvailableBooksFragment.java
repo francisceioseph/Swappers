@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.model.Book;
@@ -31,7 +32,7 @@ public class AvailableBooksFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataSource = this.createMockedDataSource();
+        dataSource = MockSingleton.INSTANCE.createMockedBookDataSource();
     }
 
     @Override
@@ -48,27 +49,6 @@ public class AvailableBooksFragment extends Fragment {
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return rootView;
-    }
-
-    private ArrayList<Book> createMockedDataSource() {
-        ArrayList<Book> dataSource = new ArrayList<>();
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-        dataSource.add(new Book("A Book", "An Author", "A Publisher", 2.1f, 4.2f));
-
-        return dataSource;
     }
 }
 
