@@ -4,8 +4,8 @@ package br.edu.ifce.swappers.swappers.fragments.principal;
 
 import android.app.DatePickerDialog;
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

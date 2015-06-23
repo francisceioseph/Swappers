@@ -1,19 +1,14 @@
 package br.edu.ifce.swappers.swappers.activities;
 
-import android.app.Activity;
-import android.app.DatePickerDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.DatePicker;
-import android.widget.Toast;
-
-import java.util.Calendar;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.principal.AboutFragment;
@@ -38,8 +33,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         this.setAccountListener(this);
 
         this.buildMainMenu();
-
-}
+    }
 
     private void buildMainMenu() {
 
@@ -53,6 +47,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         MaterialSection profileSection     = this.newSection("Profile", profileSectionIcon, new ProfileFragment());
         MaterialSection booksSection       = this.newSection("Books", booksSectionIcon, new BooksFragment());
         MaterialSection placesSection      = this.newSection("Places", placesSectionIcon, new PlacesFragment());
+//        MaterialSection placesSection      = this.newSection("Places", placesSectionIcon, new SearchViewFragment());
         MaterialSection statisticsSection  = this.newSection("Statistics", statisticsSectionIcon, new StatisticsFragment());
         MaterialSection aboutSection       = this.newSection("About", aboutSectionIcon, new AboutFragment());
         MaterialSection settingsSection    = this.newSection("Settings", settingsSectionIcon, new SettingsFragment());
@@ -67,7 +62,9 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         this.addSection(aboutSection);
         this.addSection(settingsSection);
 
+        this.disableLearningPattern();
         this.setDefaultSectionLoaded(this.getSectionList().indexOf(booksSection));
+
     }
 
     private MaterialAccount loadAccount(){
@@ -108,5 +105,21 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     public void onChangeAccount(MaterialAccount materialAccount) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView;
+
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        }
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

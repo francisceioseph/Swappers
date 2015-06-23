@@ -16,15 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import org.apache.http.Header;
-import org.apache.http.entity.StringEntity;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,7 +25,6 @@ import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.RegisterTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.TaskInterface;
-import br.edu.ifce.swappers.swappers.webservice.UserService;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.view.View.OnClickListener;
@@ -54,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         setContentView(R.layout.activity_register);
 
         this.toolbar = (Toolbar) findViewById(R.id.toolbar);
-        this.setUpActivityToolbar();
+        this.initToolbar();
 
         Button registerButton = (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(this.makeRegisterButtonClickListener());
@@ -77,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         }
     }
 
-    private void setUpActivityToolbar(){
+    private void initToolbar(){
         if (this.toolbar != null){
             this.setSupportActionBar(this.toolbar);
 
