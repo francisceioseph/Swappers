@@ -54,16 +54,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void startMainActivity(){
-        Intent mainActivityIntent = new Intent(this, MainActivity.class);
+       Intent mainActivityIntent = new Intent(this, MainActivity.class);
         mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        if(AndroidUtils.isNetworkAvailable(this)){
+        /* if(AndroidUtils.isNetworkAvailable(this)){*/
             this.startActivity(mainActivityIntent);
-        }else {
+       /* }else {
             Toast toast = SwappersToast.makeText(this, "Verifique sua conexão!", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-        }
+        }*/
     }
 
     public void startRegisterActivity(){
