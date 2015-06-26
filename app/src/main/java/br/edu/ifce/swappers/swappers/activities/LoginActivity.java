@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void startRegisterActivity(){
         Intent registerActivityIntent = new Intent(this, RegisterActivity.class);
-        //registerActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        registerActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         if(AndroidUtils.isNetworkAvailable(this)){
             this.startActivity(registerActivityIntent);
