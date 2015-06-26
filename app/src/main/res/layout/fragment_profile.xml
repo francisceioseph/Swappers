@@ -5,130 +5,120 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+
     tools:context="br.edu.ifce.swappers.swappers.fragments.principal.ProfileFragment">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-       <LinearLayout
+        <RelativeLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal|top"
+            android:orientation="horizontal">
 
-            <RelativeLayout
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <ImageView
+                android:id="@+id/place_cover_photo"
                 android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:contentDescription="@string/profile_cover_photo_description"
+                android:background="@color/accent_material_dark"
+                android:src="@drawable/background_splash"
+                android:scaleType="centerCrop"
+                android:elevation="3dp"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/place_user_photo"
+                android:src="@drawable/ic_person_giant"
+                app:border_width="1dp"
+                app:border_color="@color/transparent"
+                android:elevation="4dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="19dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:elevation="4dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|top">
-
-                <ImageView
-                    android:id="@+id/profile_cover_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:contentDescription="@string/profile_cover_photo_description"
-                    android:background="@color/accent_material_dark"
-                    android:src="@drawable/background_splash"
-                    android:scaleType="centerCrop"
-                    android:elevation="3dp"/>
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_user_photo"
-                    android:src="@drawable/ic_person_giant"
-                    app:border_width="1dp"
-                    app:border_color="@color/transparent"
-                    android:elevation="4dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignLeft="@+id/profile_cover_photo"
-                    android:layout_toRightOf="@+id/profile_cover_photo"
-                    android:layout_alignBaseline="@+id/profile_cover_photo"
-                    android:layout_alignParentTop="false"
-                    android:layout_alignWithParentIfMissing="false"
-                    android:layout_alignParentRight="false"
-                    android:layout_alignParentLeft="true" />
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/place_user_photo"
+                android:layout_toEndOf="@+id/place_user_photo"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp">
 
                 <TextView
-                    android:id="@+id/profile_user_name"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/place_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/profile_user_name_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/profile_user_photo"
-                    android:layout_marginStart="10dp"
-                    android:layout_below="@+id/profile_user_photo"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="24dp"
-                    android:elevation="4dp"/>
+                    android:text="@string/place_name_content"
+                    android:textColor="@color/primary_text_default_material_light"
+                    android:layout_marginBottom="5dp" />
 
                 <TextView
-                    android:id="@+id/profile_user_city"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/place_city"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/profile_user_city_content"
-                    android:layout_alignStart="@+id/profile_user_name"
-                    android:layout_alignParentEnd="false"
-                    android:layout_below="@+id/profile_user_photo"
-                    android:layout_alignRight="@+id/profile_user_name"
-                    android:layout_alignParentStart="false"
-                    android:layout_alignTop="@+id/profile_user_name"
-                    android:layout_alignParentTop="false"
+                    android:text="@string/place_city_content"
+                    android:textColor="@color/primary_text_default_material_light"
                     android:elegantTextHeight="false"
-                    android:focusableInTouchMode="false"
-                    android:elevation="4dp"/>
+                    android:focusableInTouchMode="false"/>
+            </LinearLayout>
 
-            </RelativeLayout>
+        </RelativeLayout>
 
-            <android.support.v4.app.FragmentTabHost
+        <android.support.v4.app.FragmentTabHost
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/place_tabHost">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/profile_tabHost">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <com.andexert.library.RippleView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
 
-                    <com.andexert.library.RippleView
+                    app:rv_centered="false"
+                    app:rv_rippleDuration="400"
+                    app:rv_color="@color/color_ripple_register">
+
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/color_accent_dark"
+                        android:elevation="4dp"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false"
+                        android:layoutMode="clipBounds"/>
 
-                        app:rv_centered="false"
-                        app:rv_rippleDuration="400"
-                        app:rv_color="@color/color_ripple_register">
+                </com.andexert.library.RippleView>
 
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </FrameLayout>
 
-                        <TabWidget
-                            android:id="@android:id/tabs"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/color_accent_dark"
-                            android:elevation="4dp"
-                            android:orientation="horizontal"
-                            android:baselineAligned="false"
-                            android:layoutMode="clipBounds"/>
+            </LinearLayout>
 
-                    </com.andexert.library.RippleView>
+        </android.support.v4.app.FragmentTabHost>
 
-                    <FrameLayout
-                        android:id="@android:id/tabcontent"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    </FrameLayout>
-
-                </LinearLayout>
-
-            </android.support.v4.app.FragmentTabHost>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
 </FrameLayout>

@@ -9,6 +9,7 @@ android {
     buildToolsVersion '21.1.2'
     defaultConfig {
         applicationId 'br.edu.ifce.swappers.swappers'
+
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
@@ -28,6 +29,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.google.android.gms:play-services:6.5.87'
+    compile 'com.android.support:recyclerview-v7:+'
+
     //    Floating action button
     compile 'com.getbase:floatingactionbutton:1.9.0'
     //    Material Navigation Drawer
@@ -44,4 +47,5 @@ dependencies {
     compile 'com.github.paolorotolo:appintro:1.1.0'
     //Ripple Efects
     compile 'com.github.traex.rippleeffect:library:1.3'
+
 }
