@@ -47,7 +47,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         MaterialSection profileSection     = this.newSection("Profile", profileSectionIcon, new ProfileFragment());
         MaterialSection booksSection       = this.newSection("Books", booksSectionIcon, new BooksFragment());
         MaterialSection placesSection      = this.newSection("Places", placesSectionIcon, new PlacesFragment());
-//        MaterialSection placesSection      = this.newSection("Places", placesSectionIcon, new SearchViewFragment());
         MaterialSection statisticsSection  = this.newSection("Statistics", statisticsSectionIcon, new StatisticsFragment());
         MaterialSection aboutSection       = this.newSection("About", aboutSectionIcon, new AboutFragment());
         MaterialSection settingsSection    = this.newSection("Settings", settingsSectionIcon, new SettingsFragment());
