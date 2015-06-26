@@ -12,8 +12,6 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.andexert.library.RippleView;
-
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.books.RecommendationsFragment;
@@ -73,6 +71,8 @@ public class BooksFragment extends Fragment {
 
         for (int i = 0; i < tabAmount; i++){
             tabView = tabWidget.getChildTabViewAt(i);
+            tabView.setBackgroundResource(R.drawable.tab_indicator);
+
             tabTextView = (TextView) tabView.findViewById(android.R.id.title);
             tabTextView.setTextColor(tabTextColors);
         }
