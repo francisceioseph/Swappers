@@ -1,43 +1,41 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
-
-
-import android.app.DatePickerDialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.fourmob.datetimepicker.date.DatePickerDialog;
+import com.fourmob.datetimepicker.date.DatePickerDialog.OnDateSetListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.SettingsArrayAdapter;
-import br.edu.ifce.swappers.swappers.fragments.dialogs.DatePickerFragment;
 import br.edu.ifce.swappers.swappers.model.SettingsListItem;
+import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements OnDateSetListener{
 
     private ListView settingsListView;
-
+    private static String BIRTHDAY_DATEPICKER_TAG = "BIRTHDAY_DATEPICKER";
 
     public SettingsFragment() {
 
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
@@ -59,8 +57,7 @@ public class SettingsFragment extends Fragment {
                         break;
                     case 2:
                         //Mudar data de nascimento
-
-                        showDatePicker();
+                        showBirthdayDatePicker();
                         break;
                     case 3:
                         //Mudar cidade
@@ -105,34 +102,22 @@ public class SettingsFragment extends Fragment {
         return dataSource;
     }
 
+    private void showBirthdayDatePicker() {
+        Calendar currentDate = Calendar.getInstance();
+        DatePickerDialog datePickerDialog;
 
-    private void showDatePicker() {
-        DatePickerFragment date = new DatePickerFragment();
-        /**
-         * Set Up Current Date Into dialog
-         */
-        Calendar calender = Calendar.getInstance();
-        Bundle args = new Bundle();
-        args.putInt("year", calender.get(Calendar.YEAR));
-        args.putInt("month", calender.get(Calendar.MONTH));
-        args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
-        date.setArguments(args);
-        /**
-         * Set Call back to capture selected date
-         */
-        date.setCallBack(ondate);
-        date.show(getFragmentManager(), "Date Picker");
-
-
+        datePickerDialog = DatePickerDialog.newInstance(this,
+                currentDate.get(Calendar.YEAR),
+                currentDate.get(Calendar.MONTH),
+                currentDate.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.setVibrate(false);
+        datePickerDialog.show(getActivity().getSupportFragmentManager(), BIRTHDAY_DATEPICKER_TAG);
+        datePickerDialog.setOnDateSetListener(this);
     }
 
-    DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            Toast.makeText(
-                    getActivity(), "My BirthDate is: " + String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear) + "/" +
-                            String.valueOf(year), Toast.LENGTH_LONG).show();
-        }
-    };
-
+    @Override
+    public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
+        String message = String.format("Data escolhida: %d - %d - %d", day, month, year);
+        SwappersToast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+    }
 }
