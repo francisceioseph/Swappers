@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
@@ -25,9 +26,15 @@ import br.edu.ifce.swappers.swappers.util.SwappersToast;
 public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Book> booksDataSource;
+    private RecycleViewOnClickListenerHack mRecycleViewOnClickListenerHack;
+
 
     public BookRecyclerViewAdapter(ArrayList<Book> books) {
         this.booksDataSource = books;
+    }
+
+    public void setRecycleViewOnClickListenerHack(RecycleViewOnClickListenerHack r) {
+        this.mRecycleViewOnClickListenerHack = r;
     }
 
     @Override
@@ -69,6 +76,8 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
             this.bookPublisherTextView         = (TextView)  itemView.findViewById(R.id.adapter_book_publisher);
             this.bookEvaluationAvarageTextView = (TextView)  itemView.findViewById(R.id.adapter_book_avarage);
             this.bookUserEvaluationRatingBar   = (RatingBar) itemView.findViewById(R.id.adapter_book_rating_bar);
+
+            itemView.setOnClickListener(this);
         }
 
         public TextView getBookTitleTextView() {
@@ -111,12 +120,12 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
             this.bookUserEvaluationRatingBar = bookUserEvaluationRatingBar;
         }
 
+
         @Override
-        public void onClick(View v) {
-            Log.i("tag", "Clique");
-            Toast toast = SwappersToast.makeText(v.getContext(), "cliques", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+        public void onClick(View view) {
+            if(mRecycleViewOnClickListenerHack != null){
+                mRecycleViewOnClickListenerHack.onClickListener(view, getPosition());
+            }
         }
     }
 }

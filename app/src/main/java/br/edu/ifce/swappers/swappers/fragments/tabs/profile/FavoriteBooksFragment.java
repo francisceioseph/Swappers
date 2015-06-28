@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,11 +18,13 @@ import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
+import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteBooksFragment extends Fragment {
+public class FavoriteBooksFragment extends Fragment implements RecycleViewOnClickListenerHack {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     ArrayList<Book> dataSource;
@@ -39,7 +43,7 @@ public class FavoriteBooksFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_favorite_books, container, false);
 
         BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(dataSource);
-
+        adapter.setRecycleViewOnClickListenerHack(this);
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.recyclerView = (RecyclerView) rootView.findViewById(R.id.favorite_books_list);
 
@@ -50,5 +54,12 @@ public class FavoriteBooksFragment extends Fragment {
 
         return rootView;
 
+    }
+
+    @Override
+    public void onClickListener(View view, int position) {
+        Toast toast = SwappersToast.makeText(getActivity(), "Livro: " + position, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 360);
+        toast.show();
     }
 }

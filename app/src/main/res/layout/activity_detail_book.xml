@@ -15,14 +15,35 @@
         />
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context="br.edu.ifce.swappers.swappers.activities.DetailBookActivity">
+        android:layout_height="match_parent"
+        tools:context="br.edu.ifce.swappers.swappers.activities.DetailBookActivity"
+        android:id="@+id/detailBookRelativeLayout">
 
-        <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/place_cover_photo"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:contentDescription="@string/profile_cover_photo_description"
+            android:background="@color/accent_material_dark"
+            android:src="@drawable/menu_back"
+            android:scaleType="centerCrop"
+            android:elevation="3dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/place_user_photo"
+            android:src="@drawable/best_book"
+            app:border_width="1dp"
+            app:border_color="@color/transparent"
+            android:elevation="4dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignBottom="@+id/place_cover_photo" />
 
     </RelativeLayout>
 </LinearLayout>
