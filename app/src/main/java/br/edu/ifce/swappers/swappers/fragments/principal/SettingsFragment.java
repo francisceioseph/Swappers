@@ -1,9 +1,10 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,35 +45,17 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
         this.settingsListView = (ListView) rootView.findViewById(R.id.settings_list_view);
         this.settingsListView.setAdapter(personalInfoListViewAdapter);
+        this.settingsListView.setOnItemClickListener(this.buildSettingsListDialogListener());
 
-        this.settingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        //Mudar foto do perfil
-                        break;
-                    case 1:
-                        //Mudar foto de capa
-                        break;
-                    case 2:
-                        //Mudar data de nascimento
-                        showBirthdayDatePicker();
-                        break;
-                    case 3:
-                        //Mudar cidade
-                        break;
-                    case 4:
-                        //Mudar senha
-                        break;
-                    case 5:
-                        //Deletar conta
-                        break;
-                }
-            }
-        });
+//        this.settingsListView.setOnItemClickListener();
 
         return rootView;
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
+        String message = String.format("Data escolhida: %d - %d - %d", day, month, year);
+        SwappersToast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
 
     private ArrayList<SettingsListItem> createSettingsDataSource() {
@@ -102,7 +85,38 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return dataSource;
     }
 
-    private void showBirthdayDatePicker() {
+    private AdapterView.OnItemClickListener buildSettingsListDialogListener() {
+        return new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        //Mudar foto do perfil
+                        break;
+                    case 1:
+                        //Mudar foto de capa
+                        break;
+                    case 2:
+                        //Mudar data de nascimento
+                        changeBirthdayDatePicker();
+                        break;
+                    case 3:
+                        //Mudar cidade
+                        break;
+                    case 4:
+                        //Mudar senha
+                        break;
+                    case 5:
+                        //Deletar conta
+                        AlertDialog deleteAccountDialog = buildDeleteAccountDialog();
+                        deleteAccountDialog.show();
+                        break;
+                }
+            }
+        };
+    }
+
+    private void changeBirthdayDatePicker() {
         Calendar currentDate = Calendar.getInstance();
         DatePickerDialog datePickerDialog;
 
@@ -115,9 +129,35 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         datePickerDialog.setOnDateSetListener(this);
     }
 
-    @Override
-    public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
-        String message = String.format("Data escolhida: %d - %d - %d", day, month, year);
-        SwappersToast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+    private AlertDialog buildDeleteAccountDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
+        builder.setTitle("Delete Account");
+        builder.setMessage("Do you really want to delete your account?");
+        builder.setPositiveButton("OK", this.dialogDeleteAccountPositiveButtonListener());
+        builder.setNegativeButton("CANCEL", this.dialogDeleteAccountNegativeButtonListener());
+
+        return builder.create();
     }
+
+    private DialogInterface.OnClickListener dialogDeleteAccountNegativeButtonListener() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SwappersToast.makeText(getActivity().getApplicationContext(), "Thanks so much! We're working so hard to make you really happy. :]", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
+    private DialogInterface.OnClickListener dialogDeleteAccountPositiveButtonListener() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SwappersToast.makeText(getActivity().getApplicationContext(), "Account Deleted Successfully", Toast.LENGTH_SHORT).show();
+                //TODO send message to ws to disable user account
+                //TODO load inicial screen and go out of current screen.
+            }
+        };
+    }
+
+
 }

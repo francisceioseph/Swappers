@@ -3,6 +3,7 @@ package br.edu.ifce.swappers.swappers.activities;
 import android.app.SearchManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         this.addAccount(userAccount);
         this.setAccountListener(this);
+
+        this.getToolbar().setTitleTextColor(Color.WHITE);
 
         this.buildMainMenu();
     }
