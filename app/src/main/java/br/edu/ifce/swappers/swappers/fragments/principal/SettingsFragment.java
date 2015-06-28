@@ -47,8 +47,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         this.settingsListView.setAdapter(personalInfoListViewAdapter);
         this.settingsListView.setOnItemClickListener(this.buildSettingsListDialogListener());
 
-//        this.settingsListView.setOnItemClickListener();
-
         return rootView;
     }
 
@@ -58,6 +56,12 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         SwappersToast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
 
+    /*
+     * This method builds an {@link SettingsListItem} {@link ArrayList}
+     * that will be used as data source by the settings listview.
+     *
+     * @return an arraylist with the settings menu options.
+     */
     private ArrayList<SettingsListItem> createSettingsDataSource() {
         ArrayList<SettingsListItem> dataSource = new ArrayList<SettingsListItem>();
 
@@ -85,38 +89,107 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return dataSource;
     }
 
+    /*
+    * This method creates a listener to handle a settings listview item click.
+    * We switch the options using the position param on the onItemClick
+    * method. The possibilities are expressed bellow:
+    *
+    * CASE 0: Change profile picture
+    * CASE 1: Change cover picture
+    * CASE 2: Change birth date
+    * CASE 3: Change current password
+    * CASE 4: Delete Account
+    *
+    * */
     private AdapterView.OnItemClickListener buildSettingsListDialogListener() {
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        //Mudar foto do perfil
+                        changeProfilePicture();
                         break;
                     case 1:
-                        //Mudar foto de capa
+                        changeCoverPicture();
                         break;
                     case 2:
-                        //Mudar data de nascimento
-                        changeBirthdayDatePicker();
+                        showChangeBirthdayDatePicker();
                         break;
                     case 3:
-                        //Mudar cidade
                         break;
                     case 4:
-                        //Mudar senha
+                        showChangePasswordDialog();
                         break;
                     case 5:
-                        //Deletar conta
-                        AlertDialog deleteAccountDialog = buildDeleteAccountDialog();
-                        deleteAccountDialog.show();
+                        showDeleteAccountDialog();
                         break;
                 }
             }
         };
     }
 
-    private void changeBirthdayDatePicker() {
+    /*
+    *This method shows a delete account alert.
+    * */
+    private void showDeleteAccountDialog() {
+        AlertDialog deleteAccountDialog = buildDeleteAccountDialog();
+        deleteAccountDialog.show();
+    }
+
+    /*
+    *This method shows a change password account alert.
+    * */
+    private void showChangePasswordDialog() {
+        AlertDialog changePasswordAlertDialog = buildChangePasswordDialog();
+        changePasswordAlertDialog.show();
+    }
+
+    /*
+    *This method shows a change cover picture alert.
+    * */
+    private void changeCoverPicture() {
+
+    }
+
+    /*
+    *This method shows a change profile picture alert.
+    * */
+    private void changeProfilePicture() {
+
+    }
+
+    /*
+    * This method creates an {@link AlertDialog} to the user change
+    * his password.
+    * Also, this method initializes the alert and sets its listeners and sets
+    * a custom view that contains the editTexts to the alert body.
+    *
+    * @return The alert to perform the password changes.
+    * */
+    private AlertDialog buildChangePasswordDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
+        builder.setTitle("Change Password");
+        builder.setMessage("Set correctly the fields bellow to change your password.");
+        builder.setView(R.layout.dialog_change_password);
+        builder.setPositiveButton("OK", this.onChangePasswordPositiveButton());
+        builder.setNegativeButton("CANCEL", this.onChangePasswordNegativeButton());
+
+        return builder.create();
+    }
+
+    /*
+    * This method creates a {@link DatePickerDialog} in material
+    * design style to ask the correct birth date of the user. I want
+    * to remember you that here we user an external library because
+    * the default Android DatePickerDialog was not working right.
+    *
+    * What this method do:
+    *   Creates a DatePickerDialog
+    *   Initializes it with the current date
+    *   Set its listener
+    *   Shows it on the screen.
+    * */
+    private void showChangeBirthdayDatePicker() {
         Calendar currentDate = Calendar.getInstance();
         DatePickerDialog datePickerDialog;
 
@@ -125,30 +198,41 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
                 currentDate.get(Calendar.MONTH),
                 currentDate.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.setVibrate(false);
-        datePickerDialog.show(getActivity().getSupportFragmentManager(), BIRTHDAY_DATEPICKER_TAG);
         datePickerDialog.setOnDateSetListener(this);
+        datePickerDialog.show(getActivity().getSupportFragmentManager(), BIRTHDAY_DATEPICKER_TAG);
     }
 
+    /*
+    * This method creates an {@link AlertDialog} to ask the user
+    * if he really wants to delete their swappers account.
+    * Also, this method initializes the alert and sets its listeners.
+    *
+    * @return The alert that asks if the user really wants to delete
+    * his swappers account.
+    * */
     private AlertDialog buildDeleteAccountDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
         builder.setTitle("Delete Account");
         builder.setMessage("Do you really want to delete your account?");
-        builder.setPositiveButton("OK", this.dialogDeleteAccountPositiveButtonListener());
-        builder.setNegativeButton("CANCEL", this.dialogDeleteAccountNegativeButtonListener());
+        builder.setPositiveButton("OK", this.onDeleteAccountPositiveButton());
+        builder.setNegativeButton("CANCEL", this.onDeleteAccountNegativeButton());
 
         return builder.create();
     }
 
-    private DialogInterface.OnClickListener dialogDeleteAccountNegativeButtonListener() {
-        return new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity().getApplicationContext(), "Thanks so much! We're working so hard to make you really happy. :]", Toast.LENGTH_SHORT).show();
-            }
-        };
-    }
-
-    private DialogInterface.OnClickListener dialogDeleteAccountPositiveButtonListener() {
+    /*
+   * This method creates the listener for the positive button
+   * of the delete account alert.
+   * This method also should:
+   *   Connect to WS to communicate account deletion
+   *   Clean the user account from the device
+   *   Do a logout from the app
+   *   Load the Sign In screen and clean the stack.
+   *
+   * @return The listener for the positive button of the delete
+   * account listener.
+   * */
+    private DialogInterface.OnClickListener onDeleteAccountPositiveButton() {
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -159,5 +243,40 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         };
     }
 
+    /*
+       * This method creates the listener for the negative button
+       * of the delete account alert.
+       * This method also should:
+       *   Show a pretty message saying that we're so happy for
+       *   the had changed his mind.
+       *
+       * @return The listener for the negative button of the delete
+       * account listener.
+       * */
+    private DialogInterface.OnClickListener onDeleteAccountNegativeButton() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SwappersToast.makeText(getActivity().getApplicationContext(), "Thanks so much! We're working so hard to make you really happy. :]", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
 
+    private DialogInterface.OnClickListener onChangePasswordPositiveButton() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SwappersToast.makeText(getActivity(), "Password changed Successfully", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
+    private DialogInterface.OnClickListener onChangePasswordNegativeButton() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SwappersToast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
 }

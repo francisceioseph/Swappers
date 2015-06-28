@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/SWToolbarTheme"
-        app:popupTheme="@style/SWToolbarMenu"
+        app:popupTheme="@style/SWToolbarMenuTheme"
         />
 
     <ScrollView
@@ -83,7 +83,7 @@
                         android:ems="10"
                         android:id="@+id/user_name_edit_text"
                         android:textColor="@color/color_accent_dark"
-                        android:theme="@style/SWTheme"
+                        android:theme="@style/SWEditTextTheme"
                         android:hint="Greather than three letters" />
 
                     <TextView
@@ -101,7 +101,7 @@
                         android:ems="10"
                         android:id="@+id/user_email_edit_text"
                         android:textColor="@color/color_accent_dark"
-                        android:theme="@style/SWTheme"
+                        android:theme="@style/SWEditTextTheme"
                         android:hint="A valid email address" />
 
                     <TextView
@@ -119,7 +119,7 @@
                         android:ems="10"
                         android:id="@+id/user_password_edit_text"
                         android:textColor="@color/color_accent_dark"
-                        android:theme="@style/SWTheme"
+                        android:theme="@style/SWEditTextTheme"
                         android:hint="Greather than 6 characters" />
 
                     <TextView
@@ -137,7 +137,7 @@
                         android:ems="10"
                         android:id="@+id/user_password_confirmation_edit_text"
                         android:textColor="@color/color_accent_dark"
-                        android:theme="@style/SWTheme"/>
+                        android:theme="@style/SWEditTextTheme"/>
 
                 </LinearLayout>
 
