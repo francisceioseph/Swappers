@@ -262,6 +262,21 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         };
     }
 
+
+    /*
+       * This method creates the listener for the positive button
+       * of the change password alert.
+       * This method also should:
+       *   Connect to WS to validate the current password
+       *   validate if the two new passwords fields contains equal
+       *   passwords.
+       *   Alert the user if something is not correct
+       *   and, if everything was ok, communicate to WS the password
+       *   changes and store it local in a secure way.
+       *
+       * @return The listener for the positive button of the delete
+       * account listener.
+       * */
     private DialogInterface.OnClickListener onChangePasswordPositiveButton() {
         return new DialogInterface.OnClickListener() {
             @Override
@@ -271,6 +286,15 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         };
     }
 
+    /*
+      * This method creates the listener for the negative button
+      * of the change password alert.
+      * This method also should:
+      *   Show a pretty message saying that the actions was cancelled.
+      *
+      * @return The listener for the negative button of the delete
+      * account listener.
+      * */
     private DialogInterface.OnClickListener onChangePasswordNegativeButton() {
         return new DialogInterface.OnClickListener() {
             @Override
