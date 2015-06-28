@@ -1,0 +1,16 @@
+/home/alessandra/Swappers/app/build/intermediates/classes/debug
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-ac292c166ba66d51e031d7a3c0441c91dcf7562c.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-a020d377d780b1d1a24594802a8980270e01d906.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-1409fe685b4c7d6b6912d6a71c3ee1ac39fbc6c8.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-fcb9a362800192208105ddc2d1438396e38d05e7.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-fd6c0503100fc42ba14765ac83dc7e160ee1746c.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-dcde7b6f8dfd7a0f665dda802ad181942ea755ef.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-74206270fe58d7e39401a24e0f5c2bdb276a63ee.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-d3b6dcf1d05c46a8087c674035a7b8e9d9efccdc.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-a1467aeac7035f336212ace1f93f79dbbb005c1f.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.5-581120cc3af5bf3972001985d74bf3111792b858.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-f78d4aefdae4ebd1617b682e67fb781b59f2f588.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-db370216cb13347cd5fc0e9cf05e13d41ad5e84d.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-d2c4e5d17f5204e83c9537f3481063790b875680.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-e29d5341386b3f5632e91b2b8c21b358d04882e7.jar
+/home/alessandra/Swappers/app/build/intermediates/pre-dexed/debug/classes-f3c3cf4b8d7ea176d44191eb242f3afd8391b537.jar

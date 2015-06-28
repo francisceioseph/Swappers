@@ -1,0 +1,91 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/userPhotoDialogTitle"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:textAlignment="gravity" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Select how you want to provide us your profile picture"
+        android:id="@+id/textSelectPicture"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal">
+
+            <at.markushi.ui.CircleButton
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:src="@drawable/ic_photo_camera"
+                app:cb_color="@color/color_accent_dark"
+                app:cb_pressedRingWidth="10dp"
+                android:id="@+id/cameraCircleButton" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Camera"
+                android:id="@+id/cameraTextView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal">
+
+            <at.markushi.ui.CircleButton
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:src="@drawable/ic_photo_album"
+                app:cb_color="@color/color_accent_dark"
+                app:cb_pressedRingWidth="10dp"
+                android:id="@+id/galleryCircleButton" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Gallery"
+                android:id="@+id/galleryTextView" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
+<!-- From: file:/home/alessandra/Swappers/app/src/main/res/layout/fragment_user_photo_dialog.xml -->

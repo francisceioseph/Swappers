@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="128dp"
+                android:layout_height="197dp"
+                android:id="@+id/adapter_book_cover"
+                android:background="@color/accent_material_dark"
+                android:contentDescription="@string/adapter_book_cover_description"
+                android:layout_margin="10dp"
+                android:adjustViewBounds="false" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/adapter_book_title"
+                android:id="@+id/adapter_book_title"
+                    android:textStyle="bold" />
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/adapter_book_authors"
+                android:id="@+id/adapter_book_authors"/>
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/adapter_book_publisher"
+                android:id="@+id/adapter_book_publisher"
+                    android:layout_marginBottom="0dp" />
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="4.7"
+                android:id="@+id/adapter_book_avarage"
+                android:textSize="50sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp" />
+
+                <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/adapter_book_rating_bar"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:paddingEnd="0dp"
+                android:paddingStart="0dp"
+                android:indeterminateOnly="false"
+                android:progressTint="@color/color_accent_dark"
+                style="?android:attr/ratingBarStyleIndicator"
+                    android:progressDrawable="@drawable/rating_stars"
+                    android:rating="0" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</FrameLayout><!-- From: file:/home/alessandra/Swappers/app/src/main/res/layout/adapter_layout_book_info.xml -->
