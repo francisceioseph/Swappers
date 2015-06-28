@@ -63,13 +63,14 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
      * @return an arraylist with the settings menu options.
      */
     private ArrayList<SettingsListItem> createSettingsDataSource() {
-        ArrayList<SettingsListItem> dataSource = new ArrayList<SettingsListItem>();
+        ArrayList<SettingsListItem> dataSource = new ArrayList<>();
 
         Drawable profilePictureIcon  = this.getResources().getDrawable(R.drawable.ic_portrait);
         Drawable profileCoverIcon    = this.getResources().getDrawable(R.drawable.ic_cover_photo);
         Drawable birthDateIcon       = this.getResources().getDrawable(R.drawable.ic_cake);
         Drawable cityIcon            = this.getResources().getDrawable(R.drawable.ic_location_city);
         Drawable changePasswordIcon  = this.getResources().getDrawable(R.drawable.ic_lock);
+        Drawable logoutIcon          = this.getResources().getDrawable(R.drawable.ic_exit);
         Drawable deleteAccountIcon   = this.getResources().getDrawable(R.drawable.ic_delete_black_48dp);
 
         SettingsListItem changeProfilePicture = new SettingsListItem(profilePictureIcon, "Change Profile Picture");
@@ -77,6 +78,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         SettingsListItem myBirthDate          = new SettingsListItem(birthDateIcon, "My Birth Date");
         SettingsListItem myCity               = new SettingsListItem(cityIcon, "My City");
         SettingsListItem changePassword = new SettingsListItem(changePasswordIcon, "Change Account Password");
+        SettingsListItem logout         = new SettingsListItem(logoutIcon, "Logout");
         SettingsListItem deleteAccount  = new SettingsListItem(deleteAccountIcon, "Delete Account");
 
         dataSource.add(changeProfilePicture);
@@ -84,6 +86,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         dataSource.add(myBirthDate);
         dataSource.add(myCity);
         dataSource.add(changePassword);
+        dataSource.add(logout);
         dataSource.add(deleteAccount);
 
         return dataSource;
@@ -97,8 +100,10 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     * CASE 0: Change profile picture
     * CASE 1: Change cover picture
     * CASE 2: Change birth date
-    * CASE 3: Change current password
-    * CASE 4: Delete Account
+    * CASE 3: Change current city
+    * CASE 4: Change current password
+    * CASE 5: Do logout
+    * CASE 6: Delete Account
     *
     * */
     private AdapterView.OnItemClickListener buildSettingsListDialogListener() {
@@ -116,16 +121,35 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
                         showChangeBirthdayDatePicker();
                         break;
                     case 3:
+                        changeCurrentCity();
                         break;
                     case 4:
                         showChangePasswordDialog();
                         break;
                     case 5:
+                        showLogoutDialog();
+                        break;
+                    case 6:
                         showDeleteAccountDialog();
                         break;
                 }
             }
         };
+    }
+
+    private void showLogoutDialog() {
+        AlertDialog logoutDialog = buildLogoutDialog();
+        logoutDialog.show();
+    }
+
+
+
+    /*
+    *This method changes the current city
+    **/
+    private void changeCurrentCity() {
+        AlertDialog changeCityDialog = buildChangeCityDialog();
+        changeCityDialog.show();
     }
 
     /*
@@ -156,6 +180,24 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     * */
     private void changeProfilePicture() {
 
+    }
+
+    /*
+    * This method creates an {@link AlertDialog} to change the current city
+    * Also, this method initializes the alert and sets its listeners and sets
+    * a custom view that contains the editTexts to the alert body.
+    *
+    * @return The alert to perform the password changes.
+    * */
+    private AlertDialog buildChangeCityDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
+        builder.setTitle("Change Current City");
+        builder.setMessage("Type the current city name or click on location button.");
+        builder.setView(R.layout.dialog_change_city);
+        builder.setPositiveButton("OK", this.onChangeCityPositiveButton());
+        builder.setNegativeButton("CANCEL", this.onChangeCityNegativeButton());
+
+        return builder.create();
     }
 
     /*
@@ -204,7 +246,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
     /*
     * This method creates an {@link AlertDialog} to ask the user
-    * if he really wants to delete their swappers account.
+    * if he really wants to delete his swappers account.
     * Also, this method initializes the alert and sets its listeners.
     *
     * @return The alert that asks if the user really wants to delete
@@ -216,6 +258,24 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         builder.setMessage("Do you really want to delete your account?");
         builder.setPositiveButton("OK", this.onDeleteAccountPositiveButton());
         builder.setNegativeButton("CANCEL", this.onDeleteAccountNegativeButton());
+
+        return builder.create();
+    }
+
+    /*
+    * This method creates an {@link AlertDialog} to ask the user
+    * if he really wants to logout from his swappers account.
+    * Also, this method initializes the alert and sets its listeners.
+    *
+    * @return The alert that asks if the user really wants to delete
+    * his swappers account.
+    * */
+    private AlertDialog buildLogoutDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
+        builder.setTitle("Logout");
+        builder.setMessage("Do you really want to logout from your account?");
+        builder.setPositiveButton("OK", this.onLogoutAccountPositiveButton());
+        builder.setNegativeButton("CANCEL", this.onLogoutAccountNegativeButton());
 
         return builder.create();
     }
@@ -262,6 +322,47 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         };
     }
 
+    /*
+   * This method creates the listener for the positive button
+   * of the logout account alert.
+   * This method also should:
+   *   Connect to WS to communicate account logout
+   *   Clean the user account from the device
+   *   Do a logout from the app
+   *   Load the Sign In screen and clean the stack.
+   *
+   * @return The listener for the positive button of the delete
+   * account listener.
+   * */
+    private DialogInterface.OnClickListener onLogoutAccountPositiveButton() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SwappersToast.makeText(getActivity().getApplicationContext(), "Logout done successfully", Toast.LENGTH_SHORT).show();
+                //TODO send message to ws to disable user account
+                //TODO load inicial screen and go out of current screen.
+            }
+        };
+    }
+
+    /*
+       * This method creates the listener for the negative button
+       * of the delete account alert.
+       * This method also should:
+       *   Show a pretty message saying that we're so happy for
+       *   the had changed his mind.
+       *
+       * @return The listener for the negative button of the delete
+       * account listener.
+       * */
+    private DialogInterface.OnClickListener onLogoutAccountNegativeButton() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SwappersToast.makeText(getActivity().getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
 
     /*
        * This method creates the listener for the positive button
@@ -296,6 +397,43 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
       * account listener.
       * */
     private DialogInterface.OnClickListener onChangePasswordNegativeButton() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SwappersToast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
+    /*
+       * This method creates the listener for the positive button
+       * of the change ciry alert.
+       * This method also should:
+       *   Connect to WS to communicate that the city changed
+       *   Update current city local field
+       *
+       * @return The listener for the positive button of the delete
+       * account listener.
+       * */
+    private DialogInterface.OnClickListener onChangeCityPositiveButton() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SwappersToast.makeText(getActivity(), "City changed Successfully", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
+    /*
+      * This method creates the listener for the negative button
+      * of the change city alert.
+      * This method also should:
+      *   Show a pretty message saying that the actions was cancelled.
+      *
+      * @return The listener for the negative button of the delete
+      * account listener.
+      * */
+    private DialogInterface.OnClickListener onChangeCityNegativeButton() {
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
