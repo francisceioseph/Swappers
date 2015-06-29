@@ -1,36 +1,40 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 public class PlacesFragment extends Fragment {
 
     MapView mapView;
     GoogleMap mapPlace;
+    LocationManager locationManager;
 
     private final LatLng SHOPPING_BENFICA = new LatLng(-3.739126, -38.5402);
     private final LatLng NORTH_SHOPPING = new LatLng(-3.7348059, -38.5662608);
     private final LatLng SHOPPING_IGUATEMI = new LatLng(-3.75529, -38.488498);
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
 
+    private LatLng myPosition;
 
     public PlacesFragment() {
         // Required empty public constructor
@@ -43,17 +47,36 @@ public class PlacesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_places, container, false);
 
-        // Gets the MapView from the XML layout and creates it
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        Listener listener = new Listener();
+        long timeUpdate = 0;
+        float distance = 0;
+
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, timeUpdate, distance, listener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, timeUpdate, distance, listener);
+
+        Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        if(locationUser == null){
+            Toast toast = SwappersToast.makeText(getActivity(), "Connect the GPS!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+            /*OBS: por enquanto, para que a aplicação não quebre, se o gps estiver desligado, o mapa abrirá em um
+            local especificado previamente.*/
+            myPosition = IFCE_FORTALEZA;
+        }
+        else myPosition = listener.getMyPosition(locationUser);
+
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
 
-        // Gets to GoogleMap from the MapView and does initialization stuff
         mapPlace = mapView.getMap();
         mapPlace.getUiSettings().setMyLocationButtonEnabled(true);
         mapPlace.setMyLocationEnabled(true);
         mapPlace.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
-        // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
         MapsInitializer.initialize(this.getActivity());
 
         setUpMap();
@@ -81,9 +104,6 @@ public class PlacesFragment extends Fragment {
     }
 
     private void setUpMap() {
-        LatLng myPosition = IFCE_FORTALEZA;
-
-        mapPlace.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
         mapPlace.animateCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
 
@@ -97,10 +117,32 @@ public class PlacesFragment extends Fragment {
                                         .title("North Shopping")
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
         mapPlace.addMarker(new MarkerOptions().position(SHOPPING_IGUATEMI)
-                                        .title("Shopping Iguatemi")
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                .title("Shopping Iguatemi")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
 
     }
-
-
 }
+
+    class Listener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location location){}
+
+        public void onStatusChanged(String provider, int status, Bundle extras){}
+
+        @Override
+        public void onProviderEnabled(String provider){}
+
+        @Override
+        public void onProviderDisabled(String provider){}
+
+        public LatLng getMyPosition(Location location){
+            float lat = (float) location.getLatitude();
+            float longi = (float) location.getLongitude();
+            LatLng myPosition = new LatLng(lat, longi);
+
+            return myPosition;
+        }
+}
+
