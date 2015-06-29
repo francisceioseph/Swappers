@@ -100,10 +100,11 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
                 if(AndroidUtils.isNetworkAvailable(getApplicationContext())) {
                     RegisterActivity.this.saveRegisterInformation();
-                }else {
-                Toast toast = SwappersToast.makeText(getApplicationContext(), "Atenção! Verifique sua conexão!", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                }
+                else {
+                    Toast toast = SwappersToast.makeText(getApplicationContext(), "Atenção! Verifique sua conexão!", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
             }
         };
@@ -179,7 +180,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     /*
     *
-    * Local and Webservice database comunication methods
+    * Local and Webservice database communication methods
     *
     * */
     private void saveRegisterInformation(){

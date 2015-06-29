@@ -3,6 +3,7 @@ package br.edu.ifce.swappers.swappers.activities;
 import android.app.SearchManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         this.addAccount(userAccount);
         this.setAccountListener(this);
 
+        this.getToolbar().setTitleTextColor(Color.WHITE);
+
         this.buildMainMenu();
     }
 
@@ -47,7 +50,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         MaterialSection profileSection     = this.newSection("Profile", profileSectionIcon, new ProfileFragment());
         MaterialSection booksSection       = this.newSection("Books", booksSectionIcon, new BooksFragment());
         MaterialSection placesSection      = this.newSection("Places", placesSectionIcon, new PlacesFragment());
-//        MaterialSection placesSection      = this.newSection("Places", placesSectionIcon, new SearchViewFragment());
         MaterialSection statisticsSection  = this.newSection("Statistics", statisticsSectionIcon, new StatisticsFragment());
         MaterialSection aboutSection       = this.newSection("About", aboutSectionIcon, new AboutFragment());
         MaterialSection settingsSection    = this.newSection("Settings", settingsSectionIcon, new SettingsFragment());
