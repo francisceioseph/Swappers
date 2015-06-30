@@ -132,7 +132,7 @@ public class PlacesFragment extends Fragment{
             userPosition = new LatLng(latitudeUser, longitudeUser);
 
             if (changeZoom < 1) {
-                PlacesFragment.mapPlace.addMarker(new MarkerOptions().position(userPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_portrait)));
+                PlacesFragment.mapPlace.addMarker(new MarkerOptions().position(userPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
                 PlacesFragment.mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(userPosition, 14));
                 PlacesFragment.mapPlace.animateCamera(CameraUpdateFactory.zoomTo(14), 500, null);
                 changeZoom++;
