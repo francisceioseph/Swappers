@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,13 +69,13 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     private ArrayList<SettingsListItem> createSettingsDataSource() {
         ArrayList<SettingsListItem> dataSource = new ArrayList<>();
 
-        Drawable profilePictureIcon  = this.getResources().getDrawable(R.drawable.ic_portrait);
-        Drawable profileCoverIcon    = this.getResources().getDrawable(R.drawable.ic_cover_photo);
-        Drawable birthDateIcon       = this.getResources().getDrawable(R.drawable.ic_cake);
-        Drawable cityIcon            = this.getResources().getDrawable(R.drawable.ic_location_city);
-        Drawable changePasswordIcon  = this.getResources().getDrawable(R.drawable.ic_lock);
-        Drawable logoutIcon          = this.getResources().getDrawable(R.drawable.ic_exit);
-        Drawable deleteAccountIcon   = this.getResources().getDrawable(R.drawable.ic_delete_black_48dp);
+        Drawable profilePictureIcon  = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_portrait);
+        Drawable profileCoverIcon    = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_cover_photo);
+        Drawable birthDateIcon       = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_cake);
+        Drawable cityIcon            = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_location_city);
+        Drawable changePasswordIcon  = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_lock);
+        Drawable logoutIcon          = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_exit);
+        Drawable deleteAccountIcon   = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_delete_black_48dp);
 
         SettingsListItem changeProfilePicture = new SettingsListItem(profilePictureIcon, "Change Profile Picture");
         SettingsListItem changeCoverPicture   = new SettingsListItem(profileCoverIcon, "Change Cover Picture");
@@ -222,7 +223,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     * @return The alert to perform the password changes.
     * */
     private AlertDialog buildChangePasswordDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity().getApplicationContext(), R.style.SWDialogTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
 
         builder.setTitle("Change Password");
         builder.setMessage("Set correctly the fields bellow to change your password.");

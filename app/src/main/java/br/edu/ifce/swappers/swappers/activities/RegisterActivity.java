@@ -82,19 +82,18 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     *
     * */
     private OnClickListener makeUserPhotoCircleButtonClickListener() {
-        OnClickListener clickListener = new OnClickListener() {
+
+        return new OnClickListener() {
             @Override
             public void onClick(View v) {
                 UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment();
                 dialogFragment.show(getSupportFragmentManager(), "User Photo Dialog Fragment");
             }
         };
-
-        return clickListener;
     }
 
     private OnClickListener makeRegisterButtonClickListener(){
-        OnClickListener clickListener = new OnClickListener() {
+        return new OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -108,7 +107,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
                 }
             }
         };
-        return clickListener;
     }
 
     /*
@@ -203,11 +201,15 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     private boolean validationRegistryUser(String name, String email, String usePassword, String passwordConfirmation){
         if(validationNameUser(name)){
             if (validateEmailWithMasks(email)){
-                if (validatePassword(usePassword,passwordConfirmation)){
-                    return true;
-                }else{return false;}
-            }else{return false;}
-        }else{return false;}
+                return validatePassword(usePassword, passwordConfirmation);
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
     }
 
     private boolean validateEmailWithMasks(String email){
