@@ -52,6 +52,4 @@ public class DonatedBooksFragment extends Fragment {
 
         return rootView;
     }
-
-
 }

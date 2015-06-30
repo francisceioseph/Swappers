@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -137,18 +139,25 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         };
     }
 
+    /*
+    * This method hows an dialog asking if the user
+    * really wants do do a logout from his swappers
+    * account
+    * */
+
     private void showLogoutDialog() {
         AlertDialog logoutDialog = buildLogoutDialog();
         logoutDialog.show();
     }
-
-
 
     /*
     *This method changes the current city
     **/
     private void changeCurrentCity() {
         AlertDialog changeCityDialog = buildChangeCityDialog();
+        ImageButton locateMe = (ImageButton) changeCityDialog.findViewById(R.id.locate_me_image_button);
+        locateMe.setOnClickListener(this.onLocateMeImageButtonClick());
+
         changeCityDialog.show();
     }
 
@@ -278,6 +287,22 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         builder.setNegativeButton("CANCEL", this.onLogoutAccountNegativeButton());
 
         return builder.create();
+    }
+
+    /*
+    * This method creates a listener to the image button on
+    * the dialog of current city changes.
+    * It should use the Android's location services to provide
+    * in a EditText the name of the current user's city.
+    * */
+    private View.OnClickListener onLocateMeImageButtonClick() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO DO Use location services to get the name of the user's current city.
+                //TODO set the current name of the city on the dialog edit text
+            }
+        };
     }
 
     /*
