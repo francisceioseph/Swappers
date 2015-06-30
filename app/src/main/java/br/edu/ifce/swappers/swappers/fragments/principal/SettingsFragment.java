@@ -19,6 +19,7 @@ import com.fourmob.datetimepicker.date.DatePickerDialog.OnDateSetListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.zip.Inflater;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.SettingsArrayAdapter;
@@ -155,9 +156,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     **/
     private void changeCurrentCity() {
         AlertDialog changeCityDialog = buildChangeCityDialog();
-        ImageButton locateMe = (ImageButton) changeCityDialog.findViewById(R.id.locate_me_image_button);
-        locateMe.setOnClickListener(this.onLocateMeImageButtonClick());
-
         changeCityDialog.show();
     }
 
@@ -199,10 +197,16 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     * @return The alert to perform the password changes.
     * */
     private AlertDialog buildChangeCityDialog() {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
+        View rootView = inflater.inflate(R.layout.dialog_change_city, null);
+        ImageButton locateMeImageButton = (ImageButton) rootView.findViewById(R.id.locate_me_image_button);
+
+        locateMeImageButton.setOnClickListener(this.onLocateMeImageButtonClick());
+
         builder.setTitle("Change Current City");
         builder.setMessage("Type the current city name or click on location button.");
-        builder.setView(R.layout.dialog_change_city);
+        builder.setView(rootView);
         builder.setPositiveButton("OK", this.onChangeCityPositiveButton());
         builder.setNegativeButton("CANCEL", this.onChangeCityNegativeButton());
 
@@ -218,7 +222,8 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     * @return The alert to perform the password changes.
     * */
     private AlertDialog buildChangePasswordDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity().getApplicationContext(), R.style.SWDialogTheme);
+
         builder.setTitle("Change Password");
         builder.setMessage("Set correctly the fields bellow to change your password.");
         builder.setView(R.layout.dialog_change_password);
@@ -301,6 +306,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
             public void onClick(View v) {
                 //TODO DO Use location services to get the name of the user's current city.
                 //TODO set the current name of the city on the dialog edit text
+                SwappersToast.makeText(getActivity().getApplicationContext(), "Service yet to implement...", Toast.LENGTH_SHORT).show();
             }
         };
     }
