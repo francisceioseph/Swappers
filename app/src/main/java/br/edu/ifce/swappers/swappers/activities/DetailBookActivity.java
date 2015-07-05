@@ -2,8 +2,6 @@ package br.edu.ifce.swappers.swappers.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import br.edu.ifce.swappers.swappers.R;
 

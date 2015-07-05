@@ -1,8 +1,8 @@
 package br.edu.ifce.swappers.swappers.fragments.tabs.statistics;
 
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +67,7 @@ public class HotSpotsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Loading previous hotspot... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), "Loading previous hotspot... #SQN", Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -76,7 +76,7 @@ public class HotSpotsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Loading next hotspot... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), "Loading next hotspot... #SQN", Toast.LENGTH_SHORT).show();
             }
         };
     }

@@ -1,10 +1,15 @@
 package br.edu.ifce.swappers.swappers.activities;
 
-import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -30,17 +35,19 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         this.addAccount(userAccount);
         this.setAccountListener(this);
 
+        this.getToolbar().setTitleTextColor(Color.WHITE);
+
         this.buildMainMenu();
     }
 
     private void buildMainMenu() {
 
-        Drawable profileSectionIcon     = this.getResources().getDrawable(R.drawable.ic_person);
-        Drawable booksSectionIcon       = this.getResources().getDrawable(R.drawable.ic_book);
-        Drawable placesSectionIcon      = this.getResources().getDrawable(R.drawable.ic_room);
-        Drawable statisticsSectionIcon  = this.getResources().getDrawable(R.drawable.ic_dashboard);
-        Drawable aboutSectionIcon       = this.getResources().getDrawable(R.drawable.ic_help);
-        Drawable settingsSectionIcon    = this.getResources().getDrawable(R.drawable.ic_settings);
+        Drawable profileSectionIcon     = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person);
+        Drawable booksSectionIcon       = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_book);
+        Drawable placesSectionIcon      = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_room);
+        Drawable statisticsSectionIcon  = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_dashboard);
+        Drawable aboutSectionIcon       = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_help);
+        Drawable settingsSectionIcon    = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_settings);
 
         MaterialSection profileSection     = this.newSection("Profile", profileSectionIcon, new ProfileFragment());
         MaterialSection booksSection       = this.newSection("Books", booksSectionIcon, new BooksFragment());
@@ -59,7 +66,9 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         this.addSection(aboutSection);
         this.addSection(settingsSection);
 
+        this.disableLearningPattern();
         this.setDefaultSectionLoaded(this.getSectionList().indexOf(booksSection));
+
     }
 
     private MaterialAccount loadAccount(){
@@ -68,18 +77,17 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         Bitmap userPhoto    = this.loadUserPhoto();
         Bitmap coverPhoto   = this.loadCoverPhoto();
 
-        MaterialAccount userAccount = new MaterialAccount(this.getResources(), username, email,userPhoto, coverPhoto);
-        return userAccount;
+        return new MaterialAccount(this.getResources(), username, email,userPhoto, coverPhoto);
     }
 
     private Bitmap loadCoverPhoto() {
-        BitmapDrawable coverPhotoDrawable = (BitmapDrawable) this.getResources().getDrawable(R.drawable.background_splash);
+        BitmapDrawable coverPhotoDrawable = (BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.background_splash);
         Bitmap coverPhotoBitmap = coverPhotoDrawable.getBitmap();
         return coverPhotoBitmap;
     }
 
     private Bitmap loadUserPhoto() {
-        BitmapDrawable userPhotoDrawer = (BitmapDrawable) this.getResources().getDrawable(R.drawable.ic_person_giant);
+        BitmapDrawable userPhotoDrawer = (BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person_giant);
         Bitmap userPhotoBitmap = userPhotoDrawer.getBitmap();
         return userPhotoBitmap;
     }
@@ -100,5 +108,21 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     public void onChangeAccount(MaterialAccount materialAccount) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView;
+
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        }
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

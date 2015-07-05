@@ -36,7 +36,6 @@ import br.edu.ifce.swappers.swappers.util.ImageUtil;
 import br.edu.ifce.swappers.swappers.util.RegisterTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.TaskInterface;
-import br.edu.ifce.swappers.swappers.webservice.UserService;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.view.View.OnClickListener;
@@ -57,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         setContentView(R.layout.activity_register);
 
         this.toolbar = (Toolbar) findViewById(R.id.toolbar);
-        this.setUpActivityToolbar();
+        this.initToolbar();
 
         Button registerButton = (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(this.makeRegisterButtonClickListener());
@@ -80,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         }
     }
 
-    private void setUpActivityToolbar(){
+    private void initToolbar(){
         if (this.toolbar != null){
             this.setSupportActionBar(this.toolbar);
 
@@ -95,32 +94,31 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     *
     * */
     private OnClickListener makeUserPhotoCircleButtonClickListener() {
-        OnClickListener clickListener = new OnClickListener() {
+
+        return new OnClickListener() {
             @Override
             public void onClick(View v) {
                 UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment();
                 dialogFragment.show(getSupportFragmentManager(), "User Photo Dialog Fragment");
             }
         };
-
-        return clickListener;
     }
 
     private OnClickListener makeRegisterButtonClickListener(){
-        OnClickListener clickListener = new OnClickListener() {
+        return new OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(AndroidUtils.isNetworkAvailable(getApplicationContext())) {
                     RegisterActivity.this.saveRegisterInformation();
-                }else {
-                Toast toast = SwappersToast.makeText(getApplicationContext(), "Atenção! Verifique sua conexão!", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                }
+                else {
+                    Toast toast = SwappersToast.makeText(getApplicationContext(), "Atenção! Verifique sua conexão!", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
             }
         };
-        return clickListener;
     }
 
     /*
@@ -191,7 +189,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     /*
     *
-    * Local and Webservice database comunication methods
+    * Local and Webservice database communication methods
     *
     * */
     private void saveRegisterInformation(){
@@ -227,6 +225,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
                 }else{return false;}
             }else{return false;}
         }else{return false;}
+
     }
 
     private boolean validateEmailWithMasks(String email){
