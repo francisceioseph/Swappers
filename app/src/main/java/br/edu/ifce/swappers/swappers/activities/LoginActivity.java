@@ -34,13 +34,8 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(AndroidUtils.isNetworkAvailable(getApplicationContext())){
-                    makeLoginTask();
-                }else {
-                Toast toast = SwappersToast.makeText(getApplicationContext(), "Verifique sua conexão!", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-            }
+                //verifyInternetAndMakeLogin();
+                LoginActivity.this.startNextActivity();
             }
         });
 
@@ -50,6 +45,17 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
                 LoginActivity.this.startRegisterActivity();
             }
         });
+    }
+
+    //Função a ser usado quando se quiser fazer login com WS
+    public void verifyInternetAndMakeLogin(){
+        if(AndroidUtils.isNetworkAvailable(getApplicationContext())){
+            makeLoginTask();
+        }else {
+            Toast toast = SwappersToast.makeText(getApplicationContext(), "Verifique sua conexão!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
     }
 
     @Override
