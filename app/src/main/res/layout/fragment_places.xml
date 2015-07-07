@@ -19,7 +19,7 @@
         android:layout_gravity="top|start"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="14dp"
-        android:background="#000000" />
+        android:background="@drawable/ic_launcher" />
 
 
 
