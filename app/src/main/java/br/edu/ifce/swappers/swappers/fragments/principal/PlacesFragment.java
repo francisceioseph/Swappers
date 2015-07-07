@@ -10,8 +10,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -29,6 +32,7 @@ public class PlacesFragment extends Fragment{
     MapView mapView;
     static GoogleMap mapPlace;
     LocationManager locationManager;
+    private Button findPlaceButton;
 
     private final LatLng SHOPPING_BENFICA = new LatLng(-3.739126, -38.5402);
     private final LatLng NORTH_SHOPPING = new LatLng(-3.7348059, -38.5662608);
@@ -37,19 +41,19 @@ public class PlacesFragment extends Fragment{
 
     private LatLng myPosition;
 
-    public PlacesFragment() {
-        // Required empty public constructor
-
-    }
+    public PlacesFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Listener listener = new Listener();
-        long timeUpdate = 5000;
+        long timeUpdate = 3000;
         float distance = 0;
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_places, container, false);
+
+        findPlaceButton = (Button) view.findViewById(R.id.find_near_place);
+        findPlaceButton.setOnClickListener(findNearPlaceOnMap());
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
@@ -83,6 +87,21 @@ public class PlacesFragment extends Fragment{
 
     }
 
+    public View.OnClickListener findNearPlaceOnMap(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if(locationUser == null) {
+                    Toast toast = SwappersToast.makeText(getActivity(), "Connect the GPS!", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(NORTH_SHOPPING, 17));
+            }
+        };
+    }
+
     @Override
     public void onResume() {
         mapView.onResume();
@@ -100,6 +119,8 @@ public class PlacesFragment extends Fragment{
         super.onLowMemory();
         mapView.onLowMemory();
     }
+
+
 
     private void setUpMap() {
         mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
@@ -156,5 +177,6 @@ public class PlacesFragment extends Fragment{
 
             return myPosition;
         }
+
 }
 
