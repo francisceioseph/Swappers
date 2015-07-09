@@ -1,9 +1,11 @@
 package br.edu.ifce.swappers.swappers.model;
 
+import java.io.Serializable;
+
 /**
  * Created by francisco on 16/06/15.
  */
-public class Book {
+public class Book implements Serializable{
     private String id;
     private String title;
     private String author;

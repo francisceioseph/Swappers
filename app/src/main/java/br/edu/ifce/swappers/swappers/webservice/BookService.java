@@ -17,14 +17,14 @@ import java.util.List;
 import br.edu.ifce.swappers.swappers.model.Book;
 
 /**
- * Created by FAMÕLIA on 06/07/2015.
+ * Created by FAM√çLIA on 06/07/2015.
  */
 public class BookService {
 
     private static final String URL_GOOGLE_BOOKS_SERVICE = "https://www.googleapis.com/books/v1/volumes?q=";
 
-    public static ArrayList<Book> getBooksByTitleWS(String title) {
-        ArrayList<Book> bookList=null;
+    public static List<Book> getBooksByTitleWS(String title) {
+        List<Book> bookList=null;
         URL url = null;
         HttpURLConnection conn = null;
         String urlGoogleBooks;
@@ -91,7 +91,7 @@ public class BookService {
     }
 
 
-    private static ArrayList<Book> parseJsonToBook(String jsonBooks){
+    private static List<Book> parseJsonToBook(String jsonBooks){
         JSONObject json = null;
         String title="";
         String subtitle="";
@@ -104,7 +104,7 @@ public class BookService {
         double rating=0.0;
         int page=0;
 
-        ArrayList<Book> bookList = new ArrayList<>();
+        List<Book> bookList = new ArrayList<>();
         try {
             json = new JSONObject(jsonBooks);
 
@@ -163,13 +163,11 @@ public class BookService {
 
             if(volumeInfo.has("pageCount")){
                 page = volumeInfo.getInt("pageCount");
-                System.out.println("P·ginas: " + page);
                 book.setNumberPage(page);
             }else{book.setNumberPage(page);}
 
             if(volumeInfo.has("publishedDate")){
                 date = volumeInfo.getString("publishedDate");
-                System.out.println("Data: " + date);
                 book.setDatePublisher(date);
             }else{book.setDatePublisher(date);}
 

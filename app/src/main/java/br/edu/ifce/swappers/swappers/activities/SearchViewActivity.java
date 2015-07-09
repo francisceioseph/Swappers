@@ -1,9 +1,13 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.app.SearchManager;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,15 +19,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.BookTask;
+import br.edu.ifce.swappers.swappers.util.SearchInterface;
+import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 
-public class SearchViewActivity extends AppCompatActivity {
+public class SearchViewActivity extends AppCompatActivity implements SearchInterface{
     private RecyclerView recyclerView;
     private ArrayList<Book> mBookList;
     private ArrayList<Book> mBookListAux;
@@ -31,6 +41,7 @@ public class SearchViewActivity extends AppCompatActivity {
     private LinearLayoutManager lm;
     private TextView tv;
     private FrameLayout frameLayout;
+    private BookTask bookTask;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +54,7 @@ public class SearchViewActivity extends AppCompatActivity {
 
         Book book = new Book("A Culpa é das Estrelas", "Shanya", "Shnya", 3.0f, 2.5f);
         mBookListAux.add(book);
-        adapter = new BookRecyclerViewAdapter(mBookListAux);
+        adapter = new BookRecyclerViewAdapter(this,mBookListAux);
 
         frameLayout = (FrameLayout) findViewById(R.id.fl_container);
 
@@ -73,12 +84,57 @@ public class SearchViewActivity extends AppCompatActivity {
     public void searchBook(String query) {
         mBookListAux.clear();
 
+        if(bookTask==null){
+            if(AndroidUtils.isNetworkAvailable(getApplicationContext())){
+                initSearchWS(query);
+            }else {
+                Toast toast = SwappersToast.makeText(this, "Verifique sua conexão!", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+        }
+
+        /**
         for (int i = 0, tamI = mBookList.size(); i < tamI; i++) {
             if (mBookList.get(i).getTitle().toLowerCase().startsWith(query.toLowerCase())) {
                 mBookListAux.add(mBookList.get(i));
             }
         }
+        **/
 
+    }
+
+    public void initSearchWS(String query){
+        if(bookTask==null || bookTask.getStatus()!= AsyncTask.Status.RUNNING) {
+            bookTask = new BookTask(this,this);
+            bookTask.execute(query);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_searchview_activity, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView;
+
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ){
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        else{
+            searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        }
+
+        ComponentName cn = new ComponentName(this, SearchViewActivity.class);
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));
+        return true;
+    }
+
+    @Override
+    public void updateRecycleView(List<Book> bookList) {
+        mBookListAux.addAll(bookList);
         recyclerView.setVisibility(mBookListAux.isEmpty() ? View.GONE : View.VISIBLE);
         if (mBookListAux.isEmpty()) {
             tv = new TextView(this);
@@ -91,22 +147,6 @@ public class SearchViewActivity extends AppCompatActivity {
         }else if(frameLayout.findViewById(new Integer(1))!=null){
             frameLayout.removeView(frameLayout.findViewById(new Integer(1)));
         }
-
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_searchview_activity, menu);
-
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView;
-
-        if (searchItem != null) {
-            searchView = (SearchView) searchItem.getActionView();
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        }
-        return super.onCreateOptionsMenu(menu);
     }
 }

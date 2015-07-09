@@ -36,7 +36,7 @@
         android:theme="@style/SWTheme">
 
         <meta-data android:name="android.app.default_searchable"
-            android:value="br.edu.ifce.swappers.swappers.activities.SearchViewActivity"/>
+            android:value=".SearchViewActivity"/>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -84,6 +84,7 @@
 
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
+
         </activity>
 
         <activity
