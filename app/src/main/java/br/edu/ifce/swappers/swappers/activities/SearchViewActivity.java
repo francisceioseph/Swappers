@@ -13,6 +13,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +50,8 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_search_view);
 
+        this.initToolbar();
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         mBookListAux = new ArrayList<>();
@@ -67,6 +71,17 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
         hendleSearch(getIntent());
     }
 
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        if (toolbar != null){
+            this.setSupportActionBar(toolbar);
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+    }
+
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
@@ -83,17 +98,14 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
     //Busca a ser feita com AsyncTask no google-books
     public void searchBook(String query) {
         mBookListAux.clear();
-
-        if(bookTask==null){
             if(AndroidUtils.isNetworkAvailable(getApplicationContext())){
+                Log.i("QUERY1",query);
                 initSearchWS(query);
             }else {
                 Toast toast = SwappersToast.makeText(this, "Verifique sua conexão!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
-        }
-
         /**
         for (int i = 0, tamI = mBookList.size(); i < tamI; i++) {
             if (mBookList.get(i).getTitle().toLowerCase().startsWith(query.toLowerCase())) {
@@ -101,7 +113,6 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
             }
         }
         **/
-
     }
 
     public void initSearchWS(String query){
@@ -121,9 +132,11 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
 
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ){
             searchView = (SearchView) searchItem.getActionView();
+            searchView.setQueryHint("buscar livro");
         }
         else{
             searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+            searchView.setQueryHint("buscar livro");
         }
 
         ComponentName cn = new ComponentName(this, SearchViewActivity.class);
@@ -134,6 +147,7 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
 
     @Override
     public void updateRecycleView(List<Book> bookList) {
+        mBookListAux.clear();
         mBookListAux.addAll(bookList);
         recyclerView.setVisibility(mBookListAux.isEmpty() ? View.GONE : View.VISIBLE);
         if (mBookListAux.isEmpty()) {

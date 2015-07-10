@@ -72,7 +72,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         this.disableLearningPattern();
         this.setDefaultSectionLoaded(this.getSectionList().indexOf(booksSection));
-
     }
 
     private MaterialAccount loadAccount(){
@@ -124,9 +123,11 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ){
             searchView = (SearchView) searchItem.getActionView();
+            searchView.setQueryHint("buscar livro");
         }
         else{
             searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+            searchView.setQueryHint("buscar livro");
         }
         ComponentName cn = new ComponentName(this, SearchViewActivity.class);
 

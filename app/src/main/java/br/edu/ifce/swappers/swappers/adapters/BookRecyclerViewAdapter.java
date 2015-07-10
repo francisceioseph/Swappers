@@ -2,6 +2,7 @@ package br.edu.ifce.swappers.swappers.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View itemView = inflater.inflate(R.layout.adapter_layout_book_info, null);
+        View itemView = inflater.inflate(R.layout.adapter_layout_book_info,viewGroup,false);
 
         return new ViewHolder(itemView);
     }
@@ -49,6 +50,8 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
 
         if(!book.getPhoto().isEmpty()) {
             Picasso.with(context).load(book.getPhoto()).into(viewHolder.bookImageImageView);
+        }else{
+            Picasso.with(context).load("https://books.google.com.br/googlebooks/images/no_cover_thumb.gif").into(viewHolder.bookImageImageView);
         }
     }
 

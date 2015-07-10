@@ -1,5 +1,7 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -158,7 +160,7 @@ public class BookService {
 
             if(volumeInfo.has("imageLinks")){
                 JSONObject imageLink = volumeInfo.getJSONObject("imageLinks");
-                book.setPhoto(imageLink.getString("smallThumbnail"));
+                book.setPhoto(imageLink.getString("thumbnail"));
             }else{book.setPhoto(photoLink);}
 
             if(volumeInfo.has("pageCount")){
