@@ -88,19 +88,61 @@ public class PlacesFragment extends Fragment{
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LatLng myCurrentlyPosition;
+                float loc1, loc2, loc3;
+                Listener listenerUser = new Listener();
+
                 LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                 Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                Location locNSh = new Location(LocationManager.GPS_PROVIDER);
+                Location locShB = new Location(LocationManager.GPS_PROVIDER);
+                Location locShI = new Location(LocationManager.GPS_PROVIDER);
+                Location atual = new Location(LocationManager.GPS_PROVIDER);
+
                 if(locationUser == null) {
                     Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
                 else{
-                    mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(NORTH_SHOPPING, 17));
+                    locNSh.setLatitude(NORTH_SHOPPING.latitude);
+                    locNSh.setLongitude(NORTH_SHOPPING.longitude);
+
+                    locShB.setLatitude(SHOPPING_BENFICA.latitude);
+                    locShB.setLongitude(SHOPPING_BENFICA.longitude);
+
+                    locShI.setLatitude(SHOPPING_IGUATEMI.latitude);
+                    locShI.setLongitude(SHOPPING_IGUATEMI.longitude);
+
+                    myCurrentlyPosition = listenerUser.getMyPosition(locationUser);
+                    atual.setLatitude(myCurrentlyPosition.latitude);
+                    atual.setLongitude(myCurrentlyPosition.longitude);
+
+                    loc1 = atual.distanceTo(locNSh);
+                    loc2 = atual.distanceTo(locShB);
+                    loc3 = atual.distanceTo(locShI);
+
+                    if(loc1<loc2 && loc1<loc3){mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(NORTH_SHOPPING, 17));}
+                    else if (loc2<loc3){mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(SHOPPING_BENFICA, 17));}
+                    else {mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(SHOPPING_IGUATEMI, 17));}
                 }
 
             }
         };
+    }
+
+    private float distanceBetween(LatLng positionUser, LatLng positionPoint){
+        Location locationUser = new Location(LocationManager.GPS_PROVIDER);
+        Location locationPoint = new Location(LocationManager.GPS_PROVIDER);
+
+        locationUser.setLatitude(positionUser.latitude);
+        locationUser.setLongitude(positionUser.longitude);
+
+        locationPoint.setLatitude(positionPoint.latitude);
+        locationPoint.setLongitude(positionPoint.longitude);
+
+        return locationUser.distanceTo(locationPoint);
     }
 
     private void setUpMap() {
