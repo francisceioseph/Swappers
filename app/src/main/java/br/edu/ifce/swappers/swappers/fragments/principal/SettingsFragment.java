@@ -4,11 +4,14 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ import com.fourmob.datetimepicker.date.DatePickerDialog.OnDateSetListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.zip.Inflater;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.SettingsArrayAdapter;
@@ -65,13 +69,13 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     private ArrayList<SettingsListItem> createSettingsDataSource() {
         ArrayList<SettingsListItem> dataSource = new ArrayList<>();
 
-        Drawable profilePictureIcon  = this.getResources().getDrawable(R.drawable.ic_portrait);
-        Drawable profileCoverIcon    = this.getResources().getDrawable(R.drawable.ic_cover_photo);
-        Drawable birthDateIcon       = this.getResources().getDrawable(R.drawable.ic_cake);
-        Drawable cityIcon            = this.getResources().getDrawable(R.drawable.ic_location_city);
-        Drawable changePasswordIcon  = this.getResources().getDrawable(R.drawable.ic_lock);
-        Drawable logoutIcon          = this.getResources().getDrawable(R.drawable.ic_exit);
-        Drawable deleteAccountIcon   = this.getResources().getDrawable(R.drawable.ic_delete_black_48dp);
+        Drawable profilePictureIcon  = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_portrait);
+        Drawable profileCoverIcon    = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_cover_photo);
+        Drawable birthDateIcon       = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_cake);
+        Drawable cityIcon            = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_location_city);
+        Drawable changePasswordIcon  = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_lock);
+        Drawable logoutIcon          = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_exit);
+        Drawable deleteAccountIcon   = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_delete_black_48dp);
 
         SettingsListItem changeProfilePicture = new SettingsListItem(profilePictureIcon, "Change Profile Picture");
         SettingsListItem changeCoverPicture   = new SettingsListItem(profileCoverIcon, "Change Cover Picture");
@@ -137,12 +141,16 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         };
     }
 
+    /*
+    * This method hows an dialog asking if the user
+    * really wants do do a logout from his swappers
+    * account
+    * */
+
     private void showLogoutDialog() {
         AlertDialog logoutDialog = buildLogoutDialog();
         logoutDialog.show();
     }
-
-
 
     /*
     *This method changes the current city
@@ -190,10 +198,16 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     * @return The alert to perform the password changes.
     * */
     private AlertDialog buildChangeCityDialog() {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
+        View rootView = inflater.inflate(R.layout.dialog_change_city, null);
+        ImageButton locateMeImageButton = (ImageButton) rootView.findViewById(R.id.locate_me_image_button);
+
+        locateMeImageButton.setOnClickListener(this.onLocateMeImageButtonClick());
+
         builder.setTitle("Change Current City");
         builder.setMessage("Type the current city name or click on location button.");
-        builder.setView(R.layout.dialog_change_city);
+        builder.setView(rootView);
         builder.setPositiveButton("OK", this.onChangeCityPositiveButton());
         builder.setNegativeButton("CANCEL", this.onChangeCityNegativeButton());
 
@@ -210,6 +224,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     * */
     private AlertDialog buildChangePasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
+
         builder.setTitle("Change Password");
         builder.setMessage("Set correctly the fields bellow to change your password.");
         builder.setView(R.layout.dialog_change_password);
@@ -278,6 +293,23 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         builder.setNegativeButton("CANCEL", this.onLogoutAccountNegativeButton());
 
         return builder.create();
+    }
+
+    /*
+    * This method creates a listener to the image button on
+    * the dialog of current city changes.
+    * It should use the Android's location services to provide
+    * in a EditText the name of the current user's city.
+    * */
+    private View.OnClickListener onLocateMeImageButtonClick() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO DO Use location services to get the name of the user's current city.
+                //TODO set the current name of the city on the dialog edit text
+                SwappersToast.makeText(getActivity().getApplicationContext(), "Service yet to implement...", Toast.LENGTH_SHORT).show();
+            }
+        };
     }
 
     /*

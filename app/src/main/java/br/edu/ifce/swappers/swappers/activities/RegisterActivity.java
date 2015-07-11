@@ -16,12 +16,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.ImageUtil;
 import br.edu.ifce.swappers.swappers.util.RegisterTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.TaskInterface;
@@ -37,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     private Toolbar toolbar;
     private CircleImageView userPhotoCircleImageView;
+    public Bitmap userPhotoBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Bitmap userPhotoBitmap;
+
 
         if (requestCode == CAMERA_INTENT_CODE && resultCode == RESULT_OK){
             userPhotoBitmap = this.retrieveImageFromCameraResult(data);
@@ -82,19 +94,18 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     *
     * */
     private OnClickListener makeUserPhotoCircleButtonClickListener() {
-        OnClickListener clickListener = new OnClickListener() {
+
+        return new OnClickListener() {
             @Override
             public void onClick(View v) {
                 UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment();
                 dialogFragment.show(getSupportFragmentManager(), "User Photo Dialog Fragment");
             }
         };
-
-        return clickListener;
     }
 
     private OnClickListener makeRegisterButtonClickListener(){
-        OnClickListener clickListener = new OnClickListener() {
+        return new OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -108,7 +119,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
                 }
             }
         };
-        return clickListener;
     }
 
     /*
@@ -164,7 +174,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         Cursor cursor;
         int columnIndex;
 
-
         selectedImageUri = data.getData();
         filePathColumn = new String[]{ MediaStore.Images.Media.DATA };
         cursor = getContentResolver().query(selectedImageUri, filePathColumn, null, null, null);
@@ -193,10 +202,18 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         String userEmail = userEmailEditText.getText().toString();
         String userPassword = userPasswordEditText.getText().toString();
         String userPasswordConfirmation = userPasswordConfirmationEditText.getText().toString();
-        //TODO Save data information on database
-        if (validationRegistryUser(userName,userEmail,userPassword,userPasswordConfirmation)){
-            RegisterTask registerTask = new RegisterTask(this,this);
-            registerTask.execute(userName, userEmail, userPassword);
+
+        if (validationRegistryUser(userName, userEmail, userPassword, userPasswordConfirmation)){
+            callAsyncTask(userName, userEmail, userPassword);
+        }
+    }
+
+    private void callAsyncTask(String name, String email, String usePassword){
+        RegisterTask registerTask = new RegisterTask(this,this);
+        if(userPhotoBitmap!=null) {
+            registerTask.execute(name, email, usePassword, ImageUtil.BitMapToString(userPhotoBitmap));
+        }else {
+            registerTask.execute(name, email, usePassword);
         }
     }
 
@@ -208,6 +225,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
                 }else{return false;}
             }else{return false;}
         }else{return false;}
+
     }
 
     private boolean validateEmailWithMasks(String email){

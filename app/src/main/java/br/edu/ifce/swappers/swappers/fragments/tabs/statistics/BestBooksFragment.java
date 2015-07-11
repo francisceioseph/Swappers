@@ -64,7 +64,7 @@ public class BestBooksFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Loading previous book... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), "Loading previous book... #SQN", Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -73,7 +73,7 @@ public class BestBooksFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Opening next book... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), "Opening next book... #SQN", Toast.LENGTH_SHORT).show();
             }
         };
     }
