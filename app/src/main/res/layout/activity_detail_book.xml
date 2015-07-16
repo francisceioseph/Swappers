@@ -1,9 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,39 +11,128 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ToolbarTheme"
-        app:popupTheme="@style/ToolbarTheme.Menu"
-        />
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="br.edu.ifce.swappers.swappers.activities.DetailBookActivity"
-        android:id="@+id/detailBookRelativeLayout">
+        app:popupTheme="@style/ToolbarTheme.Menu" />
 
-        <ImageView
-            android:id="@+id/place_cover_photo"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:contentDescription="@string/profile_cover_photo_description"
-            android:background="@color/accent_material_dark"
-            android:src="@drawable/menu_back"
-            android:scaleType="centerCrop"
-            android:elevation="3dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/place_user_photo"
-            android:src="@drawable/best_book"
-            app:border_width="1dp"
-            app:border_color="@color/transparent"
-            android:elevation="4dp"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/place_cover_photo" />
+            <ImageView
+                android:id="@+id/menu_back"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:contentDescription="@string/place_cover_photo_description"
+                android:background="@color/accent_material_dark"
+                android:src="@drawable/menu_back"
+                android:scaleType="centerCrop"
+                android:elevation="3dp"/>
 
-    </RelativeLayout>
-</LinearLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/place_user_photo"
+                android:src="@drawable/best_book"
+                app:border_width="1dp"
+                app:border_color="@color/transparent"
+                android:elevation="4dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="19dp"
+                android:contentDescription="@string/place_photo"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:elevation="4dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/place_user_photo"
+                android:layout_toEndOf="@+id/place_user_photo"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp">
+
+                <TextView
+                    android:id="@+id/title_detail_book"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/title_detail_book"
+                    android:textColor="@color/primary_text_default_material_light"
+                    android:layout_marginBottom="5dp" />
+
+                <TextView
+                    android:id="@+id/author_detail_book"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/author_detail_book"
+                    android:textColor="@color/primary_text_default_material_light"
+                    android:elegantTextHeight="false"
+                    android:focusableInTouchMode="false"/>
+
+                <TextView
+                    android:id="@+id/editor_detail_book"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/editor_detail_book"
+                    android:textColor="@color/primary_text_default_material_light"
+                    android:elegantTextHeight="false"
+                    android:focusableInTouchMode="false"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <android.support.v4.app.FragmentTabHost
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/books_tabHost">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.andexert.library.RippleView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:rv_centered="false"
+                    app:rv_rippleDuration="400"
+                    app:rv_color="@color/color_ripple_register">
+
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/color_accent_dark"
+                        android:elevation="4dp"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false"
+                        android:layoutMode="clipBounds"/>
+
+                </com.andexert.library.RippleView>
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </android.support.v4.app.FragmentTabHost>
+
+    </LinearLayout>
+</FrameLayout>

@@ -67,6 +67,13 @@
     <string name="books_retrieved_hotspot">xx books retrieved</string>
     <string name="donations_received_hotspot">xx donations received</string>
 
+    <!-- Detail Book  -->
+    <string name="title_detail_book">Title Book</string>
+    <string name="author_detail_book">Authors Book</string>
+    <string name="editor_detail_book">Editor Book</string>
+    <string name="synopsis_book">Book Synopses</string>
+
+
     <string name="best_books">Best Books</string>
     <string name="title_best_book">Title Book Here</string>
     <string name="author_best_book">Author Here</string>
