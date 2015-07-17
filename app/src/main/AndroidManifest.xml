@@ -37,8 +37,8 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyC9Kcvt_f38w1K7RA8STGbdOlu79iXPe9A"/>
-        <!--android:value="AIzaSyBHtH85RFi2p-q8ekoNJxfrNIgtlezZ_Ek"/>-->
+            android:value="AIzaSyDUqcBU9LkW75DJO9ISnwfWULjcq1HtcSg"/>
+        <!--android:value="AIzaSyC9Kcvt_f38w1K7RA8STGbdOlu79iXPe9A"/>-->
 
         <activity
             android:name=".activities.SplashActivity"

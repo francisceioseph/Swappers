@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 
@@ -34,9 +35,18 @@ public class PlacesFragment extends Fragment{
     private final LatLng SHOPPING_BENFICA = new LatLng(-3.739126, -38.5402);
     private final LatLng NORTH_SHOPPING = new LatLng(-3.7348059, -38.5662608);
     private final LatLng SHOPPING_IGUATEMI = new LatLng(-3.75529, -38.488498);
+    private final LatLng SHOPPING_IANDÊ = new LatLng(-3.734421, -38.655867);
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
 
     private LatLng myPosition;
+
+    private final int ROWS = 4; //quantidade de pontos de troca
+    private double matrixCoordinates[][] = {{0, -3.739126, -38.5402, 0},
+                                            {1, -3.7348059, -38.5662608, 0},
+                                            {2, -3.75529, -38.535877, 0},
+                                            {3, -3.734421, -38.655867, 0}};
+    private double vectorDistance[] = new double[ROWS];
+    private double vectorID[] = new double[ROWS];
 
     public PlacesFragment() {}
 
@@ -88,17 +98,15 @@ public class PlacesFragment extends Fragment{
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LatLng myCurrentlyPosition;
-                float loc1, loc2, loc3;
                 Listener listenerUser = new Listener();
+
+                int code;
+                double coordinateX;
+                double coordinateY;
+                LatLng myCurrentPosition;
 
                 LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                 Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-                Location locNSh = new Location(LocationManager.GPS_PROVIDER);
-                Location locShB = new Location(LocationManager.GPS_PROVIDER);
-                Location locShI = new Location(LocationManager.GPS_PROVIDER);
-                Location atual = new Location(LocationManager.GPS_PROVIDER);
 
                 if(locationUser == null) {
                     Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
@@ -106,43 +114,27 @@ public class PlacesFragment extends Fragment{
                     toast.show();
                 }
                 else{
-                    locNSh.setLatitude(NORTH_SHOPPING.latitude);
-                    locNSh.setLongitude(NORTH_SHOPPING.longitude);
+                    myCurrentPosition = listenerUser.getMyPosition(locationUser);
+                    for (int i=0; i<ROWS; i++){
+                        matrixCoordinates[i][3] = DistancePlaces.distanceBetween(myCurrentPosition, new LatLng(matrixCoordinates[i][1], matrixCoordinates[i][2]));
+                    }
 
-                    locShB.setLatitude(SHOPPING_BENFICA.latitude);
-                    locShB.setLongitude(SHOPPING_BENFICA.longitude);
+                    for (int j=0; j<ROWS; j++){
+                        vectorDistance[j] = matrixCoordinates[j][3];
+                        vectorID[j] = matrixCoordinates[j][0];
+                    }
 
-                    locShI.setLatitude(SHOPPING_IGUATEMI.latitude);
-                    locShI.setLongitude(SHOPPING_IGUATEMI.longitude);
+                    DistancePlaces.ordenar(vectorDistance, vectorID);
 
-                    myCurrentlyPosition = listenerUser.getMyPosition(locationUser);
-                    atual.setLatitude(myCurrentlyPosition.latitude);
-                    atual.setLongitude(myCurrentlyPosition.longitude);
+                    code = (int) vectorID[0];
+                    coordinateX = matrixCoordinates[code][1];
+                    coordinateY = matrixCoordinates[code][2];
 
-                    loc1 = atual.distanceTo(locNSh);
-                    loc2 = atual.distanceTo(locShB);
-                    loc3 = atual.distanceTo(locShI);
-
-                    if(loc1<loc2 && loc1<loc3){mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(NORTH_SHOPPING, 17));}
-                    else if (loc2<loc3){mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(SHOPPING_BENFICA, 17));}
-                    else {mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(SHOPPING_IGUATEMI, 17));}
+                    DistancePlaces.showMarker(new LatLng(coordinateX, coordinateY), mapPlace);
                 }
 
             }
         };
-    }
-
-    private float distanceBetween(LatLng positionUser, LatLng positionPoint){
-        Location locationUser = new Location(LocationManager.GPS_PROVIDER);
-        Location locationPoint = new Location(LocationManager.GPS_PROVIDER);
-
-        locationUser.setLatitude(positionUser.latitude);
-        locationUser.setLongitude(positionUser.longitude);
-
-        locationPoint.setLatitude(positionPoint.latitude);
-        locationPoint.setLongitude(positionPoint.longitude);
-
-        return locationUser.distanceTo(locationPoint);
     }
 
     private void setUpMap() {
@@ -157,6 +149,9 @@ public class PlacesFragment extends Fragment{
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         mapPlace.addMarker(new MarkerOptions().position(SHOPPING_IGUATEMI)
                 .title("Shopping Iguatemi")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        mapPlace.addMarker(new MarkerOptions().position(SHOPPING_IANDÊ)
+                .title("Shopping Iandê")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
     }
