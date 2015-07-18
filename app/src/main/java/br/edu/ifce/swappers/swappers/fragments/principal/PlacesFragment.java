@@ -21,32 +21,27 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
+import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 
 public class PlacesFragment extends Fragment{
 
-    MapView mapView;
     static GoogleMap mapPlace;
-    private Button findPlaceButton;
-
     private final LatLng SHOPPING_BENFICA = new LatLng(-3.739126, -38.5402);
     private final LatLng NORTH_SHOPPING = new LatLng(-3.7348059, -38.5662608);
     private final LatLng SHOPPING_IGUATEMI = new LatLng(-3.75529, -38.488498);
     private final LatLng SHOPPING_IANDÊ = new LatLng(-3.734421, -38.655867);
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
-
+    MapView mapView;
+    private Button findPlaceButton;
     private LatLng myPosition;
-
-    private final int ROWS = 4; //quantidade de pontos de troca
-    private double matrixCoordinates[][] = {{0, -3.739126, -38.5402, 0},
-                                            {1, -3.7348059, -38.5662608, 0},
-                                            {2, -3.75529, -38.535877, 0},
-                                            {3, -3.734421, -38.655867, 0}};
-    private double vectorDistance[] = new double[ROWS];
-    private double vectorID[] = new double[ROWS];
 
     public PlacesFragment() {}
 
@@ -99,10 +94,8 @@ public class PlacesFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Listener listenerUser = new Listener();
+                DistancePlaces distancePlaces = new DistancePlaces();
 
-                int code;
-                double coordinateX;
-                double coordinateY;
                 LatLng myCurrentPosition;
 
                 LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -113,26 +106,10 @@ public class PlacesFragment extends Fragment{
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-                else{
+                else {
                     myCurrentPosition = listenerUser.getMyPosition(locationUser);
-                    for (int i=0; i<ROWS; i++){
-                        matrixCoordinates[i][3] = DistancePlaces.distanceBetween(myCurrentPosition, new LatLng(matrixCoordinates[i][1], matrixCoordinates[i][2]));
-                    }
-
-                    for (int j=0; j<ROWS; j++){
-                        vectorDistance[j] = matrixCoordinates[j][3];
-                        vectorID[j] = matrixCoordinates[j][0];
-                    }
-
-                    DistancePlaces.ordenar(vectorDistance, vectorID);
-
-                    code = (int) vectorID[0];
-                    coordinateX = matrixCoordinates[code][1];
-                    coordinateY = matrixCoordinates[code][2];
-
-                    DistancePlaces.showMarker(new LatLng(coordinateX, coordinateY), mapPlace);
+                    distancePlaces.calculateNearPlace(myCurrentPosition, mapPlace);
                 }
-
             }
         };
     }
@@ -212,4 +189,3 @@ public class PlacesFragment extends Fragment{
             return myPosition;
         }
 }
-

@@ -7,12 +7,22 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by Joamila on 16/07/2015.
  */
-public class DistancePlaces {
+public class DistancePlaces{
 
-    public static float distanceBetween(LatLng positionUser, LatLng positionPoint){
+    private final int ROWS = 4; //quantidade de pontos de troca
+    private double matrixCoordinates[][] = {{-3.734421, -38.655867},
+                                            {-3.739126, -38.5402},
+                                            {-3.7348059, -38.5662608},
+                                            {-3.75529, -38.535877}};
+
+    public float distanceBetween(LatLng positionUser, LatLng positionPoint){
         Location locationUser = new Location(LocationManager.GPS_PROVIDER);
         Location locationPoint = new Location(LocationManager.GPS_PROVIDER);
 
@@ -25,51 +35,29 @@ public class DistancePlaces {
         return locationUser.distanceTo(locationPoint);
     }
 
-    public static void ordenar(double[] vetor, double[] id)
-    {
-        ordenar(vetor, id, 0, vetor.length - 1);
-    }
+    public void calculateNearPlace(LatLng positionUser, GoogleMap map){
+        List<Place> placeList = new ArrayList<Place>();
+        double coordinateX;
+        double coordinateY;
+        double distanceBetweenPlaces;
 
-    private static void ordenar(double[] vetor, double[] id, int inicio, int fim)
-    {
-        if (inicio < fim)
-        {
-            int posicaoPivo = separar(vetor, id, inicio, fim);
-            ordenar(vetor, id, inicio, posicaoPivo - 1);
-            ordenar(vetor, id, posicaoPivo + 1, fim);
+        for (int i=0; i<ROWS; i++){
+            distanceBetweenPlaces = distanceBetween(positionUser, new LatLng(matrixCoordinates[i][0], matrixCoordinates[i][1]));
+            placeList.add(new Place(matrixCoordinates[i][0], matrixCoordinates[i][1], distanceBetweenPlaces));
         }
+
+        Collections.sort(placeList);
+
+        Place nearPlace = placeList.get(0);
+        coordinateX = nearPlace.getLatitude();
+        coordinateY = nearPlace.getLongitude();
+
+        showMarker(new LatLng(coordinateX, coordinateY), map);
     }
 
-    private static int separar(double[] vetor, double[] id, int inicio, int fim)
-    {
-        double pivo = vetor[inicio];
-        int i = inicio + 1, f = fim;
-        while (i <= f)
-        {
-            if (vetor[i] <= pivo)
-                i++;
-            else if (pivo < vetor[f])
-                f--;
-            else
-            {
-                double troca = vetor[i];
-                double troca_id = id[i];
-                vetor[i] = vetor[f];
-                id[i] = id[f];
-                vetor[f] = troca;
-                id[f] = troca_id;
-                i++;
-                f--;
-            }
-        }
-        vetor[inicio] = vetor[f];
-        id[inicio] = id[f];
-        vetor[f] = pivo;
-        id[f] = id[inicio];
-        return f;
-    }
-
-    public static void showMarker(LatLng position, GoogleMap googleMap){
+    public void showMarker(LatLng position, GoogleMap googleMap){
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 17));
     }
+
+
 }
