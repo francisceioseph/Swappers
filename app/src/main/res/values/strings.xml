@@ -94,6 +94,7 @@
     <string name="information_fragment_business_hours">Business Hours</string>
     <string name="information_fragment_business_hours_description">Business Hours Description</string>
     <string name="place_photo">Place photo</string>
+    <string name="find_place">FIND A NEAR PLACE</string>
 
 
 </resources>
