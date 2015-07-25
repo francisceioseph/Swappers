@@ -37,13 +37,15 @@ public class BookService {
 
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
+            conn.setDefaultUseCaches(false);
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0");
             conn.setDoInput(true);
+            conn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
 
-            conn.setRequestProperty("Content-Type", "application/json");
             conn.connect();
 
-            int responseCode = conn.getResponseCode();
 
+            int responseCode = conn.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         conn.getInputStream()));
@@ -80,18 +82,18 @@ public class BookService {
 
         if (tl.length > 1) {
             for (int i = 0; i < tl.length; i++) {
-                stringBuilder.append(tl[i]);
+                stringBuilder.append(removeSpecialCharactere(tl[i]));
                 stringBuilder.append("+");
             }
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         } else {
-            stringBuilder.append(title);
+            stringBuilder.append(removeSpecialCharactere(title));
         }
 
-        stringBuilder.append("&projection=full&maxResults=30&orderBy=relevance&printType=books");
+        stringBuilder.append("&projection=full&maxResults=30&printType=books");
+        Log.i("QUERY-URI",stringBuilder.toString());
         return stringBuilder.toString();
     }
-
 
     private static List<Book> parseJsonToBook(String jsonBooks){
         JSONObject json = null;
@@ -179,5 +181,13 @@ public class BookService {
             e.printStackTrace();
         }
         return bookList;
+    }
+
+
+    private static String removeSpecialCharactere(String str){
+        return str.replace("à","a").replace("á","a").
+                replace("ã", "a").replace("ú","u").
+                replace("é", "e").replace("í","i").
+                replace("ô","o").replace("ó","o");
     }
 }

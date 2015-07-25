@@ -22,7 +22,8 @@
                 android:background="@color/accent_material_dark"
                 android:contentDescription="@string/adapter_book_cover_description"
                 android:layout_margin="10dp"
-                android:adjustViewBounds="false" />
+                android:adjustViewBounds="false"
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"

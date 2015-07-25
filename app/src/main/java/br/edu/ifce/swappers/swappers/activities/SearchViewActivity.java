@@ -44,6 +44,7 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
     private TextView tv;
     private FrameLayout frameLayout;
     private BookTask bookTask;
+    private SearchView searchView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,13 +107,6 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
-        /**
-        for (int i = 0, tamI = mBookList.size(); i < tamI; i++) {
-            if (mBookList.get(i).getTitle().toLowerCase().startsWith(query.toLowerCase())) {
-                mBookListAux.add(mBookList.get(i));
-            }
-        }
-        **/
     }
 
     public void initSearchWS(String query){
@@ -128,21 +122,34 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView;
 
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ){
             searchView = (SearchView) searchItem.getActionView();
-            searchView.setQueryHint("buscar livro");
         }
         else{
             searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-            searchView.setQueryHint("buscar livro");
         }
 
-        ComponentName cn = new ComponentName(this, SearchViewActivity.class);
+        searchView.setQueryHint("buscar livro");
 
+        ComponentName cn = new ComponentName(this, SearchViewActivity.class);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        searchView.onActionViewCollapsed();
+        super.onBackPressed();
+        this.finish();
     }
 
     @Override

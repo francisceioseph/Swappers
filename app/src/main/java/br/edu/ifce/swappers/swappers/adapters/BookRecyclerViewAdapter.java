@@ -51,7 +51,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         if(!book.getPhoto().isEmpty()) {
             Picasso.with(context).load(book.getPhoto()).into(viewHolder.bookImageImageView);
         }else{
-            Picasso.with(context).load("https://books.google.com.br/googlebooks/images/no_cover_thumb.gif").into(viewHolder.bookImageImageView);
+            Picasso.with(context).load(R.drawable.blue_book).into(viewHolder.bookImageImageView);
         }
     }
 
