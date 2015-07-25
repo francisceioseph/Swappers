@@ -38,7 +38,7 @@ public class RetrievedBooksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_retrieved_books, container, false);
 
-        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(dataSource);
+        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(getActivity().getApplicationContext(),dataSource);
 
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.recyclerView = (RecyclerView) rootView.findViewById(R.id.retrieved_books_list);

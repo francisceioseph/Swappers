@@ -40,7 +40,7 @@ public class DonatedBooksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_donated_books, container, false);
 
-        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(dataSource);
+        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(getActivity().getApplicationContext(),dataSource);
 
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.recyclerView = (RecyclerView) rootView.findViewById(R.id.donated_books_list);
