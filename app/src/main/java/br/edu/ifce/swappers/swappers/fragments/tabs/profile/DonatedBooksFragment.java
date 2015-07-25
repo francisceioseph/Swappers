@@ -68,9 +68,9 @@ public class DonatedBooksFragment extends Fragment implements RecycleViewOnClick
     @Override
     public void onClickListener(View view, int position) {
         /* Toast de Teste */
-        /*Toast toast = SwappersToast.makeText(getActivity(), "Livro: "+position, Toast.LENGTH_LONG);
+        Toast toast = SwappersToast.makeText(getActivity(), "Livro: "+position, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 360);
-        toast.show();*/
+        toast.show();
 
         Intent detailBookFragmentIntent = new Intent(this.getActivity(),DetailBookActivity.class);
         /*Tirei essa linha para que o usuário possa voltar para o aplicativo*/

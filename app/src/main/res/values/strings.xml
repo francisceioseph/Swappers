@@ -72,6 +72,7 @@
     <string name="author_detail_book">Authors Book</string>
     <string name="editor_detail_book">Editor Book</string>
     <string name="synopsis_book">Book Synopses</string>
+    <string name="evaluate_book">Book Synopses</string>
 
 
     <string name="best_books">Best Books</string>

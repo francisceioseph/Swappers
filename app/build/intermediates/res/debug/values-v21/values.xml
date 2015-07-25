@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values-v21/values.xml -->
+    <!-- From: file:/home/alessandra/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values-v21/values.xml -->
     <eat-comment/>
     <dimen name="photoMarginTop">40dp</dimen>
     <dimen name="statusMargin">24dp</dimen>
     <dimen name="userSpace">188dp</dimen>
-    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values-v21/strings.xml -->
+    <!-- From: file:/home/alessandra/Swappers/app/src/main/res/values-v21/strings.xml -->
     <eat-comment/>
     <string name="next_near_book_button">next_near_book</string>
     <string name="previous_near_book_button">previous book</string>
@@ -13,7 +13,7 @@
     <string name="see_places_of_near_book">SEE PLACES ON MAP</string>
     <string name="title_near_book">Book Title Here</string>
     <string name="userPhotoDialogTitle">Profile Picture</string>
-    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values-v21/styles.xml -->
+    <!-- From: file:/home/alessandra/Swappers/app/src/main/res/values-v21/styles.xml -->
     <eat-comment/>
     <style name="AppMaterial" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimary">@color/color_primary</item>
@@ -35,7 +35,7 @@
         <item name="android:navigationBarColor">@color/color_primary_dark</item>
         <item name="android:statusBarColor">@color/color_primary_dark</item>
     </style>
-    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values-v21/values.xml -->
+    <!-- From: file:/home/alessandra/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values-v21/values.xml -->
     <eat-comment/>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance.Material"/>
     <style name="Base.TextAppearance.AppCompat.Body1" parent="android:TextAppearance.Material.Body1"/>
@@ -253,7 +253,7 @@
     <style name="Base.Widget.AppCompat.TextView.SpinnerItem" parent="android:Widget.Material.TextView.SpinnerItem"/>
     <style name="Base.Widget.AppCompat.Toolbar.Button.Navigation" parent="android:Widget.Material.Toolbar.Button.Navigation">
     </style>
-    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values-v21/values.xml -->
+    <!-- From: file:/home/alessandra/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values-v21/values.xml -->
     <eat-comment/>
     <style name="MaterialNavigationDrawerTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowTranslucentStatus">false</item>
@@ -308,7 +308,7 @@
     <style name="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar"/>
     <style name="MaterialNavigationDrawerTheme.Light.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light"/>
     <style name="MaterialNavigationDrawerTheme.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme"/>
-    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values-v21/values.xml -->
+    <!-- From: file:/home/alessandra/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values-v21/values.xml -->
     <eat-comment/>
     <style name="Platform.AppCompat" parent="android:Theme.Material">
         <item name="android:windowNoTitle">true</item>
@@ -344,7 +344,7 @@
         <item name="android:colorControlHighlight">?attr/colorControlHighlight</item>
         <item name="android:colorButtonNormal">?attr/colorButtonNormal</item>
     </style>
-    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values-v21/styles.xml -->
+    <!-- From: file:/home/alessandra/Swappers/app/src/main/res/values-v21/styles.xml -->
     <eat-comment/>
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColorPrimary">@color/primary_text_default_material_dark</item>

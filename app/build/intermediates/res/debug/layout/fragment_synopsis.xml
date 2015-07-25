@@ -4,6 +4,47 @@
     tools:context="br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment">
 
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="8dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textAlignment="center"
+                    android:text="Teste"
+                    android:id="@+id/Teste"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center_horizontal" />
+
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,7 +90,8 @@
     </LinearLayout>
 
 
+    </LinearLayout>
 
 
 </FrameLayout>
-<!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/layout/fragment_synopsis.xml -->
+<!-- From: file:/home/alessandra/Swappers/app/src/main/res/layout/fragment_synopsis.xml -->
