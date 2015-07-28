@@ -1,8 +1,6 @@
 package br.edu.ifce.swappers.swappers.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +11,7 @@ import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Book;
-import android.widget.Toast;
-
-import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
  * Created by francisco on 16/06/15.
@@ -124,7 +117,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         @Override
         public void onClick(View view) {
             if(mRecycleViewOnClickListenerHack != null){
-                mRecycleViewOnClickListenerHack.onClickListener(view, getPosition());
+                mRecycleViewOnClickListenerHack.onClickListener(view, getAdapterPosition());
             }
         }
     }

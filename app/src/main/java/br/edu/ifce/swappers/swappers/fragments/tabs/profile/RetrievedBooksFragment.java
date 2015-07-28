@@ -1,6 +1,7 @@
 package br.edu.ifce.swappers.swappers.fragments.tabs.profile;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
 import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
@@ -58,8 +60,7 @@ public class RetrievedBooksFragment extends Fragment implements RecycleViewOnCli
 
     @Override
     public void onClickListener(View view, int position) {
-        Toast toast = SwappersToast.makeText(getActivity(), "Livro: " + position, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER, 0, 360);
-        toast.show();
+        Intent detailBookFragmentIntent = new Intent(this.getActivity(),DetailBookActivity.class);
+        this.startActivity(detailBookFragmentIntent);
     }
 }

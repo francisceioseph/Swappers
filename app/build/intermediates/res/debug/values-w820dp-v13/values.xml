@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/alessandra/Swappers/app/src/main/res/values-w820dp/dimens.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values-w820dp/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">64dp</dimen>
-    <!-- From: file:/home/alessandra/Swappers/app/src/main/res/values-w820dp/strings.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values-w820dp/strings.xml -->
     <eat-comment/>
     <string name="next_near_book_button">next_near_book</string>
     <string name="previous_near_book_button">previous book</string>

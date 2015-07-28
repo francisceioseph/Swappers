@@ -10,4 +10,4 @@
     <item android:id="@android:id/progress"
         android:drawable="@drawable/ic_star" />
 
-</layer-list><!-- From: file:/home/alessandra/Swappers/app/src/main/res/drawable/rating_stars.xml -->
+</layer-list><!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/drawable/rating_stars.xml -->

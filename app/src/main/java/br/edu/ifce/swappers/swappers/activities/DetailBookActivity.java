@@ -4,18 +4,15 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
-import android.widget.Toolbar;
-
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.AvailableBooksFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
 
 public class DetailBookActivity extends AppCompatActivity {
 
@@ -37,7 +34,7 @@ public class DetailBookActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("A Book"); /*Inserir a consulta ao banco de dados que retornará o título do livro*/
         if (toolbar != null){
             this.setSupportActionBar(toolbar);

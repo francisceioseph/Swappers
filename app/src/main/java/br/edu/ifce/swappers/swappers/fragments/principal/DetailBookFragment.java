@@ -16,9 +16,6 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.profile.DonatedBooksFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.profile.FavoriteBooksFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.profile.RetrievedBooksFragment;
 
 /**
  * A simple {@link Fragment} subclass.
