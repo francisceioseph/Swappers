@@ -66,9 +66,7 @@ public class ReadersCommentsFragment extends Fragment implements RecycleViewOnCl
 
     @Override
     public void onClickListener(View view, int position) {
-        Intent detailBookFragmentIntent;
-        detailBookFragmentIntent = new Intent(this.getActivity(), ProfileActivity.class);
-        this.startActivity(detailBookFragmentIntent);
+        //Implementar na versão 2 do Swappers.
 
     }
 

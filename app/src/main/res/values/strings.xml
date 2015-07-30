@@ -108,6 +108,10 @@
     <string name="evaluate_book_string">Evaluate this book</string>
     <string name="book_avarage_text_view">5.5</string>
     <string name="user_readers_comments">Francis Thomas</string>
+    <string name="floating_action_button_donate">Donate this Book!</string>
+    <string name="floating_action_button_adopt">Adopt this Book!</string>
+    <string name="floating_action_button_favorite">Favorite this Book!</string>
+    <string name="floating_action_button_comment">Comment this Book!</string>
 
     <!-- Fragment Comentários de Leitor-->
 <string name="reader_coment">Lorem ipsum dolor sit amet, mutat dicit scriptorem in sed,

@@ -11,6 +11,9 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
@@ -23,6 +26,9 @@ public class DetailBookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_book);
+
+        FloatingActionButton FloatingActionEtc = (FloatingActionButton) findViewById(R.id.floating_action_adop);
+
         this.initToolbar();
         this.initTabHost();
 
@@ -50,6 +56,7 @@ public class DetailBookActivity extends AppCompatActivity {
         this.bookDetailTabHost = (FragmentTabHost) findViewById(R.id.books_tabHost);
         this.bookDetailTabHost.setup(this, this.getSupportFragmentManager(), android.R.id.tabcontent);
 
+
         TabHost.TabSpec synopsisTab     = this.bookDetailTabHost.newTabSpec("synopsisTab");
         TabHost.TabSpec readersCommentsTab   = this.bookDetailTabHost.newTabSpec("readersCommentsTab");
 
@@ -60,6 +67,8 @@ public class DetailBookActivity extends AppCompatActivity {
 
         this.bookDetailTabHost.addTab(synopsisTab, SynopsisFragment.class, null);
         this.bookDetailTabHost.addTab(readersCommentsTab, ReadersCommentsFragment.class, null);
+
+
 
 
         this.bookDetailTabHost.setCurrentTab(1);
