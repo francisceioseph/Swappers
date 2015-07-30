@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
@@ -24,6 +25,7 @@ public class DetailBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_book);
         this.initToolbar();
         this.initTabHost();
+
     }
 
 

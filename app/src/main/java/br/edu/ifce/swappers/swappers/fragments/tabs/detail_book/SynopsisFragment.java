@@ -7,8 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +41,8 @@ public class SynopsisFragment extends Fragment {
         TextView stateAndCountry     = (TextView) rootView.findViewById(R.id.state_and_country_text_view);
         TextView businessHoursDescription = (TextView) rootView.findViewById(R.id.business_hours_description_text_view);
 //        RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.adapter_book_rating_bar);
+        FloatingActionButton button = (FloatingActionButton) rootView.findViewById(R.id.pink_icon);
+
 
         return rootView;
 

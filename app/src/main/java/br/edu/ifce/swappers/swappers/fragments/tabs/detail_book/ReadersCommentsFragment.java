@@ -11,7 +11,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -54,6 +57,8 @@ public class ReadersCommentsFragment extends Fragment implements RecycleViewOnCl
         this.recyclerView.setLayoutManager(layoutManager);
         this.recyclerView.setAdapter(adapter);
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
 
         return rootView;
     }
