@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,45 +21,50 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.model.DistancePlaces;
+import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 
 public class PlacesFragment extends Fragment{
 
-    MapView mapView;
     static GoogleMap mapPlace;
-    LocationManager locationManager;
-
     private final LatLng SHOPPING_BENFICA = new LatLng(-3.739126, -38.5402);
     private final LatLng NORTH_SHOPPING = new LatLng(-3.7348059, -38.5662608);
     private final LatLng SHOPPING_IGUATEMI = new LatLng(-3.75529, -38.488498);
+    private final LatLng SHOPPING_IANDÊ = new LatLng(-3.734421, -38.655867);
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
-
+    MapView mapView;
+    private Button findPlaceButton;
     private LatLng myPosition;
 
-    public PlacesFragment() {
-        // Required empty public constructor
-
-    }
+    public PlacesFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Listener listener = new Listener();
-        long timeUpdate = 5000;
+        long timeUpdate = 3000;
         float distance = 0;
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_places, container, false);
 
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        findPlaceButton = (Button) view.findViewById(R.id.find_near_place);
+        findPlaceButton.setOnClickListener(findNearPlaceOnMap());
+
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, timeUpdate, distance, listener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, timeUpdate, distance, listener);
 
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(locationUser == null){
-            Toast toast = SwappersToast.makeText(getActivity(), "Connect the GPS!", Toast.LENGTH_LONG);
+            Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
 
@@ -83,6 +89,50 @@ public class PlacesFragment extends Fragment{
 
     }
 
+    public View.OnClickListener findNearPlaceOnMap(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Listener listenerUser = new Listener();
+                DistancePlaces distancePlaces = new DistancePlaces();
+
+                LatLng myCurrentPosition;
+
+                LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                if(locationUser == null) {
+                    Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else {
+                    myCurrentPosition = listenerUser.getMyPosition(locationUser);
+                    distancePlaces.calculateNearPlace(myCurrentPosition, mapPlace);
+                }
+            }
+        };
+    }
+
+    private void setUpMap() {
+        mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
+        mapPlace.animateCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
+
+        mapPlace.addMarker(new MarkerOptions().position(SHOPPING_BENFICA)
+                .title("Shopping Benfica")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        mapPlace.addMarker(new MarkerOptions().position(NORTH_SHOPPING)
+                                        .title("North Shopping")
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        mapPlace.addMarker(new MarkerOptions().position(SHOPPING_IGUATEMI)
+                .title("Shopping Iguatemi")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        mapPlace.addMarker(new MarkerOptions().position(SHOPPING_IANDÊ)
+                .title("Shopping Iandê")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+    }
+
     @Override
     public void onResume() {
         mapView.onResume();
@@ -101,22 +151,6 @@ public class PlacesFragment extends Fragment{
         mapView.onLowMemory();
     }
 
-    private void setUpMap() {
-        mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
-        mapPlace.animateCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
-
-        mapPlace.addMarker(new MarkerOptions().position(SHOPPING_BENFICA)
-                .title("Shopping Benfica")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        mapPlace.addMarker(new MarkerOptions().position(NORTH_SHOPPING)
-                                        .title("North Shopping")
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        mapPlace.addMarker(new MarkerOptions().position(SHOPPING_IGUATEMI)
-                .title("Shopping Iguatemi")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
-    }
-
 }
 
     class Listener implements LocationListener {
@@ -133,7 +167,7 @@ public class PlacesFragment extends Fragment{
 
             if (changeZoom < 1) {
                 PlacesFragment.mapPlace.addMarker(new MarkerOptions().position(userPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
-                PlacesFragment.mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(userPosition, 14));
+                PlacesFragment.mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(userPosition, 16));
                 PlacesFragment.mapPlace.animateCamera(CameraUpdateFactory.zoomTo(14), 500, null);
                 changeZoom++;
             }
@@ -142,9 +176,7 @@ public class PlacesFragment extends Fragment{
         public void onStatusChanged(String provider, int status, Bundle extras){}
 
         @Override
-        public void onProviderEnabled(String provider){
-
-        }
+        public void onProviderEnabled(String provider){}
 
         @Override
         public void onProviderDisabled(String provider){}
@@ -157,4 +189,3 @@ public class PlacesFragment extends Fragment{
             return myPosition;
         }
 }
-

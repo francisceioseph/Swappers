@@ -1,15 +1,19 @@
 package br.edu.ifce.swappers.swappers.activities;
 
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -68,7 +72,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         this.disableLearningPattern();
         this.setDefaultSectionLoaded(this.getSectionList().indexOf(booksSection));
-
     }
 
     private MaterialAccount loadAccount(){
@@ -118,11 +121,17 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView;
 
-        if (searchItem != null) {
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ){
             searchView = (SearchView) searchItem.getActionView();
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setQueryHint("buscar livro");
         }
+        else{
+            searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+            searchView.setQueryHint("buscar livro");
+        }
+        ComponentName cn = new ComponentName(this, SearchViewActivity.class);
 
-        return super.onCreateOptionsMenu(menu);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));
+        return true;
     }
 }
