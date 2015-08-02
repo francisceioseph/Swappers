@@ -1,11 +1,14 @@
 package br.edu.ifce.swappers.swappers.activities;
 
 import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
@@ -17,17 +20,56 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
+import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 public class DetailBookActivity extends AppCompatActivity {
 
     private FragmentTabHost bookDetailTabHost;
+    private int flag = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_book);
 
-        FloatingActionButton FloatingActionEtc = (FloatingActionButton) findViewById(R.id.floating_action_adop);
+
+        findViewById(R.id.floating_action_adop).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwappersToast.makeText(DetailBookActivity.this, "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
+                ;
+            }
+        });
+
+        findViewById(R.id.floating_action_donate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwappersToast.makeText(DetailBookActivity.this, "This book has been donated by you! <3", Toast.LENGTH_SHORT).show();;
+            }
+        });
+
+        findViewById(R.id.floating_action_favorite).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView imgView =(ImageView) findViewById(R.id.is_book_favorite);
+                if (flag == 1){
+                    Drawable  drawable  = getResources().getDrawable(R.drawable.ic_is_book_favorite);
+                    imgView.setImageDrawable(drawable);
+                    flag = 0;
+                }else {
+                    imgView.setImageDrawable(null);
+                    flag = 1;
+                }
+
+            }
+        });
+
+        findViewById(R.id.floating_action_comment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //SwappersToast.makeText(DetailBookActivity.this, "This book has been favorited by you! <3", Toast.LENGTH_SHORT).show();;
+            }
+        });
 
         this.initToolbar();
         this.initTabHost();
