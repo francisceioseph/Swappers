@@ -102,16 +102,11 @@ public class DetailBookActivity extends AppCompatActivity {
         TabHost.TabSpec synopsisTab     = this.bookDetailTabHost.newTabSpec("synopsisTab");
         TabHost.TabSpec readersCommentsTab   = this.bookDetailTabHost.newTabSpec("readersCommentsTab");
 
-
         synopsisTab.setIndicator("SYNOPSES");
         readersCommentsTab.setIndicator("READERS COMMENTS");
 
-
         this.bookDetailTabHost.addTab(synopsisTab, SynopsisFragment.class, null);
         this.bookDetailTabHost.addTab(readersCommentsTab, ReadersCommentsFragment.class, null);
-
-
-
 
         this.bookDetailTabHost.setCurrentTab(1);
 
