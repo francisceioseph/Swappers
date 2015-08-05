@@ -1,0 +1,16 @@
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/classes/debug
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-2980ed2b3e0a9d3f827f01f7b600c8dd9e277e93.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-cd874bd368bdb9bc1543673d7855ee8bfcbbc7c1.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-5ea862d4c2f8ac39952db93c6ea5545671a0df3b.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-7d23086e9259582f62437c0a68abbf9709b398cd.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-f376e7b8a1a4cf8786f6e3a0bb63aa94817bdef3.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-5efd8af4744c616e07fe68713b6064f01d08902d.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-df8daf570c86ddf9ee798795cdf708b66dda2f41.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-fc58e39be75c8c85b2fc319e75812124c72791f9.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-3c7fc192ad7db5c63d5c8bcd55c4a5c4595975fc.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.5-581120cc3af5bf3972001985d74bf3111792b858.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-7e392f4db2a8e2bbfefe8de562d422f21ce6f251.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-0416908dba73845437fc971e4d1eff56e49a699f.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-4d0b878c867edbc5032cdcb7664286e897a04cb3.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-2aa4f218e25e45cc4e425ada79a08565a8168f9a.jar
+/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-c4675ca921bad8ae8967af1f93af23f2546bbaed.jar

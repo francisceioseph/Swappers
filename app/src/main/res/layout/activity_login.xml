@@ -122,7 +122,8 @@
                         android:textIsSelectable="false"
                         android:visibility="visible"
                         android:focusable="true"
-                        android:theme="@style/SWEditTextTheme" />
+                        android:theme="@style/SWEditTextTheme"
+                        android:password="true" />
 
                 </LinearLayout>
 

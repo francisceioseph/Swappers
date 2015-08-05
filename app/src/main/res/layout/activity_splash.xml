@@ -29,13 +29,14 @@
         android:textStyle="bold" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/splash_swappers_slogan"
+        android:text="Donate readings, share dreams"
         android:id="@+id/textView3"
         android:layout_marginTop="5dp"
-        android:textSize="23sp"
-        android:textColor="#ffffffff" />
+        android:textSize="23dp"
+        android:textColor="#ffffffff"
+        android:gravity="center"/>
 
 
 </LinearLayout>

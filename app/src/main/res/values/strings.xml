@@ -67,6 +67,17 @@
     <string name="books_retrieved_hotspot">xx books retrieved</string>
     <string name="donations_received_hotspot">xx donations received</string>
 
+    <!-- Detail Book  -->
+    <string name="title_detail_book">Title Book</string>
+    <string name="author_detail_book">Authors Book</string>
+    <string name="editor_detail_book">Editor Book</string>
+    <string name="synopsis_book">Lorem ipsum dolor sit amet, mutat dicit scriptorem in sed,
+    mea tractatos instructior ad, virtute discere maluisset ei has.
+    Delenit denique laboramus ei pri, est id assentior necessitatibus,
+    ne copiosae concludaturque eum. Usu everti deseruisse cu.
+    Quo ut periculis efficiendi, malis nonumes voluptaria te eam,
+    mei debitis epicurei an. An vim movet quaerendum consequuntur, ut suas legendos vix.
+    In vis quodsi verear quaeque, ex vero dignissim nam, idque eruditi sapientem sed ad. </string>
     <string name="best_books">Best Books</string>
     <string name="title_best_book">Title Book Here</string>
     <string name="author_best_book">Author Here</string>
@@ -94,7 +105,23 @@
     <string name="information_fragment_business_hours">Business Hours</string>
     <string name="information_fragment_business_hours_description">Business Hours Description</string>
     <string name="place_photo">Place photo</string>
+    <string name="evaluate_book_string">Evaluate this book</string>
+    <string name="book_avarage_text_view">5.5</string>
+    <string name="user_readers_comments">Francis Thomas</string>
+    <string name="floating_action_button_donate">Donate this Book!</string>
+    <string name="floating_action_button_adopt">Adopt this Book!</string>
+    <string name="floating_action_button_favorite">Favorite this Book!</string>
+    <string name="floating_action_button_comment">Comment this Book!</string>
     <string name="find_place">FIND A NEAR PLACE</string>
 
+    <!-- Fragment Comentários de Leitor-->
+<string name="reader_coment">Lorem ipsum dolor sit amet, mutat dicit scriptorem in sed,
+    mea tractatos instructior ad, virtute discere maluisset ei has.
+    Delenit denique laboramus ei pri, est id assentior necessitatibus,
+    ne copiosae concludaturque eum. Usu everti deseruisse cu.
+    Quo ut periculis efficiendi, malis nonumes voluptaria te eam,
+    mei debitis epicurei an. An vim movet quaerendum consequuntur, ut suas legendos vix.
+    In vis quodsi verear quaeque, ex vero dignissim nam, idque eruditi sapientem sed ad. </string>
+    <string name="title_activity_profile">ProfileActivity</string>
 
 </resources>

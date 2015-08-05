@@ -87,6 +87,7 @@
 
         </activity>
 
+
         <activity
             android:name=".activities.DetailBookActivity"
             android:label="@string/title_activity_detail_book"
@@ -97,6 +98,7 @@
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
         </activity>
 
+
         <activity
             android:name=".activities.DetailPlaceActivity"
             android:label="@string/title_activity_detail_place"
@@ -105,6 +107,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+
         </activity>
 
         <activity
@@ -115,8 +118,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
-        </activity>
 
+        </activity>
+        
+	<activity
+            android:name=".activities.ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
     </application>
 
 </manifest>

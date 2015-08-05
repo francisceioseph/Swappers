@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,9 +24,15 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Button signInButton = (Button) findViewById(R.id.sign_in_button);
         Button signUpButton = (Button) findViewById(R.id.sign_up_button);
+
+        /*Essa linha serve para esconder o teclado, assim o usuário não fica apertando o botão de voltar para escondê-lo.*/
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
 
         if (toolbar != null){
             setSupportActionBar(toolbar);

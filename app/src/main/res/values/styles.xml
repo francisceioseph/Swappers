@@ -21,6 +21,9 @@
         <item name="android:background">@color/background_material_light</item>
     </style>
 
+    <style name="menu_labels_style">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/white</item>
     <style name="SWDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColor">@color/black_text</item>
         <item name="android:textColorPrimary">@color/color_primary</item>

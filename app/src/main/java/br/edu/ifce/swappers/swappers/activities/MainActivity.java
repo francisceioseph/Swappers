@@ -71,7 +71,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         this.addSection(settingsSection);
 
         this.disableLearningPattern();
-        this.setDefaultSectionLoaded(this.getSectionList().indexOf(booksSection));
+
+        this.setDefaultSectionLoaded(this.getSectionList().indexOf(placesSection));
     }
 
     private MaterialAccount loadAccount(){
