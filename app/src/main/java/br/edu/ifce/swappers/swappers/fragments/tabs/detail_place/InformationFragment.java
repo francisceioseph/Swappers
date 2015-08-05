@@ -33,7 +33,7 @@ public class InformationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_information, container, false);
-        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(dataSource);
+        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(getActivity().getApplicationContext(), dataSource);
 
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.recyclerView = (RecyclerView) rootView.findViewById(R.id.available_books_list);

@@ -11,8 +11,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ToolbarTheme"
-        app:popupTheme="@style/ToolbarTheme.Menu" />
+        android:theme="@style/SWToolbarTheme"
+        app:popupTheme="@style/SWToolbarMenuTheme" />
 
        <LinearLayout
             android:layout_width="match_parent"
@@ -127,4 +127,4 @@
 
        </LinearLayout>
 </LinearLayout>
-<!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/layout/activity_detail_place.xml -->
+<!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/layout/activity_detail_place.xml -->

@@ -133,6 +133,8 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
 
         public void setBookImageImageView(ImageView bookImageImageView) {
             this.bookImageImageView = bookImageImageView;
+        }
+        
         @Override
         public void onClick(View view) {
             if(mRecycleViewOnClickListenerHack != null){

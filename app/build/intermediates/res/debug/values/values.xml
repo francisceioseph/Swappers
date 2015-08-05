@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+<resources xmlns:ns1="http://schemas.android.com/apk/res/android">
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -19,22 +19,30 @@
     <color name="abc_search_url_text_selected">@android:color/black</color>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
     <color name="accent_material_light">@color/material_deep_teal_500</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <color name="ampm_text_color">#8c8c8c</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="background">#e5e5e5</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <color name="background_floating_material_dark">#ff424242</color>
     <color name="background_floating_material_light">#ffeeeeee</color>
     <color name="background_material_dark">#ff303030</color>
     <color name="background_material_light">#ffeeeeee</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="black_semi_transparent">#B2000000</color>
     <color name="black_text">#000000</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <color name="blue">#ff33b5e5</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
+    <eat-comment/>
     <color name="blue_semi_transparent">#805677fc</color>
     <color name="blue_semi_transparent_pressed">#80738ffe</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
@@ -44,13 +52,19 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <color name="calendar_header">#ff999999</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <color name="cardview_dark_background">#FF202020</color>
     <color name="cardview_light_background">#FFFAFAFA</color>
     <color name="cardview_shadow_end_color">#03000000</color>
     <color name="cardview_shadow_start_color">#37000000</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <color name="circle_background">#fff2f2f2</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="color_accent">#FFD180</color>
     <color name="color_accent_dark">#FB8C00</color>
@@ -60,7 +74,7 @@
     <color name="color_primary">#1182DF</color>
     <color name="color_primary_dark">#005FB4</color>
     <color name="color_ripple_register">#FEF6C9</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/common_colors.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/res/values/common_colors.xml -->
     <eat-comment/>
     <color name="common_action_bar_splitter">#d2d2d2</color>
     <color name="common_signin_btn_dark_text_default">@android:color/white</color>
@@ -72,21 +86,35 @@
     <color name="common_signin_btn_light_text_disabled">#FFAAAAAA</color>
     <color name="common_signin_btn_light_text_focused">#FF737373</color>
     <color name="common_signin_btn_light_text_pressed">@android:color/white</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <color name="darker_blue">#ff0099cc</color>
+    <color name="date_picker_text_normal">#ff999999</color>
+    <color name="date_picker_view_animator">#fff2f2f2</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <color name="done_text_color_disabled">#ffcccccc</color>
+    <color name="done_text_color_normal">#ff333333</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="half_black">#808080</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <color name="line_background">#ffcccccc</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <eat-comment/>
     <color name="link_text_material_dark">@color/material_deep_teal_200</color>
     <color name="link_text_material_light">@color/material_deep_teal_500</color>
     <color name="material_blue_grey_800">#ff37474f</color>
@@ -94,11 +122,14 @@
     <color name="material_blue_grey_950">#ff21272b</color>
     <color name="material_deep_teal_200">#ff80cbc4</color>
     <color name="material_deep_teal_500">#ff009688</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <color name="numbers_text_color">#8c8c8c</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="pink">#e91e63</color>
     <color name="pink_pressed">#ec407a</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>
     <color name="primary_dark_material_light">#ff757575</color>
@@ -108,10 +139,10 @@
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.traex.rippleeffect/library/1.3/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.traex.rippleeffect/library/1.3/res/values/values.xml -->
     <eat-comment/>
     <color name="rippelColor">#FFFFFF</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <color name="ripple_material_dark">#4dffffff</color>
     <color name="ripple_material_light">#1f000000</color>
@@ -123,10 +154,13 @@
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/res/values/values.xml -->
     <eat-comment/>
     <color name="transparent">#00FFFFFF</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/wallet_colors.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <color name="transparent_black">#7F000000</color>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/res/values/wallet_colors.xml -->
     <eat-comment/>
     <color name="wallet_bright_foreground_disabled_holo_light">#ffb2b2b2</color>
     <color name="wallet_bright_foreground_holo_dark">#fff3f3f3</color>
@@ -141,7 +175,7 @@
     <color name="wallet_hint_foreground_holo_light">#808080</color>
     <color name="wallet_holo_blue_light">#ff33b5e5</color>
     <color name="wallet_link_text_light">#0000ee</color>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="white">#FFFFFF</color>
     <color name="white_pressed">#f1f1f1</color>
@@ -158,6 +192,7 @@
     <declare-styleable name="CardView"><attr format="color" name="cardBackgroundColor"/><attr format="dimension" name="cardCornerRadius"/><attr format="dimension" name="cardElevation"/><attr format="dimension" name="cardMaxElevation"/><attr format="boolean" name="cardUseCompatPadding"/><attr format="boolean" name="cardPreventCornerOverlap"/><attr format="dimension" name="contentPadding"/><attr format="dimension" name="contentPaddingLeft"/><attr format="dimension" name="contentPaddingRight"/><attr format="dimension" name="contentPaddingTop"/><attr format="dimension" name="contentPaddingBottom"/></declare-styleable>
     <declare-styleable name="CircleButton"><attr format="color" name="cb_color"/><attr format="dimension" name="cb_pressedRingWidth"/></declare-styleable>
     <declare-styleable name="CircleImageView"><attr format="dimension" name="border_width"/><attr format="color" name="border_color"/><attr format="boolean" name="border_overlay"/></declare-styleable>
+    <declare-styleable name="CustomWalletTheme"><attr format="enum" name="windowTransitionStyle"><enum name="slide" value="1"/><enum name="none" value="2"/></attr></declare-styleable>
     <declare-styleable name="DrawerArrowToggle"><attr format="color" name="color"/><attr format="boolean" name="spinBars"/><attr format="dimension" name="drawableSize"/><attr format="dimension" name="gapBetweenBars"/><attr format="dimension" name="topBottomBarArrowSize"/><attr format="dimension" name="middleBarArrowSize"/><attr format="dimension" name="barSize"/><attr format="dimension" name="thickness"/></declare-styleable>
     <declare-styleable name="FloatingActionButton"><attr format="color" name="fab_colorPressed"/><attr format="color" name="fab_colorDisabled"/><attr format="color" name="fab_colorNormal"/><attr format="reference" name="fab_icon"/><attr format="enum" name="fab_size"><enum name="normal" value="0"/><enum name="mini" value="1"/></attr><attr format="string" name="fab_title"/><attr format="boolean" name="fab_stroke_visible"/></declare-styleable>
     <declare-styleable name="FloatingActionsMenu"><attr format="color" name="fab_addButtonColorPressed"/><attr format="color" name="fab_addButtonColorNormal"/><attr format="enum" name="fab_addButtonSize"><enum name="normal" value="0"/><enum name="mini" value="1"/></attr><attr format="color" name="fab_addButtonPlusIconColor"/><attr format="boolean" name="fab_addButtonStrokeVisible"/><attr format="reference" name="fab_labelStyle"/><attr format="enum" name="fab_labelsPosition"><enum name="left" value="0"/><enum name="right" value="1"/></attr><attr format="enum" name="fab_expandDirection"><enum name="up" value="0"/><enum name="down" value="1"/><enum name="left" value="2"/><enum name="right" value="3"/></attr></declare-styleable>
@@ -176,7 +211,6 @@
     <declare-styleable name="MenuView"><attr name="android:itemTextAppearance"/><attr name="android:horizontalDivider"/><attr name="android:verticalDivider"/><attr name="android:headerBackground"/><attr name="android:itemBackground"/><attr name="android:windowAnimationStyle"/><attr name="android:itemIconDisabledAlpha"/><attr format="boolean" name="preserveIconSpacing"/></declare-styleable>
     <declare-styleable name="PopupWindow"><attr format="boolean" name="overlapAnchor"/><attr name="android:popupBackground"/></declare-styleable>
     <declare-styleable name="PopupWindowBackgroundState"><attr format="boolean" name="state_above_anchor"/></declare-styleable>
-    <declare-styleable name="RecyclerView"><attr format="string" name="layoutManager"/><attr name="android:orientation"/><attr format="integer" name="spanCount"/><attr format="boolean" name="reverseLayout"/><attr format="boolean" name="stackFromEnd"/></declare-styleable>
     <declare-styleable name="RippleView"><attr format="integer" name="rv_alpha"/><attr format="integer" name="rv_framerate"/><attr format="integer" name="rv_rippleDuration"/><attr format="integer" name="rv_zoomDuration"/><attr format="color" name="rv_color"/><attr format="boolean" name="rv_centered"/><attr format="enum" name="rv_type"><enum name="simpleRipple" value="0"/><enum name="doubleRipple" value="1"/><enum name="rectangle" value="2"/></attr><attr format="dimension" name="rv_ripplePadding"/><attr format="boolean" name="rv_zoom"/><attr format="float" name="rv_zoomScale"/></declare-styleable>
     <declare-styleable name="SearchView"><attr format="reference" name="layout"/><attr format="boolean" name="iconifiedByDefault"/><attr name="android:maxWidth"/><attr format="string" name="queryHint"/><attr name="android:imeOptions"/><attr name="android:inputType"/><attr format="reference" name="closeIcon"/><attr format="reference" name="goIcon"/><attr format="reference" name="searchIcon"/><attr format="reference" name="searchHintIcon"/><attr format="reference" name="voiceIcon"/><attr format="reference" name="commitIcon"/><attr format="reference" name="suggestionRowLayout"/><attr format="reference" name="queryBackground"/><attr format="reference" name="submitBackground"/><attr name="android:focusable"/></declare-styleable>
     <declare-styleable name="Spinner"><attr format="reference" name="prompt"/><attr format="enum" name="spinnerMode"><enum name="dialog" value="0"/><enum name="dropdown" value="1"/></attr><attr name="android:dropDownSelector"/><attr name="android:popupBackground"/><attr name="android:dropDownVerticalOffset"/><attr name="android:dropDownHorizontalOffset"/><attr name="android:dropDownWidth"/><attr format="reference" name="popupPromptView"/><attr name="android:gravity"/><attr format="boolean" name="disableChildrenWhenDisabled"/><attr name="android:background"/></declare-styleable>
@@ -188,7 +222,7 @@
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
     <declare-styleable name="WalletFragmentOptions"><attr format="enum" name="appTheme"><enum name="holo_dark" value="0"/><enum name="holo_light" value="1"/></attr><attr format="enum" name="environment"><enum name="production" value="1"/><enum name="sandbox" value="0"/><enum name="strict_sandbox" value="2"/></attr><attr format="reference" name="fragmentStyle"/><attr format="enum" name="fragmentMode"><enum name="buyButton" value="1"/><enum name="selectionDetails" value="2"/></attr></declare-styleable>
     <declare-styleable name="WalletFragmentStyle"><attr format="dimension" name="buyButtonHeight"><enum name="match_parent" value="-1"/><enum name="wrap_content" value="-2"/></attr><attr format="dimension" name="buyButtonWidth"><enum name="match_parent" value="-1"/><enum name="wrap_content" value="-2"/></attr><attr format="enum" name="buyButtonText"><enum name="buy_with_google" value="1"/><enum name="buy_now" value="2"/><enum name="book_now" value="3"/><enum name="donate_with_google" value="4"/></attr><attr format="enum" name="buyButtonAppearance"><enum name="classic" value="1"/><enum name="grayscale" value="2"/><enum name="monochrome" value="3"/></attr><attr format="reference" name="maskedWalletDetailsTextAppearance"/><attr format="reference" name="maskedWalletDetailsHeaderTextAppearance"/><attr format="reference|color" name="maskedWalletDetailsBackground"/><attr format="reference" name="maskedWalletDetailsButtonTextAppearance"/><attr format="reference|color" name="maskedWalletDetailsButtonBackground"/><attr format="color" name="maskedWalletDetailsLogoTextColor"/><attr format="enum" name="maskedWalletDetailsLogoImageType"><enum name="classic" value="1"/><enum name="monochrome" value="2"/></attr></declare-styleable>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -250,16 +284,28 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="ampm_label_size">16sp</dimen>
+    <dimen name="ampm_left_padding">6dip</dimen>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="cardview_compat_inset_shadow">1dp</dimen>
     <dimen name="cardview_default_elevation">2dp</dimen>
     <dimen name="cardview_default_radius">2dp</dimen>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="date_picker_component_width">270dip</dimen>
+    <dimen name="date_picker_header_height">30dip</dimen>
+    <dimen name="date_picker_header_text_size">14dip</dimen>
+    <dimen name="date_picker_view_animator_height">270dip</dimen>
+    <dimen name="day_number_select_circle_radius">16dip</dimen>
+    <dimen name="day_number_size">16sp</dimen>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
@@ -267,10 +313,16 @@
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="done_label_size">14sp</dimen>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
     <eat-comment/>
     <dimen name="drawerWidth">-1dp</dimen>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.futuresimple/android-floating-action-button/1.10.0/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="extra_time_label_margin">-30dp</dimen>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.futuresimple/android-floating-action-button/1.10.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="fab_actions_spacing">16dp</dimen>
     <dimen name="fab_icon_size">24dp</dimen>
@@ -282,57 +334,92 @@
     <dimen name="fab_size_mini">40dp</dimen>
     <dimen name="fab_size_normal">56dp</dimen>
     <dimen name="fab_stroke_width">1dp</dimen>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
     <eat-comment/>
-    <dimen name="item_touch_helper_max_drag_scroll_per_frame">20dp</dimen>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/dimens.xml -->
+    <dimen name="header_height">96dip</dimen>
+    <dimen name="minimum_margin_sides">48dip</dimen>
+    <dimen name="minimum_margin_top_bottom">24dip</dimen>
+    <dimen name="month_day_label_text_size">10sp</dimen>
+    <dimen name="month_label_size">16sp</dimen>
+    <dimen name="month_list_item_header_height">50dip</dimen>
+    <dimen name="month_select_circle_radius">45dip</dimen>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="navigation_drawer_width">240dp</dimen>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
     <eat-comment/>
     <dimen name="photoMarginTop">16dp</dimen>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="picker_dimen">270dip</dimen>
+    <dimen name="selected_calendar_layout_height">155dip</dimen>
+    <dimen name="selected_date_day_size">75dip</dimen>
+    <dimen name="selected_date_month_size">30dip</dimen>
+    <dimen name="selected_date_year_size">30dip</dimen>
+    <dimen name="separator_padding">4dip</dimen>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <eat-comment/>
     <dimen name="statusMargin">0dp</dimen>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="time_label_size">60sp</dimen>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <eat-comment/>
     <dimen name="userSpace">164dp</dimen>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="year_label_height">64dip</dimen>
+    <dimen name="year_label_text_size">22dip</dimen>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.futuresimple/android-floating-action-button/1.10.0/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <item name="animator" type="id">false</item>
+    <item name="date_picker_day" type="id">false</item>
+    <item name="date_picker_header" type="id">false</item>
+    <item name="date_picker_month" type="id">false</item>
+    <item name="date_picker_month_and_day" type="id">false</item>
+    <item name="date_picker_year" type="id">false</item>
+    <item name="day_picker_selected_date_layout" type="id">false</item>
+    <item name="done" type="id">false</item>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.futuresimple/android-floating-action-button/1.10.0/res/values/values.xml -->
     <eat-comment/>
     <item name="fab_expand_menu_button" type="id"/>
     <item name="fab_label" type="id"/>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <item name="home" type="id"/>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
     <eat-comment/>
-    <item name="item_touch_helper_previous_elevation" type="id"/>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <item name="month_text_view" type="id">false</item>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
     <item name="split_action_bar" type="id"/>
     <item name="up" type="id"/>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
     <eat-comment/>
     <integer name="DRAWERTYPE_ACCOUNTS">0</integer>
     <integer name="DRAWERTYPE_CUSTOM">2</integer>
     <integer name="DRAWERTYPE_IMAGE">1</integer>
     <integer name="DRAWERTYPE_NO_HEADER">3</integer>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <integer name="abc_config_activityDefaultDur">220</integer>
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="abc_max_action_buttons">2</integer>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/integers.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/integers.xml -->
     <eat-comment/>
     <item format="integer" name="customImeActionId" type="integer">100</item>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/version.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/res/values/version.xml -->
     <eat-comment/>
-    <integer name="google_play_services_version">6587000</integer>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <integer name="google_play_services_version">7327000</integer>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
@@ -351,7 +438,7 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="about_alessandra_name">Alessandra Lino</string>
     <string name="about_develpment_team_title">Development Team</string>
@@ -360,10 +447,10 @@
     <string name="about_joamila_name">Joamila Brito</string>
     <string name="about_swappers_slogan">Donate readings, share dreams</string>
     <string name="about_version_title">version 1.0</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/admob_strings.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="accept">Accept</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
@@ -373,6 +460,11 @@
     <string name="adapter_book_title">Book Title</string>
     <string name="address_hotspot">Address Hotspot Here</string>
     <string name="age_donator">XX anos</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <item format="float" name="ampm_circle_radius_multiplier" type="string">0.19</item>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="app_name">Swappers</string>
     <string name="author_best_book">Author Here</string>
     <string name="author_detail_book">Authors Book</string>
@@ -383,9 +475,15 @@
     <string name="best_places">Best Places</string>
     <string name="book_avarage_text_view">5.5</string>
     <string name="books_retrieved_hotspot">xx books retrieved</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <item format="float" name="circle_radius_multiplier" type="string">0.82</item>
+    <item format="float" name="circle_radius_multiplier_24HourMode" type="string">0.85</item>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="city_donator">City,</string>
     <string name="city_hotspot">City Hostspot</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/common_strings.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/res/values/common_strings.xml -->
     <eat-comment/>
     <string name="common_android_wear_notification_needs_update_text">An application requires an update to the Android Wear app.</string>
     <string name="common_android_wear_update_text">This app won\'t run unless you update the Android Wear app.</string>
@@ -406,6 +504,8 @@
     <string name="common_google_play_services_notification_needs_installation_title">An application requires installation of Google Play services.</string>
     <string name="common_google_play_services_notification_needs_update_title">An application requires an update for Google Play services.</string>
     <string name="common_google_play_services_notification_ticker">Google Play services error</string>
+    <string name="common_google_play_services_sign_in_failed_text">Error signing in the specified account. Please choose a different account.</string>
+    <string name="common_google_play_services_sign_in_failed_title">Sign in failed</string>
     <string name="common_google_play_services_unknown_issue">Unknown issue with Google Play services.</string>
     <string name="common_google_play_services_unsupported_text">Google Play services, which some of your applications rely on, is not supported by your device. Please contact the manufacturer for assistance.</string>
     <string name="common_google_play_services_unsupported_title">Google Play services</string>
@@ -415,24 +515,46 @@
     <string name="common_open_on_phone">Open on phone</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/admob_strings.xml -->
+    <string name="commono_google_play_services_api_unavailable_text">This app requires one or more Google Play services that are not currently
+available. Please contact the developer for assistance.</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="create_calendar_message">Allow Ad to create a calendar event?</string>
     <string name="create_calendar_title">Create calendar event</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="day_of_week_label_typeface" translatable="false">sans-serif</string>
+    <string name="day_picker_description">Month grid of days</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_strings.xml -->
+    <eat-comment/>
     <string name="decline">Decline</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="deleted_key"><ns1:g example="4" id="key">%1$s</ns1:g> deleted</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="donations_received_hotspot">xx donations received</string>
     <string name="donator_books_donated">Books Donated Here</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="done_label">Done</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="editor_detail_book">Editor Book</string>
     <string name="email_address">Email Address</string>
     <string name="evaluate_book_string">Evaluate this book</string>
+    <string name="find_place">FIND A NEAR PLACE</string>
     <string name="floating_action_button_adopt">Adopt this Book!</string>
     <string name="floating_action_button_comment">Comment this Book!</string>
     <string name="floating_action_button_donate">Donate this Book!</string>
     <string name="floating_action_button_favorite">Favorite this Book!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_world">Hello world!</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="hour_picker_description">Hours circular slider</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="information_fragment_address_title">Address</string>
     <string name="information_fragment_business_hours">Business Hours</string>
     <string name="information_fragment_business_hours_description">Business Hours Description</string>
@@ -440,9 +562,19 @@
     <string name="information_fragment_state_and_country">Some State and Country</string>
     <string name="information_fragment_street">Some Street</string>
     <string name="item_icon_description">item icon</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="item_is_selected">%1$s selected</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="item_name">Title of Settings Item</string>
     <string name="logo_description">Swappers Logo</string>
     <string name="logo_login_description">Swappers Logo</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="minute_picker_description">Minutes circular slider</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="month_donator">Month Donators</string>
     <string name="name_donator">Name Donator Here</string>
     <string name="name_hotspot">Name Hotspot Here</string>
@@ -451,10 +583,15 @@
     <string name="next_month_donator_button">next_donator_month</string>
     <string name="next_near_book_button">next_near_book</string>
     <string name="next_recommendation_button_description">next recommendation</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
     <eat-comment/>
     <string name="nothing"/>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <item format="float" name="numbers_radius_multiplier_inner" type="string">0.60</item>
+    <item format="float" name="numbers_radius_multiplier_normal" type="string">0.81</item>
+    <item format="float" name="numbers_radius_multiplier_outer" type="string">0.83</item>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="password">Password</string>
     <string name="place_city_content">The City Name Of The Place</string>
@@ -464,6 +601,11 @@
     <string name="previous_month_donator_button">previous_donator_month</string>
     <string name="previous_near_book_button">previous book</string>
     <string name="previous_recommendation_button_description">previous recommendation</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="radial_numbers_typeface" translatable="false">sans-serif</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="reader_coment">Lorem ipsum dolor sit amet, mutat dicit scriptorem in sed,
     mea tractatos instructior ad, virtute discere maluisset ei has.
     Delenit denique laboramus ei pri, est id assentior necessitatibus,
@@ -471,7 +613,21 @@
     Quo ut periculis efficiendi, malis nonumes voluptaria te eam,
     mei debitis epicurei an. An vim movet quaerendum consequuntur, ut suas legendos vix.
     In vis quodsi verear quaeque, ex vero dignissim nam, idque eruditi sapientem sed ad. </string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="sans_serif" translatable="false">sans-serif</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="see_places_of_near_book">SEE PLACES ON MAP</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="select_day">Select month and day</string>
+    <string name="select_hours">Select hours</string>
+    <string name="select_minutes">Select minutes</string>
+    <string name="select_year">Select year</string>
+    <item format="float" name="selection_radius_multiplier" type="string">0.16</item>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="setings_personal_info_header">Personal Information</string>
     <string name="settings_account_header">Account Settings</string>
     <string name="sign_in">SIGN IN</string>
@@ -479,11 +635,11 @@
     <string name="splash_logo_accessibiity_descriptor">swappers logo</string>
     <string name="splash_swappers_slogan">Doe leituras, compartilhe sonhos</string>
     <string name="splash_swappers_title">Swappers</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/admob_strings.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="store_picture_message">"Allow Ad to store image in Picture gallery?"</string>
     <string name="store_picture_title">Save image</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="swappers">Swappers</string>
     <string name="swappers_about_name">Swappers</string>
@@ -494,6 +650,15 @@
     Quo ut periculis efficiendi, malis nonumes voluptaria te eam,
     mei debitis epicurei an. An vim movet quaerendum consequuntur, ut suas legendos vix.
     In vis quodsi verear quaeque, ex vero dignissim nam, idque eruditi sapientem sed ad. </string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <item format="float" name="text_size_multiplier_inner" type="string">0.14</item>
+    <item format="float" name="text_size_multiplier_normal" type="string">0.17</item>
+    <item format="float" name="text_size_multiplier_outer" type="string">0.11</item>
+    <string name="time_placeholder" translatable="false">--</string>
+    <string name="time_separator" translatable="false">:</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
     <string name="times_donated_books">Donated XX times</string>
     <string name="times_retrieved_books">Retrieved XX times</string>
     <string name="title_activity_detail_book">DetailBookActivity</string>
@@ -514,29 +679,33 @@
     <string name="title_section3">Section 3</string>
     <string name="userPhotoDialogTitle">Profile Picture</string>
     <string name="user_readers_comments">Francis Thomas</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/wallet_strings.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/res/values/wallet_strings.xml -->
     <eat-comment/>
     <string name="wallet_buy_button_place_holder" translation_description="Text on a button that allows a user to make a payment with Google Wallet [CHAR LIMIT=30]">Buy with Google</string>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <string name="year_picker_description">Year list</string>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
     <style name="Animation.AppCompat.DropDownUp" parent="Base.Animation.AppCompat.DropDownUp"/>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
     <eat-comment/>
-    <style name="AppMaterial" parent="Theme.AppCompat.Light.NoActionBar">
-
-
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
     </style>
-    <style name="AppTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.traex.rippleeffect/library/1.3/res/values/values.xml -->
+    <eat-comment/>
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorAccent">@color/color_accent</item>
-        <item name="android:textColor">@color/primary_text_default_material_light</item>
     </style>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
@@ -1447,7 +1616,7 @@
         <item name="android:scaleType">center</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <style name="CardView">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
@@ -1463,7 +1632,7 @@
     <style name="CardView.Light">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
     <eat-comment/>
     <style name="MaterialAccountTheme">
         <item name="titleColor">#FFF</item>
@@ -1538,7 +1707,7 @@
     <style name="MaterialSubheaderTheme.Light">
         <item name="subheaderTitleColor">#000</item>
     </style>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <style name="Platform.AppCompat" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>
@@ -1676,6 +1845,36 @@
     <style name="RtlOverlay.Widget.AppCompat.Toolbar.Button.Navigation" parent="Base.Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:paddingLeft">@dimen/abc_action_bar_navigation_padding_start_material</item>
     </style>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="SWDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/black_text</item>
+        <item name="android:textColorPrimary">@color/color_primary</item>
+        <item name="colorAccent">@color/color_accent_dark</item>
+    </style>
+    <style name="SWEditTextTheme">
+        <item name="android:textColorSecondary">@color/color_accent_medium</item>
+    </style>
+    <style name="SWTheme" parent="MaterialNavigationDrawerTheme.Light">
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:textColor">@color/black_text</item>
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+    <style name="SWToolbarMenuTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/abc_primary_text_material_light</item>
+        <item name="android:background">@color/background_material_light</item>
+    </style>
+    <style name="SWToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/primary_text_default_material_dark</item>
+        <item name="android:textColorSecondary">@color/background_material_light</item>
+
+        <item name="android:background">@color/color_primary</item>
+    </style>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <eat-comment/>
     <style name="TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"/>
     <style name="TextAppearance.AppCompat.Body1" parent="Base.TextAppearance.AppCompat.Body1"/>
     <style name="TextAppearance.AppCompat.Body2" parent="Base.TextAppearance.AppCompat.Body2"/>
@@ -1760,7 +1959,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/admob_iap_style.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/res/values/admob_iap_style.xml -->
     <eat-comment/>
     <style name="Theme.IAPTheme" parent="android:Theme">
     <item name="android:windowIsTranslucent">true</item>
@@ -1770,26 +1969,14 @@
     <item name="android:windowIsFloating">true</item>
     <item name="android:backgroundDimEnabled">false</item>
   </style>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <style name="ThemeOverlay.AppCompat" parent="Base.ThemeOverlay.AppCompat"/>
     <style name="ThemeOverlay.AppCompat.ActionBar" parent="Base.ThemeOverlay.AppCompat.ActionBar"/>
     <style name="ThemeOverlay.AppCompat.Dark" parent="Base.ThemeOverlay.AppCompat.Dark"/>
     <style name="ThemeOverlay.AppCompat.Dark.ActionBar" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/styles.xml -->
-    <eat-comment/>
-    <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textColorPrimary">@color/primary_text_default_material_dark</item>
-        <item name="android:textColorSecondary">@color/background_material_light</item>
-
-        <item name="android:background">@color/color_primary</item>
-    </style>
-    <style name="ToolbarTheme.Menu" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textColorPrimary">@color/abc_primary_text_material_light</item>
-        <item name="android:background">@color/background_material_light</item>
-    </style>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/wallet_styles.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/res/values/wallet_styles.xml -->
     <eat-comment/>
     <style name="WalletFragmentDefaultButtonTextAppearance">
         <item name="android:textColor">@color/wallet_primary_text_holo_light</item>
@@ -1823,7 +2010,7 @@
         <item name="maskedWalletDetailsLogoTextColor">@color/wallet_bright_foreground_holo_dark</item>
         <item name="maskedWalletDetailsLogoImageType">classic</item>
     </style>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <style name="Widget.AppCompat.ActionBar" parent="Base.Widget.AppCompat.ActionBar">
     </style>
@@ -1916,10 +2103,24 @@
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="RtlOverlay.Widget.AppCompat.Toolbar.Button.Navigation"/>
-    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <style name="ampm_label">
+        <item name="android:textSize">@dimen/ampm_label_size</item>
+        <item name="android:textColor">@color/ampm_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="day_of_week_label_condensed"/>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="menu_labels_style">
         <item name="android:background">@drawable/fab_label_background</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+    <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/res/values/values.xml -->
+    <eat-comment/>
+    <style name="time_label">
+        <item name="android:textSize">@dimen/time_label_size</item>
+        <item name="android:textColor">@color/numbers_text_color</item>
     </style>
 </resources>

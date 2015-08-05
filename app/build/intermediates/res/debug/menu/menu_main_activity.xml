@@ -7,8 +7,8 @@
     <item
         android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:title="Search"/>
 </menu>
-<!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/menu/menu_main_activity.xml -->
+<!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/src/main/res/menu/menu_main_activity.xml -->
