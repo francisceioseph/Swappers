@@ -62,7 +62,7 @@ public class DonatorsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Loading previous month donator... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), "Loading previous month donator... #SQN", Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -71,7 +71,7 @@ public class DonatorsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Opening next month donator... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), "Opening next month donator... #SQN", Toast.LENGTH_SHORT).show();
             }
         };
     }

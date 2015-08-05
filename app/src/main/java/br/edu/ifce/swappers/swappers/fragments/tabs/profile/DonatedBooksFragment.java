@@ -46,13 +46,13 @@ public class DonatedBooksFragment extends Fragment implements RecycleViewOnClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_donated_books, container, false);
 
-        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(dataSource);
+        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(getActivity().getApplicationContext(),dataSource);
         adapter.setRecycleViewOnClickListenerHack(this);
 
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.recyclerView = (RecyclerView) rootView.findViewById(R.id.donated_books_list);
 
-        this.recyclerView.setHasFixedSize(true);
+        this.recyclerView.setHasFixedSize(false);
         this.recyclerView.setLayoutManager(layoutManager);
         this.recyclerView.setAdapter(adapter);
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());

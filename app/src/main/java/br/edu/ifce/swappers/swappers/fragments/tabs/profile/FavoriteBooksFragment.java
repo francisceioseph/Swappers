@@ -44,7 +44,7 @@ public class FavoriteBooksFragment extends Fragment implements RecycleViewOnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_favorite_books, container, false);
 
-        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(dataSource);
+        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(getActivity().getApplicationContext(),dataSource);
         adapter.setRecycleViewOnClickListenerHack(this);
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.recyclerView = (RecyclerView) rootView.findViewById(R.id.favorite_books_list);

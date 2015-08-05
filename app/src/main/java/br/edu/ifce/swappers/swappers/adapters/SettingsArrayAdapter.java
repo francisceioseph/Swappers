@@ -46,6 +46,8 @@ public class SettingsArrayAdapter extends ArrayAdapter<SettingsListItem> {
         viewHolder.getIconImageView().setImageDrawable(item.getIcon());
         viewHolder.getSettingsDescriptionTextView().setText(item.getText());
 
+
+
         return convertView;
     }
 

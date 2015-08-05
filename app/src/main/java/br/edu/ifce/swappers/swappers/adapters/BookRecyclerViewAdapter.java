@@ -1,11 +1,16 @@
 package br.edu.ifce.swappers.swappers.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -19,11 +24,12 @@ import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Book> booksDataSource;
+    private Context context;
     private RecycleViewOnClickListenerHack mRecycleViewOnClickListenerHack;
 
-
-    public BookRecyclerViewAdapter(ArrayList<Book> books) {
+    public BookRecyclerViewAdapter(Context context, ArrayList<Book> books) {
         this.booksDataSource = books;
+        this.context = context;
     }
 
     public void setRecycleViewOnClickListenerHack(RecycleViewOnClickListenerHack r) {
@@ -33,7 +39,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View itemView = inflater.inflate(R.layout.adapter_layout_book_info, null);
+        View itemView = inflater.inflate(R.layout.adapter_layout_book_info,viewGroup,false);
 
         return new ViewHolder(itemView);
     }
@@ -46,7 +52,13 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         viewHolder.bookAuthorsTextView.setText(book.getAuthor());
         viewHolder.bookPublisherTextView.setText(book.getPublisher());
         viewHolder.bookEvaluationAvarageTextView.setText(String.format("%.1f", book.getEvaluationAvarage()));
-        viewHolder.bookUserEvaluationRatingBar.setRating(book.getUserEvaluation());
+        viewHolder.bookUserEvaluationRatingBar.setRating(book.getEvaluationAvarage());
+
+        if(!book.getPhoto().isEmpty()) {
+            Picasso.with(context).load(book.getPhoto()).into(viewHolder.bookImageImageView);
+        }else{
+            Picasso.with(context).load(R.drawable.blue_book).into(viewHolder.bookImageImageView);
+        }
     }
 
     @Override
@@ -60,6 +72,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         private TextView  bookPublisherTextView;
         private TextView  bookEvaluationAvarageTextView;
         private RatingBar bookUserEvaluationRatingBar;
+        private ImageView bookImageImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -69,6 +82,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
             this.bookPublisherTextView         = (TextView)  itemView.findViewById(R.id.adapter_book_publisher);
             this.bookEvaluationAvarageTextView = (TextView)  itemView.findViewById(R.id.adapter_book_avarage);
             this.bookUserEvaluationRatingBar   = (RatingBar) itemView.findViewById(R.id.adapter_book_rating_bar);
+            this.bookImageImageView            = (ImageView) itemView.findViewById(R.id.adapter_book_cover);
 
             itemView.setOnClickListener(this);
         }
@@ -113,7 +127,12 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
             this.bookUserEvaluationRatingBar = bookUserEvaluationRatingBar;
         }
 
+        public ImageView getBookImageImageView() {
+            return bookImageImageView;
+        }
 
+        public void setBookImageImageView(ImageView bookImageImageView) {
+            this.bookImageImageView = bookImageImageView;
         @Override
         public void onClick(View view) {
             if(mRecycleViewOnClickListenerHack != null){

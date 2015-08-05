@@ -12,9 +12,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ToolbarTheme"
-        app:popupTheme="@style/ToolbarTheme.Menu" />
-
+        android:theme="@style/SWToolbarTheme"
+        app:popupTheme="@style/SWToolbarMenuTheme"
+        />
+    
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

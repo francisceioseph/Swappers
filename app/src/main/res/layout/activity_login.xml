@@ -15,8 +15,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ToolbarTheme"
-        app:popupTheme="@style/ToolbarTheme.Menu"
+        android:theme="@style/SWToolbarTheme"
+        app:popupTheme="@style/SWToolbarMenuTheme"
         />
 
     <ScrollView
@@ -99,7 +99,7 @@
                         android:focusable="true"
                         android:textIsSelectable="false"
                         android:visibility="visible"
-                        android:theme="@style/AppTheme" />
+                        android:theme="@style/SWEditTextTheme"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -122,7 +122,7 @@
                         android:textIsSelectable="false"
                         android:visibility="visible"
                         android:focusable="true"
-                        android:theme="@style/AppTheme"
+                        android:theme="@style/SWEditTextTheme"
                         android:password="true" />
 
                 </LinearLayout>

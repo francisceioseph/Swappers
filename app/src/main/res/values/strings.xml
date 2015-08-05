@@ -112,6 +112,7 @@
     <string name="floating_action_button_adopt">Adopt this Book!</string>
     <string name="floating_action_button_favorite">Favorite this Book!</string>
     <string name="floating_action_button_comment">Comment this Book!</string>
+    <string name="find_place">FIND A NEAR PLACE</string>
 
     <!-- Fragment Comentários de Leitor-->
 <string name="reader_coment">Lorem ipsum dolor sit amet, mutat dicit scriptorem in sed,
