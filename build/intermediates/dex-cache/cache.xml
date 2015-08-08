@@ -2,109 +2,263 @@
 <items version="2" >
 
     <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.traex.rippleeffect/library/1.3/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ee17feb34ce104bc17d1a1e64346d7f779ebb066">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-f376e7b8a1a4cf8786f6e3a0bb63aa94817bdef3.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/libs/internal_impl-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-7e392f4db2a8e2bbfefe8de562d422f21ce6f251.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-2980ed2b3e0a9d3f827f01f7b600c8dd9e277e93.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.1.1/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="22886d910315028a2b34b1ba068c265534ade87a">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-5efd8af4744c616e07fe68713b6064f01d08902d.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.markushi/circlebutton/1.1/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ebe3b1f14fa79ba3cd1588acda4e6517ee9fe611">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-cd874bd368bdb9bc1543673d7855ee8bfcbbc7c1.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.1/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="3abb4b88f5a8a0584a9b01d3170d7165f12f8588">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-0416908dba73845437fc971e4d1eff56e49a699f.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.paolorotolo/appintro/1.1.0/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="8a94ade905c7407ae3ade6b25251c1ac1942265e">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-5ea862d4c2f8ac39952db93c6ea5545671a0df3b.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-c4675ca921bad8ae8967af1f93af23f2546bbaed.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/1.3.0/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-7d23086e9259582f62437c0a68abbf9709b398cd.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-2aa4f218e25e45cc4e425ada79a08565a8168f9a.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-4d0b878c867edbc5032cdcb7664286e897a04cb3.jar" />
-    </item>
-    <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.futuresimple/android-floating-action-button/1.10.0/classes.jar"
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.futuresimple/android-floating-action-button/1.10.0/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="40b3457be120d4b1b8d8d74425b42b9815d75ea5">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-fc58e39be75c8c85b2fc319e75812124c72791f9.jar" />
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-2b77d18f74a84da9fb99fe8b734ef78690d4e06b.jar" />
     </item>
     <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/classes.jar"
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-22556adf415131c253406327d77d09c60e046510.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.markushi/circlebutton/1.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ebe3b1f14fa79ba3cd1588acda4e6517ee9fe611">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-a3cd7901619bc4aa93f5cfb7a8d085b7a10e6e5c.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-9804036f2e026364c22a5626e7bbae37fa7fd12c.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.paolorotolo/appintro/1.1.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8a94ade905c7407ae3ade6b25251c1ac1942265e">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-7a488cccd6ccedf55fbc24012b1b205ac7444c18.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-8081efd3048f2a2dd393060e871e1d0cfa0cc7a6.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-3168784976303b0398d06192f1c5d851e3f282e8.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.flavienlaurent.datetimepicker/library/0.0.2/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="2fc859b7abb78d29169f6a582b45cbe1f3f1a4cc">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-1897489eae243cd2fe5f4afd9ef541a73d71b6af.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-97a1f111006b92ce728bf33021b317439c9174c8.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-f1b2701b43ba043b4e1336f9f47c42d53437278b.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-7c54b9886dae2966a1934078d7e5a6d6ea62fe7d.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.github.traex.rippleeffect/library/1.3/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ee17feb34ce104bc17d1a1e64346d7f779ebb066">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-03ec0f16f398ea1699b7520f6bf8c01fbfe4646c.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.3.4/3b646ddbdac8a33fc45b64564011da81d23e4635/picasso-2.3.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3b646ddbdac8a33fc45b64564011da81d23e4635">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/picasso-2.3.4-6cd6acf7192237ef9d57115448426fc8eb449853.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="aba9317bc403d69d8a571c0a72acfe95698a5db0">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-df8daf570c86ddf9ee798795cdf708b66dda2f41.jar" />
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-4fcf0ad894f3c17df5dfe9ee26e57f130dc75cf8.jar" />
     </item>
     <item
-        jar="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/classes.jar"
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-f9f6ac3e4ef2957d336535726f5e4d6393e770d7.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="565a01f90f1529f73362707c4c185d0623a68782">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-c44510b796ce8f8864cfb1e5a791b343147f8e4a.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-bd113ae6e910deade060a181efb9715da87d9315.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-a38a2ef5f81e35a54aa50af8128c5153b8d44c83.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-519745e400fa56c8396fec77cd2989951b257399.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-6f7ebaa84193964051ed3b2f6e4e875ef70bf90b.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/libs/internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-2cd230172a16f99b7b063845017edc273468dbfe.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-5535c5a830e5d110842f34d695a574ad51508d9b.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-e3838f09f756d2a7552e4b34b2eddab5980125da.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.1.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="22886d910315028a2b34b1ba068c265534ade87a">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-f53cd95b220f9202f73c5156551bc71d523ac3c1.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-c6be890f00832b029fe2f1f3a1fcf74110eccdb5.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/library-2.4.0-1324c713e407735731edb4db961c596655cf5a2c.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-4318c17cc658d8d5fa97f17e2637839bf5b6fc4a.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-ab308d17159ebc1ceb6e71108ffdd76958b559d9.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-a48f1164604f1cf775a7fd7b933578da76a814c6.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="0640bc34b0f25196f82fe1e707a437bd4a405933">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-3c7fc192ad7db5c63d5c8bcd55c4a5c4595975fc.jar" />
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-ee5d222176492dc58c2afe10687899a28da22639.jar" />
     </item>
     <item
-        jar="/home/alessandra/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.5/77bf7cacf9cefe19dc105e5425d2eb1bb5285881/android-async-http-1.4.5.jar"
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.1.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e0b0c35d02308b270015a74cada4887e2e49b889">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-57076b251ffd7210516eb552f1f7bff359e0c257.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-a13c5137e834a59208ccba0fd40dd15134fe73be.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.5/77bf7cacf9cefe19dc105e5425d2eb1bb5285881/android-async-http-1.4.5.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="77bf7cacf9cefe19dc105e5425d2eb1bb5285881">
-        <dex dex="/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.5-581120cc3af5bf3972001985d74bf3111792b858.jar" />
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.5-021ab5c8b41c6b6fa75b6f7273d7d05898595ed6.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/1.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-dfa92bcb454593d16b0842c7090d017143a77a7e.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-f70e50b56dfc18a3b620a479e3ea1036194e27d9.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/classes-175415d8797b8e46fc32afdb380e8f1aa73fa643.jar" />
+    </item>
+    <item
+        jar="/Users/francisco/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-7ca346c6e63e10ecc94da005301bc827f68f7027.jar" />
     </item>
 
 </items>

@@ -667,6 +667,7 @@ available. Please contact the developer for assistance.</string>
     <string name="title_activity_main">Books</string>
     <string name="title_activity_main_activity2">MainActivity2Activity</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_reader_comment">ReaderCommentActivity</string>
     <string name="title_activity_referenced_libraries">Referenced Components</string>
     <string name="title_activity_register">Sign Up</string>
     <string name="title_activity_splash">Swappers</string>
