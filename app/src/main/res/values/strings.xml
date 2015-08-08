@@ -125,4 +125,7 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_reader_comment">ReaderCommentActivity</string>
 
+    <!-- Tela de detalhe de lugar-->
+    <string name="title_detail_place">Detail Place</string>
+
 </resources>

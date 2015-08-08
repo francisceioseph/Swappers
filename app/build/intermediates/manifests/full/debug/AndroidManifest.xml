@@ -98,6 +98,7 @@
         <activity
             android:name="br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity"
             android:label="@string/title_activity_detail_place"
+            android:launchMode="singleInstance"
             android:parentActivityName="br.edu.ifce.swappers.swappers.activities.MainActivity"
             android:theme="@style/SWTheme" >
             <meta-data

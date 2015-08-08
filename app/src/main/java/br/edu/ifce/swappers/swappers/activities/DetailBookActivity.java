@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
@@ -38,12 +40,15 @@ public class DetailBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SwappersToast.makeText(DetailBookActivity.this, "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
+
             }
         });
 
         findViewById(R.id.floating_action_donate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               // Intent intent = new Intent(getApplicationContext(), PlacesFragment.class);
+               // startActivity(intent);
                 SwappersToast.makeText(DetailBookActivity.this, "This book has been donated by you! <3", Toast.LENGTH_SHORT).show();;
             }
         });
@@ -90,9 +95,7 @@ public class DetailBookActivity extends AppCompatActivity {
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("A Book");
         if (toolbar != null){
-
             this.setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);

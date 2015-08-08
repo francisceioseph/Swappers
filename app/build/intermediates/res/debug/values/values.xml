@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:ns1="http://schemas.android.com/apk/res/android">
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
     <!-- From: file:/Users/francisco/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
@@ -673,6 +673,7 @@ available. Please contact the developer for assistance.</string>
     <string name="title_activity_splash">Swappers</string>
     <string name="title_best_book">Title Book Here</string>
     <string name="title_detail_book">Title Book</string>
+    <string name="title_detail_place">Detail Place</string>
     <string name="title_near_book">Book Title Here</string>
     <string name="title_recommendation_book">Recommendation Title Here</string>
     <string name="title_section1">Section 1</string>

@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/SWToolbarTheme"
-        app:popupTheme="@style/SWToolbarMenuTheme" />
+        app:popupTheme="@style/SWToolbarMenuTheme"
+        android:title="@string/title_detail_place"/>
 
        <LinearLayout
             android:layout_width="match_parent"
