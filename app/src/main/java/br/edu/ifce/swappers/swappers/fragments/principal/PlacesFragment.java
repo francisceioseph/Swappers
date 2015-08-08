@@ -1,6 +1,7 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,19 +20,23 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
 
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
+import br.edu.ifce.swappers.swappers.activities.RegisterActivity;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 
-public class PlacesFragment extends Fragment{
+public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener{
 
     static GoogleMap mapPlace;
     private final LatLng SHOPPING_BENFICA = new LatLng(-3.739126, -38.5402);
@@ -79,6 +84,7 @@ public class PlacesFragment extends Fragment{
         mapPlace = mapView.getMap();
         mapPlace.getUiSettings().setMyLocationButtonEnabled(true);
         mapPlace.getUiSettings().setMapToolbarEnabled(true);
+        //mapPlace.getUiSettings().setAllGesturesEnabled(false);
         mapPlace.setMyLocationEnabled(true);
         mapPlace.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
@@ -86,7 +92,6 @@ public class PlacesFragment extends Fragment{
         setUpMap();
 
         return view;
-
     }
 
     public View.OnClickListener findNearPlaceOnMap(){
@@ -131,6 +136,22 @@ public class PlacesFragment extends Fragment{
                 .title("Shopping Iandê")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
+        mapPlace.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            int tap = 0;
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                tap++;
+                if(tap == 1) return false;
+                else if(tap == 2) {
+                    Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
+                    detailPlaceActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(detailPlaceActivityIntent);
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -151,6 +172,10 @@ public class PlacesFragment extends Fragment{
         mapView.onLowMemory();
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
 }
 
     class Listener implements LocationListener {
