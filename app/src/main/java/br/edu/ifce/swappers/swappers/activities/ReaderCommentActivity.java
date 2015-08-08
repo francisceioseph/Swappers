@@ -75,7 +75,7 @@ public class ReaderCommentActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String subtitle;
-                int residualChars = 250 - count;
+                int residualChars = 250 - s.length();
 
                 if (residualChars > 1)
                     subtitle = String.format("%d caracteres disponíveis", residualChars);

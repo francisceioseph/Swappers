@@ -175,15 +175,15 @@
             fab:fab_labelsPosition="left"
             app:fab_icon="@drawable/ic_more">
 
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floating_action_adop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/color_accent_dark"
-                fab:fab_title="@string/floating_action_button_adopt"
-                fab:fab_addButtonSize="mini"
-                fab:fab_colorPressed="@color/color_accent_medium"
-                app:fab_icon="@drawable/ic_get"/>
+            <!--<com.getbase.floatingactionbutton.FloatingActionButton-->
+                <!--android:id="@+id/floating_action_adop"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--fab:fab_colorNormal="@color/color_accent_dark"-->
+                <!--fab:fab_title="@string/floating_action_button_adopt"-->
+                <!--fab:fab_addButtonSize="mini"-->
+                <!--fab:fab_colorPressed="@color/color_accent_medium"-->
+                <!--app:fab_icon="@drawable/ic_get"/>-->
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/floating_action_donate"

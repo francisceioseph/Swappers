@@ -1,5 +1,6 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -25,7 +26,7 @@ import br.edu.ifce.swappers.swappers.util.SwappersToast;
 public class DetailBookActivity extends AppCompatActivity {
 
     private FragmentTabHost bookDetailTabHost;
-    private int flag = 1;
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,12 @@ public class DetailBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_book);
 
 
-        findViewById(R.id.floating_action_adop).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SwappersToast.makeText(DetailBookActivity.this, "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
-                ;
-            }
-        });
+//        findViewById(R.id.floating_action_adop).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SwappersToast.makeText(DetailBookActivity.this, "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         findViewById(R.id.floating_action_donate).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,13 +52,13 @@ public class DetailBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ImageView imgView =(ImageView) findViewById(R.id.is_book_favorite);
-                if (flag == 1){
+                if (flag){
                     Drawable  drawable  = getResources().getDrawable(R.drawable.ic_is_book_favorite);
                     imgView.setImageDrawable(drawable);
-                    flag = 0;
+                    flag = false;
                 }else {
                     imgView.setImageDrawable(null);
-                    flag = 1;
+                    flag = true;
                 }
 
             }
@@ -67,7 +67,8 @@ public class DetailBookActivity extends AppCompatActivity {
         findViewById(R.id.floating_action_comment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SwappersToast.makeText(DetailBookActivity.this, "This book has been favorited by you! <3", Toast.LENGTH_SHORT).show();;
+                Intent intent = new Intent(getApplicationContext(), ReaderCommentActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -76,6 +77,10 @@ public class DetailBookActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        finish();
+//    }
 
     @Override
     public void onDestroy() {
@@ -87,9 +92,10 @@ public class DetailBookActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("A Book"); /*Inserir a consulta ao banco de dados que retornará o título do livro*/
         if (toolbar != null){
+
             this.setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
         }
     }
 
