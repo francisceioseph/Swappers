@@ -107,8 +107,8 @@ public final class R {
 		public static final int ic_plusone_small_off_client = 0x7f02007e;
 		public static final int ic_plusone_standard_off_client = 0x7f02007f;
 		public static final int ic_plusone_tall_off_client = 0x7f020080;
-		public static final int powered_by_google_dark = 0x7f02008b;
-		public static final int powered_by_google_light = 0x7f02008c;
+		public static final int powered_by_google_dark = 0x7f02008c;
+		public static final int powered_by_google_light = 0x7f02008d;
 	}
 	public static final class id {
 		public static final int adjust_height = 0x7f0a0026;
@@ -180,7 +180,7 @@ public final class R {
 		public static final int decline = 0x7f0c0053;
 		public static final int store_picture_message = 0x7f0c0093;
 		public static final int store_picture_title = 0x7f0c0094;
-		public static final int wallet_buy_button_place_holder = 0x7f0c00b1;
+		public static final int wallet_buy_button_place_holder = 0x7f0c00b2;
 	}
 	public static final class style {
 		public static final int Theme_IAPTheme = 0x7f0d00de;
