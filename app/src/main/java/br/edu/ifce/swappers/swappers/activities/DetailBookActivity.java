@@ -34,12 +34,12 @@ public class DetailBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_book);
 
 
-//        findViewById(R.id.floating_action_adop).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SwappersToast.makeText(DetailBookActivity.this, "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        findViewById(R.id.floating_action_adop).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwappersToast.makeText(DetailBookActivity.this, "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         findViewById(R.id.floating_action_donate).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +90,7 @@ public class DetailBookActivity extends AppCompatActivity {
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("A Book"); /*Inserir a consulta ao banco de dados que retornará o título do livro*/
+        toolbar.setTitle("A Book");
         if (toolbar != null){
 
             this.setSupportActionBar(toolbar);
