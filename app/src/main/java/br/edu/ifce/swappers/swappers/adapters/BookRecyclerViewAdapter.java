@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 
 /**
  * Created by francisco on 16/06/15.
@@ -24,10 +25,15 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
 
     private ArrayList<Book> booksDataSource;
     private Context context;
+    private RecycleViewOnClickListenerHack mRecycleViewOnClickListenerHack;
 
     public BookRecyclerViewAdapter(Context context, ArrayList<Book> books) {
         this.booksDataSource = books;
         this.context = context;
+    }
+
+    public void setRecycleViewOnClickListenerHack(RecycleViewOnClickListenerHack r) {
+        this.mRecycleViewOnClickListenerHack = r;
     }
 
     @Override
@@ -60,7 +66,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         return this.booksDataSource.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView  bookTitleTextView;
         private TextView  bookAuthorsTextView;
         private TextView  bookPublisherTextView;
@@ -77,6 +83,8 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
             this.bookEvaluationAvarageTextView = (TextView)  itemView.findViewById(R.id.adapter_book_avarage);
             this.bookUserEvaluationRatingBar   = (RatingBar) itemView.findViewById(R.id.adapter_book_rating_bar);
             this.bookImageImageView            = (ImageView) itemView.findViewById(R.id.adapter_book_cover);
+
+            itemView.setOnClickListener(this);
         }
 
         public TextView getBookTitleTextView() {
@@ -125,6 +133,13 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
 
         public void setBookImageImageView(ImageView bookImageImageView) {
             this.bookImageImageView = bookImageImageView;
+        }
+        
+        @Override
+        public void onClick(View view) {
+            if(mRecycleViewOnClickListenerHack != null){
+                mRecycleViewOnClickListenerHack.onClickListener(view, getAdapterPosition());
+            }
         }
     }
 }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.edu.ifce.swappers.swappers"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="22" />
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <permission
+        android:name="br.edu.ifce.swappers.swappers.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="br.edu.ifce.swappers.swappers.permission.MAPS_RECEIVE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/SWTheme" >
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".SearchViewActivity" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDUqcBU9LkW75DJO9ISnwfWULjcq1HtcSg" />
+
+        <activity
+            android:name="br.edu.ifce.swappers.swappers.activities.SplashActivity"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/SWTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="br.edu.ifce.swappers.swappers.activities.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/SWTheme" >
+        </activity>
+        <activity
+            android:name="br.edu.ifce.swappers.swappers.activities.RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:parentActivityName="br.edu.ifce.swappers.swappers.activities.LoginActivity"
+            android:theme="@style/SWTheme" >
+        </activity>
+        <activity
+            android:name="br.edu.ifce.swappers.swappers.activities.MainActivity"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTop"
+            android:theme="@style/SWTheme" >
+        </activity>
+        <activity
+            android:name="br.edu.ifce.swappers.swappers.activities.SearchViewActivity"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTop"
+            android:theme="@style/SWTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name="br.edu.ifce.swappers.swappers.activities.DetailBookActivity"
+            android:label="@string/title_activity_detail_book"
+            android:launchMode="singleTop"
+            android:parentActivityName="br.edu.ifce.swappers.swappers.activities.MainActivity"
+            android:theme="@style/SWTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name="br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity"
+            android:label="@string/title_activity_detail_place"
+            android:parentActivityName="br.edu.ifce.swappers.swappers.activities.MainActivity"
+            android:theme="@style/SWTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name="br.edu.ifce.swappers.swappers.activities.ReferencedLibrariesActivity"
+            android:label="@string/title_activity_referenced_libraries"
+            android:parentActivityName="br.edu.ifce.swappers.swappers.activities.MainActivity"
+            android:theme="@style/SWTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name="br.edu.ifce.swappers.swappers.activities.ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="br.edu.ifce.swappers.swappers.activities.ReaderCommentActivity"
+            android:label="@string/title_activity_reader_comment"
+            android:parentActivityName="br.edu.ifce.swappers.swappers.activities.DetailBookActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.swappers.swappers.activities.DetailBookActivity" />
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="android.support.v7.widget.TestActivity"
+            android:label="RecyclerViewTestActivity" />
+    </application>
+
+</manifest>
