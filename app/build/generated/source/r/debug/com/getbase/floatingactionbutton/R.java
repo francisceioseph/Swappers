@@ -26,30 +26,30 @@ public final class R {
 		public static final int fab_title = 0x7f010047;
 	}
 	public static final class dimen {
-		public static final int fab_actions_spacing = 0x7f090052;
-		public static final int fab_icon_size = 0x7f090053;
-		public static final int fab_labels_margin = 0x7f090054;
-		public static final int fab_plus_icon_size = 0x7f090055;
-		public static final int fab_plus_icon_stroke = 0x7f090056;
-		public static final int fab_shadow_offset = 0x7f090057;
-		public static final int fab_shadow_radius = 0x7f090058;
-		public static final int fab_size_mini = 0x7f090059;
-		public static final int fab_size_normal = 0x7f09005a;
-		public static final int fab_stroke_width = 0x7f09005b;
+		public static final int fab_actions_spacing = 0x7f08006d;
+		public static final int fab_icon_size = 0x7f08006e;
+		public static final int fab_labels_margin = 0x7f08006f;
+		public static final int fab_plus_icon_size = 0x7f080070;
+		public static final int fab_plus_icon_stroke = 0x7f080071;
+		public static final int fab_shadow_offset = 0x7f080072;
+		public static final int fab_shadow_radius = 0x7f080073;
+		public static final int fab_size_mini = 0x7f080074;
+		public static final int fab_size_normal = 0x7f080075;
+		public static final int fab_stroke_width = 0x7f080076;
 	}
 	public static final class drawable {
 		public static final int fab_bg_mini = 0x7f02005a;
 		public static final int fab_bg_normal = 0x7f02005b;
 	}
 	public static final class id {
-		public static final int down = 0x7f0a0022;
-		public static final int fab_expand_menu_button = 0x7f0a000c;
-		public static final int fab_label = 0x7f0a000d;
-		public static final int left = 0x7f0a0020;
-		public static final int mini = 0x7f0a001f;
-		public static final int normal = 0x7f0a0015;
-		public static final int right = 0x7f0a0021;
-		public static final int up = 0x7f0a0013;
+		public static final int down = 0x7f0d0022;
+		public static final int fab_expand_menu_button = 0x7f0d000c;
+		public static final int fab_label = 0x7f0d000d;
+		public static final int left = 0x7f0d0020;
+		public static final int mini = 0x7f0d001f;
+		public static final int normal = 0x7f0d0015;
+		public static final int right = 0x7f0d0021;
+		public static final int up = 0x7f0d0013;
 	}
 	public static final class styleable {
 		public static final int[] AddFloatingActionButton = { 0x7f01001f };

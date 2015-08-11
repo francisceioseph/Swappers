@@ -1,6 +1,7 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -26,12 +28,14 @@ import java.util.Collections;
 import java.util.List;
 
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
+import br.edu.ifce.swappers.swappers.activities.MainActivity;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 
-public class PlacesFragment extends Fragment{
+public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener{
 
     static GoogleMap mapPlace;
     private final LatLng SHOPPING_BENFICA = new LatLng(-3.739126, -38.5402);
@@ -121,15 +125,41 @@ public class PlacesFragment extends Fragment{
         mapPlace.addMarker(new MarkerOptions().position(SHOPPING_BENFICA)
                 .title("Shopping Benfica")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
         mapPlace.addMarker(new MarkerOptions().position(NORTH_SHOPPING)
                                         .title("North Shopping")
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
         mapPlace.addMarker(new MarkerOptions().position(SHOPPING_IGUATEMI)
                 .title("Shopping Iguatemi")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
         mapPlace.addMarker(new MarkerOptions().position(SHOPPING_IANDÊ)
                 .title("Shopping Iandê")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+        mapPlace.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            private int tap = 0;
+            private String[] marker_id = {"joamila", "brito"};
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                tap = tap + 1;
+                if(tap%2 == 1 && !(marker_id[1].equals(marker_id[0]))){
+                    marker_id[0] = marker.getId();
+                }
+                else {
+                    marker_id[1] = marker.getId();
+                    if(marker_id[1].equals(marker_id[0])) {
+                        Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
+                        startActivity(detailPlaceActivityIntent);
+                    }
+                    else {
+                        marker_id[0] = marker.getId();
+                    }
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -151,6 +181,10 @@ public class PlacesFragment extends Fragment{
         mapView.onLowMemory();
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
 }
 
     class Listener implements LocationListener {
