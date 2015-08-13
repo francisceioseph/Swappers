@@ -4,12 +4,23 @@ import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Comment;
+import br.edu.ifce.swappers.swappers.model.Place;
 
 /**
  * A singleton to concetrate all mocked methods
  */
 public enum MockSingleton {
     INSTANCE;
+
+    public ArrayList<Place> createMockedPlaceDataSource(double latitude, double longitude) {
+        ArrayList<Place> dataSource = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++){
+            dataSource.add(new Place(latitude,longitude));
+
+        }
+        return dataSource;
+    }
 
     public ArrayList<Book> createMockedBookDataSource() {
         ArrayList<Book> dataSource = new ArrayList<>();

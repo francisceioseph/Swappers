@@ -13,15 +13,15 @@ public final class R {
 		public static final int indicator_dot_white = 0x7f02008a;
 	}
 	public static final class id {
-		public static final int bottom = 0x7f0a0102;
-		public static final int bottom_separator = 0x7f0a0103;
+		public static final int bottom = 0x7f0a0104;
+		public static final int bottom_separator = 0x7f0a0105;
 		public static final int done = 0x7f0a000b;
-		public static final int dotLayout = 0x7f0a0105;
-		public static final int next = 0x7f0a0106;
-		public static final int skip = 0x7f0a0104;
-		public static final int view_pager = 0x7f0a0101;
+		public static final int dotLayout = 0x7f0a0107;
+		public static final int next = 0x7f0a0108;
+		public static final int skip = 0x7f0a0106;
+		public static final int view_pager = 0x7f0a0103;
 	}
 	public static final class layout {
-		public static final int intro_layout = 0x7f030044;
+		public static final int intro_layout = 0x7f030046;
 	}
 }

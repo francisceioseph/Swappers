@@ -127,5 +127,6 @@
 
     <!-- Tela de detalhe de lugar-->
     <string name="title_detail_place">Detail Place</string>
+    <string name="title_activity_donations_list_point">DonationsListPointActivity</string>
 
 </resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/adapter_settings_icon_image"
+        android:layout_marginStart="16dp"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/item_icon_description" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/item_name"
+        android:id="@+id/adapter_text_donate_list_points"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp" />
+
+</LinearLayout>

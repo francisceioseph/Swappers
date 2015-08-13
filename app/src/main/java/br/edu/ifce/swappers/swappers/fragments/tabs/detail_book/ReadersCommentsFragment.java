@@ -58,8 +58,6 @@ public class ReadersCommentsFragment extends Fragment implements RecycleViewOnCl
         this.recyclerView.setAdapter(adapter);
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-
         return rootView;
     }
 

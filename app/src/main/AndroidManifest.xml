@@ -43,13 +43,11 @@
             android:name=".activities.SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/SWTheme" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".activities.LoginActivity"
@@ -117,12 +115,19 @@
         <activity
             android:name=".activities.ReaderCommentActivity"
             android:label="@string/title_activity_reader_comment"
-            android:parentActivityName=".activities.DetailBookActivity">
+            android:parentActivityName=".activities.DetailBookActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.DetailBookActivity" />
         </activity>
-
+        <activity
+            android:name=".activities.DonationsListPointActivity"
+            android:label="@string/title_activity_donations_list_point"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

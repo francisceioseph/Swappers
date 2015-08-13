@@ -3,6 +3,7 @@ package br.edu.ifce.swappers.swappers.activities;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,7 +36,6 @@ public class DetailBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_book);
 
-
         findViewById(R.id.floating_action_adop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,9 +47,9 @@ public class DetailBookActivity extends AppCompatActivity {
         findViewById(R.id.floating_action_donate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent = new Intent(getApplicationContext(), PlacesFragment.class);
-               // startActivity(intent);
-                SwappersToast.makeText(DetailBookActivity.this, "This book has been donated by you! <3", Toast.LENGTH_SHORT).show();;
+                Intent donateListPointintent = new Intent(getApplicationContext(), DonationsListPointActivity.class);
+                startActivity(donateListPointintent);
+
             }
         });
 
