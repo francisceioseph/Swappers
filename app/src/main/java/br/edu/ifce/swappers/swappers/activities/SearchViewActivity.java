@@ -31,11 +31,12 @@ import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.BookTask;
+import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.util.SearchInterface;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 
-public class SearchViewActivity extends AppCompatActivity implements SearchInterface{
+public class SearchViewActivity extends AppCompatActivity implements SearchInterface, RecycleViewOnClickListenerHack {
     private RecyclerView recyclerView;
     private ArrayList<Book> mBookList;
     private ArrayList<Book> mBookListAux;
@@ -55,9 +56,9 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        mBookListAux = new ArrayList<>();
 
-        Book book = new Book("A Culpa é das Estrelas", "Shanya", "Shnya", 3.0f, 2.5f);
+        mBookListAux = new ArrayList<>();
+        Book book = new Book("A Tormenta de Espadas", "George R. R. Martin", "Leya", 5.0f, 2.5f);
         mBookListAux.add(book);
         adapter = new BookRecyclerViewAdapter(this,mBookListAux);
 
@@ -68,6 +69,7 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
         lm = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(lm);
         recyclerView.setAdapter(adapter);
+
 
         hendleSearch(getIntent());
     }
@@ -169,5 +171,15 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
             frameLayout.removeView(frameLayout.findViewById(new Integer(1)));
         }
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClickListener(View view, int position) {
+        Toast toast = SwappersToast.makeText(this, "Clique!", Toast.LENGTH_LONG);
+        toast.show();
+
+       // Intent intentDetailBookActivity = new Intent (getApplicationContext(), DetailBookActivity.class);
+
+        //startActivity(intentDetailBookActivity);
     }
 }

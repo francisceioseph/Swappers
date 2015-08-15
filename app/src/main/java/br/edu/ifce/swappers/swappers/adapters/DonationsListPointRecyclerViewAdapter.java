@@ -2,15 +2,19 @@ package br.edu.ifce.swappers.swappers.adapters;
 
 
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 
@@ -45,6 +49,8 @@ public class DonationsListPointRecyclerViewAdapter extends RecyclerView.Adapter<
     public void onBindViewHolder(DonationsListPointRecyclerViewAdapter.ViewHolder viewHolder, int position) {
         Place place = this.donationsListPointDataSource.get(position);
         viewHolder.placeNameTextView.setText(place.getNamePlace());
+        //viewHolder.iconDonateListPoint.
+
     }
 
     @Override
@@ -55,15 +61,21 @@ public class DonationsListPointRecyclerViewAdapter extends RecyclerView.Adapter<
     class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
         private TextView placeNameTextView;
 
+
         public ViewHolder(View itemView) {
             super(itemView);
 
             this.placeNameTextView = (TextView) itemView.findViewById(R.id.adapter_text_donate_list_points);
+
             itemView.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
+            if(mRecycleViewOnClickListenerHack != null){
+                mRecycleViewOnClickListenerHack.onClickListener(view, getAdapterPosition());
+            }
+
 
         }
     }

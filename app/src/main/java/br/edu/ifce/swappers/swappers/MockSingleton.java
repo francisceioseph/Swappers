@@ -1,5 +1,8 @@
 package br.edu.ifce.swappers.swappers;
 
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+
 import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.model.Book;
@@ -14,6 +17,7 @@ public enum MockSingleton {
 
     public ArrayList<Place> createMockedPlaceDataSource(double latitude, double longitude) {
         ArrayList<Place> dataSource = new ArrayList<>();
+
 
         for (int i = 0; i < 5; i++){
             dataSource.add(new Place(latitude,longitude));

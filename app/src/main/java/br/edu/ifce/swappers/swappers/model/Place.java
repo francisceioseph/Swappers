@@ -28,7 +28,7 @@ public class Place implements Comparable<Place>{
     public Place(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.namePlace = "Badiba Place";
+        this.namePlace = "Place Next ";
     }
 
     public Place(double latitude, double longitude, double distance){

@@ -129,4 +129,8 @@
     <string name="title_detail_place">Detail Place</string>
     <string name="title_activity_donations_list_point">DonationsListPointActivity</string>
 
+
+    <!-- Tela de Lista de Pontos de doação -->
+    <string name="List_points_donate_place_near">Donation points near you</string>
+
 </resources>
