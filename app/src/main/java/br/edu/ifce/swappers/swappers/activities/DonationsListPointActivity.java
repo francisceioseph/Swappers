@@ -1,6 +1,5 @@
 package br.edu.ifce.swappers.swappers.activities;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +7,7 @@ import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +44,6 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
     LayoutInflater inflater;
     AlertDialog alertDonateInThePlace;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +58,13 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         Criteria criteria = new Criteria();
         provider = service.getBestProvider(criteria, false);
         Location location = service.getLastKnownLocation(provider);
+        double latitude = 0.0;
+        double longitude = 0.0;
 
-        double latitude = location.getLatitude();
-        double longitude = location.getLatitude();
+        if (location != null){
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        }
 
         dataSource = MockSingleton.INSTANCE.createMockedPlaceDataSource(latitude, longitude);
 
@@ -79,7 +83,6 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
 
     }
 
-
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null){
@@ -89,26 +92,27 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         }
     }
 
-
     @Override
     public void onClickListener(View view, int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.SWDialogTheme);
+
         builder.setTitle("Do you wish donate this book in this place?");
         builder.setIcon(R.drawable.ic_ask_place_donate);
-        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-                Intent detailBookFragmentIntent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(detailBookFragmentIntent);
-            }
-        });
-        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-                SwappersToast.makeText(getApplicationContext(), "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
-                Intent detailBookFragmentIntent = new Intent(getApplicationContext(),SearchViewActivity.class);
-                startActivity(detailBookFragmentIntent);
 
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
+
+        builder.setPositiveButton("DONATE", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                SwappersToast.makeText(getApplicationContext(), "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
+
+                onBackPressed();
+            }
+        });
+
         alertDonateInThePlace = builder.create();
         alertDonateInThePlace.show();
     }

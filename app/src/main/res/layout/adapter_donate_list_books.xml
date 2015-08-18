@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:id="@+id/adapter_settings_icon_image"
-        android:layout_marginStart="16dp"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/item_icon_description" />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -19,8 +13,20 @@
         android:text="@string/item_name"
         android:id="@+id/adapter_text_donate_list_points"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/item_name"
+        android:id="@+id/adapter_addr_donate_list_points"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp" />
 
 
 

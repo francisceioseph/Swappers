@@ -20,7 +20,10 @@ public enum MockSingleton {
 
 
         for (int i = 0; i < 5; i++){
-            dataSource.add(new Place(latitude,longitude));
+            Place place = new Place(latitude,longitude);
+            place.setNamePlace("Shopping Benfica");
+            place.setAdressPlace("Av. Carapinima, 2081, Benfica");
+            dataSource.add(place);
 
         }
         return dataSource;

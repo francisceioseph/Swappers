@@ -49,8 +49,7 @@ public class DonationsListPointRecyclerViewAdapter extends RecyclerView.Adapter<
     public void onBindViewHolder(DonationsListPointRecyclerViewAdapter.ViewHolder viewHolder, int position) {
         Place place = this.donationsListPointDataSource.get(position);
         viewHolder.placeNameTextView.setText(place.getNamePlace());
-        //viewHolder.iconDonateListPoint.
-
+        viewHolder.placeAddrTextView.setText(place.getAdressPlace());
     }
 
     @Override
@@ -60,12 +59,14 @@ public class DonationsListPointRecyclerViewAdapter extends RecyclerView.Adapter<
 
     class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
         private TextView placeNameTextView;
+        private TextView placeAddrTextView;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             this.placeNameTextView = (TextView) itemView.findViewById(R.id.adapter_text_donate_list_points);
+            this.placeAddrTextView = (TextView) itemView.findViewById(R.id.adapter_addr_donate_list_points);
 
             itemView.setOnClickListener(this);
         }
@@ -75,8 +76,6 @@ public class DonationsListPointRecyclerViewAdapter extends RecyclerView.Adapter<
             if(mRecycleViewOnClickListenerHack != null){
                 mRecycleViewOnClickListenerHack.onClickListener(view, getAdapterPosition());
             }
-
-
         }
     }
 }
