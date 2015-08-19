@@ -32,6 +32,7 @@ import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
 import br.edu.ifce.swappers.swappers.activities.MainActivity;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.util.PlaceAsyncTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 
@@ -90,6 +91,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         MapsInitializer.initialize(this.getActivity());
         setUpMap();
 
+        PlaceAsyncTask task = new PlaceAsyncTask();
+        task.execute("Fortaleza","Ceará");
+
         return view;
 
     }
@@ -99,7 +103,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             @Override
             public void onClick(View v) {
 
-                PlaceService.getPlaceWS("Fortaleza","Ceará");
+
 
                 Listener listenerUser = new Listener();
                 DistancePlaces distancePlaces = new DistancePlaces();

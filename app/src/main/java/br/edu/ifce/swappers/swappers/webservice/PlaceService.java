@@ -8,10 +8,13 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Place;
@@ -30,17 +33,18 @@ public class PlaceService {
 
         try {
             String urlPlace = buildURLtoGetPlace(URL,city,states);
+            Log.i("URLPLACE", urlPlace);
+
             url = new URL(urlPlace);
 
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
-
             conn.setRequestProperty("Content-Type", "application/json");
             conn.connect();
 
             int responseCode = conn.getResponseCode();
-
+            Log.i("STATUS-CODE", String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         conn.getInputStream()));
@@ -51,7 +55,7 @@ public class PlaceService {
                     responseJson.append(inputLine);
                 }
                 in.close();
-
+                Log.i("RESPONSE-PLACE", responseJson.toString());
                 placeList = parseJsonToPlace(responseJson.toString());
             }
         } catch (MalformedURLException e) {
@@ -68,25 +72,24 @@ public class PlaceService {
         return placeList;
     }
 
-    private static String buildURLtoGetPlace(String url, String city, String states){
+    private static String buildURLtoGetPlace(String url, String city, String states) throws UnsupportedEncodingException {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(url);
         stringBuilder.append("?");
         stringBuilder.append("city");
         stringBuilder.append("=");
-        stringBuilder.append(city);
+        stringBuilder.append(URLEncoder.encode(city, "UTF-8"));
         stringBuilder.append("&");
         stringBuilder.append("states");
         stringBuilder.append("=");
-        stringBuilder.append(states);
-
+        stringBuilder.append(URLEncoder.encode(states, "UTF-8"));
         return stringBuilder.toString();
     }
 
     private static List<Place> parseJsonToPlace(String jsonPlace) throws JSONException {
 
         JSONObject json = null;
-        List<Place> placeList=null;
+        List<Place> placeList=new ArrayList<>();
 
         json = new JSONObject(jsonPlace);
 
