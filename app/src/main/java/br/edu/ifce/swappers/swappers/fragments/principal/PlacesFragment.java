@@ -33,6 +33,7 @@ import br.edu.ifce.swappers.swappers.activities.MainActivity;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
+import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 
 
 public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener{
@@ -97,6 +98,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                PlaceService.getPlaceWS("Fortaleza","Ceará");
+
                 Listener listenerUser = new Listener();
                 DistancePlaces distancePlaces = new DistancePlaces();
 
