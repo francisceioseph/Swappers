@@ -3,19 +3,12 @@ package br.edu.ifce.swappers.swappers.fragments.tabs.detail_place;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
-import br.edu.ifce.swappers.swappers.model.Book;
 
 /**
  * A simple {@link Fragment} subclass.

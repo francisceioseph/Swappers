@@ -1,30 +1,22 @@
 package br.edu.ifce.swappers.swappers.fragments.tabs.detail_book;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.activities.ProfileActivity;
 import br.edu.ifce.swappers.swappers.adapters.CommentRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.model.Comment;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
  * A simple {@link Fragment} subclass.

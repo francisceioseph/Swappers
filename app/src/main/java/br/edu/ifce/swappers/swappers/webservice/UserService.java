@@ -1,7 +1,5 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

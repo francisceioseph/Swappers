@@ -1,20 +1,15 @@
 package br.edu.ifce.swappers.swappers.adapters;
 
 
-
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 

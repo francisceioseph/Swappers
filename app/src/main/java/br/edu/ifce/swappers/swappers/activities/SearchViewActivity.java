@@ -1,9 +1,9 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.app.SearchManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;

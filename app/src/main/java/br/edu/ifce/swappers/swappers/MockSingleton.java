@@ -1,8 +1,5 @@
 package br.edu.ifce.swappers.swappers;
 
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-
 import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.model.Book;

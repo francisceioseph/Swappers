@@ -3,10 +3,7 @@ package br.edu.ifce.swappers.swappers.activities;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.location.LocationManager;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,10 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
@@ -36,56 +31,11 @@ public class DetailBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_book);
 
-        findViewById(R.id.floating_action_adop).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SwappersToast.makeText(DetailBookActivity.this, "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        findViewById(R.id.floating_action_donate).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent donateListPointintent = new Intent(getApplicationContext(), DonationsListPointActivity.class);
-                startActivity(donateListPointintent);
-
-            }
-        });
-
-        findViewById(R.id.floating_action_favorite).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageView imgView =(ImageView) findViewById(R.id.is_book_favorite);
-                if (flag){
-                    Drawable  drawable  = getResources().getDrawable(R.drawable.ic_is_book_favorite);
-                    imgView.setImageDrawable(drawable);
-                    flag = false;
-                }else {
-                    imgView.setImageDrawable(null);
-                    flag = true;
-                }
-
-            }
-        });
-
-        findViewById(R.id.floating_action_comment).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ReaderCommentActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        this.initFloatingButtons();
         this.initToolbar();
         this.initTabHost();
 
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        finish();
-//    }
 
     @Override
     public void onDestroy() {
@@ -95,10 +45,15 @@ public class DetailBookActivity extends AppCompatActivity {
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         if (toolbar != null){
+
+            toolbar.setTitle("Book Title");
+
             this.setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            this.getSupportActionBar().setHomeButtonEnabled(true);
+
         }
     }
 
@@ -141,5 +96,69 @@ public class DetailBookActivity extends AppCompatActivity {
             tabTextView = (TextView) tabView.findViewById(android.R.id.title);
             tabTextView.setTextColor(tabTextColors);
         }
+    }
+
+    private void initFloatingButtons(){
+
+        FloatingActionButton adoptButton    = (FloatingActionButton) findViewById(R.id.floating_action_adop);
+        FloatingActionButton donateButton   = (FloatingActionButton) findViewById(R.id.floating_action_donate);
+        FloatingActionButton favoriteButton = (FloatingActionButton) findViewById(R.id.floating_action_favorite);
+        FloatingActionButton commentButton  = (FloatingActionButton) findViewById(R.id.floating_action_comment);
+
+        adoptButton.setOnClickListener(this.makeAdoptListener());
+        donateButton.setOnClickListener(this.makeDonateListener());
+        favoriteButton.setOnClickListener(this.makeFavoriteListener());
+        commentButton.setOnClickListener(this.makeCommentListener());
+    }
+
+    private View.OnClickListener makeCommentListener() {
+
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ReaderCommentActivity.class);
+                startActivity(intent);
+            }
+        };
+    }
+
+    private View.OnClickListener makeFavoriteListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView imgView =(ImageView) findViewById(R.id.is_book_favorite);
+
+                if (flag){
+                    Drawable  drawable  = getResources().getDrawable(R.drawable.ic_is_book_favorite);
+                    imgView.setImageDrawable(drawable);
+                    flag = false;
+                }else {
+                    imgView.setImageDrawable(null);
+                    flag = true;
+                }
+
+            }
+        };
+    }
+
+    private View.OnClickListener makeDonateListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent donateListPointintent = new Intent(getApplicationContext(), DonationsListPointActivity.class);
+                startActivity(donateListPointintent);
+
+            }
+        };
+    }
+
+    private View.OnClickListener makeAdoptListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwappersToast.makeText(DetailBookActivity.this, "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
+
+            }
+        };
     }
 }
