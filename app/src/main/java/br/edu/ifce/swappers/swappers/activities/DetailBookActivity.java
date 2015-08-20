@@ -57,6 +57,7 @@ public class DetailBookActivity extends AppCompatActivity{
         editorBook = (TextView) findViewById(R.id.editor_detail_book);
         photoBook = (CircleImageView) findViewById(R.id.photoBook);
 
+        //comment
         book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
