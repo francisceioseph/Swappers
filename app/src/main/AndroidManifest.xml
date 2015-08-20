@@ -69,7 +69,7 @@
         <activity
             android:name=".activities.SearchViewActivity"
             android:label="@string/title_activity_main"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:theme="@style/SWTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -82,12 +82,12 @@
         <activity
             android:name=".activities.DetailBookActivity"
             android:label="@string/title_activity_detail_book"
-            android:launchMode="singleTop"
-            android:parentActivityName=".activities.MainActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activities.SearchViewActivity"
             android:theme="@style/SWTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+                android:value="br.edu.ifce.swappers.swappers.activities.SearchViewActivity" />
         </activity>
         <activity
             android:name=".activities.DetailPlaceActivity"

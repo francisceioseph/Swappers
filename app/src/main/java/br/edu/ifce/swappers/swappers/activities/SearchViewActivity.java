@@ -48,6 +48,7 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
     private BookTask bookTask;
     private SearchView searchView;
     private Context context;
+    private Book book;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -185,18 +186,23 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
         adapter = new BookRecyclerViewAdapter (context,mBookListAux);
         Intent intentDetailBookActivity = new Intent (getApplicationContext(), DetailBookActivity.class);
         Book book = adapter.getItem(position);
-        intentDetailBookActivity.putExtra("SELECTED_BOOK", book);
+
+        intentDetailBookActivity.putExtra(AndroidUtils.SELECTED_BOOK_ID, book);
         startActivity(intentDetailBookActivity);
-        Log.i("GET BOOK",book.getTitle());
+
+        Log.i("GET BOOK", book.getTitle());
+
     }
+
+
+
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
-        adapter = new BookRecyclerViewAdapter (context,mBookListAux);
-        Intent intentDetailBookActivity = new Intent (getApplicationContext(), DetailBookActivity.class);
-        Book book = adapter.getItem(position);
-        intentDetailBookActivity.putExtra("SELECTED_BOOK", book);
-        startActivity(intentDetailBookActivity);
+
+
+
+
 
     }
 }

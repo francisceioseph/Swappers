@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,22 +17,61 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
+import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class DetailBookActivity extends AppCompatActivity {
+public class DetailBookActivity extends AppCompatActivity{
 
     private FragmentTabHost bookDetailTabHost;
     private boolean flag = true;
+    TextView nameBook;
+    TextView authourBook;
+    TextView editorBook;
+    CircleImageView photoBook;
+    Toolbar toolbar;
+
+    Book book;
+
+    public DetailBookActivity(){
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_book);
+
+        Intent currentIntent = getIntent();
+
+
+        nameBook = (TextView) findViewById(R.id.title_detail_book);
+        authourBook = (TextView) findViewById(R.id.author_detail_book);
+        editorBook = (TextView) findViewById(R.id.editor_detail_book);
+        photoBook = (CircleImageView) findViewById(R.id.photoBook);
+
+        book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(book.getTitle());
+
+        nameBook.setText(book.getTitle());
+        authourBook.setText(book.getAuthor());
+        editorBook.setText(book.getPublisher());
+
+
+        if(!book.getPhoto().isEmpty()) {
+            Picasso.with(getApplicationContext()).load(book.getPhoto()).into(photoBook);
+        }else{
+            Picasso.with(getApplicationContext()).load(R.drawable.blue_book).into(photoBook);
+        }
 
         this.initFloatingButtons();
         this.initToolbar();
@@ -45,12 +86,7 @@ public class DetailBookActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         if (toolbar != null){
-
-            toolbar.setTitle("Book Title");
-
             this.setSupportActionBar(toolbar);
             this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             this.getSupportActionBar().setHomeButtonEnabled(true);

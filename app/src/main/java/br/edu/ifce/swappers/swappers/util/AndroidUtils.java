@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
  * Created by FAMILIA on 10/06/2015.
  */
 public class AndroidUtils {
+    public final static String SELECTED_BOOK_ID = "SELECTED_BOOK";
 
     public final static int BOOK_DONATION_INTENT_CODE = 1991;
     public final static int BOOK_ADOPTION_INTENT_CODE = 1993;
