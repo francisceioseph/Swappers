@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Swappers</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_splash">Swappers</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="logo_login_description">Swappers Logo</string>
+    <string name="title_activity_main">Books</string>
+    <string name="title_activity_login">Sign In</string>
+    <string name="title_activity_register">Sign Up</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_detail_book">DetailBookActivity</string>
+    <string name="title_activity_detail_place">DetailPlaceActivity</string>
+    <string name="logo_description">Swappers Logo</string>
+    <string name="userPhotoDialogTitle">Profile Picture</string>
+    <string name="see_places_of_near_book">SEE PLACES ON MAP</string>
+    <string name="title_near_book">Book Title Here</string>
+    <string name="author_near_book">Book Authors Here</string>
+    <string name="previous_near_book_button">previous book</string>
+    <string name="next_near_book_button">next_near_book</string>
+    <string name="author_recommendation_book">Recommendation Authors Here</string>
+    <string name="title_recommendation_book">Recommendation Title Here</string>
+    <string name="next_recommendation_button_description">next recommendation</string>
+    <string name="previous_recommendation_button_description">previous recommendation</string>
+    <string name="place_cover_photo_description">cover photo of user profile</string>
+    <string name="place_name_content">The Name Of The Place</string>
+    <string name="place_city_content">The City Name Of The Place</string>
+    <string name="adapter_book_cover_description">Book Cover</string>
+    <string name="adapter_book_title">Book Title</string>
+    <string name="adapter_book_authors">Book Authors</string>
+    <string name="adapter_book_publisher">Publisher</string>
+    <string name="setings_personal_info_header">Personal Information</string>
+    <string name="settings_account_header">Account Settings</string>
+
+    <!-- Tela de Login -->
+    <string name="swappers">Swappers</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="be_a_swapper">Are not you a Swapper?</string>
+    <string name="sign_up">SIGN UP NOW</string>
+
+    <!-- Statistics Fragments -->
+    <string name="month_donator">Month Donators</string>
+    <string name="next_month_donator_button">next_donator_month</string>
+    <string name="previous_month_donator_button">previous_donator_month</string>
+    <string name="name_donator">Name Donator Here</string>
+    <string name="city_donator">City,</string>
+    <string name="age_donator">XX anos</string>
+    <string name="donator_books_donated">Books Donated Here</string>
+
+    <string name="best_places">Best Places</string>
+    <string name="name_hotspot">Name Hotspot Here</string>
+    <string name="address_hotspot">Address Hotspot Here</string>
+    <string name="city_hotspot">City Hostspot</string>
+    <string name="books_retrieved_hotspot">xx books retrieved</string>
+    <string name="donations_received_hotspot">xx donations received</string>
+
+    <!-- Detail Book  -->
+    <string name="title_detail_book">Title Book</string>
+    <string name="author_detail_book">Authors Book</string>
+    <string name="editor_detail_book">Editor Book</string>
+    <string name="synopsis_book">Lorem ipsum dolor sit amet, mutat dicit scriptorem in sed,
+    mea tractatos instructior ad, virtute discere maluisset ei has.
+    Delenit denique laboramus ei pri, est id assentior necessitatibus,
+    ne copiosae concludaturque eum. Usu everti deseruisse cu.
+    Quo ut periculis efficiendi, malis nonumes voluptaria te eam,
+    mei debitis epicurei an. An vim movet quaerendum consequuntur, ut suas legendos vix.
+    In vis quodsi verear quaeque, ex vero dignissim nam, idque eruditi sapientem sed ad. </string>
+    <string name="best_books">Best Books</string>
+    <string name="title_best_book">Title Book Here</string>
+    <string name="author_best_book">Author Here</string>
+    <string name="times_retrieved_books">Retrieved XX times</string>
+    <string name="times_donated_books">Donated XX times</string>
+    <string name="swappers_about_name">Swappers</string>
+    <string name="about_swappers_slogan">Donate readings, share dreams</string>
+    <string name="about_develpment_team_title">Development Team</string>
+    <string name="about_alessandra_name">Alessandra Lino</string>
+    <string name="about_gracyane_name">Gracyane Oliveira</string>
+    <string name="about_francis_name">Francisco Souza</string>
+    <string name="about_joamila_name">Joamila Brito</string>
+    <string name="about_version_title">version 1.0</string>
+    <string name="title_activity_referenced_libraries">Referenced Components</string>
+    <string name="splash_logo_accessibiity_descriptor">swappers logo</string>
+    <string name="splash_swappers_title">Swappers</string>
+    <string name="splash_swappers_slogan">Doe leituras, compartilhe sonhos</string>
+    <string name="title_activity_main_activity2">MainActivity2Activity</string>
+    <string name="item_icon_description">item icon</string>
+    <string name="item_name">Title of Settings Item</string>
+    <string name="information_fragment_address_title">Address</string>
+    <string name="information_fragment_street">Some Street</string>
+    <string name="information_fragment_neighborhood_and_city">Some neighbor and city</string>
+    <string name="information_fragment_state_and_country">Some State and Country</string>
+    <string name="information_fragment_business_hours">Business Hours</string>
+    <string name="information_fragment_business_hours_description">Business Hours Description</string>
+    <string name="place_photo">Place photo</string>
+    <string name="evaluate_book_string">Evaluate this book</string>
+    <string name="book_avarage_text_view">5.5</string>
+    <string name="user_readers_comments">Francis Thomas</string>
+    <string name="floating_action_button_donate">Donate this Book!</string>
+    <string name="floating_action_button_adopt">Adopt this Book!</string>
+    <string name="floating_action_button_favorite">Favorite this Book!</string>
+    <string name="floating_action_button_comment">Comment this Book!</string>
+    <string name="find_place">FIND A NEAR PLACE</string>
+
+    <!-- Fragment Comentários de Leitor-->
+    <string name="reader_coment">Lorem ipsum dolor sit amet, mutat dicit scriptorem in sed,
+    mea tractatos instructior ad, virtute discere maluisset ei has.
+    Delenit denique laboramus ei pri, est id assentior necessitatibus,
+    ne copiosae concludaturque eum. Usu everti deseruisse cu.
+    Quo ut periculis efficiendi, malis nonumes voluptaria te eam,
+    mei debitis epicurei an. An vim movet quaerendum consequuntur, ut suas legendos vix.
+    In vis quodsi verear quaeque, ex vero dignissim nam, idque eruditi sapientem sed ad. </string>
+
+
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_reader_comment">Comments</string>
+
+    <!-- Tela de detalhe de lugar-->
+    <string name="title_detail_place">Detail Place</string>
+    <string name="title_activity_donations_list_point">Near Places</string>
+
+
+    <!-- Tela de Lista de Pontos de doação -->
+    <string name="List_points_donate_place_near">Donation points near you</string>
+
+</resources>
