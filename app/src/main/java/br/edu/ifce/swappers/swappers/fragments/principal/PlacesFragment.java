@@ -2,11 +2,14 @@ package br.edu.ifce.swappers.swappers.fragments.principal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,45 +26,67 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
 import br.edu.ifce.swappers.swappers.activities.MainActivity;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.PlaceAsyncTask;
+import br.edu.ifce.swappers.swappers.util.PlaceInterface;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 
 
-public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener{
+public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener,PlaceInterface{
 
     static GoogleMap mapPlace;
-    private final LatLng SHOPPING_BENFICA = new LatLng(-3.739126, -38.5402);
-    private final LatLng NORTH_SHOPPING = new LatLng(-3.7348059, -38.5662608);
-    private final LatLng SHOPPING_IGUATEMI = new LatLng(-3.75529, -38.488498);
-    private final LatLng SHOPPING_IANDÊ = new LatLng(-3.734421, -38.655867);
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
     MapView mapView;
     private Button findPlaceButton;
     private LatLng myPosition;
+    private DistancePlaces distancePlaces =null;
+    private List<Place> placesNear = new ArrayList<>();
+    private int countPlace=0;
+    private Listener listener = new Listener();
 
     public PlacesFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Listener listener = new Listener();
-        long timeUpdate = 3000;
-        float distance = 0;
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_places, container, false);
 
         findPlaceButton = (Button) view.findViewById(R.id.find_near_place);
         findPlaceButton.setOnClickListener(findNearPlaceOnMap());
+
+        verifyGpsAndWifi();
+
+        mapView = (MapView) view.findViewById(R.id.map);
+        mapView.onCreate(savedInstanceState);
+
+        mapPlace = mapView.getMap();
+        mapPlace.getUiSettings().setMyLocationButtonEnabled(true);
+        mapPlace.getUiSettings().setMapToolbarEnabled(true);
+        mapPlace.setMyLocationEnabled(true);
+        mapPlace.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+
+        MapsInitializer.initialize(this.getActivity());
+        eventMarkers();
+
+        return view;
+    }
+
+    private void verifyGpsAndWifi(){
+        long timeUpdate = 3000;
+        float distance = 0;
 
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
@@ -77,97 +102,98 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             //se o gps estiver desligado, o mapa abrirá em um local previamente definido.
             myPosition = IFCE_FORTALEZA;
         }
-        else myPosition = listener.getMyPosition(locationUser);
+        else{
+            myPosition = listener.getMyPosition(locationUser);
 
-        mapView = (MapView) view.findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);
+            Geocoder gcd = new Geocoder(getActivity(), Locale.getDefault());
+            List<Address> addresses = null;
+            String city = null;
+            String state = null;
+            try {
+                addresses = gcd.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
+                if (addresses.size() > 0){
+                    city = addresses.get(0).getLocality();
+                    state = addresses.get(0).getAdminArea();
+                }
 
-        mapPlace = mapView.getMap();
-        mapPlace.getUiSettings().setMyLocationButtonEnabled(true);
-        mapPlace.getUiSettings().setMapToolbarEnabled(true);
-        mapPlace.setMyLocationEnabled(true);
-        mapPlace.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        MapsInitializer.initialize(this.getActivity());
-        setUpMap();
-
-        PlaceAsyncTask task = new PlaceAsyncTask();
-        task.execute("Fortaleza","Ceará");
-
-        return view;
-
+            if(AndroidUtils.isNetworkAvailable(getActivity())) {
+                PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
+                task.execute(city, state);
+            }
+        }
     }
 
     public View.OnClickListener findNearPlaceOnMap(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (AndroidUtils.isNetworkAvailable(getActivity()) && !placesNear.isEmpty()) {
+                    if (countPlace > placesNear.size() - 1) {
+                        countPlace = 0;
+                    }
+                    LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
 
-
-
-                Listener listenerUser = new Listener();
-                DistancePlaces distancePlaces = new DistancePlaces();
-
-                LatLng myCurrentPosition;
-
-                LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-                Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-                if(locationUser == null) {
-                    Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
+                    setUpMap(placesNear.get(countPlace), placeNow);
+                    showMarker(placeNow, mapPlace);
+                    countPlace++;
+                }else if(AndroidUtils.isNetworkAvailable(getActivity()) && placesNear.isEmpty()){
+                    verifyGpsAndWifi();
+                }else{
+                    Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                }
-                else {
-                    myCurrentPosition = listenerUser.getMyPosition(locationUser);
-                    distancePlaces.calculateNearPlace(myCurrentPosition, mapPlace);
                 }
             }
         };
     }
 
-    private void setUpMap() {
+    public void showMarker(LatLng position, GoogleMap googleMap){
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 17));
+    }
+
+    private void setUpMap(Place place, LatLng placeNow) {
         mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
         mapPlace.animateCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
 
-        mapPlace.addMarker(new MarkerOptions().position(SHOPPING_BENFICA)
-                .title("Shopping Benfica")
+        mapPlace.addMarker(new MarkerOptions().position(placeNow)
+                .title("teste")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+    }
 
-        mapPlace.addMarker(new MarkerOptions().position(NORTH_SHOPPING)
-                                        .title("North Shopping")
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
-        mapPlace.addMarker(new MarkerOptions().position(SHOPPING_IGUATEMI)
-                .title("Shopping Iguatemi")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
-        mapPlace.addMarker(new MarkerOptions().position(SHOPPING_IANDÊ)
-                .title("Shopping Iandê")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
+    private void eventMarkers(){
         mapPlace.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             private int tap = 0;
-            private String[] marker_id = {"joamila", "brito"};
+            private LatLng position_1 = new LatLng(0.0, 1.1);
+            private LatLng position_2 = new LatLng(1.1, 0.0);
+
             @Override
             public boolean onMarkerClick(Marker marker) {
+                Log.i("onMarkerClick", String.valueOf(tap));
                 tap = tap + 1;
-                if(tap%2 == 1 && !(marker_id[1].equals(marker_id[0]))){
-                    marker_id[0] = marker.getId();
-                }
-                else {
-                    marker_id[1] = marker.getId();
-                    if(marker_id[1].equals(marker_id[0])) {
+
+                if (tap % 2 == 1 && !(position_1.equals(position_2))){
+                    position_1 = marker.getPosition();
+                } else {
+                    position_2 = marker.getPosition();
+                    if (position_1.equals(position_2)){
                         Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
                         startActivity(detailPlaceActivityIntent);
-                    }
-                    else {
-                        marker_id[0] = marker.getId();
+                    } else {
+                        position_1 = marker.getPosition();
                     }
                 }
+                Log.i("onMarkerClick", String.valueOf(tap));
+
                 return false;
             }
         });
+    }
+
+    public void doCallAsyncTask(){
 
     }
 
@@ -192,6 +218,29 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     @Override
     public boolean onMarkerClick(Marker marker) {
         return false;
+    }
+
+    @Override
+    public void updatePlaceNear(List<Place> placeList) {
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        if(locationUser == null) {
+            Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }else {
+            Listener listenerUser = new Listener();
+            LatLng myCurrentPosition = listenerUser.getMyPosition(locationUser);
+            distancePlaces = new DistancePlaces(placeList);
+            placesNear = distancePlaces.calculateNearPlace(myCurrentPosition);
+
+            LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
+
+            setUpMap(placesNear.get(countPlace), placeNow);
+            showMarker(placeNow, mapPlace);
+            countPlace++;
+        }
     }
 }
 

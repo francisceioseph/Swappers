@@ -2,6 +2,7 @@ package br.edu.ifce.swappers.swappers.webservice;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -87,11 +88,24 @@ public class PlaceService {
     }
 
     private static List<Place> parseJsonToPlace(String jsonPlace) throws JSONException {
-
+        JSONArray jsonArray = null;
         JSONObject json = null;
-        List<Place> placeList=new ArrayList<>();
+        JSONObject jsonItems = null;
+        List<Place> placeList = new ArrayList<>();
 
         json = new JSONObject(jsonPlace);
+        jsonArray = json.getJSONArray("place");
+        for(int i =0; i<jsonArray.length();i++ ){
+            Place place = new Place();
+            jsonItems = jsonArray.getJSONObject(i);
+
+            place.setId(jsonItems.getInt("id"));
+            place.setCity(jsonItems.get("city").toString());
+            place.setName(jsonItems.get("name").toString());
+            place.setLatitude(jsonItems.getDouble("latitude"));
+            place.setLongitude(jsonItems.getDouble("longitude"));
+            placeList.add(place);
+        }
 
         Log.i("TAG-PLACE",json.toString());
 

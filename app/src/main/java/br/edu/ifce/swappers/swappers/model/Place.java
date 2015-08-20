@@ -20,6 +20,7 @@ public class Place implements Comparable<Place>{
     private double longitude;
     private double distance;
 
+    public Place(){}
 
     public Place(double latitude, double longitude, double distance){
         this.setLatitude(latitude);
