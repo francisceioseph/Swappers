@@ -160,8 +160,17 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         mapPlace.animateCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
 
         mapPlace.addMarker(new MarkerOptions().position(placeNow)
-                .title("teste")
+                .title(place.getName())
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+    }
+
+    private void setUpMarkers(List<Place> placesCity){
+        for(int i=0; i<placesCity.size(); i++){
+            LatLng coordinate = new LatLng(placesCity.get(i).getLatitude(), placesCity.get(i).getLongitude());
+            mapPlace.addMarker(new MarkerOptions().position(coordinate)
+                    .title(placesCity.get(i).getName())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        }
     }
 
     private void eventMarkers(){
@@ -193,27 +202,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         });
     }
 
-    public void doCallAsyncTask(){
-
-    }
-
-    @Override
-    public void onResume() {
-        mapView.onResume();
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
@@ -232,15 +220,42 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         }else {
             Listener listenerUser = new Listener();
             LatLng myCurrentPosition = listenerUser.getMyPosition(locationUser);
-            distancePlaces = new DistancePlaces(placeList);
-            placesNear = distancePlaces.calculateNearPlace(myCurrentPosition);
 
-            LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
+            setUpMarkers(placeList);
 
-            setUpMap(placesNear.get(countPlace), placeNow);
-            showMarker(placeNow, mapPlace);
-            countPlace++;
+            if(placeList != null) {
+                distancePlaces = new DistancePlaces(placeList);
+                placesNear = distancePlaces.calculateNearPlace(myCurrentPosition);
+
+                LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
+
+                setUpMap(placesNear.get(countPlace), placeNow);
+                showMarker(placeNow, mapPlace);
+                countPlace++;
+            }else{
+                Toast toast = SwappersToast.makeText(getActivity(), "Desculpe-nos! Ainda não há pontos de troca em sua cidade.", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
         }
+    }
+
+    @Override
+    public void onResume() {
+        mapView.onResume();
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
     }
 }
 

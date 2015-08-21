@@ -1,6 +1,8 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
  * Created by gracyane e joamila on 19/08/2015.
@@ -57,7 +60,12 @@ public class PlaceService {
                 }
                 in.close();
                 Log.i("RESPONSE-PLACE", responseJson.toString());
-                placeList = parseJsonToPlace(responseJson.toString());
+                if(responseJson != null)
+                    placeList = parseJsonToPlace(responseJson.toString());
+                else {
+                    Place placeDefault = new Place();
+                    placeList.add(placeDefault);
+                }
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -92,22 +100,44 @@ public class PlaceService {
         JSONObject json = null;
         JSONObject jsonItems = null;
         List<Place> placeList = new ArrayList<>();
+        int count = 0;
 
         json = new JSONObject(jsonPlace);
-        jsonArray = json.getJSONArray("place");
-        for(int i =0; i<jsonArray.length();i++ ){
-            Place place = new Place();
-            jsonItems = jsonArray.getJSONObject(i);
 
-            place.setId(jsonItems.getInt("id"));
-            place.setCity(jsonItems.get("city").toString());
-            place.setName(jsonItems.get("name").toString());
-            place.setLatitude(jsonItems.getDouble("latitude"));
-            place.setLongitude(jsonItems.getDouble("longitude"));
-            placeList.add(place);
+        for(int i=0; i<jsonPlace.length(); i++){
+            if(jsonPlace.charAt(i) == '}') count++;
         }
 
-        Log.i("TAG-PLACE",json.toString());
+        if(count == 2){
+            jsonItems = (JSONObject)json.get("place");
+
+            Place placeUnique = new Place();
+
+            placeUnique.setId(jsonItems.getInt("id"));
+            placeUnique.setName(jsonItems.get("name").toString());
+            placeUnique.setCity(jsonItems.get("city").toString());
+            placeUnique.setLatitude(jsonItems.getDouble("latitude"));
+            placeUnique.setLongitude(jsonItems.getDouble("longitude"));
+            placeList.add(placeUnique);
+
+        } else{
+            jsonArray = json.getJSONArray("place");
+
+            for(int i =0; i<jsonArray.length();i++ ){
+                Place place = new Place();
+                jsonItems = jsonArray.getJSONObject(i);
+
+                place.setId(jsonItems.getInt("id"));
+                place.setCity(jsonItems.get("city").toString());
+                place.setName(jsonItems.get("name").toString());
+                place.setLatitude(jsonItems.getDouble("latitude"));
+                place.setLongitude(jsonItems.getDouble("longitude"));
+                placeList.add(place);
+            }
+        }
+
+
+        Log.i("TAG-PLACE", json.toString());
 
         return placeList;
     }

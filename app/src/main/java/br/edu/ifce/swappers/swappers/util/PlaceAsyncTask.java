@@ -35,6 +35,7 @@ public class PlaceAsyncTask extends AsyncTask<String,String,List<Place>> {
     @Override
     protected List<Place> doInBackground(String... params) {
         return PlaceService.getPlaceWS(params[0],params[1]);
+
     }
 
     @Override
@@ -42,6 +43,6 @@ public class PlaceAsyncTask extends AsyncTask<String,String,List<Place>> {
         placeInterface.updatePlaceNear(placeList);
         progressDialog.dismiss();
 
-        Log.i("SIZE-PLACE",String.valueOf(placeList.size()));
+       // Log.i("SIZE-PLACE", String.valueOf(placeList.size()));
     }
 }
