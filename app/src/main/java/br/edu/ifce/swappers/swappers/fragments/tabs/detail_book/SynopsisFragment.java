@@ -15,8 +15,6 @@ import br.edu.ifce.swappers.swappers.R;
  */
 public class SynopsisFragment extends Fragment {
 
-    //private RatingBar ratingBar;
-
     public SynopsisFragment() {
 
     }
@@ -26,10 +24,8 @@ public class SynopsisFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_synopsis, container, false);
-        TextView streetAddress       = (TextView) rootView.findViewById(R.id.street_text_view);
-        TextView neighborhoodAndCity = (TextView) rootView.findViewById(R.id.neighborhood_and_city_text_view);
-        TextView stateAndCountry     = (TextView) rootView.findViewById(R.id.state_and_country_text_view);
-        TextView businessHoursDescription = (TextView) rootView.findViewById(R.id.business_hours_description_text_view);
+
+        TextView synopsisTextView = (TextView) rootView.findViewById(R.id.synopsis_book);
 
         return rootView;
     }
