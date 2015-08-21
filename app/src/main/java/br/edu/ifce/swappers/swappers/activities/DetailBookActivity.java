@@ -59,13 +59,11 @@ public class DetailBookActivity extends AppCompatActivity{
         book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(book.getTitle());
+        toolbar.setTitle("Detail Book");
 
         nameBook.setText(book.getTitle());
         authourBook.setText(book.getAuthor());
         editorBook.setText(book.getPublisher());
-
-
 
         if(!book.getPhoto().isEmpty()) {
             Picasso.with(getApplicationContext()).load(book.getPhoto()).into(photoBook);
