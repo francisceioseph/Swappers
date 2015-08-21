@@ -32,12 +32,11 @@ import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.BookTask;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
-import br.edu.ifce.swappers.swappers.util.RecyclerViewClickListener;
 import br.edu.ifce.swappers.swappers.util.SearchInterface;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 
-public class SearchViewActivity extends AppCompatActivity implements SearchInterface, RecycleViewOnClickListenerHack, RecyclerViewClickListener {
+public class SearchViewActivity extends AppCompatActivity implements SearchInterface, RecycleViewOnClickListenerHack {
     private RecyclerView recyclerView;
     private ArrayList<Book> mBookList;
     private ArrayList<Book> mBookListAux;
@@ -195,14 +194,4 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
     }
 
 
-
-
-    @Override
-    public void recyclerViewListClicked(View v, int position) {
-
-
-
-
-
-    }
 }
