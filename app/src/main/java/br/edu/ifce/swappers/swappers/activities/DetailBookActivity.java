@@ -51,13 +51,12 @@ public class DetailBookActivity extends AppCompatActivity{
 
         Intent currentIntent = getIntent();
 
-
         nameBook = (TextView) findViewById(R.id.title_detail_book);
         authourBook = (TextView) findViewById(R.id.author_detail_book);
         editorBook = (TextView) findViewById(R.id.editor_detail_book);
         photoBook = (CircleImageView) findViewById(R.id.photoBook);
 
-        //comment
+
         book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -66,6 +65,7 @@ public class DetailBookActivity extends AppCompatActivity{
         nameBook.setText(book.getTitle());
         authourBook.setText(book.getAuthor());
         editorBook.setText(book.getPublisher());
+
 
 
         if(!book.getPhoto().isEmpty()) {

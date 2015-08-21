@@ -80,6 +80,7 @@
                         android:textColor="@color/primary_text_default_material_light"
                         android:layout_marginBottom="5dp"
                         android:layout_toRightOf="@+id/photoBook"
+                        android:maxLength="40"
                         />
 
                     <TextView
