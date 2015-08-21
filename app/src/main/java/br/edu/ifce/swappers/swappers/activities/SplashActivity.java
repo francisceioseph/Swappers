@@ -39,7 +39,7 @@ public class SplashActivity extends Activity {
     }
 
     private boolean autoLogin(){
-        return true;
+        return false;
     }
 
     private void loadMainActivity(){
