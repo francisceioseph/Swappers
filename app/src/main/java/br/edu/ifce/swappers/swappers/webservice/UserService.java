@@ -195,7 +195,7 @@ public class UserService {
         String codedPhoto = jsonObject.getString("photo");
 
 //        user.setPhoto(ImageUtil.StringToBitMap(codedPhoto).toString().getBytes());
-        Log.i("USER-LOGIN-TAG-AWASOME", ImageUtil.StringToBitMap(codedPhoto).toString());
+//        Log.i("USER-LOGIN-TAG-AWASOME", ImageUtil.StringToBitMap(codedPhoto).toString());
 
         user.setId(jsonObject.getInt("id"));
         user.setName(jsonObject.getString("username"));
