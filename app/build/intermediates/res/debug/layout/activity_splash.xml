@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/book_background"
+    android:weightSum="1"
+    android:gravity="center">
+
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/ic_launcher_web"
+        android:contentDescription="@string/splash_logo_accessibiity_descriptor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/splash_swappers_title"
+        android:id="@+id/textView2"
+        android:textSize="40sp"
+        android:layout_marginTop="5dp"
+        android:textColor="#ffffffff"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Donate readings, share dreams"
+        android:id="@+id/textView3"
+        android:layout_marginTop="5dp"
+        android:textSize="23dp"
+        android:textColor="#ffffffff"
+        android:gravity="center"/>
+
+
+</LinearLayout><!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/layout/activity_splash.xml -->

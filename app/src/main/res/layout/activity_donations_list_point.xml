@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:theme="@style/SWToolbarTheme"
         app:popupTheme="@style/SWToolbarMenuTheme"
-        android:title="@string/List_points_donate_place_near"
         />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/donation_list_point"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="65dp" />
 
 </FrameLayout>
+<!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/layout/fragment_search_view.xml -->

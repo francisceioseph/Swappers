@@ -1,0 +1,130 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/SWToolbarTheme"
+        app:popupTheme="@style/SWToolbarMenuTheme" />
+
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/place_cover_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:contentDescription="@string/place_cover_photo_description"
+                    android:background="@color/accent_material_dark"
+                    android:src="@drawable/background_splash"
+                    android:scaleType="centerCrop"
+                    android:elevation="3dp"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/adapter_comment_author_image"
+                    android:src="@drawable/ic_location_city"
+                    app:border_width="1dp"
+                    app:border_color="@color/transparent"
+                    android:elevation="4dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="19dp"
+                    android:contentDescription="@string/place_photo"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:elevation="4dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/adapter_comment_author_image"
+                    android:layout_toEndOf="@+id/adapter_comment_author_image"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:id="@+id/place_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/place_name_content"
+                        android:textColor="@color/primary_text_default_material_light"
+                        android:layout_marginBottom="5dp" />
+
+                    <TextView
+                        android:id="@+id/place_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/place_city_content"
+                        android:textColor="@color/primary_text_default_material_light"
+                        android:elegantTextHeight="false"
+                        android:focusableInTouchMode="false"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <android.support.v4.app.FragmentTabHost
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/place_tabHost">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.andexert.library.RippleView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        app:rv_centered="false"
+                        app:rv_rippleDuration="400"
+                        app:rv_color="@color/color_ripple_register">
+
+
+                        <TabWidget
+                            android:id="@android:id/tabs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/color_accent_dark"
+                            android:elevation="4dp"
+                            android:orientation="horizontal"
+                            android:baselineAligned="false"
+                            android:layoutMode="clipBounds"/>
+
+                    </com.andexert.library.RippleView>
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </android.support.v4.app.FragmentTabHost>
+
+       </LinearLayout>
+</LinearLayout>
+<!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/layout/activity_detail_place.xml -->
