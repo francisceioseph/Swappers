@@ -31,9 +31,9 @@ public class InformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_information, container, false);
 
-        TextView streetAddress = (TextView) rootView.findViewById(R.id.street_text_view);
+        TextView streetAddress       = (TextView) rootView.findViewById(R.id.street_text_view);
         TextView neighborhoodAndCity = (TextView) rootView.findViewById(R.id.neighborhood_and_city_text_view);
-        TextView stateAndCountry = (TextView) rootView.findViewById(R.id.state_and_country_text_view);
+        TextView stateAndCountry     = (TextView) rootView.findViewById(R.id.state_and_country_text_view);
         TextView businessHoursDescription = (TextView) rootView.findViewById(R.id.business_hours_description_text_view);
 
         return rootView;

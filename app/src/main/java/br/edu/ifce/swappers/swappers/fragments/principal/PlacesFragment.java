@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -47,7 +48,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private Button findPlaceButton;
     private LatLng myPosition;
 
-    public PlacesFragment() {}
+    public PlacesFragment() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -161,7 +164,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             }
         });
 
+
     }
+
+
 
     @Override
     public void onResume() {

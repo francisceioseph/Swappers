@@ -1,9 +1,9 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.app.SearchManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,11 +31,12 @@ import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.BookTask;
+import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.util.SearchInterface;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 
-public class SearchViewActivity extends AppCompatActivity implements SearchInterface{
+public class SearchViewActivity extends AppCompatActivity implements SearchInterface, RecycleViewOnClickListenerHack {
     private RecyclerView recyclerView;
     private ArrayList<Book> mBookList;
     private ArrayList<Book> mBookListAux;
@@ -45,6 +46,8 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
     private FrameLayout frameLayout;
     private BookTask bookTask;
     private SearchView searchView;
+    private Context context;
+    private Book book;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,20 +55,24 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
         setContentView(R.layout.fragment_search_view);
 
         this.initToolbar();
-
+        context = getApplicationContext();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        mBookListAux = new ArrayList<>();
 
-        Book book = new Book("A Culpa é das Estrelas", "Shanya", "Shnya", 3.0f, 2.5f);
+        mBookListAux = new ArrayList<>();
+        Book book = new Book("A Tormenta de Espadas", "George R. R. Martin", "Leya", 5.0f, 2.5f);
         mBookListAux.add(book);
+
         adapter = new BookRecyclerViewAdapter(this,mBookListAux);
+        adapter.setRecycleViewOnClickListenerHack(this);
 
         frameLayout = (FrameLayout) findViewById(R.id.fl_container);
 
         recyclerView.setHasFixedSize(false);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         lm = new LinearLayoutManager(getApplicationContext());
+
         recyclerView.setLayoutManager(lm);
         recyclerView.setAdapter(adapter);
 
@@ -157,7 +164,7 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
         mBookListAux.clear();
         mBookListAux.addAll(bookList);
         recyclerView.setVisibility(mBookListAux.isEmpty() ? View.GONE : View.VISIBLE);
-        if (mBookListAux.isEmpty()) {
+       /* if (mBookListAux.isEmpty()) {
             tv = new TextView(this);
             tv.setText("Nenhum livro encontrado.");
             tv.setTextColor(getResources().getColor(R.color.color_primary));
@@ -166,8 +173,25 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
             tv.setGravity(Gravity.CENTER);
             frameLayout.addView(tv);
         }else if(frameLayout.findViewById(new Integer(1))!=null){
-            frameLayout.removeView(frameLayout.findViewById(new Integer(1)));
-        }
+            frameLayout.removeView(frameLayout.findViewById(newInteger(1)));
+        }*/
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onClickListener(View view, int position) {
+     //   Intent intentDetailBookActivity = new Intent (getApplicationContext(), DetailBookActivity.class);
+       // startActivity(intentDetailBookActivity);
+        adapter = new BookRecyclerViewAdapter (context,mBookListAux);
+        Intent intentDetailBookActivity = new Intent (getApplicationContext(), DetailBookActivity.class);
+        Book book = adapter.getItem(position);
+
+        intentDetailBookActivity.putExtra(AndroidUtils.SELECTED_BOOK_ID, book);
+        startActivity(intentDetailBookActivity);
+
+        Log.i("GET BOOK", book.getTitle());
+
+    }
+
+
 }

@@ -12,6 +12,7 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.DonatedBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.FavoriteBooksFragment;
@@ -29,6 +30,23 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        this.initUserInformationFields(rootView);
+        this.initTabHost(rootView);
+
+        return rootView;
+    }
+
+    private void initUserInformationFields(View rootView) {
+        TextView usernameTextView = (TextView) rootView.findViewById(R.id.user_name_text_view);
+        TextView userCityTextView = (TextView) rootView.findViewById(R.id.user_city_text_view);
+
+        usernameTextView.setText(this.getUserNameFromSingleton());
+        userCityTextView.setText(this.getUserCityFromSingleton());
+
+    }
+
+    private void initTabHost(View rootView) {
 
         this.profileTabHost = (FragmentTabHost) rootView.findViewById(R.id.place_tabHost);
         this.profileTabHost.setup(this.getActivity(), this.getChildFragmentManager(), android.R.id.tabcontent);
@@ -49,7 +67,6 @@ public class ProfileFragment extends Fragment {
 
         this.stylizeTabsTextView(this.profileTabHost);
 
-        return rootView;
     }
 
     @Override
@@ -78,5 +95,39 @@ public class ProfileFragment extends Fragment {
             tabTextView = (TextView) tabView.findViewById(android.R.id.title);
             tabTextView.setTextColor(tabTextColors);
         }
+    }
+
+    public String getUserNameFromSingleton() {
+        String username;
+
+        try {
+            username = MockSingleton.INSTANCE.user.getName();
+
+            if (username.isEmpty()) {
+                username = "No name found...";
+            }
+        }
+        catch (NullPointerException e){
+            username = "Guest";
+        }
+
+        return username;
+    }
+
+    public String getUserCityFromSingleton() {
+        String city;
+
+        try {
+            city = MockSingleton.INSTANCE.user.getCity();
+
+            if (city.isEmpty()) {
+                city = "X-Land City";
+            }
+        }
+        catch (NullPointerException e){
+            city = "X-Land City";
+        }
+
+        return city;
     }
 }

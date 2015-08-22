@@ -7,4 +7,6 @@ import android.view.View;
  */
 public interface RecycleViewOnClickListenerHack {
     public void onClickListener(View view, int position);
+
+
 }

@@ -58,4 +58,5 @@ public class DistancePlaces{
     public void showMarker(LatLng position, GoogleMap googleMap){
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 17));
     }
+
 }

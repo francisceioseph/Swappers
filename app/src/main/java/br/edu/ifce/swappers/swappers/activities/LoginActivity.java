@@ -16,6 +16,7 @@ import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.LoginTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.TaskInterface;
+import br.edu.ifce.swappers.swappers.util.UserTask;
 
 public class LoginActivity extends AppCompatActivity implements TaskInterface{
 
@@ -41,8 +42,8 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //verifyInternetAndMakeLogin();
-                LoginActivity.this.startNextActivity();
+                verifyInternetAndMakeLogin();
+//                LoginActivity.this.startNextActivity();
             }
         });
 
@@ -91,8 +92,11 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        LoginTask loginTask = new LoginTask(this,this);
-        loginTask.execute(email,password);
+        UserTask userTask = new UserTask(this, this);
+        userTask.execute(email, password);
+
+//        LoginTask loginTask = new LoginTask(this,this);
+//        loginTask.execute(email,password);
     }
 
 }
