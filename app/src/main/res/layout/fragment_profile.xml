@@ -57,23 +57,28 @@
                 android:layout_marginLeft="15dp">
 
                 <TextView
-                    android:id="@+id/place_name"
+                    android:id="@+id/user_name_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/place_name_content"
+                    android:textColor="@color/primary_text_default_material_light"
+                    android:layout_marginBottom="5dp"
+                    android:shadowColor="@color/white"
+                    android:shadowRadius="6"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/user_city_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/place_name_content"
-                    android:textColor="@color/primary_text_default_material_light"
-                    android:layout_marginBottom="5dp" />
-
-                <TextView
-                    android:id="@+id/place_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/place_city_content"
                     android:textColor="@color/primary_text_default_material_light"
                     android:elegantTextHeight="false"
-                    android:focusableInTouchMode="false"/>
+                    android:focusableInTouchMode="false"
+                    android:shadowColor="@color/white"
+                    android:shadowRadius="6" />
             </LinearLayout>
 
         </RelativeLayout>
