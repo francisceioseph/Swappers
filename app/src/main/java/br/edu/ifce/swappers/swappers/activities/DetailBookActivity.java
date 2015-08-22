@@ -37,7 +37,6 @@ public class DetailBookActivity extends AppCompatActivity{
     TextView editorBook;
     CircleImageView photoBook;
     Toolbar toolbar;
-
     Book book;
 
     public DetailBookActivity(){
@@ -72,21 +71,21 @@ public class DetailBookActivity extends AppCompatActivity{
             nameBook.setText(book.getTitle());
         }
 
-        if(book.getAuthor().length() > 25){
-            StringBuilder authorBook = new StringBuilder(book.getTitle());
-            authorBook.setCharAt(22, '.');
-            authorBook.setCharAt(23, '.');
-            authorBook.setCharAt(24, '.');
+        if(book.getAuthor().length() > 20){
+            StringBuilder authorBook = new StringBuilder(book.getAuthor());
+            authorBook.setCharAt(18, '.');
+            authorBook.setCharAt(19, '.');
+            authorBook.setCharAt(20, '.');
             authourBook.setText(authorBook);
         }else{
             authourBook.setText(book.getAuthor());
         }
 
-        if(book.getPublisher().length() > 15){
-            StringBuilder editorBooks = new StringBuilder(book.getTitle());
-            editorBooks.setCharAt(12, '.');
-            editorBooks.setCharAt(13, '.');
-            editorBooks.setCharAt(14, '.');
+        if(book.getPublisher().length() > 25){
+            StringBuilder editorBooks = new StringBuilder(book.getPublisher());
+            editorBooks.setCharAt(22, '.');
+            editorBooks.setCharAt(23, '.');
+            editorBooks.setCharAt(24, '.');
             editorBook.setText(editorBooks);
         }else {
             editorBook.setText(book.getPublisher());

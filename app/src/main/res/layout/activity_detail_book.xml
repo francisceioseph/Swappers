@@ -69,7 +69,8 @@
                     android:layout_toRightOf="@+id/photoBook"
                     android:layout_toEndOf="@+id/photoBook"
                     android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp">
+                    android:layout_marginLeft="15dp"
+                    >
 
                     <TextView
                         android:id="@+id/title_detail_book"
@@ -95,7 +96,7 @@
                         android:textColor="@color/primary_text_default_material_light"
                         android:elegantTextHeight="false"
                         android:focusableInTouchMode="false"
-                        android:maxLength="25"
+                        android:maxLength="20"
                         android:shadowColor="@color/white"
                         android:shadowRadius="6"
                         android:textStyle="bold" />
@@ -108,7 +109,7 @@
                         android:textColor="@color/primary_text_default_material_light"
                         android:elegantTextHeight="false"
                         android:focusableInTouchMode="false"
-                        android:maxLength="15"
+                        android:maxLength="25"
                         android:shadowColor="@color/white"
                         android:shadowRadius="6"
                         android:textStyle="bold" />

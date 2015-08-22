@@ -419,6 +419,9 @@
     <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/res/values/version.xml -->
     <eat-comment/>
     <integer name="google_play_services_version">7327000</integer>
+    <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="List_points_donate_place_near">Donation points near you</string>
     <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
@@ -663,16 +666,18 @@ available. Please contact the developer for assistance.</string>
     <string name="times_retrieved_books">Retrieved XX times</string>
     <string name="title_activity_detail_book">DetailBookActivity</string>
     <string name="title_activity_detail_place">DetailPlaceActivity</string>
+    <string name="title_activity_donations_list_point">Near Places</string>
     <string name="title_activity_login">Sign In</string>
     <string name="title_activity_main">Books</string>
     <string name="title_activity_main_activity2">MainActivity2Activity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="title_activity_reader_comment">ReaderCommentActivity</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_reader_comment">Comments</string>
     <string name="title_activity_referenced_libraries">Referenced Components</string>
     <string name="title_activity_register">Sign Up</string>
     <string name="title_activity_splash">Swappers</string>
     <string name="title_best_book">Title Book Here</string>
     <string name="title_detail_book">Title Book</string>
+    <string name="title_detail_place">Detail Place</string>
     <string name="title_near_book">Book Title Here</string>
     <string name="title_recommendation_book">Recommendation Title Here</string>
     <string name="title_section1">Section 1</string>

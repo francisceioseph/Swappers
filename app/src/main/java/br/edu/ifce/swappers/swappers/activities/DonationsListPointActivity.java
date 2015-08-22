@@ -141,7 +141,7 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         adapter.setRecycleViewOnClickListenerHack(this);
 
         this.layoutManager = new LinearLayoutManager(this);
-        this.recyclerView = (RecyclerView) findViewById(R.id.donation_list_point);
+        this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         this.recyclerView.setHasFixedSize(true);
         this.recyclerView.setLayoutManager(layoutManager);

@@ -14,149 +14,164 @@
         android:layout_height="wrap_content"
         android:theme="@style/SWToolbarTheme"
         app:popupTheme="@style/SWToolbarMenuTheme"
+        android:title="@string/title_detail_book"
         />
     
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <RelativeLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|top"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
 
-            <ImageView
-                android:id="@+id/menu_back"
+            <RelativeLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:contentDescription="@string/place_cover_photo_description"
-                android:background="@color/accent_material_dark"
-                android:src="@drawable/menu_back"
-                android:scaleType="centerCrop"
-                android:elevation="3dp"/>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/adapter_comment_author_image"
-                android:src="@drawable/best_book"
-                app:border_width="1dp"
-                app:border_color="@color/transparent"
-                android:elevation="4dp"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="15dp"
-                android:layout_marginStart="15dp"
-                android:contentDescription="@string/place_photo"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:elevation="4dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/adapter_comment_author_image"
-                android:layout_toEndOf="@+id/adapter_comment_author_image"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp">
+                android:layout_gravity="center_horizontal|top"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/title_detail_book"
+                <ImageView
+                    android:id="@+id/menu_back"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/title_detail_book"
-                    android:textColor="@color/primary_text_default_material_light"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_height="160dp"
+                    android:contentDescription="@string/place_cover_photo_description"
+                    android:background="@color/accent_material_dark"
+                    android:src="@drawable/menu_back"
+                    android:scaleType="centerCrop"
+                    android:elevation="3dp"/>
 
-                <TextView
-                    android:id="@+id/author_detail_book"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/photoBook"
+                    android:src="@drawable/best_book"
+                    app:border_width="1dp"
+                    app:border_color="@color/transparent"
+                    android:elevation="4dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginRight="8dp"
+                    android:contentDescription="@string/place_photo"/>
+
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:elevation="4dp"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/author_detail_book"
-                    android:textColor="@color/primary_text_default_material_light"
-                    android:elegantTextHeight="false"
-                    android:focusableInTouchMode="false"/>
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/photoBook"
+                    android:layout_toEndOf="@+id/photoBook"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    >
 
-                <TextView
-                    android:id="@+id/editor_detail_book"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/editor_detail_book"
-                    android:textColor="@color/primary_text_default_material_light"
-                    android:elegantTextHeight="false"
-                    android:focusableInTouchMode="false"/>
-
-                <FrameLayout
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="end">
-
-                    <ImageView
-                        android:id="@+id/is_book_favorite"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/splash_logo_accessibiity_descriptor" />
-
-                </FrameLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <android.support.v4.app.FragmentTabHost
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/books_tabHost">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <com.andexert.library.RippleView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    app:rv_centered="false"
-                    app:rv_rippleDuration="400"
-                    app:rv_color="@color/color_ripple_register">
-
-                    <TabWidget
-                        android:id="@android:id/tabs"
+                    <TextView
+                        android:id="@+id/title_detail_book"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/color_accent_dark"
-                        android:elevation="4dp"
-                        android:orientation="horizontal"
-                        android:baselineAligned="false"
-                        android:layoutMode="clipBounds"/>
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/title_detail_book"
+                        android:textColor="@color/primary_text_default_material_light"
+                        android:layout_marginBottom="5dp"
+                        android:layout_toRightOf="@+id/photoBook"
+                        android:maxLength="45"
+                        android:focusableInTouchMode="false"
+                        android:shadowColor="@color/white"
+                        android:shadowRadius="6"
+                        android:textStyle="bold"
+                        />
 
-                </com.andexert.library.RippleView>
+                    <TextView
+                        android:id="@+id/author_detail_book"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/primary_text_default_material_light"
+                        android:elegantTextHeight="false"
+                        android:focusableInTouchMode="false"
+                        android:maxLength="20"
+                        android:shadowColor="@color/white"
+                        android:shadowRadius="6"
+                        android:textStyle="bold" />
 
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
+                    <TextView
+                        android:id="@+id/editor_detail_book"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/primary_text_default_material_light"
+                        android:elegantTextHeight="false"
+                        android:focusableInTouchMode="false"
+                        android:maxLength="25"
+                        android:shadowColor="@color/white"
+                        android:shadowRadius="6"
+                        android:textStyle="bold" />
+
+                    <FrameLayout
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="end">
+
+                        <ImageView
+                            android:id="@+id/is_book_favorite"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/splash_logo_accessibiity_descriptor" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <android.support.v4.app.FragmentTabHost
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/books_tabHost">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                </FrameLayout>
-            </LinearLayout>
+                    <com.andexert.library.RippleView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-        </android.support.v4.app.FragmentTabHost>
-    </LinearLayout>
+                        app:rv_centered="false"
+                        app:rv_rippleDuration="400"
+                        app:rv_color="@color/color_ripple_register">
+
+                        <TabWidget
+                            android:id="@android:id/tabs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/color_accent_dark"
+                            android:elevation="4dp"
+                            android:orientation="horizontal"
+                            android:baselineAligned="false"
+                            android:layoutMode="clipBounds"/>
+
+                    </com.andexert.library.RippleView>
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </FrameLayout>
+                </LinearLayout>
+
+            </android.support.v4.app.FragmentTabHost>
+        </LinearLayout>
 
         <com.getbase.floatingactionbutton.FloatingActionsMenu
             android:id="@+id/right_labels"
@@ -175,15 +190,15 @@
             fab:fab_labelsPosition="left"
             app:fab_icon="@drawable/ic_more">
 
-            <!--<com.getbase.floatingactionbutton.FloatingActionButton-->
-                <!--android:id="@+id/floating_action_adop"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--fab:fab_colorNormal="@color/color_accent_dark"-->
-                <!--fab:fab_title="@string/floating_action_button_adopt"-->
-                <!--fab:fab_addButtonSize="mini"-->
-                <!--fab:fab_colorPressed="@color/color_accent_medium"-->
-                <!--app:fab_icon="@drawable/ic_get"/>-->
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floating_action_adop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/color_accent_dark"
+                fab:fab_title="@string/floating_action_button_adopt"
+                fab:fab_addButtonSize="mini"
+                fab:fab_colorPressed="@color/color_accent_medium"
+                app:fab_icon="@drawable/ic_get"/>
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/floating_action_donate"
@@ -219,5 +234,6 @@
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
     </FrameLayout>
 </LinearLayout>
+
 
 <!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/layout/activity_detail_book.xml -->
