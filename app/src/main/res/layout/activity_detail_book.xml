@@ -80,7 +80,11 @@
                         android:textColor="@color/primary_text_default_material_light"
                         android:layout_marginBottom="5dp"
                         android:layout_toRightOf="@+id/photoBook"
-                        android:maxLength="40"
+                        android:maxLength="45"
+                        android:focusableInTouchMode="false"
+                        android:shadowColor="@color/white"
+                        android:shadowRadius="6"
+                        android:textStyle="bold"
                         />
 
                     <TextView
@@ -88,20 +92,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="@string/author_detail_book"
                         android:textColor="@color/primary_text_default_material_light"
                         android:elegantTextHeight="false"
-                        android:focusableInTouchMode="false"/>
+                        android:focusableInTouchMode="false"
+                        android:maxLength="25"
+                        android:shadowColor="@color/white"
+                        android:shadowRadius="6"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/editor_detail_book"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="@string/editor_detail_book"
                         android:textColor="@color/primary_text_default_material_light"
                         android:elegantTextHeight="false"
-                        android:focusableInTouchMode="false"/>
+                        android:focusableInTouchMode="false"
+                        android:maxLength="15"
+                        android:shadowColor="@color/white"
+                        android:shadowRadius="6"
+                        android:textStyle="bold" />
 
                     <FrameLayout
                         android:layout_width="24dp"

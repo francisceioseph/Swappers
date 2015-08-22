@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -61,9 +62,36 @@ public class DetailBookActivity extends AppCompatActivity{
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Detail Book");
 
-        nameBook.setText(book.getTitle());
-        authourBook.setText(book.getAuthor());
-        editorBook.setText(book.getPublisher());
+        if(book.getTitle().length() > 45){
+            StringBuilder titleBook = new StringBuilder(book.getTitle());
+            titleBook.setCharAt(42, '.');
+            titleBook.setCharAt(43, '.');
+            titleBook.setCharAt(44, '.');
+            nameBook.setText(titleBook);
+        }else{
+            nameBook.setText(book.getTitle());
+        }
+
+        if(book.getAuthor().length() > 25){
+            StringBuilder authorBook = new StringBuilder(book.getTitle());
+            authorBook.setCharAt(22, '.');
+            authorBook.setCharAt(23, '.');
+            authorBook.setCharAt(24, '.');
+            authourBook.setText(authorBook);
+        }else{
+            authourBook.setText(book.getAuthor());
+        }
+
+        if(book.getPublisher().length() > 15){
+            StringBuilder editorBooks = new StringBuilder(book.getTitle());
+            editorBooks.setCharAt(12, '.');
+            editorBooks.setCharAt(13, '.');
+            editorBooks.setCharAt(14, '.');
+            editorBook.setText(editorBooks);
+        }else {
+            editorBook.setText(book.getPublisher());
+        }
+
 
         if(!book.getPhoto().isEmpty()) {
             Picasso.with(getApplicationContext()).load(book.getPhoto()).into(photoBook);
