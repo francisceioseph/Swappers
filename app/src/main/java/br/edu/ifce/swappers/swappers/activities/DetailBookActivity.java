@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,7 @@ public class DetailBookActivity extends AppCompatActivity{
     TextView editorBook;
     CircleImageView photoBook;
     Toolbar toolbar;
+    CollapsingToolbarLayout collapsingToolbarLayout;
     Book book;
 
     public DetailBookActivity(){
@@ -59,6 +61,7 @@ public class DetailBookActivity extends AppCompatActivity{
         book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         toolbar.setTitle("Detail Book");
 
         if(book.getTitle().length() > 45){

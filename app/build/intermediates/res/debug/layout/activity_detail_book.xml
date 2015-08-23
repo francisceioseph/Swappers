@@ -16,7 +16,7 @@
         app:popupTheme="@style/SWToolbarMenuTheme"
         android:title="@string/title_detail_book"
         />
-    
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -233,7 +233,4 @@
 
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
     </FrameLayout>
-</LinearLayout>
-
-
-<!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/layout/activity_detail_book.xml -->
+</LinearLayout><!-- From: file:/home/alessandra/AndroidStudioProjects/Swappers/app/src/main/res/layout/activity_detail_book.xml -->

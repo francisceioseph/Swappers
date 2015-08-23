@@ -24,7 +24,9 @@ public class SplashActivity extends Activity implements TaskInterface{
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                doAutoLogin();
+               doAutoLogin();
+               // loadMainActivity();
+
             }
         }, SPLASH_TIME_OUT);
     }
