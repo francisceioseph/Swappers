@@ -24,6 +24,7 @@ import br.edu.ifce.swappers.swappers.fragments.principal.ProfileFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.SettingsFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.StatisticsFragment;
 import br.edu.ifce.swappers.swappers.model.User;
+import br.edu.ifce.swappers.swappers.util.ImageUtil;
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
@@ -91,8 +92,15 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     }
 
     private Bitmap loadUserPhoto() {
-        BitmapDrawable userPhotoDrawer = (BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person_giant);
-        Bitmap userPhotoBitmap = userPhotoDrawer.getBitmap();
+        Bitmap userPhotoBitmap;
+
+        try {
+            userPhotoBitmap = ImageUtil.StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+        }
+        catch (Exception e){
+            userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person_giant)).getBitmap();
+        }
+
         return userPhotoBitmap;
     }
 

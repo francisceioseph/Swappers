@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.LoginTask;
@@ -68,8 +69,11 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
 
     @Override
     public void startNextActivity() {
+        AndroidUtils.create(this, MockSingleton.INSTANCE.user);
+
         Intent mainActivityIntent = new Intent(this, MainActivity.class);
         mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
         this.startActivity(mainActivityIntent);
     }
 
