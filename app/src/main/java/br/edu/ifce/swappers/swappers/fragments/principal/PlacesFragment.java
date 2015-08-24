@@ -19,8 +19,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -44,7 +46,7 @@ import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 
 
-public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener,PlaceInterface{
+public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener, PlaceInterface, OnMapReadyCallback{
 
     static GoogleMap mapPlace;
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
@@ -52,8 +54,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private Button findPlaceButton;
     private LatLng myPosition;
     private DistancePlaces distancePlaces =null;
-    private List<Place> placesNear = new ArrayList<>();
-    private int countPlace=0;
+    private List<Place> placesNear = new ArrayList<Place>();
     private Listener listener = new Listener();
 
     public PlacesFragment() {}
@@ -67,10 +68,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         findPlaceButton = (Button) view.findViewById(R.id.find_near_place);
         findPlaceButton.setOnClickListener(findNearPlaceOnMap());
 
-        verifyGpsAndWifi();
-
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
 
         mapPlace = mapView.getMap();
         mapPlace.getUiSettings().setMyLocationButtonEnabled(true);
@@ -79,6 +79,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         mapPlace.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
         MapsInitializer.initialize(this.getActivity());
+
+        verifyGpsAndWifi();
         eventMarkers();
 
         return view;
@@ -105,12 +107,12 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         else{
             myPosition = listener.getMyPosition(locationUser);
 
-            Geocoder gcd = new Geocoder(getActivity(), Locale.getDefault());
-            List<Address> addresses = null;
+            Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
+            List<Address> addresses;
             String city = null;
             String state = null;
             try {
-                addresses = gcd.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
+                addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 3);
                 if (addresses.size() > 0){
                     city = addresses.get(0).getLocality();
                     state = addresses.get(0).getAdminArea();
@@ -129,6 +131,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
     public View.OnClickListener findNearPlaceOnMap(){
         return new View.OnClickListener() {
+            int countPlace = 0;
             @Override
             public void onClick(View v) {
                 if (AndroidUtils.isNetworkAvailable(getActivity()) && !placesNear.isEmpty()) {
@@ -165,11 +168,13 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     }
 
     private void setUpMarkers(List<Place> placesCity){
-        for(int i=0; i<placesCity.size(); i++){
-            LatLng coordinate = new LatLng(placesCity.get(i).getLatitude(), placesCity.get(i).getLongitude());
-            mapPlace.addMarker(new MarkerOptions().position(coordinate)
-                    .title(placesCity.get(i).getName())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        if(!placesCity.isEmpty()) {
+            for (int i = 0; i < placesCity.size(); i++) {
+                LatLng coordinate = new LatLng(placesCity.get(i).getLatitude(), placesCity.get(i).getLongitude());
+                mapPlace.addMarker(new MarkerOptions().position(coordinate)
+                        .title(placesCity.get(i).getName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            }
         }
     }
 
@@ -210,6 +215,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
     @Override
     public void updatePlaceNear(List<Place> placeList) {
+        int countPlace = 0;
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
@@ -223,7 +229,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
             setUpMarkers(placeList);
 
-            if(placeList != null) {
+            if(!placeList.isEmpty()) {
                 distancePlaces = new DistancePlaces(placeList);
                 placesNear = distancePlaces.calculateNearPlace(myCurrentPosition);
 
@@ -256,6 +262,12 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mapPlace = googleMap;
+        mapPlace.setMyLocationEnabled(true);
     }
 }
 

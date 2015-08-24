@@ -9,8 +9,8 @@ package com.github.paolorotolo.appintro;
 public final class R {
 	public static final class drawable {
 		public static final int ic_navigate_next_white_24dp = 0x7f020078;
-		public static final int indicator_dot_grey = 0x7f020088;
-		public static final int indicator_dot_white = 0x7f020089;
+		public static final int indicator_dot_grey = 0x7f02008a;
+		public static final int indicator_dot_white = 0x7f02008b;
 	}
 	public static final class id {
 		public static final int bottom = 0x7f0d0101;

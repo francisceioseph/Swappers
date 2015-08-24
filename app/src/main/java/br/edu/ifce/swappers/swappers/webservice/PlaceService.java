@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -24,7 +25,7 @@ import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
- * Created by gracyane e joamila on 19/08/2015.
+ * Created by gracyane and joamila on 19/08/2015.
  */
 public class PlaceService {
 
@@ -70,6 +71,9 @@ public class PlaceService {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {
+            //e.printStackTrace();
+            e.getCause().toString();
+        } catch (ConnectException e){
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,13 +106,12 @@ public class PlaceService {
         List<Place> placeList = new ArrayList<>();
         int count = 0;
 
-        json = new JSONObject(jsonPlace);
-
         for(int i=0; i<jsonPlace.length(); i++){
             if(jsonPlace.charAt(i) == '}') count++;
         }
 
-        if(count == 2){
+        if(!jsonPlace.isEmpty() && count == 2){
+            json = new JSONObject(jsonPlace);
             jsonItems = (JSONObject)json.get("place");
 
             Place placeUnique = new Place();
@@ -120,7 +123,8 @@ public class PlaceService {
             placeUnique.setLongitude(jsonItems.getDouble("longitude"));
             placeList.add(placeUnique);
 
-        } else{
+        } else if(!jsonPlace.isEmpty() && count > 2){
+            json = new JSONObject(jsonPlace);
             jsonArray = json.getJSONArray("place");
 
             for(int i =0; i<jsonArray.length();i++ ){
@@ -137,7 +141,7 @@ public class PlaceService {
         }
 
 
-        Log.i("TAG-PLACE", json.toString());
+        //Log.i("TAG-PLACE", json.toString());
 
         return placeList;
     }

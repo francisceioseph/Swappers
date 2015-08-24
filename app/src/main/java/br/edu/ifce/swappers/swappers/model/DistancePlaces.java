@@ -44,6 +44,7 @@ public class DistancePlaces{
         for (int i=0; i<places.size(); i++){
             distanceBetweenPlaces = distanceBetween(positionUser, new LatLng(places.get(i).getLatitude(), places.get(i).getLongitude()));
             placeList.add(new Place(places.get(i).getLatitude(), places.get(i).getLongitude(), distanceBetweenPlaces));
+            Log.i("NOME", places.get(i).getName());
         }
 
         Collections.sort(placeList);
