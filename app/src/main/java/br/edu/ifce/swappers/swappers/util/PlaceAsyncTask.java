@@ -43,6 +43,5 @@ public class PlaceAsyncTask extends AsyncTask<String,String,List<Place>> {
         placeInterface.updatePlaceNear(placeList);
         progressDialog.dismiss();
 
-        Log.i("SIZE-PLACE", String.valueOf(placeList.size()));
     }
 }

@@ -99,6 +99,7 @@ public class PlaceService {
         return stringBuilder.toString();
     }
 
+
     private static List<Place> parseJsonToPlace(String jsonPlace) throws JSONException {
         JSONArray jsonArray = null;
         JSONObject json = null;
@@ -145,4 +146,7 @@ public class PlaceService {
 
         return placeList;
     }
+
 }
+
+

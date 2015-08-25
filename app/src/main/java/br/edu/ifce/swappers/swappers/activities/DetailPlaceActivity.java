@@ -23,6 +23,13 @@ public class DetailPlaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_place);
 
+        TextView placeName = (TextView) findViewById(R.id.place_name);
+        TextView placeCity = (TextView) findViewById(R.id.place_city);
+
+        Bundle extras = getIntent().getExtras();
+        placeName.setText(extras.getString("name"));
+        placeCity.setText(extras.getString("city"));
+
         this.initToolbar();
         this.initTabHost();
     }

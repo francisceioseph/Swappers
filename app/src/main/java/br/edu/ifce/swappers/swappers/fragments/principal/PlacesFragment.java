@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -37,9 +38,12 @@ import java.util.Locale;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
 import br.edu.ifce.swappers.swappers.activities.MainActivity;
+import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.ListenerGPS;
+import br.edu.ifce.swappers.swappers.util.MarkerAsyncTask;
 import br.edu.ifce.swappers.swappers.util.PlaceAsyncTask;
 import br.edu.ifce.swappers.swappers.util.PlaceInterface;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
@@ -48,14 +52,19 @@ import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 
 public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener, PlaceInterface, OnMapReadyCallback{
 
-    static GoogleMap mapPlace;
-    private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
-    MapView mapView;
+    private static GoogleMap mapPlace;
+    public static GoogleMap getMapPlace() {
+        return mapPlace;
+    }
+
+    private MapView mapView;
     private Button findPlaceButton;
     private LatLng myPosition;
     private DistancePlaces distancePlaces =null;
     private List<Place> placesNear = new ArrayList<Place>();
-    private Listener listener = new Listener();
+    private ListenerGPS listenerGPS = new ListenerGPS();
+
+    private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
 
     public PlacesFragment() {}
 
@@ -86,14 +95,22 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         return view;
     }
 
+    public LatLng getMyPosition(Location location){
+        float myPositionLatitude = (float) location.getLatitude();
+        float myPositionLongitude = (float) location.getLongitude();
+        LatLng myPosition = new LatLng(myPositionLatitude, myPositionLongitude);
+
+        return myPosition;
+    }
+
     private void verifyGpsAndWifi(){
         long timeUpdate = 3000;
         float distance = 0;
 
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, timeUpdate, distance, listener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, timeUpdate, distance, listener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, timeUpdate, distance, listenerGPS);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, timeUpdate, distance, listenerGPS);
 
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(locationUser == null){
@@ -105,7 +122,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             myPosition = IFCE_FORTALEZA;
         }
         else{
-            myPosition = listener.getMyPosition(locationUser);
+            myPosition = getMyPosition(locationUser);
 
             Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
             List<Address> addresses;
@@ -124,9 +141,44 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
             if(AndroidUtils.isNetworkAvailable(getActivity())) {
                 PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
-                task.execute(city, state);
+                task.execute("Caucaia", state);
             }
         }
+    }
+
+    private void eventMarkers(){
+        mapPlace.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            private int tap = 0;
+            private LatLng position_1 = new LatLng(0.0, 1.1);
+            private LatLng position_2 = new LatLng(1.1, 0.0);
+
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                tap = tap + 1;
+
+                if (tap % 2 == 1 && !(position_1.equals(position_2))){
+                    position_1 = marker.getPosition();
+                } else {
+                    position_2 = marker.getPosition();
+                    if (position_1.equals(position_2)){
+                        Double latitude;
+                        Double longitude;
+
+                        latitude = marker.getPosition().latitude;
+                        longitude = marker.getPosition().longitude;
+
+                        MarkerAsyncTask task = new MarkerAsyncTask(getActivity(), this);
+                        task.execute(latitude, longitude);
+
+                    } else {
+                        position_1 = marker.getPosition();
+                    }
+                }
+                Log.i("onMarkerClick", String.valueOf(tap));
+
+                return false;
+            }
+        });
     }
 
     public View.OnClickListener findNearPlaceOnMap(){
@@ -154,10 +206,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         };
     }
 
-    public void showMarker(LatLng position, GoogleMap googleMap){
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 17));
-    }
-
     private void setUpMap(Place place, LatLng placeNow) {
         mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
         mapPlace.animateCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
@@ -165,6 +213,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         mapPlace.addMarker(new MarkerOptions().position(placeNow)
                 .title(place.getName())
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+    }
+
+    public void showMarker(LatLng position, GoogleMap googleMap){
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 17));
     }
 
     private void setUpMarkers(List<Place> placesCity){
@@ -178,41 +230,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         }
     }
 
-    private void eventMarkers(){
-        mapPlace.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            private int tap = 0;
-            private LatLng position_1 = new LatLng(0.0, 1.1);
-            private LatLng position_2 = new LatLng(1.1, 0.0);
-
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Log.i("onMarkerClick", String.valueOf(tap));
-                tap = tap + 1;
-
-                if (tap % 2 == 1 && !(position_1.equals(position_2))){
-                    position_1 = marker.getPosition();
-                } else {
-                    position_2 = marker.getPosition();
-                    if (position_1.equals(position_2)){
-                        Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
-                        startActivity(detailPlaceActivityIntent);
-                    } else {
-                        position_1 = marker.getPosition();
-                    }
-                }
-                Log.i("onMarkerClick", String.valueOf(tap));
-
-                return false;
-            }
-        });
-    }
-
-
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        return false;
-    }
-
     @Override
     public void updatePlaceNear(List<Place> placeList) {
         int countPlace = 0;
@@ -224,8 +241,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }else {
-            Listener listenerUser = new Listener();
-            LatLng myCurrentPosition = listenerUser.getMyPosition(locationUser);
+            LatLng myCurrentPosition = getMyPosition(locationUser);
 
             setUpMarkers(placeList);
 
@@ -247,6 +263,35 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     }
 
     @Override
+    public void getDetailPlace(Place place) {
+        Bundle bundle = new Bundle();
+
+        bundle.putString("name", place.getName());
+        bundle.putString("city", place.getCity());
+
+        bundle.putString("streetnumber", place.getStreet() + ", " + place.getNumber());
+        bundle.putString("neighborcity", place.getDistrict() + ", " + place.getCity());
+        bundle.putString("statecountry", place.getStates() + ", " + "Brasil");
+        bundle.putString("hourfunc", place.getHour_func());
+
+        Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
+        detailPlaceActivityIntent.putExtras(bundle);
+        startActivity(detailPlaceActivityIntent);
+
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mapPlace = googleMap;
+        mapPlace.setMyLocationEnabled(true);
+    }
+
+    @Override
     public void onResume() {
         mapView.onResume();
         super.onResume();
@@ -263,47 +308,4 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         super.onLowMemory();
         mapView.onLowMemory();
     }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mapPlace = googleMap;
-        mapPlace.setMyLocationEnabled(true);
-    }
-}
-
-    class Listener implements LocationListener {
-        float latitudeUser;
-        float longitudeUser;
-        LatLng userPosition;
-        private int changeZoom = 0;
-
-        @Override
-        public void onLocationChanged(Location location){
-            latitudeUser = (float)location.getLatitude();
-            longitudeUser = (float)location.getLongitude();
-            userPosition = new LatLng(latitudeUser, longitudeUser);
-
-            if (changeZoom < 1) {
-                PlacesFragment.mapPlace.addMarker(new MarkerOptions().position(userPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
-                PlacesFragment.mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(userPosition, 16));
-                PlacesFragment.mapPlace.animateCamera(CameraUpdateFactory.zoomTo(14), 500, null);
-                changeZoom++;
-            }
-        }
-
-        public void onStatusChanged(String provider, int status, Bundle extras){}
-
-        @Override
-        public void onProviderEnabled(String provider){}
-
-        @Override
-        public void onProviderDisabled(String provider){}
-
-        public LatLng getMyPosition(Location location){
-            float myPositionLatitude = (float) location.getLatitude();
-            float myPositionLongitude = (float) location.getLongitude();
-            LatLng myPosition = new LatLng(myPositionLatitude, myPositionLongitude);
-
-            return myPosition;
-        }
 }
