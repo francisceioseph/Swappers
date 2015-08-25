@@ -10,4 +10,4 @@
         android:id="@+id/available_books_list"
         android:layout_height="fill_parent"
         android:layout_width="match_parent"/>
-</FrameLayout><!-- From: file:/C:/Users/Joamila/Desktop/Copy/Swappers-Git/Swappers/app/src/main/res/layout/fragment_available_books.xml -->
+</FrameLayout><!-- From: file:/C:/Users/Bolsista/Desktop/Joamila/Git-Swappers/SWAPPERS-Atual/Swappers/app/src/main/res/layout/fragment_available_books.xml -->

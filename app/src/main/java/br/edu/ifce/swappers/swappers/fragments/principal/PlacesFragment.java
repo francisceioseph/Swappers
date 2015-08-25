@@ -30,10 +30,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
@@ -63,6 +66,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private DistancePlaces distancePlaces =null;
     private List<Place> placesNear = new ArrayList<Place>();
     private ListenerGPS listenerGPS = new ListenerGPS();
+    private Map<String,Integer> mapPlaceMarker = new HashMap<>();
 
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
 
@@ -141,7 +145,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
             if(AndroidUtils.isNetworkAvailable(getActivity())) {
                 PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
-                task.execute("Caucaia", state);
+                task.execute(city, state);
             }
         }
     }
@@ -167,8 +171,12 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                         latitude = marker.getPosition().latitude;
                         longitude = marker.getPosition().longitude;
 
-                        MarkerAsyncTask task = new MarkerAsyncTask(getActivity(), this);
-                        task.execute(latitude, longitude);
+                        Log.i("TAG-ID-MARK","LATITUDE="+String.valueOf(latitude));
+                        Log.i("TAG-ID-MARK","lONGITUDE="+String.valueOf(longitude));
+
+                        makePlaceTask(marker.getId());
+
+                        Log.i("TAG-ID-MARK", String.valueOf(mapPlaceMarker.get(marker.getId())));
 
                     } else {
                         position_1 = marker.getPosition();
@@ -181,6 +189,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         });
     }
 
+    public void makePlaceTask(String markerId){
+        MarkerAsyncTask task = new MarkerAsyncTask(getActivity(),this);
+        task.execute(mapPlaceMarker.get(markerId));
+    }
     public View.OnClickListener findNearPlaceOnMap(){
         return new View.OnClickListener() {
             int countPlace = 0;
@@ -223,9 +235,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         if(!placesCity.isEmpty()) {
             for (int i = 0; i < placesCity.size(); i++) {
                 LatLng coordinate = new LatLng(placesCity.get(i).getLatitude(), placesCity.get(i).getLongitude());
-                mapPlace.addMarker(new MarkerOptions().position(coordinate)
+                Marker marker =mapPlace.addMarker(new MarkerOptions().position(coordinate)
                         .title(placesCity.get(i).getName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                mapPlaceMarker.put(marker.getId(),placesCity.get(i).getId());
             }
         }
     }
@@ -277,7 +290,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
         detailPlaceActivityIntent.putExtras(bundle);
         startActivity(detailPlaceActivityIntent);
-
     }
 
     @Override

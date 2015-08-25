@@ -3,6 +3,7 @@ package br.edu.ifce.swappers.swappers.util;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
 
@@ -11,15 +12,16 @@ import br.edu.ifce.swappers.swappers.model.Place;
 /**
  * Created by Joamila on 23/08/2015.
  */
-public class MarkerAsyncTask extends AsyncTask<Double,Double,Place> {
+public class MarkerAsyncTask extends AsyncTask<Integer,Double,Place> {
     private PlaceInterface placeInterface;
     private ProgressDialog progressDialog;
     private Context context;
     private GoogleMap.OnMarkerClickListener onMarkerClickListener;
 
-    public MarkerAsyncTask(Context context, GoogleMap.OnMarkerClickListener markerClickListener){
+    public MarkerAsyncTask(Context context, PlaceInterface placeInterface){
         this.context = context;
-        this.onMarkerClickListener = markerClickListener;
+       // this.onMarkerClickListener = markerClickListener;
+        this.placeInterface = placeInterface;
     }
 
     @Override
@@ -30,14 +32,14 @@ public class MarkerAsyncTask extends AsyncTask<Double,Double,Place> {
     }
 
     @Override
-    protected Place doInBackground(Double... params) {
-        return MarkerService.getDetailPlaceWS(params[0], params[1]);
+    protected Place doInBackground(Integer... params) {
+        return MarkerService.getDetailPlaceWS(params[0]);
     }
 
     @Override
     protected void onPostExecute(Place placeInformation) {
+        Log.i("onPostExecute",placeInformation.getName());
         placeInterface.getDetailPlace(placeInformation);
         progressDialog.dismiss();
-
     }
 }

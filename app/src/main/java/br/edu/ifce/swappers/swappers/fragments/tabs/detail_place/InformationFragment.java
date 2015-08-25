@@ -42,7 +42,7 @@ public class InformationFragment extends Fragment {
 
         Bundle extras = getActivity().getIntent().getExtras();
 
-        streetAddress.setText(extras.getString("address"));
+        streetAddress.setText(extras.getString("streetnumber"));
         neighborhoodAndCity.setText(extras.getString("neighborcity"));
         stateAndCountry.setText(extras.getString("statecountry"));
         businessHoursDescription.setText(extras.getString("hourfunc"));

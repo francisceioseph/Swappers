@@ -24,13 +24,13 @@ import br.edu.ifce.swappers.swappers.model.Place;
 public class MarkerService {
     private static final String URL = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/place";
 
-    public static Place getDetailPlaceWS(double latitude, double longitude){
+    public static Place getDetailPlaceWS(int idPlace){
         java.net.URL url = null;
         HttpURLConnection conn = null;
-        Place placeInformation = new Place();
+        Place placeInformation = null;
 
         try {
-            String urlPlace = buildURLtoGetDetailPlace(URL, String.valueOf(latitude), String.valueOf(longitude));
+            String urlPlace = buildURLtoGetDetailPlace(URL, idPlace);
             Log.i("URLPLACE", urlPlace);
 
             url = new URL(urlPlace);
@@ -53,7 +53,7 @@ public class MarkerService {
                     responseJson.append(inputLine);
                 }
                 in.close();
-                Log.i("RESPONSE-PLACE", responseJson.toString());
+                Log.i("RESPONSE-PLACE-1", responseJson.toString());
 
                 placeInformation = parseJsonToDetailPlace(responseJson.toString());
 
@@ -75,17 +75,11 @@ public class MarkerService {
         return placeInformation;
     }
 
-    private static String buildURLtoGetDetailPlace(String url, String latitude, String longitude) throws UnsupportedEncodingException {
+    private static String buildURLtoGetDetailPlace(String url, int idPlace) throws UnsupportedEncodingException {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(url);
-        stringBuilder.append("?");
-        stringBuilder.append("latitude");
-        stringBuilder.append("=");
-        stringBuilder.append(URLEncoder.encode(latitude, "UTF-8"));
-        stringBuilder.append("&");
-        stringBuilder.append("longitude");
-        stringBuilder.append("=");
-        stringBuilder.append(URLEncoder.encode(longitude, "UTF-8"));
+        stringBuilder.append("/");
+        stringBuilder.append(idPlace);
         return stringBuilder.toString();
     }
 
@@ -95,21 +89,43 @@ public class MarkerService {
         Place placeInformation = new Place();
 
         json = new JSONObject(jsonPlace);
-        jsonItems = (JSONObject)json.get("place");
+        //jsonItems = (JSONObject)json.get("");
+        Log.i("IDPLACE",String.valueOf(json.getInt("id")));
+        Log.i("IDPLACE",String.valueOf(json.getString("name")));
+        Log.i("IDPLACE",String.valueOf(json.getString("states")));
+        Log.i("IDPLACE",String.valueOf(json.getString("city")));
+        Log.i("IDPLACE",String.valueOf(json.getString("district")));
+        Log.i("IDPLACE",String.valueOf(json.getString("street")));
+        Log.i("IDPLACE",String.valueOf(json.getString("number")));
+        Log.i("IDPLACE",String.valueOf(json.getString("cep")));
+        Log.i("IDPLACE",String.valueOf(json.getString("hour_func")));
+        Log.i("IDPLACE",String.valueOf(json.getString("latitude")));
+        Log.i("IDPLACE",String.valueOf(json.getString("longitude")));
 
-        placeInformation.setId(jsonItems.getInt("id"));
-        placeInformation.setName(jsonItems.get("nome").toString());
-        placeInformation.setStates(jsonItems.getString("states"));
-        placeInformation.setCity(jsonItems.getString("city"));
-        placeInformation.setDistrict(jsonItems.getString("district"));
-        placeInformation.setStreet(jsonItems.getString("street"));
-        placeInformation.setNumber(jsonItems.getString("number"));
-        placeInformation.setCep(jsonItems.getString("cep"));
-        placeInformation.setHour_func(jsonItems.getString("hour_func"));
-        placeInformation.setLatitude(jsonItems.getDouble("latitude"));
-        placeInformation.setLongitude(jsonItems.getDouble("longitude"));
+        placeInformation.setId(json.getInt("id"));
+        Log.i("PONTO=", String.valueOf(1));
+        placeInformation.setName(json.getString("name"));
+        Log.i("PONTO=", String.valueOf(2));
+        placeInformation.setStates(json.getString("states"));
+        Log.i("PONTO=", String.valueOf(3));
+        placeInformation.setCity(json.getString("city"));
+        Log.i("PONTO=", String.valueOf(4));
+        placeInformation.setDistrict(json.getString("district"));
+        Log.i("PONTO=", String.valueOf(5));
+        placeInformation.setStreet(json.getString("street"));
+        Log.i("PONTO=", String.valueOf(6));
+        placeInformation.setNumber(json.getString("number"));
+        Log.i("PONTO=", String.valueOf(7));
+        placeInformation.setCep(json.getString("cep"));
+        Log.i("PONTO=", String.valueOf(8));
+        placeInformation.setHour_func(json.getString("hour_func"));
+        Log.i("PONTO=", String.valueOf(9));
+        placeInformation.setLatitude(json.getDouble("latitude"));
+        Log.i("PONTO=", String.valueOf(10));
+        placeInformation.setLongitude(json.getDouble("longitude"));
+        Log.i("PONTO=", String.valueOf(11));
         //placeInformation.setPhoto(jsonItems.get("photo").toString());
-
+        Log.i("PONTO=", placeInformation.getName());
         return placeInformation;
     }
 }
