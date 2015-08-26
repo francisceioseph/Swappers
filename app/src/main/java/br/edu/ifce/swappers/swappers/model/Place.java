@@ -1,9 +1,13 @@
 package br.edu.ifce.swappers.swappers.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Bolsista on 18/07/2015.
  */
-public class Place implements Comparable<Place>{
+public class Place implements Serializable,Comparable<Place>{
     private int id;
     private String name;
     private String city;
@@ -16,9 +20,11 @@ public class Place implements Comparable<Place>{
     private int donation;
     private String hour_func;
     private byte[] photo;
+    private String photo2;
     private double latitude;
     private double longitude;
     private double distance;
+    private List<Book> books = new ArrayList<Book>();
 
     public Place(){}
 
@@ -146,6 +152,22 @@ public class Place implements Comparable<Place>{
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public String getPhoto2() {
+        return photo2;
+    }
+
+    public void setPhoto2(String photo2) {
+        this.photo2 = photo2;
     }
 
     @Override

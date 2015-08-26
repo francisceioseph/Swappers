@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.Format;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -157,6 +158,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     }
 
     private void eventMarkers(){
+
         mapPlace.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             private int tap = 0;
             private LatLng position_1 = new LatLng(0.0, 1.1);
@@ -172,7 +174,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     position_2 = marker.getPosition();
                     if (position_1.equals(position_2)){
                         if(AndroidUtils.isNetworkAvailable(getActivity()))
-                            makePlaceTask(marker.getId());
+                            makePlaceTask(marker.getSnippet());
                         else{
                             Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -203,7 +205,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     }
                     LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
 
-                    setUpMap(placesNear.get(countPlace), placeNow);
                     showMarker(placeNow, mapPlace);
                     countPlace++;
                 }else if(AndroidUtils.isNetworkAvailable(getActivity()) && placesNear.isEmpty()){
@@ -234,17 +235,17 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         if(!placesCity.isEmpty()) {
             for (int i = 0; i < placesCity.size(); i++) {
                 LatLng coordinate = new LatLng(placesCity.get(i).getLatitude(), placesCity.get(i).getLongitude());
-                Marker marker =mapPlace.addMarker(new MarkerOptions().position(coordinate)
+                Marker marker = mapPlace.addMarker(new MarkerOptions().position(coordinate)
                         .title(placesCity.get(i).getName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                mapPlaceMarker.put(marker.getId(), placesCity.get(i).getId());
+                marker.setSnippet(String.valueOf(i));
+                mapPlaceMarker.put(marker.getSnippet(), placesCity.get(i).getId());
             }
         }
     }
 
     @Override
     public void updatePlaceNear(List<Place> placeList) {
-        int countPlace = 0;
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
@@ -261,11 +262,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 distancePlaces = new DistancePlaces(placeList);
                 placesNear = distancePlaces.calculateNearPlace(myCurrentPosition);
 
-                LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
+                LatLng placeNow = new LatLng(placesNear.get(0).getLatitude(), placesNear.get(0).getLongitude());
 
-                setUpMap(placesNear.get(countPlace), placeNow);
                 showMarker(placeNow, mapPlace);
-                countPlace++;
             }else{
                 Toast toast = SwappersToast.makeText(getActivity(), "Desculpe-nos! Ainda não há pontos de troca em sua cidade.", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
@@ -276,18 +275,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
     @Override
     public void getDetailPlace(Place place) {
-        Bundle bundle = new Bundle();
-
-        bundle.putString("name", place.getName());
-        bundle.putString("city", place.getCity());
-
-        bundle.putString("streetnumber", place.getStreet() + ", " + place.getNumber());
-        bundle.putString("neighborcity", place.getDistrict() + ", " + place.getCity());
-        bundle.putString("statecountry", place.getStates() + ", " + "Brasil");
-        bundle.putString("hourfunc", place.getHour_func());
-
         Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
-        detailPlaceActivityIntent.putExtras(bundle);
+        detailPlaceActivityIntent.putExtra("SELECTED_BOOK_PLACE",place);
         startActivity(detailPlaceActivityIntent);
     }
 

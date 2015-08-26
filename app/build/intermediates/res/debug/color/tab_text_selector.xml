@@ -2,4 +2,4 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="true" android:color="@color/white" />
     <item android:state_selected="false" android:color="@color/color_accent" />
-</selector><!-- From: file:/C:/Users/Joamila/Desktop/Copy/Swappers-Git/Swappers/app/src/main/res/color/tab_text_selector.xml -->
+</selector><!-- From: file:/C:/Users/Bolsista/Desktop/Joamila/Git-Swappers/SWAPPERS-Atual/Swappers/app/src/main/res/color/tab_text_selector.xml -->

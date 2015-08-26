@@ -1,7 +1,8 @@
-package br.edu.ifce.swappers.swappers.util;
+package br.edu.ifce.swappers.swappers.webservice;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,7 +16,11 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
+import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
 
 /**
@@ -85,47 +90,58 @@ public class MarkerService {
 
     private static Place parseJsonToDetailPlace(String jsonPlace) throws JSONException {
         JSONObject json;
-        JSONObject jsonItems;
+        JSONObject jsonItemsBook;
+        JSONArray jsonArray;
         Place placeInformation = new Place();
 
+        List<Book> books = new ArrayList<>();
+
         json = new JSONObject(jsonPlace);
-        //jsonItems = (JSONObject)json.get("");
-        Log.i("IDPLACE",String.valueOf(json.getInt("id")));
-        Log.i("IDPLACE",String.valueOf(json.getString("name")));
-        Log.i("IDPLACE",String.valueOf(json.getString("states")));
-        Log.i("IDPLACE",String.valueOf(json.getString("city")));
-        Log.i("IDPLACE",String.valueOf(json.getString("district")));
-        Log.i("IDPLACE",String.valueOf(json.getString("street")));
-        Log.i("IDPLACE",String.valueOf(json.getString("number")));
-        Log.i("IDPLACE",String.valueOf(json.getString("cep")));
-        Log.i("IDPLACE",String.valueOf(json.getString("hour_func")));
-        Log.i("IDPLACE",String.valueOf(json.getString("latitude")));
-        Log.i("IDPLACE",String.valueOf(json.getString("longitude")));
 
         placeInformation.setId(json.getInt("id"));
-        Log.i("PONTO=", String.valueOf(1));
         placeInformation.setName(json.getString("name"));
-        Log.i("PONTO=", String.valueOf(2));
         placeInformation.setStates(json.getString("states"));
-        Log.i("PONTO=", String.valueOf(3));
         placeInformation.setCity(json.getString("city"));
-        Log.i("PONTO=", String.valueOf(4));
         placeInformation.setDistrict(json.getString("district"));
-        Log.i("PONTO=", String.valueOf(5));
         placeInformation.setStreet(json.getString("street"));
-        Log.i("PONTO=", String.valueOf(6));
         placeInformation.setNumber(json.getString("number"));
-        Log.i("PONTO=", String.valueOf(7));
         placeInformation.setCep(json.getString("cep"));
-        Log.i("PONTO=", String.valueOf(8));
         placeInformation.setHour_func(json.getString("hour_func"));
-        Log.i("PONTO=", String.valueOf(9));
         placeInformation.setLatitude(json.getDouble("latitude"));
-        Log.i("PONTO=", String.valueOf(10));
         placeInformation.setLongitude(json.getDouble("longitude"));
-        Log.i("PONTO=", String.valueOf(11));
-        //placeInformation.setPhoto(jsonItems.get("photo").toString());
-        Log.i("PONTO=", placeInformation.getName());
+        placeInformation.setPhoto2(new String(json.getString("photo").getBytes(Charset.forName("UTF-8"))));
+
+        Log.i("PHOTO-BYTES-PLACE", String.valueOf(json.getString("photo").getBytes(Charset.forName("UTF-8"))));
+        Log.i("PHOTO-BYTES-PLACE",new String(placeInformation.getPhoto2()));
+
+        if(json.has("books")){
+            if(json.toString().contains("[")){
+                jsonArray = json.getJSONArray("books");
+                for (int i = 0; i<jsonArray.length();i++){
+                    Book book= new Book();
+                    book.setId(jsonArray.getJSONObject(i).getString("id"));
+                    book.setAuthor(jsonArray.getJSONObject(i).getString("author"));
+                    book.setPublisher(jsonArray.getJSONObject(i).getString("publisher"));
+                    book.setDescription(jsonArray.getJSONObject(i).getString("synopsis"));
+                    book.setPhoto(jsonArray.getJSONObject(i).getString("photo"));
+                    book.setTitle(jsonArray.getJSONObject(i).getString("title"));
+                    book.setEvaluationAvarage((float) jsonArray.getJSONObject(i).getDouble("evaluationAverage"));
+                    books.add(book);
+                }
+            }else{
+                JSONObject jsonItems = json.getJSONObject("books");
+                Book book= new Book();
+                book.setId(jsonItems.getString("id"));
+                book.setAuthor(jsonItems.getString("author"));
+                book.setPublisher(jsonItems.getString("publisher"));
+                book.setDescription(jsonItems.getString("synopsis"));
+                book.setPhoto(jsonItems.getString("photo"));
+                book.setTitle(jsonItems.getString("title"));
+                book.setEvaluationAvarage((float) jsonItems.getDouble("evaluationAverage"));
+                books.add(book);
+            }
+            placeInformation.setBooks(books);
+        }
         return placeInformation;
     }
 }

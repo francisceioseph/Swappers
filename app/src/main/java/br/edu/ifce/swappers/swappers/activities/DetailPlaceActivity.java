@@ -1,6 +1,9 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
@@ -10,13 +13,21 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.AvailableBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
+import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.ImageUtil;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailPlaceActivity extends AppCompatActivity {
 
     private FragmentTabHost placeTabHost;
+    private Place place;
+    private CircleImageView photoPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +36,15 @@ public class DetailPlaceActivity extends AppCompatActivity {
 
         TextView placeName = (TextView) findViewById(R.id.place_name);
         TextView placeCity = (TextView) findViewById(R.id.place_city);
+        photoPlace = (CircleImageView) findViewById(R.id.adapter_comment_author_image);
 
-        Bundle extras = getIntent().getExtras();
-        placeName.setText(extras.getString("name"));
-        placeCity.setText(extras.getString("city"));
+        Intent currentIntent = getIntent();
+        place = (Place) currentIntent.getSerializableExtra("SELECTED_BOOK_PLACE");
+        placeName.setText(place.getName());
+        placeCity.setText(place.getCity());
+
+        //photoPlace.setImageBitmap(BitmapFactory.decodeByteArray(place.getPhoto(), 0, place.getPhoto().length));
+        photoPlace.setImageBitmap(ImageUtil.StringToBitMap(place.getPhoto2()));
 
         this.initToolbar();
         this.initTabHost();
