@@ -143,9 +143,15 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 e.printStackTrace();
             }
 
-            if(AndroidUtils.isNetworkAvailable(getActivity())) {
-                PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
-                task.execute(city, state);
+            if(city!=null && state!=null){
+                if(AndroidUtils.isNetworkAvailable(getActivity())) {
+                    PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
+                    task.execute(city, state);
+                }
+            } else{
+                Toast toast = SwappersToast.makeText(getActivity(), "Não conseguimos identificar sua localização. Tente novamente em instantes!", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
             }
         }
     }
@@ -165,25 +171,18 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 } else {
                     position_2 = marker.getPosition();
                     if (position_1.equals(position_2)){
-                        Double latitude;
-                        Double longitude;
-
-                        latitude = marker.getPosition().latitude;
-                        longitude = marker.getPosition().longitude;
-
-                        Log.i("TAG-ID-MARK","LATITUDE="+String.valueOf(latitude));
-                        Log.i("TAG-ID-MARK","lONGITUDE="+String.valueOf(longitude));
-
-                        makePlaceTask(marker.getId());
-
-                        Log.i("TAG-ID-MARK", String.valueOf(mapPlaceMarker.get(marker.getId())));
+                        if(AndroidUtils.isNetworkAvailable(getActivity()))
+                            makePlaceTask(marker.getId());
+                        else{
+                            Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
 
                     } else {
                         position_1 = marker.getPosition();
                     }
                 }
-                Log.i("onMarkerClick", String.valueOf(tap));
-
                 return false;
             }
         });
@@ -238,7 +237,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 Marker marker =mapPlace.addMarker(new MarkerOptions().position(coordinate)
                         .title(placesCity.get(i).getName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                mapPlaceMarker.put(marker.getId(),placesCity.get(i).getId());
+                mapPlaceMarker.put(marker.getId(), placesCity.get(i).getId());
             }
         }
     }
