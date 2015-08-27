@@ -15,6 +15,28 @@ public class User implements Serializable{
     private String city;
     private Integer donationNum;
     private byte[] photo;
+    private String photo2;
+
+
+
+    public User() {
+
+    }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getPhoto2() {
+        return photo2;
+    }
+
+    public void setPhoto2(String photo2) {
+        this.photo2 = photo2;
+    }
+
     private byte[] cover;
     private Date bithday;
 

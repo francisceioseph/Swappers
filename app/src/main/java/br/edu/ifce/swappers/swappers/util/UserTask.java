@@ -44,6 +44,7 @@ public class UserTask extends AsyncTask<String,Void,User> {
 
         if (user != null) {
             MockSingleton.INSTANCE.user = user;
+
             taskInterface.startNextActivity();
         }
         else {

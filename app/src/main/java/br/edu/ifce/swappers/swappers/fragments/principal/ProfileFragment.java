@@ -2,9 +2,12 @@ package br.edu.ifce.swappers.swappers.fragments.principal;
 
 
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,8 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.DonatedBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.FavoriteBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.RetrievedBooksFragment;
+import br.edu.ifce.swappers.swappers.util.ImageUtil;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
@@ -40,9 +45,13 @@ public class ProfileFragment extends Fragment {
     private void initUserInformationFields(View rootView) {
         TextView usernameTextView = (TextView) rootView.findViewById(R.id.user_name_text_view);
         TextView userCityTextView = (TextView) rootView.findViewById(R.id.user_city_text_view);
+        CircleImageView userImageView = (CircleImageView) rootView.findViewById(R.id.user_image_view);
 
+        userImageView.setImageBitmap(this.getUserPhoto());
         usernameTextView.setText(this.getUserNameFromSingleton());
         userCityTextView.setText(this.getUserCityFromSingleton());
+
+
 
     }
 
@@ -129,5 +138,18 @@ public class ProfileFragment extends Fragment {
         }
 
         return city;
+    }
+
+    private Bitmap getUserPhoto() {
+        Bitmap userPhotoBitmap;
+
+        try {
+            userPhotoBitmap = ImageUtil.StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+        }
+        catch (Exception e){
+            userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.ic_person_giant)).getBitmap();
+        }
+
+        return userPhotoBitmap;
     }
 }

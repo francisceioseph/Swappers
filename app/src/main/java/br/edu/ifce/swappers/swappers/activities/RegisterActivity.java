@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import java.util.regex.Pattern;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
+import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.ImageUtil;
 import br.edu.ifce.swappers.swappers.util.RegisterTask;
@@ -200,11 +202,14 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     private void callAsyncTask(String name, String email, String usePassword){
         RegisterTask registerTask = new RegisterTask(this,this);
+        User user = new User(name, email, usePassword);
+
         if(userPhotoBitmap!=null) {
-            registerTask.execute(name, email, usePassword, ImageUtil.BitMapToString(userPhotoBitmap));
-        }else {
-            registerTask.execute(name, email, usePassword);
+            user.setPhoto2(ImageUtil.BitMapToString(userPhotoBitmap));
+            Log.i("USER-LOGIN-TAG-AWASOME", ImageUtil.BitMapToString(userPhotoBitmap));
         }
+
+        registerTask.execute(user);
     }
 
     private boolean validationRegistryUser(String name, String email, String usePassword, String passwordConfirmation){

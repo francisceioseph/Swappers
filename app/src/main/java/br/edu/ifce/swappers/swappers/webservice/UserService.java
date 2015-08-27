@@ -27,12 +27,12 @@ public class UserService {
     private static final String URL_LOGIN_SERVICE    = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/dologin";
     private static final String URL_GET_USER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/users";
 
-    public static int registerUserWithWS(String name, String email, String pwd,String photo) {
+    public static int registerUserWithWS(User user) {
         int status_code = 0;
             try {
                 URL url = new URL(URL_REGISTER_SERVICE);
 
-                JSONObject jsonParam = fillParamJson(name, email, pwd, photo);
+                JSONObject jsonParam = fillParamJson(user);
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(15000);
@@ -66,15 +66,13 @@ public class UserService {
         return status_code;
     }
 
-    private static JSONObject fillParamJson(String name, String email, String pwd,String photo) throws JSONException, UnsupportedEncodingException {
+    private static JSONObject fillParamJson(User user) throws JSONException, UnsupportedEncodingException {
         JSONObject jsonParam = new JSONObject();
-        jsonParam.put("username", name);
-        jsonParam.put("email", email);
-        jsonParam.put("password", pwd);
+        jsonParam.put("username", user.getName());
+        jsonParam.put("email", user.getEmail());
+        jsonParam.put("password", user.getPassword());
+        jsonParam.put("photo2", user.getPhoto2());
 
-        if (!photo.equals("null")){
-            jsonParam.put("photo", ImageUtil.StringToByte(photo));
-        }
         return jsonParam;
     }
 
@@ -192,11 +190,11 @@ public class UserService {
 
     private static User parseUserFromJSON(JSONObject jsonObject) throws JSONException{
         User user = new User();
-        String codedPhoto = jsonObject.getString("photo");
+        String codedPhoto = jsonObject.getString("photo2");
+        Log.i("USER-LOGIN-TAG-AWASOME", codedPhoto);
 
-//        user.setPhoto(ImageUtil.StringToBitMap(codedPhoto).toString().getBytes());
-//        Log.i("USER-LOGIN-TAG-AWASOME", ImageUtil.StringToBitMap(codedPhoto).toString());
 
+        user.setPhoto2(codedPhoto);
         user.setId(jsonObject.getInt("id"));
         user.setName(jsonObject.getString("username"));
         user.setEmail(jsonObject.getString("email"));
