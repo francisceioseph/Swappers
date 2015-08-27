@@ -19,6 +19,7 @@ import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
 import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
+import br.edu.ifce.swappers.swappers.model.Place;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +29,7 @@ public class AvailableBooksFragment extends Fragment implements RecycleViewOnCli
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     ArrayList<Book> dataSource;
+    Place place;
 
     public AvailableBooksFragment() {
     }
@@ -41,7 +43,11 @@ public class AvailableBooksFragment extends Fragment implements RecycleViewOnCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_available_books, container, false);
-        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(getActivity(),dataSource);
+
+        Intent currentIntent = getActivity().getIntent();
+        place = (Place) currentIntent.getSerializableExtra("SELECTED_BOOK_PLACE");
+
+        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(getActivity(),(ArrayList)place.getBooks());
         adapter.setRecycleViewOnClickListenerHack(this);
 
         this.layoutManager = new LinearLayoutManager(getActivity());
@@ -58,7 +64,7 @@ public class AvailableBooksFragment extends Fragment implements RecycleViewOnCli
 
     @Override
     public void onClickListener(View view, int position) {
-        Intent detailBookFragmentIntent = new Intent(this.getActivity().getApplicationContext(),DetailBookActivity.class);
+        Intent detailBookFragmentIntent = new Intent(this.getActivity().getApplicationContext(), DetailBookActivity.class);
         this.startActivity(detailBookFragmentIntent);
     }
 }
