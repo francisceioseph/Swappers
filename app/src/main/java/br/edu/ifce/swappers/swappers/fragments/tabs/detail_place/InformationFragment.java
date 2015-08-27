@@ -50,15 +50,7 @@ public class InformationFragment extends Fragment {
         neighborhoodAndCity.setText(place.getDistrict()+", "+place.getCity());
         stateAndCountry.setText(place.getStates()+", "+"Brasil");
         businessHoursDescription.setText(place.getHour_func());
-
-        /**
-        Bundle extras = getActivity().getIntent().getExtras();
-
-        streetAddress.setText(extras.getString("streetnumber"));
-        neighborhoodAndCity.setText(extras.getString("neighborcity"));
-        stateAndCountry.setText(extras.getString("statecountry"));
-        businessHoursDescription.setText(extras.getString("hourfunc"));
-        **/
+        
         return rootView;
     }
 

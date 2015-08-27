@@ -43,13 +43,11 @@
             android:name=".activities.SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/SWTheme" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".activities.LoginActivity"
@@ -71,7 +69,7 @@
         <activity
             android:name=".activities.SearchViewActivity"
             android:label="@string/title_activity_main"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:theme="@style/SWTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -84,16 +82,17 @@
         <activity
             android:name=".activities.DetailBookActivity"
             android:label="@string/title_activity_detail_book"
-            android:launchMode="singleTop"
-            android:parentActivityName=".activities.MainActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activities.SearchViewActivity"
             android:theme="@style/SWTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+                android:value="br.edu.ifce.swappers.swappers.activities.SearchViewActivity" />
         </activity>
         <activity
             android:name=".activities.DetailPlaceActivity"
             android:label="@string/title_activity_detail_place"
+            android:launchMode="singleInstance"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/SWTheme" >
             <meta-data
@@ -116,12 +115,20 @@
         <activity
             android:name=".activities.ReaderCommentActivity"
             android:label="@string/title_activity_reader_comment"
-            android:parentActivityName=".activities.DetailBookActivity">
+            android:launchMode="singleInstance"
+            android:parentActivityName=".activities.DetailBookActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.DetailBookActivity" />
         </activity>
-
+        <activity
+            android:name=".activities.DonationsListPointActivity"
+            android:label="@string/title_activity_donations_list_point"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.ImageUtil;
 
 /**
@@ -23,14 +24,15 @@ import br.edu.ifce.swappers.swappers.util.ImageUtil;
 public class UserService {
 
     private static final String URL_REGISTER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login";
-    private static final String URL_LOGIN_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/dologin";
+    private static final String URL_LOGIN_SERVICE    = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/dologin";
+    private static final String URL_GET_USER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/users";
 
-    public static int registerUserWithWS(String name, String email, String pwd,String photo) {
+    public static int registerUserWithWS(User user) {
         int status_code = 0;
             try {
                 URL url = new URL(URL_REGISTER_SERVICE);
 
-                JSONObject jsonParam = fillParamJson(name, email, pwd, photo);
+                JSONObject jsonParam = fillParamJson(user);
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(15000);
@@ -64,15 +66,13 @@ public class UserService {
         return status_code;
     }
 
-    private static JSONObject fillParamJson(String name, String email, String pwd,String photo) throws JSONException, UnsupportedEncodingException {
+    private static JSONObject fillParamJson(User user) throws JSONException, UnsupportedEncodingException {
         JSONObject jsonParam = new JSONObject();
-        jsonParam.put("username", name);
-        jsonParam.put("email", email);
-        jsonParam.put("password", pwd);
+        jsonParam.put("username", user.getName());
+        jsonParam.put("email", user.getEmail());
+        jsonParam.put("password", user.getPassword());
+        jsonParam.put("photo2", user.getPhoto2());
 
-        if (!photo.equals("null")){
-            jsonParam.put("photo", ImageUtil.StringToByte(photo));
-        }
         return jsonParam;
     }
 
@@ -135,5 +135,71 @@ public class UserService {
         stringBuilder.append(pwd);
 
         return stringBuilder.toString();
+    }
+
+    public static User getUserFromWS(String email, String password) {
+        User user = null;
+
+        URL url = null;
+        HttpURLConnection conn = null;
+
+        try {
+            String urlLogin = buildURLtoLogin(URL_GET_USER_SERVICE,email,password);
+            url = new URL(urlLogin);
+
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setDoInput(true);
+
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.connect();
+
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                        conn.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                in.close();
+
+                Log.i("USER-LOGIN-TAG-AWASOME", response.toString());
+                JSONObject jsonObject = new JSONObject(response.toString());
+                user = parseUserFromJSON(jsonObject);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }finally {
+            conn.disconnect();
+        }
+
+
+        return user;
+    }
+
+    private static User parseUserFromJSON(JSONObject jsonObject) throws JSONException{
+        User user = new User();
+        String codedPhoto = jsonObject.getString("photo2");
+        Log.i("USER-LOGIN-TAG-AWASOME", codedPhoto);
+
+
+        user.setPhoto2(codedPhoto);
+        user.setId(jsonObject.getInt("id"));
+        user.setName(jsonObject.getString("username"));
+        user.setEmail(jsonObject.getString("email"));
+        user.setPassword(jsonObject.getString("password"));
+
+        return user;
     }
 }

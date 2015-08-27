@@ -59,6 +59,7 @@ public class DetailPlaceActivity extends AppCompatActivity {
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+
         if (toolbar != null){
             this.setSupportActionBar(toolbar);
 
