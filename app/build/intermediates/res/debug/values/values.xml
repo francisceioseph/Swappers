@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:ns1="http://schemas.android.com/apk/res/android">
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
     <!-- From: file:/C:/Users/Bolsista/Desktop/Joamila/Git-Swappers/SWAPPERS-Atual/Swappers/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
@@ -662,7 +662,7 @@ available. Please contact the developer for assistance.</string>
     <string name="times_donated_books">Donated XX times</string>
     <string name="times_retrieved_books">Retrieved XX times</string>
     <string name="title_activity_detail_book">DetailBookActivity</string>
-    <string name="title_activity_detail_place">DetailPlaceActivity</string>
+    <string name="title_activity_detail_place">Detail Place</string>
     <string name="title_activity_login">Sign In</string>
     <string name="title_activity_main">Books</string>
     <string name="title_activity_main_activity2">MainActivity2Activity</string>

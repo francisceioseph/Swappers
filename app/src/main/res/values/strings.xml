@@ -21,7 +21,7 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_detail_book">DetailBookActivity</string>
-    <string name="title_activity_detail_place">DetailPlaceActivity</string>
+    <string name="title_activity_detail_place">Detail Place</string>
     <string name="logo_description">Swappers Logo</string>
     <string name="userPhotoDialogTitle">Profile Picture</string>
     <string name="see_places_of_near_book">SEE PLACES ON MAP</string>
