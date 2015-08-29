@@ -175,7 +175,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     position_2 = marker.getPosition();
                     if (position_1.equals(position_2)){
                         if(AndroidUtils.isNetworkAvailable(getActivity()))
-                            makePlaceTask(marker.getSnippet());
+                            makePlaceTask(marker.getId());
                         else{
                             Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -195,6 +195,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         MarkerAsyncTask task = new MarkerAsyncTask(getActivity(),this);
         task.execute(mapPlaceMarker.get(markerId));
     }
+
     public View.OnClickListener findNearPlaceOnMap(){
         return new View.OnClickListener() {
             int countPlace = 0;
@@ -239,8 +240,13 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 Marker marker = mapPlace.addMarker(new MarkerOptions().position(coordinate)
                         .title(placesCity.get(i).getName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                marker.setSnippet(String.valueOf(i));
-                mapPlaceMarker.put(marker.getSnippet(), placesCity.get(i).getId());
+
+                int total_books = placesCity.get(i).getDonation() - placesCity.get(i).getRecovered();
+                if(total_books == 0) marker.setSnippet("Não há livros aqui, no momento. Faça uma doação!");
+                else if(total_books == 1) marker.setSnippet("Há 1 livro disponível aqui.");
+                else marker.setSnippet("Há " + String.valueOf(total_books) + " livros disponíveis aqui.");
+
+                mapPlaceMarker.put(marker.getId(), placesCity.get(i).getId());
             }
         }
     }

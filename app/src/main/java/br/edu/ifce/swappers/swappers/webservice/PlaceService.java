@@ -122,6 +122,8 @@ public class PlaceService {
             placeUnique.setCity(jsonItems.get("city").toString());
             placeUnique.setLatitude(jsonItems.getDouble("latitude"));
             placeUnique.setLongitude(jsonItems.getDouble("longitude"));
+            placeUnique.setDonation(jsonItems.getInt("donation"));
+            placeUnique.setRecovered(jsonItems.getInt("recovered"));
             placeList.add(placeUnique);
 
         } else if(!jsonPlace.isEmpty() && count > 2){
@@ -137,12 +139,11 @@ public class PlaceService {
                 place.setName(jsonItems.get("name").toString());
                 place.setLatitude(jsonItems.getDouble("latitude"));
                 place.setLongitude(jsonItems.getDouble("longitude"));
+                place.setDonation(jsonItems.getInt("donation"));
+                place.setRecovered(jsonItems.getInt("recovered"));
                 placeList.add(place);
             }
         }
-
-
-        //Log.i("TAG-PLACE", json.toString());
 
         return placeList;
     }

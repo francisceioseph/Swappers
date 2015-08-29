@@ -94,7 +94,7 @@ public class MarkerService {
         JSONArray jsonArray;
         Place placeInformation = new Place();
 
-        List<Book> books = new ArrayList<>();
+        List<Book> books = new ArrayList<Book>();
 
         json = new JSONObject(jsonPlace);
 
@@ -109,6 +109,8 @@ public class MarkerService {
         placeInformation.setHour_func(json.getString("hour_func"));
         placeInformation.setLatitude(json.getDouble("latitude"));
         placeInformation.setLongitude(json.getDouble("longitude"));
+        placeInformation.setDonation(json.getInt("donation"));
+        placeInformation.setRecovered(json.getInt("recovered"));
         placeInformation.setPhoto2(new String(json.getString("photo").getBytes(Charset.forName("UTF-8"))));
 
         Log.i("PHOTO-BYTES-PLACE", String.valueOf(json.getString("photo").getBytes(Charset.forName("UTF-8"))));

@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId 'br.edu.ifce.swappers.swappers'
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
     }
@@ -51,5 +51,4 @@ dependencies {
     //DateTimePicker
     compile 'com.github.flavienlaurent.datetimepicker:library:0.0.2'
     compile 'com.android.support:design:22.2.0'
-
 }
