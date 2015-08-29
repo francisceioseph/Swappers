@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
 import br.edu.ifce.swappers.swappers.activities.MainActivity;
@@ -232,7 +233,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 17));
     }
 
-    private void setUpMarkers(List<Place> placesCity){
+    private void setUpMarkers(ArrayList<Place> placesCity){
         if(!placesCity.isEmpty()) {
             for (int i = 0; i < placesCity.size(); i++) {
                 LatLng coordinate = new LatLng(placesCity.get(i).getLatitude(), placesCity.get(i).getLongitude());
@@ -241,12 +242,17 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
                 marker.setSnippet(String.valueOf(i));
                 mapPlaceMarker.put(marker.getSnippet(), placesCity.get(i).getId());
+
+                Log.i("PLACENEAR", placesCity.get(i).getName());
             }
         }
+        //Log.i("PLACENEAR",placesCity.get(i).getName());
+
     }
 
+
     @Override
-    public void updatePlaceNear(List<Place> placeList) {
+    public void updatePlaceNear(ArrayList<Place> placeList) {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 

@@ -58,6 +58,7 @@ public class DetailBookActivity extends AppCompatActivity{
         photoBook = (CircleImageView) findViewById(R.id.photoBook);
 
 
+
         book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -211,7 +212,8 @@ public class DetailBookActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent donateListPointIntent = new Intent(getApplicationContext(), DonationsListPointActivity.class);
-                donateListPointIntent.putExtra(AndroidUtils.BOOK_INTENT_CODE_ID, AndroidUtils.BOOK_DONATION_INTENT_CODE);
+              //  donateListPointIntent.putExtra(AndroidUtils.BOOK_INTENT_CODE_ID, AndroidUtils.BOOK_DONATION_INTENT_CODE);
+                donateListPointIntent.putExtra(AndroidUtils.SELECTED_BOOK_ID, book);
 
                 startActivity(donateListPointIntent);
 

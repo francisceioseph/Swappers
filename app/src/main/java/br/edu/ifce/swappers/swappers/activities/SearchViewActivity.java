@@ -189,7 +189,7 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
         intentDetailBookActivity.putExtra(AndroidUtils.SELECTED_BOOK_ID, book);
         startActivity(intentDetailBookActivity);
 
-        Log.i("GET BOOK", book.getTitle());
+
 
     }
 

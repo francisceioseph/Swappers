@@ -37,7 +37,7 @@ public class SynopsisFragment extends Fragment {
         fragmentActivity = super.getActivity();
         currentIntent = fragmentActivity.getIntent();
         book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
-        synopsisText.setText(book.getDescription());
+        synopsisText.setText(book.getSynopsis());
 
         return rootView;
     }

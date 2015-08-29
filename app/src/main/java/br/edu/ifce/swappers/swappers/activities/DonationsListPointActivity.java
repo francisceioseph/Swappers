@@ -10,31 +10,45 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
+import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.DonationTask;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.UserPosition;
+import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;
 
 public class DonationsListPointActivity extends AppCompatActivity implements RecycleViewOnClickListenerHack {
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
+    Book book;
+    Place place;
+    DonationsListPointRecyclerViewAdapter adapter;
 
     ArrayList<Place> dataSource;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donations_list_point);
+
+        Intent currentIntent = getIntent();
+        book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
+
 
         UserPosition userPosition;
 
@@ -55,11 +69,11 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         Intent currentIntent = getIntent();
         int intentCode = currentIntent.getIntExtra("INTENT_CODE", 0);
 
-        alertDonateInThePlace = this.makeConfirmDialog();
+        alertDonateInThePlace = this.makeConfirmDialog(position);
         alertDonateInThePlace.show();
     }
 
-    private AlertDialog makeConfirmDialog(){
+ /*   private AlertDialog makeConfirmDialog(int posRecycleView){
         AlertDialog dialog = null;
         Intent currentIntent = getIntent();
         int intentCode = currentIntent.getIntExtra(AndroidUtils.BOOK_INTENT_CODE_ID, 0);
@@ -68,13 +82,20 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
             dialog = this.makeConfirmDialogForBookAdoption();
         }
         else if (intentCode == AndroidUtils.BOOK_DONATION_INTENT_CODE) {
-            dialog = this.makeConfirmDialogForBookDonation();
+            dialog = this.makeConfirmDialogForBookDonation(posRecycleView);
         }
 
         return dialog;
+    }*/
+
+      private AlertDialog makeConfirmDialog(int posRecycleView){
+        AlertDialog dialog = null;
+        dialog = this.makeConfirmDialogForBookDonation(posRecycleView);
+        return dialog;
     }
 
-    private AlertDialog makeConfirmDialogForBookDonation() {
+
+    private AlertDialog makeConfirmDialogForBookDonation(final int posRecycleView) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.SWDialogTheme);
 
         builder.setTitle("Do you wish donate this book in this place?");
@@ -88,14 +109,15 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
 
         builder.setPositiveButton("DONATE", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getApplicationContext(), "This book has been donated by you! <3", Toast.LENGTH_SHORT).show();
-
+                initDonate(posRecycleView);
                 onBackPressed();
+
             }
         });
 
         return builder.create();
     }
+
 
     private AlertDialog makeConfirmDialogForBookAdoption(){
 
@@ -113,12 +135,24 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         builder.setPositiveButton("ADOPT", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 SwappersToast.makeText(getApplicationContext(), "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
-
                 onBackPressed();
             }
         });
 
         return builder.create();
+    }
+
+    public void initDonate(int posRecycleview){
+        User user = new User();
+        user.setId(MockSingleton.INSTANCE.user.getId());
+        Place place = new Place();
+        place.setId(adapter.getItemID(posRecycleview));
+
+        book.setPlace(place);
+        user.setBook(book);
+
+        DonationTask donationTask = new DonationTask(getApplicationContext());
+        donationTask.execute(user);
     }
 
     private void initToolbar() {
@@ -134,14 +168,16 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
     }
 
     private void initRecyclerView(UserPosition userPosition) {
+        dataSource = PlaceSingleton.getInstance().getPlaces();
 
-        dataSource = MockSingleton.INSTANCE.createMockedPlaceDataSource(userPosition.getLatitude(), userPosition.getLongitude());
 
-        DonationsListPointRecyclerViewAdapter adapter = new DonationsListPointRecyclerViewAdapter(dataSource);
+        adapter = new DonationsListPointRecyclerViewAdapter(dataSource);
         adapter.setRecycleViewOnClickListenerHack(this);
+
 
         this.layoutManager = new LinearLayoutManager(this);
         this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
 
         this.recyclerView.setHasFixedSize(true);
         this.recyclerView.setLayoutManager(layoutManager);

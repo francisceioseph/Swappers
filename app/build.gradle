@@ -50,6 +50,10 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.3.4'
     //DateTimePicker
     compile 'com.github.flavienlaurent.datetimepicker:library:0.0.2'
+    //Material design
     compile 'com.android.support:design:22.2.0'
+    //Gson
+    compile 'com.google.code.gson:gson:2.3.1'
+
 
 }

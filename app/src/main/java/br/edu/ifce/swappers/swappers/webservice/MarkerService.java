@@ -122,7 +122,7 @@ public class MarkerService {
                     book.setId(jsonArray.getJSONObject(i).getString("id"));
                     book.setAuthor(jsonArray.getJSONObject(i).getString("author"));
                     book.setPublisher(jsonArray.getJSONObject(i).getString("publisher"));
-                    book.setDescription(jsonArray.getJSONObject(i).getString("synopsis"));
+                    book.setSynopsis(jsonArray.getJSONObject(i).getString("synopsis"));
                     book.setPhoto(jsonArray.getJSONObject(i).getString("photo"));
                     book.setTitle(jsonArray.getJSONObject(i).getString("title"));
                     book.setEvaluationAvarage((float) jsonArray.getJSONObject(i).getDouble("evaluationAverage"));
@@ -134,7 +134,7 @@ public class MarkerService {
                 book.setId(jsonItems.getString("id"));
                 book.setAuthor(jsonItems.getString("author"));
                 book.setPublisher(jsonItems.getString("publisher"));
-                book.setDescription(jsonItems.getString("synopsis"));
+                book.setSynopsis(jsonItems.getString("synopsis"));
                 book.setPhoto(jsonItems.getString("photo"));
                 book.setTitle(jsonItems.getString("title"));
                 book.setEvaluationAvarage((float) jsonItems.getDouble("evaluationAverage"));
