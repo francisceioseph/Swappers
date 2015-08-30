@@ -111,7 +111,7 @@ public class PlaceService {
             if(jsonPlace.charAt(i) == '}') count++;
         }
 
-        if(!jsonPlace.isEmpty() && count == 2){
+        if(!jsonPlace.isEmpty() && count == 3){
             json = new JSONObject(jsonPlace);
             jsonItems = (JSONObject)json.get("place");
 
