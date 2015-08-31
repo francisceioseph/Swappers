@@ -27,12 +27,12 @@ public class ListenerGPS implements LocationListener {
         longitudeUser = (float)location.getLongitude();
         userPosition = new LatLng(latitudeUser, longitudeUser);
 
-        if (changeZoom < 1) {
-            PlacesFragment.getMapPlace().addMarker(new MarkerOptions().position(userPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
-            PlacesFragment.getMapPlace().moveCamera(CameraUpdateFactory.newLatLngZoom(userPosition, 16));
-            PlacesFragment.getMapPlace().animateCamera(CameraUpdateFactory.zoomTo(14), 500, null);
-            changeZoom++;
-        }
+        //if (changeZoom < 1) {
+            //PlacesFragment.getMapPlace().addMarker(new MarkerOptions().position(userPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
+            //PlacesFragment.getMapPlace().moveCamera(CameraUpdateFactory.newLatLngZoom(userPosition, 16));
+            //PlacesFragment.getMapPlace().animateCamera(CameraUpdateFactory.zoomTo(14), 500, null);
+            //changeZoom++;
+        //}
 
     }
 
