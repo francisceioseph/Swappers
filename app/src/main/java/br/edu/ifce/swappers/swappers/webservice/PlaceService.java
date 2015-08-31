@@ -111,7 +111,7 @@ public class PlaceService {
             if(jsonPlace.charAt(i) == '}') count++;
         }
 
-        if(!jsonPlace.isEmpty() && count == 2){
+        if(!jsonPlace.isEmpty() && count == 4){
             json = new JSONObject(jsonPlace);
             jsonItems = (JSONObject)json.get("place");
 
@@ -126,7 +126,7 @@ public class PlaceService {
             placeUnique.setRecovered(jsonItems.getInt("recovered"));
             placeList.add(placeUnique);
 
-        } else if(!jsonPlace.isEmpty() && count > 2){
+        } else if(!jsonPlace.isEmpty() && count > 4){
             json = new JSONObject(jsonPlace);
             jsonArray = json.getJSONArray("place");
 

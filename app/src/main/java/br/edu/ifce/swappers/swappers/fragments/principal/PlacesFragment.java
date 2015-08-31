@@ -135,7 +135,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             String city = null;
             String state = null;
             try {
-                addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 3);
+                addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
                 if (addresses.size() > 0){
                     city = addresses.get(0).getLocality();
                     state = addresses.get(0).getAdminArea();
@@ -230,7 +230,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     }
 
     public void showMarker(LatLng position, GoogleMap googleMap){
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 17));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 18));
     }
 
     private void setUpMarkers(List<Place> placesCity){
@@ -242,7 +242,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
                 int total_books = placesCity.get(i).getDonation() - placesCity.get(i).getRecovered();
-                if(total_books == 0) marker.setSnippet("Não há livros aqui, no momento. Faça uma doação!");
+                if(total_books == 0) marker.setSnippet("Não há livros aqui. Faça uma doação!");
                 else if(total_books == 1) marker.setSnippet("Há 1 livro disponível aqui.");
                 else marker.setSnippet("Há " + String.valueOf(total_books) + " livros disponíveis aqui.");
 
@@ -269,9 +269,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 distancePlaces = new DistancePlaces(placeList);
                 placesNear = distancePlaces.calculateNearPlace(myCurrentPosition);
 
-                LatLng placeNow = new LatLng(placesNear.get(0).getLatitude(), placesNear.get(0).getLongitude());
+                getMapPlace().addMarker(new MarkerOptions().position(myCurrentPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
+                getMapPlace().moveCamera(CameraUpdateFactory.newLatLngZoom(myCurrentPosition, 18));
 
-                showMarker(placeNow, mapPlace);
             }else{
                 Toast toast = SwappersToast.makeText(getActivity(), "Desculpe-nos! Ainda não há pontos de troca em sua cidade.", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
