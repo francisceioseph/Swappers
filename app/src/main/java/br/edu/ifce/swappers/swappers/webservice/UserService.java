@@ -19,7 +19,6 @@ import java.net.URL;
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.util.ImageUtil;
 
 /**
  * Created by francisco on 29/05/15.

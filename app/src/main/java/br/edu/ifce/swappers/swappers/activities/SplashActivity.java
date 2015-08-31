@@ -7,10 +7,7 @@ import android.os.Handler;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.util.TaskInterface;
-import br.edu.ifce.swappers.swappers.util.UserTask;
 
 
 public class SplashActivity extends Activity{

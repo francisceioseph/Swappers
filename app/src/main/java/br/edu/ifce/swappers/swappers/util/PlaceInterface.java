@@ -1,7 +1,6 @@
 package br.edu.ifce.swappers.swappers.util;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Place;
 

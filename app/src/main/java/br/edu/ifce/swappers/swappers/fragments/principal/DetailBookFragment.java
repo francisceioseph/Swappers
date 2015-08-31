@@ -16,7 +16,6 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
-import br.edu.ifce.swappers.swappers.model.Book;
 
 /**
  * A simple {@link Fragment} subclass.

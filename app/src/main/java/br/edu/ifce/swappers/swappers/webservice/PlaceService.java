@@ -1,8 +1,6 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,10 +17,8 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Place;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
  * Created by gracyane and joamila on 19/08/2015.

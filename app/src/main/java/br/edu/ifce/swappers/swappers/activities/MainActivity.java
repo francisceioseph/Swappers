@@ -14,7 +14,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -24,7 +23,6 @@ import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.ProfileFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.SettingsFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.StatisticsFragment;
-import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.ImageUtil;
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;

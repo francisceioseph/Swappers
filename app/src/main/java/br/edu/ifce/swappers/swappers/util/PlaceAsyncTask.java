@@ -3,14 +3,9 @@ package br.edu.ifce.swappers.swappers.util;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;

@@ -3,7 +3,6 @@ package br.edu.ifce.swappers.swappers;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Comment;
