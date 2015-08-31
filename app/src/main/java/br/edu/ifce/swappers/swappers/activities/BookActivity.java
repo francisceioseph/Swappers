@@ -31,9 +31,17 @@ public class BookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book);
 
         initTabHost();
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Books");
+        initToolbar();
 
+    }
+
+    private void initToolbar() {
+        if (toolbar != null){
+            this.setSupportActionBar(toolbar);
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            this.getSupportActionBar().setHomeButtonEnabled(true);
+
+        }
     }
 
     private void initTabHost() {
@@ -42,14 +50,14 @@ public class BookActivity extends AppCompatActivity {
         this.tabHost.setup(this, this.getSupportFragmentManager(), android.R.id.tabcontent);
 
 
-        TabHost.TabSpec synopsisTab     = this.tabHost.newTabSpec("synopsisTab");
-        TabHost.TabSpec readersCommentsTab   = this.tabHost.newTabSpec("readersCommentsTab");
+        TabHost.TabSpec nearBooksTab     = this.tabHost.newTabSpec("nearBooksTab");
+        TabHost.TabSpec recommendationsTab   = this.tabHost.newTabSpec("recommendationsTab");
 
-        synopsisTab.setIndicator("SYNOPSES");
-        readersCommentsTab.setIndicator("READERS COMMENTS");
+        nearBooksTab.setIndicator("NEAR BOOKS");
+        recommendationsTab.setIndicator("RECOMMENDATIONS");
 
-        this.tabHost.addTab(synopsisTab, SynopsisFragment.class, null);
-        this.tabHost.addTab(readersCommentsTab, ReadersCommentsFragment.class, null);
+        this.tabHost.addTab(nearBooksTab, NearBooksFragment.class, null);
+        this.tabHost.addTab(recommendationsTab, RecommendationsFragment.class, null);
 
         this.tabHost.setCurrentTab(1);
 

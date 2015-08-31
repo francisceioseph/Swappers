@@ -4,19 +4,25 @@ package br.edu.ifce.swappers.swappers.fragments.tabs.books;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
+import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
+import br.edu.ifce.swappers.swappers.util.ImageUtil;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NearBooksFragment extends Fragment {
@@ -30,7 +36,10 @@ public class NearBooksFragment extends Fragment {
     TextView titleNearBookTextView;
     TextView authorsNearBookTextView;
 
-    List<Place> nearPlaces;
+    List<Place> nearPlaces = MockSingleton.INSTANCE.placesNear;
+    List<Book> nearBooks = new ArrayList<Book>();
+    List<Integer> idPlaces = new ArrayList<>();
+    int indexBook = 0;
 
     public NearBooksFragment() {
 
@@ -38,11 +47,32 @@ public class NearBooksFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_near_books, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {        View rootView = inflater.inflate(R.layout.fragment_near_books, container, false);
 
         this.initViewComponents(rootView);
         this.initViewListeners();
+
+
+        if (nearPlaces!=null) {
+            for (int i = 0; i < nearPlaces.size(); i++) {
+                if (nearPlaces.get(i).getBooks().size()>0) {
+                    nearBooks.addAll(nearPlaces.get(i).getBooks());
+                    for(int j=0; j<nearPlaces.get(i).getBooks().size(); j++){
+                        idPlaces.add(nearPlaces.get(i).getId());
+                    }
+
+                }
+            }
+        }
+
+        if(!nearBooks.get(0).getPhoto().isEmpty()) {
+            Picasso.with(getActivity()).load(nearBooks.get(0).getPhoto()).into(coverNearBookCircleImageView);
+        }else{
+            Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverNearBookCircleImageView);
+        }
+
+            titleNearBookTextView.setText(nearBooks.get(0).getTitle());
+            authorsNearBookTextView.setText(nearBooks.get(0).getAuthor());
 
         return rootView;
     }
@@ -68,7 +98,26 @@ public class NearBooksFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Opening Map... #SQN", Toast.LENGTH_SHORT).show();;
+                    for (int j=0; j<nearPlaces.size(); j++){
+                        if(idPlaces.get(indexBook) == nearPlaces.get(j).getId()){
+                            Place place =  new Place();
+                            place.setId(nearPlaces.get(j).getId());
+                            place.setName(nearPlaces.get(j).getName());
+                            place.setStreet(nearPlaces.get(j).getStreet());
+                            place.setNumber(nearPlaces.get(j).getNumber());
+                            place.setDistrict(nearPlaces.get(j).getDistrict());
+                            place.setCity(nearPlaces.get(j).getCity());
+                            place.setStates(nearPlaces.get(j).getStates());
+                            place.setCep(nearPlaces.get(j).getCep());
+                            place.setHour_func(nearPlaces.get(j).getHour_func());
+                            place.setPhoto2(nearPlaces.get(j).getPhoto2());
+                            place.setBooks(nearPlaces.get(j).getBooks());
+
+                            Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
+                            detailPlaceActivityIntent.putExtra("SELECTED_BOOK_PLACE", place);
+                            startActivity(detailPlaceActivityIntent);
+                        }
+                    }
             }
         };
     }
@@ -77,16 +126,39 @@ public class NearBooksFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Loading previous book... #SQN", Toast.LENGTH_SHORT).show();;
+
+                indexBook--;
+                if (indexBook<=0) indexBook = nearBooks.size()-1;
+
+                titleNearBookTextView.setText(nearBooks.get(indexBook).getTitle());
+                authorsNearBookTextView.setText(nearBooks.get(indexBook).getAuthor());
+
+                if(!nearBooks.get(indexBook).getPhoto().isEmpty()) {
+                    Picasso.with(getActivity()).load(nearBooks.get(indexBook).getPhoto()).into(coverNearBookCircleImageView);
+                }else{
+                    Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverNearBookCircleImageView);
+                }
             }
         };
     }
 
     private View.OnClickListener nextNearBookClickListener() {
         return new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Opening next book... #SQN", Toast.LENGTH_SHORT).show();;
+                indexBook++;
+                if(indexBook>nearBooks.size()-1) indexBook = 0;
+
+                titleNearBookTextView.setText(nearBooks.get(indexBook).getTitle());
+                authorsNearBookTextView.setText(nearBooks.get(indexBook).getAuthor());
+
+                if(!nearBooks.get(indexBook).getPhoto().isEmpty()) {
+                    Picasso.with(getActivity()).load(nearBooks.get(indexBook).getPhoto()).into(coverNearBookCircleImageView);
+                }else{
+                    Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverNearBookCircleImageView);
+                }
+
             }
         };
     }

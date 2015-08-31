@@ -9,5 +9,5 @@ import br.edu.ifce.swappers.swappers.model.Place;
  */
 public interface PlaceInterface {
     public void updatePlaceNear(List<Place> placeList);
-    public void getDetailPlace(Place placeInformation);
+    public void getDetailPlace(List<Place> placeInformation,String makerId);
 }

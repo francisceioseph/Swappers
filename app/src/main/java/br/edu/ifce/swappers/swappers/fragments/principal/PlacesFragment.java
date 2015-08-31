@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
 import br.edu.ifce.swappers.swappers.activities.MainActivity;
@@ -171,14 +172,15 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             public boolean onMarkerClick(Marker marker) {
                 tap = tap + 1;
 
-                if (tap % 2 == 1 && !(position_1.equals(position_2))){
+                if (tap % 2 == 1 && !(position_1.equals(position_2))) {
                     position_1 = marker.getPosition();
                 } else {
                     position_2 = marker.getPosition();
-                    if (position_1.equals(position_2)){
-                        if(AndroidUtils.isNetworkAvailable(getActivity()))
-                            makePlaceTask(marker.getId());
-                        else{
+                    if (position_1.equals(position_2)) {
+                        if (AndroidUtils.isNetworkAvailable(getActivity()))
+                            //makePlaceTask(marker.getId());
+                            getDetailPlace(placesNear,marker.getId());
+                        else {
                             Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
@@ -269,7 +271,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 setUpMarkers(placeList);
 
                 distancePlaces = new DistancePlaces(placeList);
-                placesNear = distancePlaces.calculateNearPlace(myCurrentPosition);
+                MockSingleton.INSTANCE.placesNear = distancePlaces.calculateNearPlace(myCurrentPosition);
+                placesNear = MockSingleton.INSTANCE.placesNear;
 
                 getMapPlace().addMarker(new MarkerOptions().position(myCurrentPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
                 getMapPlace().moveCamera(CameraUpdateFactory.newLatLngZoom(myCurrentPosition, 18));
@@ -283,10 +286,17 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     }
 
     @Override
-    public void getDetailPlace(Place place) {
-        Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
-        detailPlaceActivityIntent.putExtra("SELECTED_BOOK_PLACE",place);
-        startActivity(detailPlaceActivityIntent);
+    public void getDetailPlace(List<Place> places, String idMarker) {
+        Place place = new Place();
+        for (int i=0;i<places.size();i++){
+            if(places.get(i).getId()==mapPlaceMarker.get(idMarker)){
+                place = places.get(i);
+
+                Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
+                detailPlaceActivityIntent.putExtra("SELECTED_BOOK_PLACE", place);
+                startActivity(detailPlaceActivityIntent);
+            }
+        }
     }
 
     @Override

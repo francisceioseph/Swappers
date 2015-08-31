@@ -1,6 +1,7 @@
 package br.edu.ifce.swappers.swappers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Comment;
@@ -14,6 +15,7 @@ public enum MockSingleton {
     INSTANCE;
 
     public User user;
+    public List<Place> placesNear;
 
     public ArrayList<Place> createMockedPlaceDataSource(double latitude, double longitude) {
         ArrayList<Place> dataSource = new ArrayList<>();

@@ -38,7 +38,7 @@ public class MarkerAsyncTask extends AsyncTask<Integer,Double,Place> {
     protected void onPostExecute(Place placeInformation) {
         progressDialog.dismiss();
         if(placeInformation!=null){
-            placeInterface.getDetailPlace(placeInformation);
+            //placeInterface.getDetailPlace(placeInformation);
         }else{
             Toast toast = SwappersToast.makeText(context,"Erro no servidor! Tente novamente mais tarde!", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);

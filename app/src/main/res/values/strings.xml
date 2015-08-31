@@ -134,6 +134,6 @@
 
     <!-- Tela de Lista de Pontos de doação -->
     <string name="List_points_donate_place_near">Donation points near you</string>
-    <string name="title_activity_book">BookActivity</string>
+    <string name="title_activity_book">Books</string>
 
 </resources>
