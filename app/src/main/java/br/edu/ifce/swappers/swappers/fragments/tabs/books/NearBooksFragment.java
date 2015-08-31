@@ -1,6 +1,7 @@
 package br.edu.ifce.swappers.swappers.fragments.tabs.books;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +12,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,6 +29,8 @@ public class NearBooksFragment extends Fragment {
 
     TextView titleNearBookTextView;
     TextView authorsNearBookTextView;
+
+    List<Place> nearPlaces;
 
     public NearBooksFragment() {
 

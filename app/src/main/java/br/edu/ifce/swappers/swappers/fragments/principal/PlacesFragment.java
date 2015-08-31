@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +44,7 @@ import java.util.Map;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
 import br.edu.ifce.swappers.swappers.activities.MainActivity;
+import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
@@ -263,9 +265,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         }else {
             LatLng myCurrentPosition = getMyPosition(locationUser);
 
-            setUpMarkers(placeList);
-
             if(!placeList.isEmpty()) {
+                setUpMarkers(placeList);
+
                 distancePlaces = new DistancePlaces(placeList);
                 placesNear = distancePlaces.calculateNearPlace(myCurrentPosition);
 
