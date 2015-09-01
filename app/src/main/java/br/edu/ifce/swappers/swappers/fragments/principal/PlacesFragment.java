@@ -143,6 +143,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
                 if (addresses.size() > 0){
                     city = addresses.get(0).getLocality();
+                    //city = "Caucaia";
                     state = addresses.get(0).getAdminArea();
                 }
 

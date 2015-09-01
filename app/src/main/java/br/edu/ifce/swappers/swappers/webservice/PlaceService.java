@@ -5,6 +5,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -104,14 +105,24 @@ public class PlaceService {
         JSONObject jsonItems = null;
         List<Place> placeList = new ArrayList<>();
         int count = 0;
-
+        boolean verifyJson = false;
+        /**
         for(int i=0; i<jsonPlace.length(); i++){
             if(jsonPlace.charAt(i) == '}') count++;
         }
 
         Log.i("tagSIZE", String.valueOf(count));
+       **/
+        JSONObject jsonObject = new JSONObject(jsonPlace);
+        JSONObject dataObject = jsonObject.optJSONObject("place");
+        if (dataObject!=null){
+            verifyJson = true;
+        }else {
+            verifyJson = false;
+        }
 
-        if(!jsonPlace.isEmpty() && count == 4){
+        //if(!jsonPlace.isEmpty() && count == 4){
+        if(verifyJson){
             json = new JSONObject(jsonPlace);
             jsonItems = (JSONObject)json.get("place");
 
@@ -131,7 +142,7 @@ public class PlaceService {
             placeUnique.setLongitude(jsonItems.getDouble("longitude"));
             placeUnique.setDonation(jsonItems.getInt("donation"));
             placeUnique.setRecovered(jsonItems.getInt("recovered"));
-            placeUnique.setPhoto2(new String(json.getString("photo").getBytes(Charset.forName("UTF-8"))));
+            placeUnique.setPhoto2(new String(jsonItems.getString("photo").getBytes(Charset.forName("UTF-8"))));
 
             if(jsonItems.has("books")&& jsonItems.toString().contains("[")){
                 JSONArray arrayJson = jsonItems.getJSONArray("books");
@@ -165,7 +176,8 @@ public class PlaceService {
 
             placeList.add(placeUnique);
 
-        } else if(!jsonPlace.isEmpty() && count > 4){
+        //} else if(!jsonPlace.isEmpty() && count > 4){
+        } else {
             json = new JSONObject(jsonPlace);
             jsonArray = json.getJSONArray("place");
             for(int i =0; i<jsonArray.length();i++ ){
