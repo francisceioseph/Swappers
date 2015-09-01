@@ -14,7 +14,6 @@ import android.widget.Toast;
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.util.LoginTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.TaskInterface;
 import br.edu.ifce.swappers.swappers.util.UserTask;
@@ -96,11 +95,15 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        UserTask userTask = new UserTask(this, this);
-        userTask.execute(email, password);
+        if(AndroidUtils.userHasBeenLoaded(this)){
+            MockSingleton.INSTANCE.user = AndroidUtils.loadUser(this);
+        }else {
+            UserTask userTask = new UserTask(this, this);
+            userTask.execute(email, password);
 
 //        LoginTask loginTask = new LoginTask(this,this);
 //        loginTask.execute(email,password);
+        }
     }
 
 }

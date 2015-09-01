@@ -2,8 +2,6 @@ package br.edu.ifce.swappers.swappers.activities;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
@@ -13,13 +11,10 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.AvailableBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
 import br.edu.ifce.swappers.swappers.model.Place;
-import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.ImageUtil;
 import de.hdodenhof.circleimageview.CircleImageView;
 

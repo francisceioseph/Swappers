@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
@@ -37,7 +36,7 @@ public class SynopsisFragment extends Fragment {
         fragmentActivity = super.getActivity();
         currentIntent = fragmentActivity.getIntent();
         book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
-        synopsisText.setText(book.getDescription());
+        synopsisText.setText(book.getSynopsis());
 
         return rootView;
     }

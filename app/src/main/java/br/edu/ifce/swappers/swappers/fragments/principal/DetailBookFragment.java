@@ -25,6 +25,7 @@ public class DetailBookFragment extends Fragment {
     private FragmentTabHost detailBookTabHost;
     private DetailBookActivity detailBookActivity;
 
+
     public DetailBookFragment() {
         // Required empty public constructor
     }

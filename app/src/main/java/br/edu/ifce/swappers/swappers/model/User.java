@@ -17,6 +17,7 @@ public class User implements Serializable{
     private Integer donationNum;
     private byte[] photo;
     private String photo2;
+    private Book book;
     private ArrayList<Book> bookWithdraweList;
     private ArrayList<Book> bookDonationList;
     private ArrayList<Book> bookFavoriteList;
@@ -113,6 +114,14 @@ public class User implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public ArrayList<Book> getBookWithdraweList() {

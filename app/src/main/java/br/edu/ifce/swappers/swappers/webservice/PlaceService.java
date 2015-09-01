@@ -23,6 +23,7 @@ import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
  * Created by gracyane and joamila on 19/08/2015.
@@ -31,10 +32,10 @@ public class PlaceService {
 
     private static final String URL = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/place";
 
-    public static List<Place> getPlaceWS(String city, String states){
+    public static ArrayList<Place> getPlaceWS(String city, String states){
         URL url = null;
         HttpURLConnection conn = null;
-        List<Place> placeList=null;
+        ArrayList<Place> placeList=null;
 
         try {
             String urlPlace = buildURLtoGetPlace(URL,city,states);
@@ -99,11 +100,12 @@ public class PlaceService {
         return stringBuilder.toString();
     }
 
-    private static List<Place> parseJsonToPlace(String jsonPlace) throws JSONException {
+
+    private static ArrayList<Place> parseJsonToPlace(String jsonPlace) throws JSONException {
         JSONArray jsonArray = null;
         JSONObject json = null;
         JSONObject jsonItems = null;
-        List<Place> placeList = new ArrayList<>();
+        ArrayList<Place> placeList = new ArrayList<>();
         int count = 0;
         boolean verifyJson = false;
         /**
@@ -132,52 +134,13 @@ public class PlaceService {
             placeUnique.setId(jsonItems.getInt("id"));
             placeUnique.setName(jsonItems.get("name").toString());
             placeUnique.setCity(jsonItems.get("city").toString());
-            placeUnique.setDistrict(jsonItems.getString("district"));
-            placeUnique.setStates(jsonItems.get("states").toString());
-            placeUnique.setStreet(jsonItems.getString("street"));
-            placeUnique.setNumber(jsonItems.get("number").toString());
-            placeUnique.setCep(jsonItems.get("cep").toString());
-            placeUnique.setHour_func(jsonItems.getString("hour_func"));
             placeUnique.setLatitude(jsonItems.getDouble("latitude"));
             placeUnique.setLongitude(jsonItems.getDouble("longitude"));
             placeUnique.setDonation(jsonItems.getInt("donation"));
             placeUnique.setRecovered(jsonItems.getInt("recovered"));
-            placeUnique.setPhoto2(new String(jsonItems.getString("photo").getBytes(Charset.forName("UTF-8"))));
-
-            if(jsonItems.has("books")&& jsonItems.toString().contains("[")){
-                JSONArray arrayJson = jsonItems.getJSONArray("books");
-
-                for (int i = 0; i<arrayJson.length();i++){
-                    Book book= new Book();
-                    book.setId(arrayJson.getJSONObject(i).getString("id"));
-                    book.setAuthor(arrayJson.getJSONObject(i).getString("author"));
-                    book.setPublisher(arrayJson.getJSONObject(i).getString("publisher"));
-                    book.setDescription(arrayJson.getJSONObject(i).getString("synopsis"));
-                    book.setPhoto(arrayJson.getJSONObject(i).getString("photo"));
-                    book.setTitle(arrayJson.getJSONObject(i).getString("title"));
-                    book.setEvaluationAvarage((float) arrayJson.getJSONObject(i).getDouble("evaluationAverage"));
-                    books.add(book);
-                }
-                placeUnique.setBooks(books);
-            }else if(jsonItems.has("books")){
-                JSONObject jsonItem = json.getJSONObject("books");
-                Book book= new Book();
-                book.setId(jsonItem.getString("id"));
-                book.setAuthor(jsonItem.getString("author"));
-                book.setPublisher(jsonItem.getString("publisher"));
-                book.setDescription(jsonItem.getString("synopsis"));
-                book.setPhoto(jsonItem.getString("photo"));
-                book.setTitle(jsonItem.getString("title"));
-                book.setEvaluationAvarage((float) jsonItem.getDouble("evaluationAverage"));
-                books.add(book);
-
-                placeUnique.setBooks(books);
-            }
-
             placeList.add(placeUnique);
 
-        //} else if(!jsonPlace.isEmpty() && count > 4){
-        } else if(!jsonPlace.isEmpty() &&!verifyJson){
+        } else if(!jsonPlace.isEmpty() && count > 4){
             json = new JSONObject(jsonPlace);
             jsonArray = json.getJSONArray("place");
             for(int i =0; i<jsonArray.length();i++ ){
@@ -209,7 +172,7 @@ public class PlaceService {
                             book.setId(arrayBook.getJSONObject(j).getString("id"));
                             book.setAuthor(arrayBook.getJSONObject(j).getString("author"));
                             book.setPublisher(arrayBook.getJSONObject(j).getString("publisher"));
-                            book.setDescription(arrayBook.getJSONObject(j).getString("synopsis"));
+                            book.setSynopsis(arrayBook.getJSONObject(j).getString("synopsis"));
                             book.setPhoto(arrayBook.getJSONObject(j).getString("photo"));
                             book.setTitle(arrayBook.getJSONObject(j).getString("title"));
                             book.setEvaluationAvarage((float) arrayBook.getJSONObject(j).getDouble("evaluationAverage"));
@@ -222,7 +185,7 @@ public class PlaceService {
                     book.setId(jsonItem.getString("id"));
                     book.setAuthor(jsonItem.getString("author"));
                     book.setPublisher(jsonItem.getString("publisher"));
-                    book.setDescription(jsonItem.getString("synopsis"));
+                    book.setSynopsis(jsonItem.getString("synopsis"));
                     book.setPhoto(jsonItem.getString("photo"));
                     book.setTitle(jsonItem.getString("title"));
                     book.setEvaluationAvarage((float) jsonItem.getDouble("evaluationAverage"));
@@ -233,6 +196,7 @@ public class PlaceService {
                 placeList.add(place);
             }
         }
+
         return placeList;
     }
 }

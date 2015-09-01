@@ -1,5 +1,7 @@
 package br.edu.ifce.swappers.swappers;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +17,9 @@ public enum MockSingleton {
     INSTANCE;
 
     public User user;
-    public List<Place> placesNear;
+    public ArrayList<Place> places = new ArrayList<Place>();
 
-    public ArrayList<Place> createMockedPlaceDataSource(double latitude, double longitude) {
+   /* public ArrayList<Place> createMockedPlaceDataSource(double latitude, double longitude) {
         ArrayList<Place> dataSource = new ArrayList<>();
 
 
@@ -29,6 +31,27 @@ public enum MockSingleton {
 
         }
         return dataSource;
+    }*/
+
+    public ArrayList<Place> createPlace(ArrayList<Place> place) {
+
+        //ArrayList<Place> dataSource = new ArrayList<>();
+        for (int i = 0; i < place.size(); i++){
+
+            this.places.add(place.get(i));
+            Log.i("PLACESNEAR", this.places.get(i).getName());
+
+        }
+        return this.places;
+
+    }
+
+    public ArrayList<Place> getPlaces() {
+        return this.places;
+    }
+
+    public void setPlace(ArrayList<Place> places) {
+        this.places = places;
     }
 
     public ArrayList<Book> createMockedBookDataSource() {

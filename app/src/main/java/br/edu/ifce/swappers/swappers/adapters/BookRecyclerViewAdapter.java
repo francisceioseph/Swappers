@@ -67,6 +67,8 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         viewHolder.bookEvaluationAvarageTextView.setText(String.format("%.1f", book.getEvaluationAvarage()));
         viewHolder.bookUserEvaluationRatingBar.setRating(book.getEvaluationAvarage());
 
+
+
         if(!book.getPhoto().isEmpty()) {
             Picasso.with(context).load(book.getPhoto()).into(viewHolder.bookImageImageView);
         }else{
@@ -86,6 +88,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         private TextView  bookEvaluationAvarageTextView;
         private RatingBar bookUserEvaluationRatingBar;
         private ImageView bookImageImageView;
+
 
 
 
@@ -151,7 +154,6 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         }
 
 
-        
         @Override
         public void onClick(View view) {
             if(mRecycleViewOnClickListenerHack != null){
