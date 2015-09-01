@@ -36,7 +36,7 @@ public class NearBooksFragment extends Fragment {
     TextView titleNearBookTextView;
     TextView authorsNearBookTextView;
 
-    List<Place> nearPlaces = MockSingleton.INSTANCE.placesNear;
+    List<Place> nearPlaces = MockSingleton.INSTANCE.places;
     List<Book> nearBooks = new ArrayList<Book>();
     List<Integer> idPlaces = new ArrayList<>();
     int indexBook = 0;

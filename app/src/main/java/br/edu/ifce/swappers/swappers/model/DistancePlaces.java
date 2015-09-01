@@ -14,11 +14,11 @@ import java.util.List;
  * Created by Joamila on 16/07/2015.
  */
 public class DistancePlaces{
-    private List<Place> places=null;
+    private ArrayList<Place> places=null;
 
     public DistancePlaces(){}
 
-    public DistancePlaces(List<Place> places){
+    public DistancePlaces(ArrayList<Place> places){
         this.places = places;
     }
 
@@ -35,8 +35,8 @@ public class DistancePlaces{
         return locationUser.distanceTo(locationPoint);
     }
 
-    public List<Place> calculateNearPlace(LatLng positionUser){
-        List<Place> placeList = new ArrayList<Place>();
+    public ArrayList<Place> calculateNearPlace(LatLng positionUser){
+        ArrayList<Place> placeList = new ArrayList<Place>();
         double distanceBetweenPlaces;
 
         for (int i=0; i<places.size(); i++){

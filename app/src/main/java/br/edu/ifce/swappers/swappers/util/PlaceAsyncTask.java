@@ -40,6 +40,7 @@ public class PlaceAsyncTask extends AsyncTask<String,String,ArrayList<Place>> {
     @Override
     protected void onPostExecute(ArrayList<Place> placeList) {
         placeInterface.updatePlaceNear(placeList);
+
         placeSingleton = PlaceSingleton.getInstance();
         placeSingleton.setPlaces(placeList);
         progressDialog.dismiss();
