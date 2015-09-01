@@ -12,10 +12,11 @@ public class Book implements Serializable{
     private String publisher;
     private String photo="";
     private String datePublisher;
-    private String description;
+    private String synopsis="";
     private int numberPage;
     private float evaluationAvarage;
     private float userEvaluation;
+    private Place place;
 
     public Book() {
     }
@@ -92,12 +93,12 @@ public class Book implements Serializable{
         this.datePublisher = datePublisher;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSynopsis() {
+        return synopsis;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
     }
 
     public int getNumberPage() {
@@ -106,5 +107,13 @@ public class Book implements Serializable{
 
     public void setNumberPage(int numberPage) {
         this.numberPage = numberPage;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
     }
 }

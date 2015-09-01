@@ -1,8 +1,6 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,10 +17,8 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Place;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
  * Created by gracyane and joamila on 19/08/2015.
@@ -31,10 +27,10 @@ public class PlaceService {
 
     private static final String URL = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/place";
 
-    public static List<Place> getPlaceWS(String city, String states){
+    public static ArrayList<Place> getPlaceWS(String city, String states){
         URL url = null;
         HttpURLConnection conn = null;
-        List<Place> placeList=null;
+        ArrayList<Place> placeList=null;
 
         try {
             String urlPlace = buildURLtoGetPlace(URL,city,states);
@@ -100,18 +96,18 @@ public class PlaceService {
     }
 
 
-    private static List<Place> parseJsonToPlace(String jsonPlace) throws JSONException {
+    private static ArrayList<Place> parseJsonToPlace(String jsonPlace) throws JSONException {
         JSONArray jsonArray = null;
         JSONObject json = null;
         JSONObject jsonItems = null;
-        List<Place> placeList = new ArrayList<>();
+        ArrayList<Place> placeList = new ArrayList<>();
         int count = 0;
 
         for(int i=0; i<jsonPlace.length(); i++){
             if(jsonPlace.charAt(i) == '}') count++;
         }
 
-        if(!jsonPlace.isEmpty() && count == 4){
+        if(!jsonPlace.isEmpty() && count == 3){
             json = new JSONObject(jsonPlace);
             jsonItems = (JSONObject)json.get("place");
 
@@ -120,13 +116,19 @@ public class PlaceService {
             placeUnique.setId(jsonItems.getInt("id"));
             placeUnique.setName(jsonItems.get("name").toString());
             placeUnique.setCity(jsonItems.get("city").toString());
+            placeUnique.setDistrict(jsonItems.get("district").toString());
+            placeUnique.setNumber(jsonItems.get("number").toString());
+            placeUnique.setStreet(jsonItems.get("street").toString());
+            placeUnique.setCep(jsonItems.get("cep").toString());
+            placeUnique.setStates(jsonItems.get("states").toString());
+            placeUnique.setRecovered(jsonItems.getInt("recovered"));
+            placeUnique.setDonation(jsonItems.getInt("donation"));
+
             placeUnique.setLatitude(jsonItems.getDouble("latitude"));
             placeUnique.setLongitude(jsonItems.getDouble("longitude"));
-            placeUnique.setDonation(jsonItems.getInt("donation"));
-            placeUnique.setRecovered(jsonItems.getInt("recovered"));
             placeList.add(placeUnique);
 
-        } else if(!jsonPlace.isEmpty() && count > 4){
+        } else if(!jsonPlace.isEmpty() && count > 2){
             json = new JSONObject(jsonPlace);
             jsonArray = json.getJSONArray("place");
 
@@ -135,16 +137,20 @@ public class PlaceService {
                 jsonItems = jsonArray.getJSONObject(i);
 
                 place.setId(jsonItems.getInt("id"));
-                place.setCity(jsonItems.get("city").toString());
                 place.setName(jsonItems.get("name").toString());
+                place.setCity(jsonItems.get("city").toString());
+
+                place.setStreet(jsonItems.get("street").toString());
+                place.setNumber(jsonItems.get("number").toString());
+                place.setCep(jsonItems.get("cep").toString());
+                place.setDistrict(jsonItems.get("district").toString());
+
                 place.setLatitude(jsonItems.getDouble("latitude"));
                 place.setLongitude(jsonItems.getDouble("longitude"));
-                place.setDonation(jsonItems.getInt("donation"));
-                place.setRecovered(jsonItems.getInt("recovered"));
                 placeList.add(place);
             }
         }
-
+        
         return placeList;
     }
 

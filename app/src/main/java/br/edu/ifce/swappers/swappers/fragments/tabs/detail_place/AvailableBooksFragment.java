@@ -21,6 +21,7 @@ import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 
 /**
  * A simple {@link Fragment} subclass.

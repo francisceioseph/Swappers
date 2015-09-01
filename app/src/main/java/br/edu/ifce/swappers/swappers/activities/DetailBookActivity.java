@@ -4,19 +4,15 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
@@ -26,7 +22,6 @@ import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsF
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailBookActivity extends AppCompatActivity{
@@ -56,6 +51,7 @@ public class DetailBookActivity extends AppCompatActivity{
         authourBook = (TextView) findViewById(R.id.author_detail_book);
         editorBook = (TextView) findViewById(R.id.editor_detail_book);
         photoBook = (CircleImageView) findViewById(R.id.photoBook);
+
 
 
         book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
@@ -211,7 +207,8 @@ public class DetailBookActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent donateListPointIntent = new Intent(getApplicationContext(), DonationsListPointActivity.class);
-                donateListPointIntent.putExtra(AndroidUtils.BOOK_INTENT_CODE_ID, AndroidUtils.BOOK_DONATION_INTENT_CODE);
+              //  donateListPointIntent.putExtra(AndroidUtils.BOOK_INTENT_CODE_ID, AndroidUtils.BOOK_DONATION_INTENT_CODE);
+                donateListPointIntent.putExtra(AndroidUtils.SELECTED_BOOK_ID, book);
 
                 startActivity(donateListPointIntent);
 

@@ -24,8 +24,10 @@ public class DonationsListPointRecyclerViewAdapter extends RecyclerView.Adapter<
     private RecycleViewOnClickListenerHack mRecycleViewOnClickListenerHack;
 
 
+
     public DonationsListPointRecyclerViewAdapter(ArrayList<Place> donationsListPointDataSource) {
         this.donationsListPointDataSource = donationsListPointDataSource;
+
     }
 
     public void setRecycleViewOnClickListenerHack(RecycleViewOnClickListenerHack recycleViewOnClickListenerHack) {
@@ -43,8 +45,9 @@ public class DonationsListPointRecyclerViewAdapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(DonationsListPointRecyclerViewAdapter.ViewHolder viewHolder, int position) {
         Place place = this.donationsListPointDataSource.get(position);
-        viewHolder.placeNameTextView.setText(place.getNamePlace());
-        viewHolder.placeAddrTextView.setText(place.getAdressPlace());
+        String address = place.getStreet() + ", " + place.getNumber() + " - "+ place.getDistrict();
+        viewHolder.placeNameTextView.setText(place.getName());
+        viewHolder.placeAddrTextView.setText(address);
     }
 
     @Override
@@ -52,9 +55,17 @@ public class DonationsListPointRecyclerViewAdapter extends RecyclerView.Adapter<
         return donationsListPointDataSource.size();
     }
 
+    public int getItemID(int position){
+        return donationsListPointDataSource.get(position).getId();
+    }
+
+
+
+
     class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
         private TextView placeNameTextView;
         private TextView placeAddrTextView;
+
 
 
         public ViewHolder(View itemView) {
@@ -63,8 +74,11 @@ public class DonationsListPointRecyclerViewAdapter extends RecyclerView.Adapter<
             this.placeNameTextView = (TextView) itemView.findViewById(R.id.adapter_text_donate_list_points);
             this.placeAddrTextView = (TextView) itemView.findViewById(R.id.adapter_addr_donate_list_points);
 
+
+
             itemView.setOnClickListener(this);
         }
+
 
         @Override
         public void onClick(View view) {
