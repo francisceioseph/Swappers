@@ -43,6 +43,7 @@ import java.util.Map;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.activities.BookActivity;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
 import br.edu.ifce.swappers.swappers.activities.MainActivity;
 import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
@@ -76,6 +77,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
 
     public PlacesFragment() {}
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

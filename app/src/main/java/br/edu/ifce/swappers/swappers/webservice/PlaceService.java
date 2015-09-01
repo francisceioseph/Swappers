@@ -109,6 +109,8 @@ public class PlaceService {
             if(jsonPlace.charAt(i) == '}') count++;
         }
 
+        Log.i("tagSIZE", String.valueOf(count));
+
         if(!jsonPlace.isEmpty() && count == 4){
             json = new JSONObject(jsonPlace);
             jsonItems = (JSONObject)json.get("place");

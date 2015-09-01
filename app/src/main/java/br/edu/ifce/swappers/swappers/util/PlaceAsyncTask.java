@@ -42,6 +42,5 @@ public class PlaceAsyncTask extends AsyncTask<String,String,List<Place>> {
     protected void onPostExecute(List<Place> placeList) {
         placeInterface.updatePlaceNear(placeList);
         progressDialog.dismiss();
-
     }
 }
