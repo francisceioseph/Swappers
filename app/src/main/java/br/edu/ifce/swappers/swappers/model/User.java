@@ -1,6 +1,7 @@
 package br.edu.ifce.swappers.swappers.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,7 +17,9 @@ public class User implements Serializable{
     private Integer donationNum;
     private byte[] photo;
     private String photo2;
-
+    private ArrayList<Book> bookWithdraweList;
+    private ArrayList<Book> bookDonationList;
+    private ArrayList<Book> bookFavoriteList;
 
 
     public User() {
@@ -110,5 +113,29 @@ public class User implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ArrayList<Book> getBookWithdraweList() {
+        return bookWithdraweList;
+    }
+
+    public void setBookWithdraweList(ArrayList<Book> bookWithdraweList) {
+        this.bookWithdraweList = bookWithdraweList;
+    }
+
+    public ArrayList<Book> getBookDonationList() {
+        return bookDonationList;
+    }
+
+    public void setBookDonationList(ArrayList<Book> bookDonationList) {
+        this.bookDonationList = bookDonationList;
+    }
+
+    public ArrayList<Book> getBookFavoriteList() {
+        return bookFavoriteList;
+    }
+
+    public void setBookFavoriteList(ArrayList<Book> bookFavoriteList) {
+        this.bookFavoriteList = bookFavoriteList;
     }
 }

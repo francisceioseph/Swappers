@@ -143,7 +143,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
                 if (addresses.size() > 0){
                     city = addresses.get(0).getLocality();
-                    //city = "Caucaia";
+                    //city = "Iguatu";
                     state = addresses.get(0).getAdminArea();
                 }
 
@@ -270,7 +270,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         }else {
             LatLng myCurrentPosition = getMyPosition(locationUser);
 
-            if(!placeList.isEmpty()) {
+            if(placeList!=null) {
                 setUpMarkers(placeList);
 
                 distancePlaces = new DistancePlaces(placeList);

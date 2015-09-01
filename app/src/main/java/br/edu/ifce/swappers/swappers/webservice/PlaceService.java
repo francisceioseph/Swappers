@@ -177,7 +177,7 @@ public class PlaceService {
             placeList.add(placeUnique);
 
         //} else if(!jsonPlace.isEmpty() && count > 4){
-        } else {
+        } else if(!jsonPlace.isEmpty() &&!verifyJson){
             json = new JSONObject(jsonPlace);
             jsonArray = json.getJSONArray("place");
             for(int i =0; i<jsonArray.length();i++ ){
