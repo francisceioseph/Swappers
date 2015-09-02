@@ -43,6 +43,7 @@ import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.ListenerGPS;
 import br.edu.ifce.swappers.swappers.util.MarkerAsyncTask;
@@ -63,6 +64,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private LatLng myPosition;
     private DistancePlaces distancePlaces =null;
     private ArrayList<Place> placesNear = new ArrayList<Place>();
+    private User user = MockSingleton.INSTANCE.user;
     private ListenerGPS listenerGPS = new ListenerGPS();
     private Map<String,Integer> mapPlaceMarker = new HashMap<>();
 
@@ -116,13 +118,11 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, timeUpdate, distance, listenerGPS);
 
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
         if(locationUser == null){
             Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-
-            //se o gps estiver desligado, o mapa abrirá em um local previamente definido.
-            myPosition = IFCE_FORTALEZA;
         }
         else{
             myPosition = getMyPosition(locationUser);
@@ -130,28 +130,46 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
             List<Address> addresses;
             String city = null;
+            String cityUser = null;
             String state = null;
+            String stateUser = null;
+            ArrayList<Place> places = MockSingleton.INSTANCE.places;
+
             try {
                 addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
                 if (addresses.size() > 0){
                     city = addresses.get(0).getLocality();
                     state = addresses.get(0).getAdminArea();
                 }
-
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 e.printStackTrace();
             }
 
-            if(city!=null && state!=null){
-                if(AndroidUtils.isNetworkAvailable(getActivity())) {
+            if(user.getCity()!=null && user.getState()!=null){
+                cityUser = user.getCity();
+                stateUser = user.getState();
+            }else {
+                user.setCity(city);
+                user.setState(state);
+
+                cityUser = "";
+                stateUser = "";
+            }
+
+            if(city!=null && state!=null && AndroidUtils.isNetworkAvailable(getActivity())){
+                if(city.equals(cityUser) && state.equals(stateUser)){
+                    updatePlaceNear(places);
+                }else {
                     PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
                     task.execute(city, state);
                 }
             } else{
-                Toast toast = SwappersToast.makeText(getActivity(), "Não conseguimos identificar sua localização. Tente novamente em instantes!", Toast.LENGTH_LONG);
+                Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão e tente novamente!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
+
         }
     }
 
@@ -172,7 +190,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     position_2 = marker.getPosition();
                     if (position_1.equals(position_2)) {
                         if (AndroidUtils.isNetworkAvailable(getActivity()))
-                            //makePlaceTask(marker.getId());
                             getDetailPlace(placesNear, marker.getId());
                         else {
                             Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
@@ -187,11 +204,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 return false;
             }
         });
-    }
-
-    public void makePlaceTask(String markerId){
-        MarkerAsyncTask task = new MarkerAsyncTask(getActivity(),this);
-        task.execute(mapPlaceMarker.get(markerId));
     }
     
     public View.OnClickListener findNearPlaceOnMap(){
@@ -216,15 +228,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 }
             }
         };
-    }
-
-    private void setUpMap(Place place, LatLng placeNow) {
-        mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
-        mapPlace.animateCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14));
-
-        mapPlace.addMarker(new MarkerOptions().position(placeNow)
-                .title(place.getName())
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
     }
 
     public void showMarker(LatLng position, GoogleMap googleMap){
@@ -262,11 +265,17 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             LatLng myCurrentPosition = getMyPosition(locationUser);
 
             if(placeList!=null) {
-                setUpMarkers(placeList);
+                if(placeList.isEmpty()){
+                    Toast toast = SwappersToast.makeText(getActivity(), "Desculpe-nos! Ainda não há pontos de troca em sua cidade.", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }else {
+                    setUpMarkers(placeList);
 
-                distancePlaces = new DistancePlaces(placeList);
-                MockSingleton.INSTANCE.places = distancePlaces.calculateNearPlace(myCurrentPosition);
-                placesNear = MockSingleton.INSTANCE.places;
+                    distancePlaces = new DistancePlaces(placeList);
+                    MockSingleton.INSTANCE.places = distancePlaces.calculateNearPlace(myCurrentPosition);
+                    placesNear = MockSingleton.INSTANCE.places;
+                }
 
                 getMapPlace().addMarker(new MarkerOptions().position(myCurrentPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
                 getMapPlace().moveCamera(CameraUpdateFactory.newLatLngZoom(myCurrentPosition, 18));
