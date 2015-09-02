@@ -211,13 +211,15 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             int countPlace = 0;
             @Override
             public void onClick(View v) {
-                if (AndroidUtils.isNetworkAvailable(getActivity()) && !placesNear.isEmpty()) {
+                if (AndroidUtils.isNetworkAvailable(getActivity()) && !placesNear.isEmpty()) { //&& !placesNear.isEmpty()
+                    setUpMarkers(placesNear);
+
                     if (countPlace > placesNear.size() - 1) {
                         countPlace = 0;
                     }
                     LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
-
                     showMarker(placeNow, mapPlace);
+
                     countPlace++;
                 }else if(AndroidUtils.isNetworkAvailable(getActivity()) && placesNear.isEmpty()){
                     verifyGpsAndWifi();
@@ -276,7 +278,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     MockSingleton.INSTANCE.places = distancePlaces.calculateNearPlace(myCurrentPosition);
                     placesNear = MockSingleton.INSTANCE.places;
                 }
-
                 getMapPlace().addMarker(new MarkerOptions().position(myCurrentPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
                 getMapPlace().moveCamera(CameraUpdateFactory.newLatLngZoom(myCurrentPosition, 18));
 
