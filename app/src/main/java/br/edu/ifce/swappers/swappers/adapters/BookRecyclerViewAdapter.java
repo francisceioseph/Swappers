@@ -2,7 +2,6 @@ package br.edu.ifce.swappers.swappers.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +25,25 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
     private ArrayList<Book> booksDataSource;
     private Context context;
     private RecycleViewOnClickListenerHack mRecycleViewOnClickListenerHack;
+    private BookRecyclerViewAdapter itemListener;
 
     public BookRecyclerViewAdapter(Context context, ArrayList<Book> books) {
         this.booksDataSource = books;
         this.context = context;
     }
+
+
+    public BookRecyclerViewAdapter(Context context, ArrayList<Book> books, BookRecyclerViewAdapter itemListener) {
+        this.booksDataSource = books;
+        this.context = context;
+        this.itemListener = itemListener;
+    }
+
+    public Book getItem(int positon){
+        return booksDataSource.get(positon);
+    }
+
+
 
     public void setRecycleViewOnClickListenerHack(RecycleViewOnClickListenerHack r) {
         this.mRecycleViewOnClickListenerHack = r;
@@ -54,6 +67,8 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         viewHolder.bookEvaluationAvarageTextView.setText(String.format("%.1f", book.getEvaluationAvarage()));
         viewHolder.bookUserEvaluationRatingBar.setRating(book.getEvaluationAvarage());
 
+
+
         if(!book.getPhoto().isEmpty()) {
             Picasso.with(context).load(book.getPhoto()).into(viewHolder.bookImageImageView);
         }else{
@@ -73,6 +88,9 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         private TextView  bookEvaluationAvarageTextView;
         private RatingBar bookUserEvaluationRatingBar;
         private ImageView bookImageImageView;
+
+
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -134,7 +152,8 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         public void setBookImageImageView(ImageView bookImageImageView) {
             this.bookImageImageView = bookImageImageView;
         }
-        
+
+
         @Override
         public void onClick(View view) {
             if(mRecycleViewOnClickListenerHack != null){

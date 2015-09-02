@@ -25,23 +25,15 @@ public class RegisterTask extends AsyncTask<User,String,Integer>{
     }
 
     @Override
+    protected Integer doInBackground(User... params) {
+        return UserService.registerUserWithWS(context,params[0]);
+    }
+
+    @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Processando...");
         progressDialog.show();
-    }
-
-    @Override
-    protected Integer doInBackground(User... params) {
-
-        if (params.length==4) {
-           // return UserService.registerUserWithWS(params[0], params[1], params[2],params[3]);
-        }else {
-            String str = "null";
-            //return UserService.registerUserWithWS(params[0], params[1], params[2],str);
-        }
-
-        return UserService.registerUserWithWS2(params[0]);
     }
 
     @Override

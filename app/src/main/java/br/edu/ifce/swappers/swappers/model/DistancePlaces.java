@@ -2,9 +2,8 @@ package br.edu.ifce.swappers.swappers.model;
 
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -15,12 +14,13 @@ import java.util.List;
  * Created by Joamila on 16/07/2015.
  */
 public class DistancePlaces{
+    private ArrayList<Place> places=null;
 
-    private final int ROWS = 4; //quantidade de pontos de troca
-    private double matrixCoordinates[][] = {{-3.734421, -38.655867},
-                                            {-3.739126, -38.5402},
-                                            {-3.7348059, -38.5662608},
-                                            {-3.75529, -38.535877}};
+    public DistancePlaces(){}
+
+    public DistancePlaces(ArrayList<Place> places){
+        this.places = places;
+    }
 
     public float distanceBetween(LatLng positionUser, LatLng positionPoint){
         Location locationUser = new Location(LocationManager.GPS_PROVIDER);
@@ -35,27 +35,39 @@ public class DistancePlaces{
         return locationUser.distanceTo(locationPoint);
     }
 
-    public void calculateNearPlace(LatLng positionUser, GoogleMap map){
-        List<Place> placeList = new ArrayList<Place>();
-        double coordinateX;
-        double coordinateY;
+    public ArrayList<Place> calculateNearPlace(LatLng positionUser){
+        ArrayList<Place> placeList = new ArrayList<Place>();
         double distanceBetweenPlaces;
 
-        for (int i=0; i<ROWS; i++){
-            distanceBetweenPlaces = distanceBetween(positionUser, new LatLng(matrixCoordinates[i][0], matrixCoordinates[i][1]));
-            placeList.add(new Place(matrixCoordinates[i][0], matrixCoordinates[i][1], distanceBetweenPlaces));
+        for (int i=0; i<places.size(); i++){
+            distanceBetweenPlaces = distanceBetween(positionUser, new LatLng(places.get(i).getLatitude(), places.get(i).getLongitude()));
+
+            Place place = new Place();
+            place.setLatitude(places.get(i).getLatitude());
+            place.setLongitude(places.get(i).getLongitude());
+            place.setDistance(distanceBetweenPlaces);
+            place.setCity(places.get(i).getCity());
+            place.setNumber(places.get(i).getNumber());
+            place.setId(places.get(i).getId());
+            place.setName(places.get(i).getName());
+            place.setDistrict(places.get(i).getDistrict());
+            place.setStreet(places.get(i).getStreet());
+            place.setBooks(places.get(i).getBooks());
+            place.setStates(places.get(i).getStates());
+            place.setDonation(places.get(i).getDonation());
+            place.setRecovered(places.get(i).getRecovered());
+            place.setCep(places.get(i).getCep());
+            place.setHour_func(places.get(i).getHour_func());
+            place.setPhoto2(places.get(i).getPhoto2());
+
+            //placeList.add(new Place(places.get(i).getLatitude(), places.get(i).getLongitude(), distanceBetweenPlaces));
+            placeList.add(place);
+            Log.i("NOME", places.get(i).getName());
         }
 
         Collections.sort(placeList);
 
-        Place nearPlace = placeList.get(0);
-        coordinateX = nearPlace.getLatitude();
-        coordinateY = nearPlace.getLongitude();
-
-        showMarker(new LatLng(coordinateX, coordinateY), map);
+        return placeList;
     }
 
-    public void showMarker(LatLng position, GoogleMap googleMap){
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 17));
-    }
 }

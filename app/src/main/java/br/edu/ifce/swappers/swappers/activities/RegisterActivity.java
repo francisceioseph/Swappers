@@ -10,22 +10,13 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import org.apache.http.Header;
-import org.apache.http.entity.StringEntity;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -211,21 +202,14 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     private void callAsyncTask(String name, String email, String usePassword){
         RegisterTask registerTask = new RegisterTask(this,this);
-        User use = new User();
-        use.setName(name);
-        use.setEmail(email);
-        use.setPassword(usePassword);
+        User user = new User(name, email, usePassword);
 
         if(userPhotoBitmap!=null) {
-            //use.setPhoto(ImageUtil.BitMapToByte(userPhotoBitmap));
-            use.setPhoto2(ImageUtil.BitMapToString(userPhotoBitmap));
-            //registerTask.execute(name, email, usePassword, ImageUtil.BitMapToString(userPhotoBitmap));
-
-        }else {
-            //registerTask.execute(name, email, usePassword);
+            user.setPhoto2(ImageUtil.BitMapToString(userPhotoBitmap));
+            Log.i("USER-LOGIN-TAG-AWASOME", ImageUtil.BitMapToString(userPhotoBitmap));
         }
 
-        registerTask.execute(use);
+        registerTask.execute(user);
     }
 
     private boolean validationRegistryUser(String name, String email, String usePassword, String passwordConfirmation){

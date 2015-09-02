@@ -18,13 +18,13 @@
     <string name="title_activity_login">Sign In</string>
     <string name="title_activity_register">Sign Up</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_detail_book">DetailBookActivity</string>
-    <string name="title_activity_detail_place">DetailPlaceActivity</string>
+    <string name="title_activity_detail_place">Detail Place</string>
     <string name="logo_description">Swappers Logo</string>
     <string name="userPhotoDialogTitle">Profile Picture</string>
-    <string name="see_places_of_near_book">SEE PLACES ON MAP</string>
+    <string name="see_places_of_near_book">SEE THE PLACE</string>
     <string name="title_near_book">Book Title Here</string>
     <string name="author_near_book">Book Authors Here</string>
     <string name="previous_near_book_button">previous book</string>
@@ -115,14 +115,25 @@
     <string name="find_place">FIND A NEAR PLACE</string>
 
     <!-- Fragment Comentários de Leitor-->
-<string name="reader_coment">Lorem ipsum dolor sit amet, mutat dicit scriptorem in sed,
+    <string name="reader_coment">Lorem ipsum dolor sit amet, mutat dicit scriptorem in sed,
     mea tractatos instructior ad, virtute discere maluisset ei has.
     Delenit denique laboramus ei pri, est id assentior necessitatibus,
     ne copiosae concludaturque eum. Usu everti deseruisse cu.
     Quo ut periculis efficiendi, malis nonumes voluptaria te eam,
     mei debitis epicurei an. An vim movet quaerendum consequuntur, ut suas legendos vix.
     In vis quodsi verear quaeque, ex vero dignissim nam, idque eruditi sapientem sed ad. </string>
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="title_activity_reader_comment">ReaderCommentActivity</string>
+
+
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_reader_comment">Comments</string>
+
+    <!-- Tela de detalhe de lugar-->
+    <string name="title_detail_place">Detail Place</string>
+    <string name="title_activity_donations_list_point">Near Places</string>
+
+
+    <!-- Tela de Lista de Pontos de doação -->
+    <string name="List_points_donate_place_near">Donation points near you</string>
+    <string name="title_activity_book">Books</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
@@ -13,15 +14,32 @@ import android.widget.TextView;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.AvailableBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
+import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.util.ImageUtil;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailPlaceActivity extends AppCompatActivity {
 
     private FragmentTabHost placeTabHost;
+    private Place place;
+    private CircleImageView photoPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_place);
+
+        TextView placeName = (TextView) findViewById(R.id.place_name);
+        TextView placeCity = (TextView) findViewById(R.id.place_city);
+        photoPlace = (CircleImageView) findViewById(R.id.adapter_comment_author_image);
+
+        Intent currentIntent = getIntent();
+        place = (Place) currentIntent.getSerializableExtra("SELECTED_BOOK_PLACE");
+        placeName.setText(place.getName());
+        placeCity.setText(place.getCity());
+
+        //photoPlace.setImageBitmap(BitmapFactory.decodeByteArray(place.getPhoto(), 0, place.getPhoto().length));
+        photoPlace.setImageBitmap(ImageUtil.StringToBitMap(place.getPhoto2()));
 
         this.initToolbar();
         this.initTabHost();
@@ -35,6 +53,7 @@ public class DetailPlaceActivity extends AppCompatActivity {
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
 
         if (toolbar != null){
             this.setSupportActionBar(toolbar);

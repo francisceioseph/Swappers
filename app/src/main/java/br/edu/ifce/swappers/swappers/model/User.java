@@ -1,6 +1,7 @@
 package br.edu.ifce.swappers.swappers.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,8 +15,32 @@ public class User implements Serializable{
     private String password;
     private String city;
     private Integer donationNum;
-    private String photo2;
     private byte[] photo;
+    private String photo2;
+    private Book book;
+    private ArrayList<Book> bookWithdraweList;
+    private ArrayList<Book> bookDonationList;
+    private ArrayList<Book> bookFavoriteList;
+
+
+    public User() {
+
+    }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getPhoto2() {
+        return photo2;
+    }
+
+    public void setPhoto2(String photo2) {
+        this.photo2 = photo2;
+    }
+
     private byte[] cover;
     private Date bithday;
 
@@ -91,11 +116,35 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public String getPhoto2() {
-        return photo2;
+    public Book getBook() {
+        return book;
     }
 
-    public void setPhoto2(String photo2) {
-        this.photo2 = photo2;
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public ArrayList<Book> getBookWithdraweList() {
+        return bookWithdraweList;
+    }
+
+    public void setBookWithdraweList(ArrayList<Book> bookWithdraweList) {
+        this.bookWithdraweList = bookWithdraweList;
+    }
+
+    public ArrayList<Book> getBookDonationList() {
+        return bookDonationList;
+    }
+
+    public void setBookDonationList(ArrayList<Book> bookDonationList) {
+        this.bookDonationList = bookDonationList;
+    }
+
+    public ArrayList<Book> getBookFavoriteList() {
+        return bookFavoriteList;
+    }
+
+    public void setBookFavoriteList(ArrayList<Book> bookFavoriteList) {
+        this.bookFavoriteList = bookFavoriteList;
     }
 }

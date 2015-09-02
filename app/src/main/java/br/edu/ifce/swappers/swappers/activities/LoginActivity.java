@@ -11,11 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.util.LoginTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.TaskInterface;
+import br.edu.ifce.swappers.swappers.util.UserTask;
 
 public class LoginActivity extends AppCompatActivity implements TaskInterface{
 
@@ -41,8 +42,8 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //verifyInternetAndMakeLogin();
-                LoginActivity.this.startNextActivity();
+                verifyInternetAndMakeLogin();
+//                LoginActivity.this.startNextActivity();
             }
         });
 
@@ -67,8 +68,11 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
 
     @Override
     public void startNextActivity() {
+        AndroidUtils.create(this, MockSingleton.INSTANCE.user);
+
         Intent mainActivityIntent = new Intent(this, MainActivity.class);
         mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
         this.startActivity(mainActivityIntent);
     }
 
@@ -91,8 +95,15 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        LoginTask loginTask = new LoginTask(this,this);
-        loginTask.execute(email,password);
+        if(AndroidUtils.userHasBeenLoaded(this)){
+            MockSingleton.INSTANCE.user = AndroidUtils.loadUser(this);
+        }else {
+            UserTask userTask = new UserTask(this, this);
+            userTask.execute(email, password);
+
+//        LoginTask loginTask = new LoginTask(this,this);
+//        loginTask.execute(email,password);
+        }
     }
 
 }

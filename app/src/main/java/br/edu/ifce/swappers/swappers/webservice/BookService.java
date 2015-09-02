@@ -137,8 +137,8 @@ public class BookService {
 
             if(volumeInfo.has("description")){
                 desc = volumeInfo.getString("description");
-                book.setDescription(desc);
-            }else{book.setDescription(desc);}
+                book.setSynopsis(desc);
+            }else{book.setSynopsis(desc);}
 
             if(volumeInfo.has("averageRating")){
                 rating = volumeInfo.getDouble("averageRating");
