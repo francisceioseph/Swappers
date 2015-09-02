@@ -1,5 +1,7 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -14,7 +16,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
+import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.ImageUtil;
 
 /**
@@ -64,6 +68,41 @@ public class UserService {
         return status_code;
     }
 
+    public static int registerUserWithWS2(User user) {
+        int status_code = 0;
+        try {
+            URL url = new URL(URL_REGISTER_SERVICE);
+
+            JSONObject jsonParam = fillParamJson2(user);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(25000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.connect();
+
+            OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
+            os.write(jsonParam.toString());
+            os.flush();
+
+            status_code = conn.getResponseCode();
+
+            os.close();
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return status_code;
+    }
+
     private static JSONObject fillParamJson(String name, String email, String pwd,String photo) throws JSONException, UnsupportedEncodingException {
         JSONObject jsonParam = new JSONObject();
         jsonParam.put("username", name);
@@ -73,6 +112,20 @@ public class UserService {
         if (!photo.equals("null")){
             jsonParam.put("photo", ImageUtil.StringToByte(photo));
         }
+        return jsonParam;
+    }
+
+    private static JSONObject fillParamJson2(User user) throws JSONException, UnsupportedEncodingException {
+        JSONObject jsonParam = new JSONObject();
+        jsonParam.put("username", user.getName());
+        jsonParam.put("email", user.getEmail());
+        jsonParam.put("password", user.getPassword());
+        jsonParam.put("photo2", user.getPhoto2());
+        //System.out.println("OPS-PHOTO=" + user.getPhoto2());
+        //Log.i("TAG-PHOTO", new String(user.getPhoto()));
+        //Log.i("TAG-PHOTO", user.getPhoto2());
+        //StandardCharsets.UTF_8
+
         return jsonParam;
     }
 

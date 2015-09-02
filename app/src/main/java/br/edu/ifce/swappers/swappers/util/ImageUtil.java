@@ -3,6 +3,7 @@ package br.edu.ifce.swappers.swappers.util;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
@@ -14,10 +15,22 @@ public class ImageUtil {
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos = new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100, baos);
         byte [] b = baos.toByteArray();
         String temp = Base64.encodeToString(b, Base64.DEFAULT);
+        Log.i("TAG-PHOTO", "Tamanho = "+temp.length());
+        Log.i("TAG-PHOTO", "W = "+bitmap.getWidth());
+        Log.i("TAG-PHOTO", "H = "+bitmap.getHeight());
+        Log.i("TAG-PHOTO", "ByteCount = "+bitmap.getByteCount());
         return temp;
+    }
+
+    public static byte[] BitMapToByte(Bitmap bitmap){
+        ByteArrayOutputStream baos = new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte [] b = baos.toByteArray();
+        Log.i("TAG-PHOTO", "Tamanho="+String.valueOf(b.length));
+        return b;
     }
 
     public Bitmap StringToBitMap(String encodedString){

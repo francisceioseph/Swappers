@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
+import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.ImageUtil;
 import br.edu.ifce.swappers.swappers.util.RegisterTask;
@@ -210,11 +211,21 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     private void callAsyncTask(String name, String email, String usePassword){
         RegisterTask registerTask = new RegisterTask(this,this);
+        User use = new User();
+        use.setName(name);
+        use.setEmail(email);
+        use.setPassword(usePassword);
+
         if(userPhotoBitmap!=null) {
-            registerTask.execute(name, email, usePassword, ImageUtil.BitMapToString(userPhotoBitmap));
+            //use.setPhoto(ImageUtil.BitMapToByte(userPhotoBitmap));
+            use.setPhoto2(ImageUtil.BitMapToString(userPhotoBitmap));
+            //registerTask.execute(name, email, usePassword, ImageUtil.BitMapToString(userPhotoBitmap));
+
         }else {
-            registerTask.execute(name, email, usePassword);
+            //registerTask.execute(name, email, usePassword);
         }
+
+        registerTask.execute(use);
     }
 
     private boolean validationRegistryUser(String name, String email, String usePassword, String passwordConfirmation){

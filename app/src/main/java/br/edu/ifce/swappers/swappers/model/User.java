@@ -14,6 +14,7 @@ public class User implements Serializable{
     private String password;
     private String city;
     private Integer donationNum;
+    private String photo2;
     private byte[] photo;
     private byte[] cover;
     private Date bithday;
@@ -88,5 +89,13 @@ public class User implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoto2() {
+        return photo2;
+    }
+
+    public void setPhoto2(String photo2) {
+        this.photo2 = photo2;
     }
 }

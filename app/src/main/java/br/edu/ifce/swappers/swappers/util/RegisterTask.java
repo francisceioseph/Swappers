@@ -7,12 +7,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.webservice.UserService;
 
 /**
  * Created by gracyane on 04/06/2015.
  */
-public class RegisterTask extends AsyncTask<String,String,Integer>{
+public class RegisterTask extends AsyncTask<User,String,Integer>{
     private Context context;
     private ProgressDialog progressDialog;
     private TaskInterface ti;
@@ -31,14 +32,16 @@ public class RegisterTask extends AsyncTask<String,String,Integer>{
     }
 
     @Override
-    protected Integer doInBackground(String... params) {
+    protected Integer doInBackground(User... params) {
 
         if (params.length==4) {
-            return UserService.registerUserWithWS(params[0], params[1], params[2],params[3]);
+           // return UserService.registerUserWithWS(params[0], params[1], params[2],params[3]);
         }else {
             String str = "null";
-            return UserService.registerUserWithWS(params[0], params[1], params[2],str);
+            //return UserService.registerUserWithWS(params[0], params[1], params[2],str);
         }
+
+        return UserService.registerUserWithWS2(params[0]);
     }
 
     @Override
