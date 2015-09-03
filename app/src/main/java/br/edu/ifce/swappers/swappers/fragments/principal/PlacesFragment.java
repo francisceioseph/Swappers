@@ -92,6 +92,12 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
         MapsInitializer.initialize(this.getActivity());
 
+        if(!MockSingleton.INSTANCE.places.isEmpty()){
+            placesNear = MockSingleton.INSTANCE.places;
+            setUpMarkers(placesNear);
+            defineLocationManager();
+        }
+
         verifyGpsAndWifi();
         eventMarkers();
 
@@ -143,7 +149,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             }
 
             if(city!=null && state!=null){
-                if(AndroidUtils.isNetworkAvailable(getActivity())) {
+                if(AndroidUtils.isNetworkAvailable(getActivity()) && placesNear.isEmpty()) {
                     PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
                     task.execute(city, state);
                 }
@@ -276,6 +282,21 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
+        }
+    }
+
+    private void defineLocationManager(){
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        if(locationUser == null) {
+            Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }else {
+            LatLng myCurrentPosition = getMyPosition(locationUser);
+            getMapPlace().addMarker(new MarkerOptions().position(myCurrentPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
+            getMapPlace().moveCamera(CameraUpdateFactory.newLatLngZoom(myCurrentPosition, 18));
         }
     }
 
