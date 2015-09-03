@@ -3,9 +3,12 @@ package br.edu.ifce.swappers.swappers.util;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;
@@ -16,6 +19,7 @@ import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;
 public class PlaceAsyncTask extends AsyncTask<String,String,ArrayList<Place>> {
  private PlaceInterface placeInterface;
  private ProgressDialog progressDialog;
+    PlacesFragment placesFragment = new PlacesFragment();
  private Context context;
     private PlaceSingleton placeSingleton;
 
@@ -39,10 +43,18 @@ public class PlaceAsyncTask extends AsyncTask<String,String,ArrayList<Place>> {
 
     @Override
     protected void onPostExecute(ArrayList<Place> placeList) {
-        placeInterface.updatePlaceNear(placeList);
-
-        placeSingleton = PlaceSingleton.getInstance();
-        placeSingleton.setPlaces(placeList);
         progressDialog.dismiss();
+        if(PlaceService.getResponseCode() == 200){
+            placeInterface.updatePlaceNear(placeList);
+
+            placeSingleton = PlaceSingleton.getInstance();
+            placeSingleton.setPlaces(placeList);
+        }
+        else{
+            Toast toast = SwappersToast.makeText(context, "Erro no servidor. Tente novamente mais tarde!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+
     }
 }

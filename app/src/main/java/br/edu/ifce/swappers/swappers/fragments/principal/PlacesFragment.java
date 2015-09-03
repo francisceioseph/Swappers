@@ -50,6 +50,7 @@ import br.edu.ifce.swappers.swappers.util.MarkerAsyncTask;
 import br.edu.ifce.swappers.swappers.util.PlaceAsyncTask;
 import br.edu.ifce.swappers.swappers.util.PlaceInterface;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
+import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 
 
 public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener, PlaceInterface, OnMapReadyCallback{
@@ -158,7 +159,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             }
 
             if(city!=null && state!=null && AndroidUtils.isNetworkAvailable(getActivity())){
-                if(city.equals(cityUser) && state.equals(stateUser)){
+                if(city.equals(cityUser) && state.equals(stateUser) && PlaceService.getResponseCode()==200){
                     updatePlaceNear(places);
                 }else {
                     PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
@@ -211,8 +212,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             int countPlace = 0;
             @Override
             public void onClick(View v) {
-                if (AndroidUtils.isNetworkAvailable(getActivity()) && !placesNear.isEmpty()) { //&& !placesNear.isEmpty()
-                    setUpMarkers(placesNear);
+                if (AndroidUtils.isNetworkAvailable(getActivity()) && !placesNear.isEmpty()) {
+                    //setUpMarkers(placesNear);
 
                     if (countPlace > placesNear.size() - 1) {
                         countPlace = 0;
@@ -265,6 +266,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             toast.show();
         }else {
             LatLng myCurrentPosition = getMyPosition(locationUser);
+            getMapPlace().addMarker(new MarkerOptions().position(myCurrentPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
+            getMapPlace().moveCamera(CameraUpdateFactory.newLatLngZoom(myCurrentPosition, 18));
 
             if(placeList!=null) {
                 if(placeList.isEmpty()){
@@ -278,9 +281,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     MockSingleton.INSTANCE.places = distancePlaces.calculateNearPlace(myCurrentPosition);
                     placesNear = MockSingleton.INSTANCE.places;
                 }
-                getMapPlace().addMarker(new MarkerOptions().position(myCurrentPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
-                getMapPlace().moveCamera(CameraUpdateFactory.newLatLngZoom(myCurrentPosition, 18));
-
             }else{
                 Toast toast = SwappersToast.makeText(getActivity(), "Desculpe-nos! Ainda não há pontos de troca em sua cidade.", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
