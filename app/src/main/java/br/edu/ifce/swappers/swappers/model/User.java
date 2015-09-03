@@ -14,6 +14,7 @@ public class User implements Serializable{
     private String email;
     private String password;
     private String city;
+    private String state;
     private Integer donationNum;
     private byte[] photo;
     private String photo2;
@@ -107,6 +108,10 @@ public class User implements Serializable{
     public void setCity(String city) {
         this.city = city;
     }
+
+    public String getState() { return state; }
+
+    public void setState(String state) { this.state = state; }
 
     public String getPassword() {
         return password;
