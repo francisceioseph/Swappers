@@ -31,6 +31,10 @@ import br.edu.ifce.swappers.swappers.util.SwappersToast;
 public class PlaceService {
 
     private static final String URL = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/place";
+    private static int responseCode;
+    public static int getResponseCode() {
+        return responseCode;
+    }
 
     public static ArrayList<Place> getPlaceWS(String city, String states){
         URL url = null;
@@ -49,7 +53,7 @@ public class PlaceService {
             conn.setRequestProperty("Content-Type", "application/json");
             conn.connect();
 
-            int responseCode = conn.getResponseCode();
+            responseCode = conn.getResponseCode();
             Log.i("STATUS-CODE", String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(

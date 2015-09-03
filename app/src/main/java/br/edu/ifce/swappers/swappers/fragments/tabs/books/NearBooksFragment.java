@@ -45,7 +45,6 @@ public class NearBooksFragment extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {        View rootView = inflater.inflate(R.layout.fragment_near_books, container, false);
 
@@ -64,7 +63,7 @@ public class NearBooksFragment extends Fragment {
                 }
             }
 
-            if(!nearBooks.get(0).getPhoto().isEmpty()) {
+            if(!nearBooks.isEmpty()) {
                 Picasso.with(getActivity()).load(nearBooks.get(0).getPhoto()).into(coverNearBookCircleImageView);
                 titleNearBookTextView.setText(nearBooks.get(0).getTitle());
                 authorsNearBookTextView.setText(nearBooks.get(0).getAuthor());
@@ -76,9 +75,8 @@ public class NearBooksFragment extends Fragment {
         }else {
             Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverNearBookCircleImageView);
             titleNearBookTextView.setText("Ainda não há livros.");
+            authorsNearBookTextView.setText("");
         }
-
-
 
         return rootView;
     }
