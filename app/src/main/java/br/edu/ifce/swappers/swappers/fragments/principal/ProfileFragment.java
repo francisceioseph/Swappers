@@ -51,8 +51,6 @@ public class ProfileFragment extends Fragment {
         usernameTextView.setText(this.getUserNameFromSingleton());
         userCityTextView.setText(this.getUserCityFromSingleton());
 
-
-
     }
 
     private void initTabHost(View rootView) {

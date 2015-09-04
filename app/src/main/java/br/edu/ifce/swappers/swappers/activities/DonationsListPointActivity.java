@@ -16,15 +16,18 @@ import java.util.ArrayList;
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
+import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.BookInterface;
+import br.edu.ifce.swappers.swappers.util.CategoryBook;
 import br.edu.ifce.swappers.swappers.util.DonationTask;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;
 
-public class DonationsListPointActivity extends AppCompatActivity implements RecycleViewOnClickListenerHack {
+public class DonationsListPointActivity extends AppCompatActivity implements RecycleViewOnClickListenerHack,BookInterface {
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
@@ -81,8 +84,14 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         book.setPlace(place);
         user.setBook(book);
 
-        DonationTask donationTask = new DonationTask(getApplicationContext());
+        DonationTask donationTask = new DonationTask(getApplicationContext(), this);
         donationTask.execute(user);
+    }
+
+    @Override
+    public void saveBookBaseLocal(){
+        BookDAO bookDAO = new BookDAO(this);
+        bookDAO.insert(book, CategoryBook.DONATION);
     }
 
     private void initToolbar() {

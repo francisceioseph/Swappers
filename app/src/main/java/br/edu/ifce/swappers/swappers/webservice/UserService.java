@@ -3,6 +3,9 @@ package br.edu.ifce.swappers.swappers.webservice;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,12 +14,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
+import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 
@@ -161,6 +168,7 @@ public class UserService {
 
         try {
             String urlLogin = buildURLtoLogin(URL_GET_USER_SERVICE,email,password);
+            Log.i("INFO-LOGIN",urlLogin);
             url = new URL(urlLogin);
 
             conn = (HttpURLConnection) url.openConnection();
@@ -171,13 +179,13 @@ public class UserService {
             conn.connect();
 
             int responseCode = conn.getResponseCode();
-
+            Log.i("INFO-LOGIN",String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         conn.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
-
+                Log.i("INFO-LOGIN",response.toString());
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
@@ -207,14 +215,60 @@ public class UserService {
     private static User parseUserFromJSON(JSONObject jsonObject) throws JSONException{
         User user = new User();
         String codedPhoto = jsonObject.getString("photo2");
-        Log.i("USER-LOGIN-TAG-AWASOME", codedPhoto);
-
 
         user.setPhoto2(codedPhoto);
         user.setId(jsonObject.getInt("id"));
         user.setName(jsonObject.getString("username"));
         user.setEmail(jsonObject.getString("email"));
         user.setPassword(jsonObject.getString("password"));
+
+        //Log.i("TAG-booksDonation", jsonObject.get("booksDonation").toString());
+        if(jsonObject.has("booksDonation") && jsonObject.get("booksDonation").toString().contains("[")){
+            String jsonBooks = jsonObject.get("booksDonation").toString();
+            Type collectionType = new TypeToken<ArrayList<Book>>(){}.getType();
+            ArrayList<Book> books = new Gson().fromJson(jsonBooks, collectionType);
+            user.setBookDonationList(books);
+        }else if(jsonObject.has("booksDonation")){
+            String jsonBooks = jsonObject.get("booksDonation").toString();
+            Book book = new Gson().fromJson(jsonBooks, Book.class);
+            ArrayList<Book> bookArrayList = new ArrayList<>();
+            bookArrayList.add(book);
+            user.setBookDonationList(bookArrayList);
+        }else{
+            user.setBookDonationList(new ArrayList<Book>());
+        }
+        if(jsonObject.has("booksRetrieved") && jsonObject.get("booksRetrieved").toString().contains("[")){
+            String jsonBooks = jsonObject.get("booksRetrieved").toString();
+            Type collectionType = new TypeToken<ArrayList<Book>>(){}.getType();
+            ArrayList<Book> books = new Gson().fromJson(jsonBooks, collectionType);
+            user.setBookRetrievedList(books);
+        }else if(jsonObject.has("booksRetrieved")){
+            String jsonBooks = jsonObject.get("booksRetrieved").toString();
+            Book book = new Gson().fromJson(jsonBooks, Book.class);
+            ArrayList<Book> bookArrayList = new ArrayList<>();
+            bookArrayList.add(book);
+            user.setBookDonationList(bookArrayList);
+        }else{
+            user.setBookRetrievedList(new ArrayList<Book>());
+        }
+
+        if(jsonObject.has("booksFavorite") && jsonObject.get("booksFavorite").toString().contains("[")){
+            String jsonBooks = jsonObject.get("booksFavorite").toString();
+            Type collectionType = new TypeToken<ArrayList<Book>>(){}.getType();
+            ArrayList<Book> books = new Gson().fromJson(jsonBooks, collectionType);
+            user.setBookFavoriteList(books);
+        }else if(jsonObject.has("booksFavorite")){
+            String jsonBooks = jsonObject.get("booksFavorite").toString();
+            Book book = new Gson().fromJson(jsonBooks, Book.class);
+            ArrayList<Book> bookArrayList = new ArrayList<>();
+            bookArrayList.add(book);
+            user.setBookDonationList(bookArrayList);
+        }else{
+            user.setBookFavoriteList(new ArrayList<Book>());
+        }
+        Log.i("SIZE-BOOK",String.valueOf(user.getBookDonationList().size()));
+        Log.i("SIZE-BOOK",String.valueOf(user.getBookRetrievedList().size()));
+        Log.i("SIZE-BOOK",String.valueOf(user.getBookFavoriteList().size()));
 
         return user;
     }

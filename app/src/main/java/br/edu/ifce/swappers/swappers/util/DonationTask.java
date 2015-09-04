@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.webservice.DonationService;
 
@@ -15,9 +16,11 @@ import br.edu.ifce.swappers.swappers.webservice.DonationService;
 public class DonationTask extends AsyncTask<User,Void,Integer> {
     private ProgressDialog progressDialog;
     private Context context;
+    private BookInterface bookInterface;
 
-    public DonationTask(Context context) {
+    public DonationTask(Context context,BookInterface bookInterface) {
         this.context = context;
+        this.bookInterface = bookInterface;
     }
 
 
@@ -39,17 +42,15 @@ public class DonationTask extends AsyncTask<User,Void,Integer> {
         Toast toast;
        // progressDialog.dismiss();
         if(statusCode == 200){
-            toast = SwappersToast.makeText(context,"Doação do livro foi efetuada!", Toast.LENGTH_LONG);
+            bookInterface.saveBookBaseLocal();
+            toast = SwappersToast.makeText(context,"Doação do livro efetuada com sucesso!", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
 
         }else {
-            toast = SwappersToast.makeText(context,"Falha ao doar o livro", Toast.LENGTH_LONG);
+            toast = SwappersToast.makeText(context,"Falha ao registrar doação do livro!", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
     }
-
-
-
 }

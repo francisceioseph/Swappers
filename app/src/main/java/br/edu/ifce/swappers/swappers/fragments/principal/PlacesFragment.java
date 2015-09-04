@@ -91,6 +91,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         mapPlace.getUiSettings().setMyLocationButtonEnabled(true);
         mapPlace.getUiSettings().setMapToolbarEnabled(true);
         mapPlace.setMyLocationEnabled(true);
+
         mapPlace.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
         MapsInitializer.initialize(this.getActivity());
@@ -166,7 +167,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     task.execute(city, state);
                 }
             } else{
-                Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão e tente novamente!", Toast.LENGTH_LONG);
+                Toast toast = SwappersToast.makeText(getActivity(), "Verifique seu GPS e conexão e tente novamente!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
