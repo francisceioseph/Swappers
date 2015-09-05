@@ -128,7 +128,6 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
             this.recyclerView.setLayoutManager(layoutManager);
             this.recyclerView.setAdapter(adapter);
             this.recyclerView.setItemAnimator(new DefaultItemAnimator());
-
     }
 
     private ArrayList<Place> getPlaces(){

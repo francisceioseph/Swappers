@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -68,6 +69,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private User user = MockSingleton.INSTANCE.user;
     private ListenerGPS listenerGPS = new ListenerGPS();
     private Map<String,Integer> mapPlaceMarker = new HashMap<>();
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F); //Atributo que gerencia um efeito shape de click
 
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
 
@@ -207,12 +209,14 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             }
         });
     }
-    
+
     public View.OnClickListener findNearPlaceOnMap(){
         return new View.OnClickListener() {
             int countPlace = 0;
+
             @Override
             public void onClick(View v) {
+                v.startAnimation(buttonClick);
                 if (AndroidUtils.isNetworkAvailable(getActivity()) && !placesNear.isEmpty()) {
                     //setUpMarkers(placesNear);
 
