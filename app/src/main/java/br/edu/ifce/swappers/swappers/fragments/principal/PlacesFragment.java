@@ -69,7 +69,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private User user = MockSingleton.INSTANCE.user;
     private ListenerGPS listenerGPS = new ListenerGPS();
     private Map<String,Integer> mapPlaceMarker = new HashMap<>();
-    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F); //Atributo que gerencia um efeito shape de click
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
 
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
 
@@ -97,10 +97,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         mapPlace.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
         MapsInitializer.initialize(this.getActivity());
-
-        if(!MockSingleton.INSTANCE.places.isEmpty()){
-            placesNear = MockSingleton.INSTANCE.places;
-        }
 
         verifyGpsAndWifi();
         eventMarkers();
@@ -134,6 +130,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         }
         else{
             myPosition = getMyPosition(locationUser);
+            //myPosition = new LatLng(-23.6765722, -46.5625052);
 
             Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
             List<Address> addresses;
@@ -146,10 +143,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             try {
                 addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
                 if (addresses.size() > 0){
-                    //city = addresses.get(0).getLocality();
-                    //state = addresses.get(0).getAdminArea();
-                    city="Fortaleza";
-                    state="Ceará";
+                    city = addresses.get(0).getLocality();
+                    state = addresses.get(0).getAdminArea();
                 }
             }
             catch (IOException e) {
@@ -199,10 +194,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 } else {
                     position_2 = marker.getPosition();
                     if (position_1.equals(position_2)) {
-                        if (AndroidUtils.isNetworkAvailable(getActivity())){
-                            //placesNear = MockSingleton.INSTANCE.places;
+                        if (AndroidUtils.isNetworkAvailable(getActivity()))
                             getDetailPlace(placesNear, marker.getId());
-                        }else {
+                        else {
                             Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
@@ -220,12 +214,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     public View.OnClickListener findNearPlaceOnMap(){
         return new View.OnClickListener() {
             int countPlace = 0;
-
             @Override
             public void onClick(View v) {
                 v.startAnimation(buttonClick);
                 if (AndroidUtils.isNetworkAvailable(getActivity()) && !placesNear.isEmpty()) {
-                    //setUpMarkers(placesNear);
 
                     if (countPlace > placesNear.size() - 1) {
                         countPlace = 0;

@@ -252,7 +252,6 @@ public class DetailBookActivity extends AppCompatActivity{
             for (int j =0; j<places.get(i).getBooks().size();j++)
                 if (places.get(i).getBooks().get(j).getId().equals(book.getId())){
                     placeRetrieved.add(places.get(i));
-                    Log.i("TAG-PLACE-BOOK", "entrou");
                 }
         }
         return placeRetrieved;
