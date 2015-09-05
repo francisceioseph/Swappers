@@ -9,9 +9,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -34,6 +36,7 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
     Book book;
     DonationsListPointRecyclerViewAdapter adapter;
     ArrayList<Place> dataSource;
+    int positionPlace;
 
 
     @Override
@@ -68,6 +71,7 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         builder.setPositiveButton("DONATE", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 initDonate(posRecycleView);
+                positionPlace = posRecycleView;
                 onBackPressed();
             }
         });
@@ -92,6 +96,21 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
     public void saveBookBaseLocal(){
         BookDAO bookDAO = new BookDAO(this);
         bookDAO.insert(book, CategoryBook.DONATION);
+
+        addBookIntoPlace();
+    }
+
+    private int addBookIntoPlace(){
+        int size = MockSingleton.INSTANCE.places.size();
+        int idPlace = adapter.getItemID(positionPlace);
+
+        for(int i=0; i<size; i++) {
+            if(idPlace==MockSingleton.INSTANCE.places.get(i).getId()) {
+               MockSingleton.INSTANCE.places.get(i).getBooks().add(book);
+               return 1;
+            }
+        }
+        return 0;
     }
 
     private void initToolbar() {
@@ -107,7 +126,9 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
     }
 
     private void initRecyclerView() {
-        dataSource = PlaceSingleton.getInstance().getPlaces();
+        //dataSource = PlaceSingleton.getInstance().getPlaces();
+
+        dataSource = MockSingleton.INSTANCE.places;
 
         adapter = new DonationsListPointRecyclerViewAdapter(dataSource);
         adapter.setRecycleViewOnClickListenerHack(this);

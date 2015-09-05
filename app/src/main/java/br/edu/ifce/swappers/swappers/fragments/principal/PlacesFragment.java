@@ -98,6 +98,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
         MapsInitializer.initialize(this.getActivity());
 
+        if(!MockSingleton.INSTANCE.places.isEmpty()){
+            placesNear = MockSingleton.INSTANCE.places;
+        }
+
         verifyGpsAndWifi();
         eventMarkers();
 
@@ -142,8 +146,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             try {
                 addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
                 if (addresses.size() > 0){
-                    city = addresses.get(0).getLocality();
-                    state = addresses.get(0).getAdminArea();
+                    //city = addresses.get(0).getLocality();
+                    //state = addresses.get(0).getAdminArea();
+                    city="Fortaleza";
+                    state="Ceará";
                 }
             }
             catch (IOException e) {
@@ -193,9 +199,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 } else {
                     position_2 = marker.getPosition();
                     if (position_1.equals(position_2)) {
-                        if (AndroidUtils.isNetworkAvailable(getActivity()))
+                        if (AndroidUtils.isNetworkAvailable(getActivity())){
+                            //placesNear = MockSingleton.INSTANCE.places;
                             getDetailPlace(placesNear, marker.getId());
-                        else {
+                        }else {
                             Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
