@@ -137,6 +137,14 @@
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
         </activity>
         <activity
+            android:name=".activities.AdoptionListPointActivity"
+            android:label="@string/title_activity_donations_list_point"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+        </activity>
+        <activity
             android:name=".activities.BookActivity"
             android:label="@string/title_activity_book"
             android:parentActivityName=".activities.MainActivity"

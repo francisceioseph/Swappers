@@ -9,28 +9,34 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
+import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.BookInterface;
+import br.edu.ifce.swappers.swappers.util.CategoryBook;
 import br.edu.ifce.swappers.swappers.util.DonationTask;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;
 
-public class DonationsListPointActivity extends AppCompatActivity implements RecycleViewOnClickListenerHack {
+public class DonationsListPointActivity extends AppCompatActivity implements RecycleViewOnClickListenerHack,BookInterface {
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     Book book;
     DonationsListPointRecyclerViewAdapter adapter;
     ArrayList<Place> dataSource;
+    int positionPlace;
 
 
     @Override
@@ -65,6 +71,7 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         builder.setPositiveButton("DONATE", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 initDonate(posRecycleView);
+                positionPlace = posRecycleView;
                 onBackPressed();
             }
         });
@@ -81,8 +88,29 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         book.setPlace(place);
         user.setBook(book);
 
-        DonationTask donationTask = new DonationTask(getApplicationContext());
+        DonationTask donationTask = new DonationTask(getApplicationContext(), this);
         donationTask.execute(user);
+    }
+
+    @Override
+    public void saveBookBaseLocal(){
+        BookDAO bookDAO = new BookDAO(this);
+        bookDAO.insert(book, CategoryBook.DONATION);
+
+        addBookIntoPlace();
+    }
+
+    private int addBookIntoPlace(){
+        int size = MockSingleton.INSTANCE.places.size();
+        int idPlace = adapter.getItemID(positionPlace);
+
+        for(int i=0; i<size; i++) {
+            if(idPlace==MockSingleton.INSTANCE.places.get(i).getId()) {
+               MockSingleton.INSTANCE.places.get(i).getBooks().add(book);
+               return 1;
+            }
+        }
+        return 0;
     }
 
     private void initToolbar() {
@@ -98,7 +126,9 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
     }
 
     private void initRecyclerView() {
-        dataSource = PlaceSingleton.getInstance().getPlaces();
+        //dataSource = PlaceSingleton.getInstance().getPlaces();
+
+        dataSource = MockSingleton.INSTANCE.places;
 
         adapter = new DonationsListPointRecyclerViewAdapter(dataSource);
         adapter.setRecycleViewOnClickListenerHack(this);
