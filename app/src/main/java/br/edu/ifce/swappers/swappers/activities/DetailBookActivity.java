@@ -24,15 +24,20 @@ import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.BookInterface;
+import br.edu.ifce.swappers.swappers.util.CategoryBook;
+import br.edu.ifce.swappers.swappers.util.FavoriteTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class DetailBookActivity extends AppCompatActivity{
+public class DetailBookActivity extends AppCompatActivity implements BookInterface{
 
     private FragmentTabHost bookDetailTabHost;
     private boolean flag = true;
@@ -195,8 +200,10 @@ public class DetailBookActivity extends AppCompatActivity{
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView imgView =(ImageView) findViewById(R.id.is_book_favorite);
 
+                registryFavoriteBookWS();
+
+                /*
                 if (flag){
                     Drawable  drawable  = getResources().getDrawable(R.drawable.ic_is_book_favorite);
                     imgView.setImageDrawable(drawable);
@@ -205,9 +212,40 @@ public class DetailBookActivity extends AppCompatActivity{
                     imgView.setImageDrawable(null);
                     flag = true;
                 }
+                **/
 
             }
         };
+    }
+
+    private void setFavoriteBookView(){
+        ImageView imgView =(ImageView) findViewById(R.id.is_book_favorite);
+        if (flag){
+            Drawable  drawable  = getResources().getDrawable(R.drawable.ic_is_book_favorite);
+            imgView.setImageDrawable(drawable);
+            flag = false;
+        }else {
+            imgView.setImageDrawable(null);
+            flag = true;
+        }
+    }
+
+    @Override
+    public void saveBookBaseLocal() {
+        BookDAO bookDAO = new BookDAO(this);
+        bookDAO.insert(book, CategoryBook.FAVORITE);
+
+        setFavoriteBookView();
+    }
+
+    private void registryFavoriteBookWS(){
+        User user = new User();
+        user.setId(MockSingleton.INSTANCE.user.getId());
+
+        user.setBook(book);
+
+        FavoriteTask favoriteTask = new FavoriteTask(this,this);
+        favoriteTask.execute(user);
     }
 
     private View.OnClickListener makeDonateListener() {
@@ -256,4 +294,5 @@ public class DetailBookActivity extends AppCompatActivity{
         }
         return placeRetrieved;
     }
+
 }
