@@ -39,6 +39,11 @@ public class BestBooksFragment extends Fragment {
         this.initViewComponents(rootView);
         this.initViewListeners();
 
+        titleBestBookTextView.setText("A Dança dos Dragões");
+        authorBestBookTextView.setText("George R. R. Martin");
+        retrievedBestBookTextView.setText("Adotado 40 vezes");
+        donatedBestBookTextView.setText("Doado 45 vezes");
+
         return rootView;
     }
 
@@ -64,7 +69,7 @@ public class BestBooksFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Loading previous book... #SQN", Toast.LENGTH_SHORT).show();
+                //SwappersToast.makeText(getActivity(), "Loading previous book... #SQN", Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -73,7 +78,7 @@ public class BestBooksFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Opening next book... #SQN", Toast.LENGTH_SHORT).show();
+                //0SwappersToast.makeText(getActivity(), "Opening next book... #SQN", Toast.LENGTH_SHORT).show();
             }
         };
     }
