@@ -10,60 +10,58 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
+import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.BookInterface;
+import br.edu.ifce.swappers.swappers.util.CategoryBook;
+import br.edu.ifce.swappers.swappers.util.DonationTask;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
+import br.edu.ifce.swappers.swappers.util.RetrievedTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.UserPosition;
 import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;
 
-public class AdoptionListPointActivity extends AppCompatActivity implements RecycleViewOnClickListenerHack {
+public class AdoptionListPointActivity extends AppCompatActivity implements RecycleViewOnClickListenerHack,BookInterface {
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     Book book;
     DonationsListPointRecyclerViewAdapter adapter;
-
     ArrayList<Place> dataSource;
-
+    int positionPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donations_list_point);
 
-        UserPosition userPosition;
-        LocationManager locationManager;
-        boolean isLocationServiceEnabled;
-
         Intent currentIntent = getIntent();
         this.book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
 
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        isLocationServiceEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-        if (isLocationServiceEnabled) {
-            userPosition = UserPosition.getInstance(locationManager);
-
-            this.initToolbar();
-            this.initRecyclerView(userPosition);
-        }
+        this.initToolbar();
+        this.initRecyclerView();
     }
 
     @Override
     public void onClickListener(View view, int position) {
-        this.makeConfirmDialogForBookAdoption().show();
+        this.makeConfirmDialogForBookAdoption(position).show();
     }
 
-    private AlertDialog makeConfirmDialogForBookAdoption(){
+    private AlertDialog makeConfirmDialogForBookAdoption(final int posRecycleView){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.SWDialogTheme);
 
@@ -78,12 +76,56 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
 
         builder.setPositiveButton("ADOPT", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getApplicationContext(), "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
+                initRetrieved(posRecycleView);
+                positionPlace = posRecycleView;
+                //SwappersToast.makeText(getApplicationContext(), "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
         });
 
         return builder.create();
+    }
+
+    public void initRetrieved(int posRecycleview){
+        User user = new User();
+        user.setId(MockSingleton.INSTANCE.user.getId());
+        Place place = new Place();
+        place.setId(adapter.getItemID(posRecycleview));
+
+        book.setPlace(place);
+        user.setBook(book);
+
+        RetrievedTask retrievedTask = new RetrievedTask(getApplicationContext(),this);
+        retrievedTask.execute(user);
+    }
+
+    @Override
+    public void saveBookBaseLocal() {
+        BookDAO bookDAO = new BookDAO(this);
+        bookDAO.insert(book, CategoryBook.RETRIEVED);
+
+        removeBookIntoPlace();
+    }
+
+    private int removeBookIntoPlace(){
+        int size = MockSingleton.INSTANCE.places.size();
+        int idPlace = adapter.getItemID(positionPlace);
+
+        for(int i=0; i<size; i++) {
+            if(idPlace==MockSingleton.INSTANCE.places.get(i).getId()) {
+                List<Book> books = MockSingleton.INSTANCE.places.get(i).getBooks();
+                for(int j=0; j<books.size() ; j++){
+                    Log.i("ID-BOOK",books.get(j).getId());
+                    Log.i("ID-BOOK",book.getId());
+                    if(books.get(j).getId().equals(book.getId())){
+                        MockSingleton.INSTANCE.places.get(i).getBooks().remove(books.get(j));
+                        return 1;
+                    }
+                }
+            }
+        }
+
+        return 0;
     }
 
     private void initToolbar() {
@@ -98,22 +140,34 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
         }
     }
 
-    private void initRecyclerView(UserPosition userPosition) {
-        dataSource = PlaceSingleton.getInstance().getPlaces();
+    private void initRecyclerView() {
+        //dataSource = PlaceSingleton.getInstance().getPlaces();
+            dataSource = getPlaces();
 
+            adapter = new DonationsListPointRecyclerViewAdapter(dataSource);
+            adapter.setRecycleViewOnClickListenerHack(this);
 
-        adapter = new DonationsListPointRecyclerViewAdapter(dataSource);
-        adapter.setRecycleViewOnClickListenerHack(this);
+            this.layoutManager = new LinearLayoutManager(this);
+            this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
+            this.recyclerView.setHasFixedSize(true);
+            this.recyclerView.setLayoutManager(layoutManager);
+            this.recyclerView.setAdapter(adapter);
+            this.recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        this.layoutManager = new LinearLayoutManager(this);
-        this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+    }
 
+    private ArrayList<Place> getPlaces(){
+        ArrayList<Place> places = MockSingleton.INSTANCE.getPlaces();
+        ArrayList<Place> placeRetrieved = new ArrayList<>();
 
-        this.recyclerView.setHasFixedSize(true);
-        this.recyclerView.setLayoutManager(layoutManager);
-        this.recyclerView.setAdapter(adapter);
-        this.recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        for (int i =0; i<places.size();i++) {
+            for (int j =0; j<places.get(i).getBooks().size();j++)
+                if (places.get(i).getBooks().get(j).getId().equals(book.getId())){
+                    placeRetrieved.add(places.get(i));
+                    Log.i("TAG-PLACE-BOOK","entrou");
+                }
+        }
+        return placeRetrieved;
     }
 }

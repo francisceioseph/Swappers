@@ -17,7 +17,9 @@ import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
 import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
+import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.util.CategoryBook;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 
 /**
@@ -36,7 +38,13 @@ public class DonatedBooksFragment extends Fragment implements RecycleViewOnClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataSource = MockSingleton.INSTANCE.createMockedBookDataSource();
+
+        BookDAO bookDAO = new BookDAO(getActivity());
+        if (!bookDAO.getBookAllByCategory(CategoryBook.DONATION.toString()).isEmpty()) {
+            dataSource = bookDAO.getBookAllByCategory(CategoryBook.DONATION.toString());
+        }else{
+            dataSource = MockSingleton.INSTANCE.createMockedBookDataSource();
+        }
     }
 
     @Override

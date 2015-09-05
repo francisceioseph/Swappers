@@ -19,7 +19,7 @@ public class User implements Serializable{
     private byte[] photo;
     private String photo2;
     private Book book;
-    private ArrayList<Book> bookWithdraweList;
+    private ArrayList<Book> bookRetrievedList;
     private ArrayList<Book> bookDonationList;
     private ArrayList<Book> bookFavoriteList;
 
@@ -129,12 +129,12 @@ public class User implements Serializable{
         this.book = book;
     }
 
-    public ArrayList<Book> getBookWithdraweList() {
-        return bookWithdraweList;
+    public ArrayList<Book> getBookRetrievedList() {
+        return bookRetrievedList;
     }
 
-    public void setBookWithdraweList(ArrayList<Book> bookWithdraweList) {
-        this.bookWithdraweList = bookWithdraweList;
+    public void setBookRetrievedList(ArrayList<Book> bookRetrievedList) {
+        this.bookRetrievedList = bookRetrievedList;
     }
 
     public ArrayList<Book> getBookDonationList() {
