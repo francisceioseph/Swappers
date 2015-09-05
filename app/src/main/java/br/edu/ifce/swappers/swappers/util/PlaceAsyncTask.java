@@ -17,10 +17,9 @@ import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;
  * Created by Gracyane on 19/08/2015.
  */
 public class PlaceAsyncTask extends AsyncTask<String,String,ArrayList<Place>> {
- private PlaceInterface placeInterface;
- private ProgressDialog progressDialog;
-    PlacesFragment placesFragment = new PlacesFragment();
- private Context context;
+    private PlaceInterface placeInterface;
+    private ProgressDialog progressDialog;
+    private Context context;
     private PlaceSingleton placeSingleton;
 
     public PlaceAsyncTask(Context context, PlaceInterface placeInterface){

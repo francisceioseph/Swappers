@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -41,6 +42,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
     Book book;
     DonationsListPointRecyclerViewAdapter adapter;
     ArrayList<Place> dataSource;
+    int positionPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
         builder.setPositiveButton("ADOPT", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 initRetrieved(posRecycleView);
+                positionPlace = posRecycleView;
                 //SwappersToast.makeText(getApplicationContext(), "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
@@ -100,6 +103,29 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
     public void saveBookBaseLocal() {
         BookDAO bookDAO = new BookDAO(this);
         bookDAO.insert(book, CategoryBook.RETRIEVED);
+
+        removeBookIntoPlace();
+    }
+
+    private int removeBookIntoPlace(){
+        int size = MockSingleton.INSTANCE.places.size();
+        int idPlace = adapter.getItemID(positionPlace);
+
+        for(int i=0; i<size; i++) {
+            if(idPlace==MockSingleton.INSTANCE.places.get(i).getId()) {
+                List<Book> books = MockSingleton.INSTANCE.places.get(i).getBooks();
+                for(int j=0; j<books.size() ; j++){
+                    Log.i("ID-BOOK",books.get(j).getId());
+                    Log.i("ID-BOOK",book.getId());
+                    if(books.get(j).getId().equals(book.getId())){
+                        MockSingleton.INSTANCE.places.get(i).getBooks().remove(books.get(j));
+                        return 1;
+                    }
+                }
+            }
+        }
+
+        return 0;
     }
 
     private void initToolbar() {
