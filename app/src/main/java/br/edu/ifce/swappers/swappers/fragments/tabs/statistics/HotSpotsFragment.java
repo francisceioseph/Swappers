@@ -41,6 +41,13 @@ public class HotSpotsFragment extends Fragment {
         this.initViewComponents(rootView);
         this.initViewListeners();
 
+        nameHotspotTextView.setText("Winterfell");
+        addressHotspotTextView.setText("Norte");
+        cityHotspotTextView.setText("Sete Reinos");
+        retrievedHotspotTextView.setText("55 livros adotados");
+        receivedHotspotTextView.setText("70 livros doados");
+
+
         return rootView;
     }
 
@@ -67,7 +74,7 @@ public class HotSpotsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Loading previous hotspot... #SQN", Toast.LENGTH_SHORT).show();
+                //SwappersToast.makeText(getActivity(), "Loading previous hotspot... #SQN", Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -76,7 +83,7 @@ public class HotSpotsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SwappersToast.makeText(getActivity(), "Loading next hotspot... #SQN", Toast.LENGTH_SHORT).show();
+                //SwappersToast.makeText(getActivity(), "Loading next hotspot... #SQN", Toast.LENGTH_SHORT).show();
             }
         };
     }

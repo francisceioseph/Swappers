@@ -24,7 +24,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="180dp"
                 android:layout_height="180dp"
-                android:src="@drawable/ic_person_giant"
+                android:src="@drawable/mock_statistics_donator"
                 android:id="@+id/cover_month_donator"
                 app:border_width="1dp"
                 app:border_color="@color/transparent"

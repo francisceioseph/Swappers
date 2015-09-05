@@ -68,7 +68,7 @@ public class DonatedBooksFragment extends Fragment implements RecycleViewOnClick
 
     @Override
     public void onClickListener(View view, int position) {
-        Intent detailBookFragmentIntent = new Intent(this.getActivity(),DetailBookActivity.class);
-        this.startActivity(detailBookFragmentIntent);
+        //Intent detailBookFragmentIntent = new Intent(this.getActivity(),DetailBookActivity.class);
+        //this.startActivity(detailBookFragmentIntent);
     }
 }
