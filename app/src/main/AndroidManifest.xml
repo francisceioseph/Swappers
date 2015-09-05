@@ -85,7 +85,7 @@
         <activity
             android:name=".activities.DetailBookActivity"
             android:label="@string/title_activity_detail_book"
-            
+            android:launchMode="singleInstance"
             android:parentActivityName=".activities.SearchViewActivity"
             android:theme="@style/SWTheme"
             android:screenOrientation="portrait" >

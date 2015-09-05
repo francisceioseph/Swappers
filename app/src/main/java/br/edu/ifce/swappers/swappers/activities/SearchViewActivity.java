@@ -152,12 +152,9 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        searchView.onActionViewCollapsed();
-        super.onBackPressed();
-        this.finish();
-    }
+
+
+
 
     @Override
     public void updateRecycleView(List<Book> bookList) {

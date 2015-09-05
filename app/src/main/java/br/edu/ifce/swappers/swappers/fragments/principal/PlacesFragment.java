@@ -144,10 +144,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             try {
                 addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
                 if (addresses.size() > 0){
-                    //city = addresses.get(0).getLocality();
-                    //state = addresses.get(0).getAdminArea();
-                    city="Fortaleza";
-                    state="Ceará";
+                    city = addresses.get(0).getLocality();
+                    state = addresses.get(0).getAdminArea();
+                    //city="Fortaleza";
+                    //state="Ceará";
                 }
             }
             catch (IOException e) {
