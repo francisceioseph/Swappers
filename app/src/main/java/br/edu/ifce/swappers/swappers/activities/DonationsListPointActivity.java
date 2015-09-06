@@ -17,6 +17,7 @@ import java.util.List;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.Book;
@@ -90,6 +91,21 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
 
         DonationTask donationTask = new DonationTask(getApplicationContext(), this);
         donationTask.execute(user);
+
+        refreshPointDonation(book, place.getId());
+    }
+
+    public void refreshPointDonation(Book book, int placeId){
+        ArrayList<Place> places = MockSingleton.INSTANCE.places;
+
+        for (int i = 0; i<places.size(); i++){
+            if (places.get(i).getId() == placeId){
+                places.get(i).getBooks().add(book);
+                BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(this, (ArrayList<Book>) places.get(i).getBooks());
+                adapter.setRecycleViewOnClickListenerHack(this);
+                MockSingleton.INSTANCE.places.get(i).setBooks(places.get(i).getBooks());
+            }
+        }
     }
 
     @Override
