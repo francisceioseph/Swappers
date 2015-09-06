@@ -20,6 +20,7 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
+import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
@@ -38,6 +39,7 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
     DonationsListPointRecyclerViewAdapter adapter;
     ArrayList<Place> dataSource;
     int positionPlace;
+    PlacesFragment placesFragment = new PlacesFragment();
 
 
     @Override
@@ -92,7 +94,10 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         DonationTask donationTask = new DonationTask(getApplicationContext(), this);
         donationTask.execute(user);
 
-        refreshPointDonation(book, place.getId());
+        if (MockSingleton.INSTANCE.statusCodeDonation == 200){
+            refreshPointDonation(book, place.getId());
+            placesFragment.refreshMarker(place.getId(), 1);
+        }
     }
 
     public void refreshPointDonation(Book book, int placeId){

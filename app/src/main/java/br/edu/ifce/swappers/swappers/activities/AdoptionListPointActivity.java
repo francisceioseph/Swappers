@@ -19,8 +19,10 @@ import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
+import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
@@ -33,6 +35,7 @@ import br.edu.ifce.swappers.swappers.util.RetrievedTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.UserPosition;
 import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;
+import br.edu.ifce.swappers.swappers.webservice.RetrievedService;
 
 public class AdoptionListPointActivity extends AppCompatActivity implements RecycleViewOnClickListenerHack,BookInterface {
 
@@ -41,6 +44,8 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
     Book book;
     DonationsListPointRecyclerViewAdapter adapter;
     ArrayList<Place> dataSource;
+    PlacesFragment placesFragment = new PlacesFragment();
+    RetrievedService retrievedService = new RetrievedService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +99,29 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
 
         RetrievedTask retrievedTask = new RetrievedTask(getApplicationContext(),this);
         retrievedTask.execute(user);
+
+        if (MockSingleton.INSTANCE.statusCodeAdoption == 200){
+            refreshPointAdoption(book, place.getId());
+            placesFragment.refreshMarker(place.getId(), 2);
+        }
+    }
+
+    public void refreshPointAdoption(Book book, int placeId){
+        ArrayList<Place> places = MockSingleton.INSTANCE.places;
+        ArrayList<Book> bookRefresh = new ArrayList<>();
+
+        for (int i = 0; i<places.size(); i++){
+            if (places.get(i).getId() == placeId){
+                for(int j = 0; j<places.get(i).getBooks().size(); j++){
+                    if(!book.getId().equals(places.get(i).getBooks().get(j).getId())){
+                        bookRefresh.add(places.get(i).getBooks().get(j));
+                    }
+                }
+                BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(this, bookRefresh);
+                adapter.setRecycleViewOnClickListenerHack(this);
+                MockSingleton.INSTANCE.places.get(i).setBooks(bookRefresh);
+            }
+        }
     }
 
     @Override
