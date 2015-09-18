@@ -21,6 +21,7 @@ import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
+import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
@@ -104,6 +105,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
         bookDAO.insert(book, CategoryBook.RETRIEVED);
 
         removeBookIntoPlace();
+        adoptionMarker(positionPlace);
     }
 
     private int removeBookIntoPlace(){
@@ -123,6 +125,13 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
             }
         }
         return 0;
+    }
+
+    public void adoptionMarker(int position){
+        PlacesFragment placesFragment = new PlacesFragment();
+        int idPlace = adapter.getItemID(position);
+
+        placesFragment.refreshMarker(idPlace, 2);
     }
 
     private void initToolbar() {
