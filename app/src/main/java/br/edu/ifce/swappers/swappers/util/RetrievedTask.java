@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.webservice.RetrievedService;
 
@@ -34,7 +33,6 @@ public class RetrievedTask extends AsyncTask<User,Void,Integer> {
     @Override
     protected void onPostExecute(Integer statusCode) {
         Toast toast;
-        MockSingleton.INSTANCE.statusCodeAdoption = statusCode;
         if(statusCode == 200){
             bookInterface.saveBookBaseLocal();
             toast = SwappersToast.makeText(context,"Adoção registrada com sucesso!", Toast.LENGTH_LONG);

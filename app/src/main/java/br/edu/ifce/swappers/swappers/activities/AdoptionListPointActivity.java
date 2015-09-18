@@ -19,10 +19,8 @@ import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
-import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
@@ -35,7 +33,6 @@ import br.edu.ifce.swappers.swappers.util.RetrievedTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import br.edu.ifce.swappers.swappers.util.UserPosition;
 import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;
-import br.edu.ifce.swappers.swappers.webservice.RetrievedService;
 
 public class AdoptionListPointActivity extends AppCompatActivity implements RecycleViewOnClickListenerHack,BookInterface {
 
@@ -44,8 +41,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
     Book book;
     DonationsListPointRecyclerViewAdapter adapter;
     ArrayList<Place> dataSource;
-    PlacesFragment placesFragment = new PlacesFragment();
-    RetrievedService retrievedService = new RetrievedService();
+    int positionPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +76,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
         builder.setPositiveButton("ADOPT", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 initRetrieved(posRecycleView);
+                positionPlace = posRecycleView;
                 //SwappersToast.makeText(getApplicationContext(), "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
@@ -99,35 +96,33 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
 
         RetrievedTask retrievedTask = new RetrievedTask(getApplicationContext(),this);
         retrievedTask.execute(user);
-
-        if (MockSingleton.INSTANCE.statusCodeAdoption == 200){
-            refreshPointAdoption(book, place.getId());
-            placesFragment.refreshMarker(place.getId(), 2);
-        }
-    }
-
-    public void refreshPointAdoption(Book book, int placeId){
-        ArrayList<Place> places = MockSingleton.INSTANCE.places;
-        ArrayList<Book> bookRefresh = new ArrayList<>();
-
-        for (int i = 0; i<places.size(); i++){
-            if (places.get(i).getId() == placeId){
-                for(int j = 0; j<places.get(i).getBooks().size(); j++){
-                    if(!book.getId().equals(places.get(i).getBooks().get(j).getId())){
-                        bookRefresh.add(places.get(i).getBooks().get(j));
-                    }
-                }
-                BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(this, bookRefresh);
-                adapter.setRecycleViewOnClickListenerHack(this);
-                MockSingleton.INSTANCE.places.get(i).setBooks(bookRefresh);
-            }
-        }
     }
 
     @Override
     public void saveBookBaseLocal() {
         BookDAO bookDAO = new BookDAO(this);
         bookDAO.insert(book, CategoryBook.RETRIEVED);
+
+        removeBookIntoPlace();
+    }
+
+    private int removeBookIntoPlace(){
+        int size = MockSingleton.INSTANCE.places.size();
+        int idPlace = adapter.getItemID(positionPlace);
+        ArrayList<Book> refreshBooks = new ArrayList<>();
+
+        for(int i=0; i<size; i++) {
+            if(idPlace==MockSingleton.INSTANCE.places.get(i).getId()) {
+                for(int j = 0; j< MockSingleton.INSTANCE.places.get(i).getBooks().size(); j++){
+                    if(!(MockSingleton.INSTANCE.places.get(i).getBooks().get(j).getId()).equals(book.getId())){
+                        refreshBooks.add(MockSingleton.INSTANCE.places.get(i).getBooks().get(j));
+                    }
+                }
+                MockSingleton.INSTANCE.places.get(i).setBooks(refreshBooks);
+                return 1;
+            }
+        }
+        return 0;
     }
 
     private void initToolbar() {
@@ -144,7 +139,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
 
     private void initRecyclerView() {
         //dataSource = PlaceSingleton.getInstance().getPlaces();
-            dataSource = getPlaces();
+            dataSource = MockSingleton.INSTANCE.places;
 
             adapter = new DonationsListPointRecyclerViewAdapter(dataSource);
             adapter.setRecycleViewOnClickListenerHack(this);
@@ -159,7 +154,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
     }
 
     private ArrayList<Place> getPlaces(){
-        ArrayList<Place> places = MockSingleton.INSTANCE.getPlaces();
+        ArrayList<Place> places = MockSingleton.INSTANCE.places;
         ArrayList<Place> placeRetrieved = new ArrayList<>();
 
         for (int i =0; i<places.size();i++) {

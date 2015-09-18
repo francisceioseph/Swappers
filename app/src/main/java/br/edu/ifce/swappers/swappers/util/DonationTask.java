@@ -6,8 +6,6 @@ import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import br.edu.ifce.swappers.swappers.MockSingleton;
-import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.webservice.DonationService;
 
@@ -41,7 +39,6 @@ public class DonationTask extends AsyncTask<User,Void,Integer> {
     @Override
     protected void onPostExecute(Integer statusCode) {
         Toast toast;
-        MockSingleton.INSTANCE.statusCodeDonation = statusCode;
        // progressDialog.dismiss();
         if(statusCode == 200){
             bookInterface.saveBookBaseLocal();

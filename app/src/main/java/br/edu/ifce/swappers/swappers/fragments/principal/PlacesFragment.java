@@ -7,9 +7,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,17 +35,12 @@ import java.util.Map;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.activities.BookActivity;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
-import br.edu.ifce.swappers.swappers.activities.MainActivity;
-import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.ListenerGPS;
-import br.edu.ifce.swappers.swappers.util.MarkerAsyncTask;
 import br.edu.ifce.swappers.swappers.util.PlaceAsyncTask;
 import br.edu.ifce.swappers.swappers.util.PlaceInterface;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
@@ -145,10 +138,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             try {
                 addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
                 if (addresses.size() > 0){
-                    //city = addresses.get(0).getLocality();
-                    //state = addresses.get(0).getAdminArea();
-                    city="Caucaia";
-                    state="Ceará";
+                    city = addresses.get(0).getLocality();
+                    state = addresses.get(0).getAdminArea();
                 }
             }
             catch (IOException e) {
