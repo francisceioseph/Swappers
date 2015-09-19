@@ -21,6 +21,7 @@ import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
+import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
@@ -41,6 +42,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
     Book book;
     DonationsListPointRecyclerViewAdapter adapter;
     ArrayList<Place> dataSource;
+    int positionPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
         builder.setPositiveButton("ADOPT", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 initRetrieved(posRecycleView);
+                positionPlace = posRecycleView;
                 //SwappersToast.makeText(getApplicationContext(), "This book has been adopted by you! <3", Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
@@ -100,6 +103,35 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
     public void saveBookBaseLocal() {
         BookDAO bookDAO = new BookDAO(this);
         bookDAO.insert(book, CategoryBook.RETRIEVED);
+
+        removeBookIntoPlace();
+        adoptionMarker(positionPlace);
+    }
+
+    private int removeBookIntoPlace(){
+        int size = MockSingleton.INSTANCE.places.size();
+        int idPlace = adapter.getItemID(positionPlace);
+        ArrayList<Book> refreshBooks = new ArrayList<>();
+
+        for(int i=0; i<size; i++) {
+            if(idPlace==MockSingleton.INSTANCE.places.get(i).getId()) {
+                for(int j = 0; j< MockSingleton.INSTANCE.places.get(i).getBooks().size(); j++){
+                    if(!(MockSingleton.INSTANCE.places.get(i).getBooks().get(j).getId()).equals(book.getId())){
+                        refreshBooks.add(MockSingleton.INSTANCE.places.get(i).getBooks().get(j));
+                    }
+                }
+                MockSingleton.INSTANCE.places.get(i).setBooks(refreshBooks);
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public void adoptionMarker(int position){
+        PlacesFragment placesFragment = new PlacesFragment();
+        int idPlace = adapter.getItemID(position);
+
+        placesFragment.refreshMarker(idPlace, 2);
     }
 
     private void initToolbar() {
@@ -116,7 +148,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
 
     private void initRecyclerView() {
         //dataSource = PlaceSingleton.getInstance().getPlaces();
-            dataSource = getPlaces();
+            dataSource = MockSingleton.INSTANCE.places;
 
             adapter = new DonationsListPointRecyclerViewAdapter(dataSource);
             adapter.setRecycleViewOnClickListenerHack(this);
@@ -131,7 +163,7 @@ public class AdoptionListPointActivity extends AppCompatActivity implements Recy
     }
 
     private ArrayList<Place> getPlaces(){
-        ArrayList<Place> places = MockSingleton.INSTANCE.getPlaces();
+        ArrayList<Place> places = MockSingleton.INSTANCE.places;
         ArrayList<Place> placeRetrieved = new ArrayList<>();
 
         for (int i =0; i<places.size();i++) {

@@ -7,9 +7,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,17 +35,12 @@ import java.util.Map;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.activities.BookActivity;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
-import br.edu.ifce.swappers.swappers.activities.MainActivity;
-import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.ListenerGPS;
-import br.edu.ifce.swappers.swappers.util.MarkerAsyncTask;
 import br.edu.ifce.swappers.swappers.util.PlaceAsyncTask;
 import br.edu.ifce.swappers.swappers.util.PlaceInterface;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
@@ -69,6 +62,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private User user = MockSingleton.INSTANCE.user;
     private ListenerGPS listenerGPS = new ListenerGPS();
     private Map<String,Integer> mapPlaceMarker = new HashMap<>();
+    private Map<Integer, String> mapPlaceMarkerAux = new HashMap<>();
+    ArrayList<Marker> markers = new ArrayList<>();
     private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
 
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
@@ -255,6 +250,37 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 else marker.setSnippet("Há " + String.valueOf(total_books) + " livros disponíveis aqui.");
 
                 mapPlaceMarker.put(marker.getId(), placesCity.get(i).getId());
+                mapPlaceMarkerAux.put(placesCity.get(i).getId(), marker.getId());
+                markers.add(marker);
+
+            }
+        }
+    }
+
+    public void refreshMarker(int placeId, int codeOperation){
+        ArrayList<Place> places = MockSingleton.INSTANCE.places;
+        String markerId = mapPlaceMarkerAux.get(placeId);
+        int total_books;
+
+        for(int i = 0; i<places.size(); i++){
+            if(places.get(i).getId() == placeId){
+                if (codeOperation == 1){
+                    places.get(i).setDonation(places.get(i).getDonation() + 1);
+                }
+                else if (codeOperation == 2){
+                    places.get(i).setRecovered(places.get(i).getRecovered() + 1);
+                }
+
+                for (int j=0; j<markers.size(); j++){
+                    if(markerId.equals(markers.get(j).getId())){
+                        total_books = places.get(i).getDonation() - places.get(i).getRecovered();
+                        if(total_books == 0) markers.get(j).setSnippet("Não há livros aqui. Faça uma doação!");
+                        else if(total_books == 1) markers.get(j).setSnippet("Há 1 livro disponível aqui.");
+                        else markers.get(j).setSnippet("Há " + String.valueOf(total_books) + " livros disponíveis aqui.");
+                    }
+                }
+
+                MockSingleton.INSTANCE.places = places;
             }
         }
     }

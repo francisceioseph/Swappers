@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.webservice.DonationService;
 

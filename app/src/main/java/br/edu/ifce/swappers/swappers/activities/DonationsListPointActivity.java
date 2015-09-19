@@ -9,16 +9,15 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.DonationsListPointRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
+import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
@@ -27,7 +26,6 @@ import br.edu.ifce.swappers.swappers.util.BookInterface;
 import br.edu.ifce.swappers.swappers.util.CategoryBook;
 import br.edu.ifce.swappers.swappers.util.DonationTask;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
-import br.edu.ifce.swappers.swappers.webservice.PlaceSingleton;
 
 public class DonationsListPointActivity extends AppCompatActivity implements RecycleViewOnClickListenerHack,BookInterface {
 
@@ -37,7 +35,6 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
     DonationsListPointRecyclerViewAdapter adapter;
     ArrayList<Place> dataSource;
     int positionPlace;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +87,9 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
 
         DonationTask donationTask = new DonationTask(getApplicationContext(), this);
         donationTask.execute(user);
+
     }
+
 
     @Override
     public void saveBookBaseLocal(){
@@ -98,6 +97,7 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
         bookDAO.insert(book, CategoryBook.DONATION);
 
         addBookIntoPlace();
+        donateMarker(positionPlace);
     }
 
     private int addBookIntoPlace(){
@@ -111,6 +111,13 @@ public class DonationsListPointActivity extends AppCompatActivity implements Rec
             }
         }
         return 0;
+    }
+
+    public void donateMarker(int position){
+        PlacesFragment placesFragment = new PlacesFragment();
+        int idPlace = adapter.getItemID(position);
+
+        placesFragment.refreshMarker(idPlace, 1);
     }
 
     private void initToolbar() {
