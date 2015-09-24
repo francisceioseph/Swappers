@@ -7,13 +7,12 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -36,17 +35,12 @@ import java.util.Map;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.activities.BookActivity;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
-import br.edu.ifce.swappers.swappers.activities.MainActivity;
-import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.util.AndroidUtils;
 import br.edu.ifce.swappers.swappers.util.ListenerGPS;
-import br.edu.ifce.swappers.swappers.util.MarkerAsyncTask;
 import br.edu.ifce.swappers.swappers.util.PlaceAsyncTask;
 import br.edu.ifce.swappers.swappers.util.PlaceInterface;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
@@ -68,6 +62,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private User user = MockSingleton.INSTANCE.user;
     private ListenerGPS listenerGPS = new ListenerGPS();
     private Map<String,Integer> mapPlaceMarker = new HashMap<>();
+    private Map<Integer, String> mapPlaceMarkerAux = new HashMap<>();
+    ArrayList<Marker> markers = new ArrayList<>();
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
 
     private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
 
@@ -91,11 +88,12 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         mapPlace.getUiSettings().setMyLocationButtonEnabled(true);
         mapPlace.getUiSettings().setMapToolbarEnabled(true);
         mapPlace.setMyLocationEnabled(true);
+
         mapPlace.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
         MapsInitializer.initialize(this.getActivity());
 
-        verifyGpsAndWifi();
+        getPlacesInWS();
         eventMarkers();
 
         return view;
@@ -109,7 +107,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         return myPosition;
     }
 
-    private void verifyGpsAndWifi(){
+    private boolean verifyGPS(){
         long timeUpdate = 3000;
         float distance = 0;
 
@@ -121,13 +119,21 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         if(locationUser == null){
-            Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            return false;
         }
         else{
             myPosition = getMyPosition(locationUser);
+            return true;
+        }
 
+    }
+
+    private void getPlacesInWS(){
+        boolean statusGPS;
+
+        statusGPS = verifyGPS();
+
+        if (statusGPS == true){
             Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
             List<Address> addresses;
             String city = null;
@@ -172,6 +178,12 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             }
 
         }
+
+        else{
+               Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS e tente novamente!", Toast.LENGTH_LONG);
+               toast.setGravity(Gravity.CENTER, 0, 0);
+               toast.show();
+        }
     }
 
     private void eventMarkers(){
@@ -206,24 +218,26 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             }
         });
     }
-    
+
     public View.OnClickListener findNearPlaceOnMap(){
         return new View.OnClickListener() {
             int countPlace = 0;
             @Override
             public void onClick(View v) {
+                v.startAnimation(buttonClick);
                 if (AndroidUtils.isNetworkAvailable(getActivity()) && !placesNear.isEmpty()) {
-                    //setUpMarkers(placesNear);
 
                     if (countPlace > placesNear.size() - 1) {
                         countPlace = 0;
                     }
                     LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
+                    if(verifyGPS() == false){
+                        setUpMarkers(placesNear);
+                    }
                     showMarker(placeNow, mapPlace);
-
                     countPlace++;
                 }else if(AndroidUtils.isNetworkAvailable(getActivity()) && placesNear.isEmpty()){
-                    verifyGpsAndWifi();
+                    getPlacesInWS();
                 }else{
                     Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -251,6 +265,37 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 else marker.setSnippet("Há " + String.valueOf(total_books) + " livros disponíveis aqui.");
 
                 mapPlaceMarker.put(marker.getId(), placesCity.get(i).getId());
+                mapPlaceMarkerAux.put(placesCity.get(i).getId(), marker.getId());
+                markers.add(marker);
+
+            }
+        }
+    }
+
+    public void refreshMarker(int placeId, int codeOperation){
+        ArrayList<Place> places = MockSingleton.INSTANCE.places;
+        String markerId = mapPlaceMarkerAux.get(placeId);
+        int total_books;
+
+        for(int i = 0; i<places.size(); i++){
+            if(places.get(i).getId() == placeId){
+                if (codeOperation == 1){
+                    places.get(i).setDonation(places.get(i).getDonation() + 1);
+                }
+                else if (codeOperation == 2){
+                    places.get(i).setRecovered(places.get(i).getRecovered() + 1);
+                }
+
+                for (int j=0; j<markers.size(); j++){
+                    if(markerId.equals(markers.get(j).getId())){
+                        total_books = places.get(i).getDonation() - places.get(i).getRecovered();
+                        if(total_books == 0) markers.get(j).setSnippet("Não há livros aqui. Faça uma doação!");
+                        else if(total_books == 1) markers.get(j).setSnippet("Há 1 livro disponível aqui.");
+                        else markers.get(j).setSnippet("Há " + String.valueOf(total_books) + " livros disponíveis aqui.");
+                    }
+                }
+
+                MockSingleton.INSTANCE.places = places;
             }
         }
     }
