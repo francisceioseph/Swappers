@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="fill_parent" android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:elevation="4dp"
         android:layout_margin="10dp">
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/adapter_comment_author_image"
-                    android:src="@drawable/ic_person_giant"
+                    android:src="@drawable/mock_statistics_donator"
                     app:border_width="1dp"
                     app:border_color="@color/transparent"
                     android:elevation="4dp"
@@ -37,7 +37,7 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:layout_marginLeft="8dp"
@@ -46,7 +46,7 @@
                     android:layout_marginBottom="8dp">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Francis Thomas"
@@ -54,7 +54,7 @@
                         android:layout_marginBottom="8dp" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="Posted at Apr, 24, 2015"
@@ -65,7 +65,7 @@
             </LinearLayout>
 
             <View
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="#ff919292"
                 android:layout_marginLeft="8dp"
@@ -74,10 +74,10 @@
 
             </View>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/reader_coment"
+
                 android:id="@+id/adapter_comment_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"

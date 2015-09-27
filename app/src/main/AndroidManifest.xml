@@ -31,7 +31,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/SWTheme" >
+        android:theme="@style/SWTheme"
+        >
         <meta-data
             android:name="android.app.default_searchable"
             android:value=".SearchViewActivity" />
@@ -64,13 +65,15 @@
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleTop"
-            android:theme="@style/SWTheme" >
+            android:theme="@style/SWTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.SearchViewActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleInstance"
-            android:theme="@style/SWTheme" >
+            android:theme="@style/SWTheme"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -84,7 +87,8 @@
             android:label="@string/title_activity_detail_book"
             android:launchMode="singleInstance"
             android:parentActivityName=".activities.SearchViewActivity"
-            android:theme="@style/SWTheme" >
+            android:theme="@style/SWTheme"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.SearchViewActivity" />
@@ -92,9 +96,10 @@
         <activity
             android:name=".activities.DetailPlaceActivity"
             android:label="@string/title_activity_detail_place"
-            android:launchMode="singleInstance"
+
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/SWTheme" >
+            android:theme="@style/SWTheme"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
@@ -116,13 +121,23 @@
             android:name=".activities.ReaderCommentActivity"
             android:label="@string/title_activity_reader_comment"
             android:launchMode="singleInstance"
-            android:parentActivityName=".activities.DetailBookActivity" >
+            android:parentActivityName=".activities.DetailBookActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.DetailBookActivity" />
         </activity>
         <activity
             android:name=".activities.DonationsListPointActivity"
+            android:label="@string/title_activity_donations_list_point"
+            android:parentActivityName=".activities.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AdoptionListPointActivity"
             android:label="@string/title_activity_donations_list_point"
             android:parentActivityName=".activities.MainActivity" >
             <meta-data
@@ -132,7 +147,8 @@
         <activity
             android:name=".activities.BookActivity"
             android:label="@string/title_activity_book"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".activities.MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />

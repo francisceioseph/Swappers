@@ -17,7 +17,9 @@ import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
 import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
+import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.util.CategoryBook;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 
 /**
@@ -34,7 +36,13 @@ public class RetrievedBooksFragment extends Fragment implements RecycleViewOnCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataSource = MockSingleton.INSTANCE.createMockedBookDataSource();
+
+        BookDAO bookDAO = new BookDAO(getActivity());
+        if (!bookDAO.getBookAllByCategory(CategoryBook.RETRIEVED.toString()).isEmpty()) {
+            dataSource = bookDAO.getBookAllByCategory(CategoryBook.RETRIEVED.toString());
+        }else{
+            dataSource = MockSingleton.INSTANCE.createMockedBookDataSource();
+        }
     }
 
     @Override
@@ -58,7 +66,7 @@ public class RetrievedBooksFragment extends Fragment implements RecycleViewOnCli
 
     @Override
     public void onClickListener(View view, int position) {
-        Intent detailBookFragmentIntent = new Intent(this.getActivity(),DetailBookActivity.class);
-        this.startActivity(detailBookFragmentIntent);
+        //Intent detailBookFragmentIntent = new Intent(this.getActivity(),DetailBookActivity.class);
+        // this.startActivity(detailBookFragmentIntent);
     }
 }

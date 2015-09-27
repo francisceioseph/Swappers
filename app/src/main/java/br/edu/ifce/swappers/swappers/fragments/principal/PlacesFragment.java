@@ -93,7 +93,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
         MapsInitializer.initialize(this.getActivity());
 
-        getPlacesInWS();
+        verifyGpsAndWifi();
         eventMarkers();
 
         return view;
@@ -107,7 +107,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         return myPosition;
     }
 
-    private boolean verifyGPS(){
+    private void verifyGpsAndWifi(){
         long timeUpdate = 3000;
         float distance = 0;
 
@@ -119,21 +119,14 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         if(locationUser == null){
-            return false;
+            Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
         }
         else{
             myPosition = getMyPosition(locationUser);
-            return true;
-        }
+            //myPosition = new LatLng(-23.6765722, -46.5625052);
 
-    }
-
-    private void getPlacesInWS(){
-        boolean statusGPS;
-
-        statusGPS = verifyGPS();
-
-        if (statusGPS == true){
             Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
             List<Address> addresses;
             String city = null;
@@ -172,17 +165,11 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     task.execute(city, state);
                 }
             } else{
-                Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão e tente novamente!", Toast.LENGTH_LONG);
+                Toast toast = SwappersToast.makeText(getActivity(), "Verifique seu GPS e conexão e tente novamente!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
 
-        }
-
-        else{
-               Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS e tente novamente!", Toast.LENGTH_LONG);
-               toast.setGravity(Gravity.CENTER, 0, 0);
-               toast.show();
         }
     }
 
@@ -231,13 +218,11 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                         countPlace = 0;
                     }
                     LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
-                    if(verifyGPS() == false){
-                        setUpMarkers(placesNear);
-                    }
                     showMarker(placeNow, mapPlace);
+
                     countPlace++;
                 }else if(AndroidUtils.isNetworkAvailable(getActivity()) && placesNear.isEmpty()){
-                    getPlacesInWS();
+                    verifyGpsAndWifi();
                 }else{
                     Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
