@@ -3,6 +3,7 @@ package br.edu.ifce.swappers.swappers;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Comment;
@@ -17,6 +18,7 @@ public enum MockSingleton {
 
     public User user;
     public ArrayList<Place> places = new ArrayList<Place>();
+    public ArrayList<User> donators = new ArrayList<>();
 
    /* public ArrayList<Place> createMockedPlaceDataSource(double latitude, double longitude) {
         ArrayList<Place> dataSource = new ArrayList<>();
@@ -73,4 +75,11 @@ public enum MockSingleton {
     }
 
 
+    public ArrayList<User> getDonators() {
+        return donators;
+    }
+
+    public void setDonators(ArrayList<User> donators) {
+        this.donators = donators;
+    }
 }
