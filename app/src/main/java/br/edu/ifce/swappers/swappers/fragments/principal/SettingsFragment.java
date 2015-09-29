@@ -1,17 +1,23 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.fourmob.datetimepicker.date.DatePickerDialog;
@@ -19,7 +25,10 @@ import com.fourmob.datetimepicker.date.DatePickerDialog.OnDateSetListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.SettingsArrayAdapter;
 import br.edu.ifce.swappers.swappers.model.SettingsListItem;
@@ -32,6 +41,22 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
     private ListView settingsListView;
     private static String BIRTHDAY_DATEPICKER_TAG = "BIRTHDAY_DATEPICKER";
+    EditText newCity;
+    Spinner optionStates;
+    private static final String[] STATES = new String[]{"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG",
+                                            "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+    private Map<String, String> states = new HashMap<>();
+
+    private void createHashStates(){
+        String[] nameStates = new String[]{"Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
+            "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí",
+            "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo",
+            "Sergipe", "Tocantins"};
+
+        for (int i = 0; i<nameStates.length; i++){
+            states.put(STATES[i], nameStates[i]);
+        }
+    }
 
     public SettingsFragment() {
 
@@ -48,6 +73,8 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         this.settingsListView = (ListView) rootView.findViewById(R.id.settings_list_view);
         this.settingsListView.setAdapter(personalInfoListViewAdapter);
         this.settingsListView.setOnItemClickListener(this.buildSettingsListDialogListener());
+
+        createHashStates();
 
         return rootView;
     }
@@ -199,12 +226,18 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         LayoutInflater inflater = getActivity().getLayoutInflater();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
         View rootView = inflater.inflate(R.layout.dialog_change_city, null);
-        ImageButton locateMeImageButton = (ImageButton) rootView.findViewById(R.id.locate_me_image_button);
+       // ImageButton locateMeImageButton = (ImageButton) rootView.findViewById(R.id.locate_me_image_button);
+        newCity = (EditText) rootView.findViewById(R.id.new_current_city_edit_text);
+        optionStates = (Spinner) rootView.findViewById(R.id.option_state_spinner);
+        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, STATES);
 
-        locateMeImageButton.setOnClickListener(this.onLocateMeImageButtonClick());
+        //locateMeImageButton.setOnClickListener(this.onLocateMeImageButtonClick());
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        optionStates.setAdapter(adapter);
 
         builder.setTitle("Change Current City");
-        builder.setMessage("Type the current city name or click on location button.");
+        //builder.setMessage("Type the current city name or click on location button.");
+        builder.setMessage("Tap the current city name and choose the state on list.");
         builder.setView(rootView);
         builder.setPositiveButton("OK", this.onChangeCityPositiveButton());
         builder.setNegativeButton("CANCEL", this.onChangeCityNegativeButton());
@@ -449,7 +482,17 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String city = newCity.getText().toString();
+                String state = optionStates.getSelectedItem().toString();
+
+                String nameState = states.get(state);
+
+                MockSingleton.INSTANCE.user.setCity(city);
+                MockSingleton.INSTANCE.user.setState(nameState);
+
                 SwappersToast.makeText(getActivity(), "City changed Successfully", Toast.LENGTH_SHORT).show();
+
+                MockSingleton.INSTANCE.flagSettingsFragmentCity ++;
             }
         };
     }
@@ -467,7 +510,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
+               // SwappersToast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
             }
         };
     }
