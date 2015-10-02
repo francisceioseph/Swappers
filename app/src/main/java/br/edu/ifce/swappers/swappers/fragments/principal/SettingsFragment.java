@@ -487,12 +487,14 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
                 String nameState = states.get(state);
 
-                MockSingleton.INSTANCE.user.setCity(city);
-                MockSingleton.INSTANCE.user.setState(nameState);
+                MockSingleton.INSTANCE.userChangeCity = city;
+                MockSingleton.INSTANCE.userChangeState = nameState;
 
-                SwappersToast.makeText(getActivity(), "City changed Successfully", Toast.LENGTH_SHORT).show();
+                //MockSingleton.INSTANCE.user.setCity(city);
+               // MockSingleton.INSTANCE.user.setState(nameState);
 
-                MockSingleton.INSTANCE.flagSettingsFragmentCity ++;
+                SwappersToast.makeText(getActivity(), "City changed successfully", Toast.LENGTH_SHORT).show();
+
             }
         };
     }

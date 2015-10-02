@@ -146,47 +146,58 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             try {
                 addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
                 if (addresses.size() > 0){
-                    //city = addresses.get(0).getLocality();
-                    //state = addresses.get(0).getAdminArea();
-                    city="Caucaia";
-                    state="Ceará";
+                    city = addresses.get(0).getLocality();
+                    state = addresses.get(0).getAdminArea();
                 }
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
 
-            if(user.getCity()!=null && user.getState()!=null){
-                cityUser = user.getCity();
-                stateUser = user.getState();
-            }else {
-                user.setCity(city);
-                user.setState(state);
-
+            if(MockSingleton.INSTANCE.userChangeCity==null && MockSingleton.INSTANCE.userChangeState==null){
                 cityUser = "";
                 stateUser = "";
             }
+            else {
+                cityUser = MockSingleton.INSTANCE.userChangeCity;
+                stateUser = MockSingleton.INSTANCE.userChangeState;
+            }
 
             if(city!=null && state!=null && AndroidUtils.isNetworkAvailable(getActivity())){
-                if(city.equals(cityUser) && state.equals(stateUser) && PlaceService.getResponseCode()==200){
-                    updatePlaceNear(places);
-                }
-                else if((!city.equals(cityUser) || !state.equals(stateUser)) && MockSingleton.INSTANCE.flagSettingsFragmentCity!=0 &&
-                        MockSingleton.INSTANCE.flagSettingsFragmentCity%2==0){
-                    updatePlaceNear(places);
-                }
-                else {
-                    if(!cityUser.equals("") && !stateUser.equals("")){
+                user.setCity(city);
+                user.setState(state);
+
+                if(MockSingleton.INSTANCE.flagSettingsFragmentCity==false){
+                    if(cityUser.equals("") && stateUser.equals("")){
+                        PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
+                        task.execute(city, state);
+
+                    }
+
+                    else {
                         PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
                         task.execute(cityUser, stateUser);
-                        MockSingleton.INSTANCE.flagSettingsFragmentCity ++;
+
+                    }
+
+                    if(PlaceService.getResponseCode()==200)
+                        MockSingleton.INSTANCE.flagSettingsFragmentCity = true;
+                }
+
+                else {
+                    if(cityUser.equals("") && stateUser.equals("")){
+                        updatePlaceNear(places);
                     }
                     else {
                         PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
-                        task.execute(city, state);
+                        task.execute(cityUser, stateUser);
+
+                        MockSingleton.INSTANCE.userChangeCity=null;
+                        MockSingleton.INSTANCE.userChangeState=null;
                     }
                 }
             }
+
             else{
                 Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão e tente novamente!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
