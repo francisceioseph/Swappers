@@ -151,7 +151,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 }
             }
             catch (IOException e) {
-                e.printStackTrace();
+                e.fillInStackTrace();
             }
 
             if(MockSingleton.INSTANCE.userChangeCity==null && MockSingleton.INSTANCE.userChangeState==null){
@@ -171,17 +171,16 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     if(cityUser.equals("") && stateUser.equals("")){
                         PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
                         task.execute(city, state);
-
-                    }
+                     }
 
                     else {
                         PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
                         task.execute(cityUser, stateUser);
-
                     }
 
-                    if(PlaceService.getResponseCode()==200)
+                    //if(PlaceService.getResponseCode()==200){
                         MockSingleton.INSTANCE.flagSettingsFragmentCity = true;
+                    //}
                 }
 
                 else {
@@ -354,7 +353,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     placesNear = MockSingleton.INSTANCE.places;
                 }
             }else{
-                Toast toast = SwappersToast.makeText(getActivity(), "Desculpe-nos! Ainda não há pontos de troca em sua cidade.", Toast.LENGTH_LONG);
+                Toast toast = SwappersToast.makeText(getActivity(), "Erro no servidor. :( Tente novamente mais tarde!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }

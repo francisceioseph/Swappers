@@ -3,6 +3,7 @@ package br.edu.ifce.swappers.swappers.fragments.principal;
 import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.media.audiofx.EnvironmentalReverb;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,7 @@ import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.SettingsArrayAdapter;
 import br.edu.ifce.swappers.swappers.model.SettingsListItem;
+import br.edu.ifce.swappers.swappers.util.Settings;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
@@ -43,18 +45,54 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     private static String BIRTHDAY_DATEPICKER_TAG = "BIRTHDAY_DATEPICKER";
     EditText newCity;
     Spinner optionStates;
-    private static final String[] STATES = new String[]{"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG",
+    Spinner optionCities;
+    private static final String[] STATES = new String[]{"state", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG",
                                             "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
     private Map<String, String> states = new HashMap<>();
 
     private void createHashStates(){
-        String[] nameStates = new String[]{"Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
+        String[] nameStates = new String[]{"state", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
             "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí",
             "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo",
             "Sergipe", "Tocantins"};
 
         for (int i = 0; i<nameStates.length; i++){
             states.put(STATES[i], nameStates[i]);
+        }
+    }
+
+    private void initCitiesSpinner(String city){
+        switch (city){
+            case "AC": ArrayAdapter adapter_ac = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
+                                                Settings.getCitiesAC());
+                       adapter_ac.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                       optionCities.setAdapter(adapter_ac);
+                break;
+            case "AL": ArrayAdapter adapter_al = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
+                    Settings.getCitiesAL());
+                adapter_al.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                optionCities.setAdapter(adapter_al);
+                break;
+            case "AP": ArrayAdapter adapter_ap = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
+                    Settings.getCitiesAP());
+                adapter_ap.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                optionCities.setAdapter(adapter_ap);
+                break;
+            case "AM": ArrayAdapter adapter_am = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
+                    Settings.getCitiesAM());
+                adapter_am.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                optionCities.setAdapter(adapter_am);
+                break;
+            case "BA": ArrayAdapter adapter_ba = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
+                    Settings.getCitiesBA());
+                adapter_ba.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                optionCities.setAdapter(adapter_ba);
+                break;
+            case "CE": ArrayAdapter adapter_ce = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
+                    Settings.getCitiesCE());
+                adapter_ce.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                optionCities.setAdapter(adapter_ce);
+
         }
     }
 
@@ -226,10 +264,12 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         LayoutInflater inflater = getActivity().getLayoutInflater();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
         View rootView = inflater.inflate(R.layout.dialog_change_city, null);
-       // ImageButton locateMeImageButton = (ImageButton) rootView.findViewById(R.id.locate_me_image_button);
-        newCity = (EditText) rootView.findViewById(R.id.new_current_city_edit_text);
+        //newCity = (EditText) rootView.findViewById(R.id.new_current_city_edit_text);
         optionStates = (Spinner) rootView.findViewById(R.id.option_state_spinner);
+        optionCities = (Spinner) rootView.findViewById(R.id.option_city_spinner);
+
         ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, STATES);
+        initCitiesSpinner("CE");
 
         //locateMeImageButton.setOnClickListener(this.onLocateMeImageButtonClick());
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -237,7 +277,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
         builder.setTitle("Change Current City");
         //builder.setMessage("Type the current city name or click on location button.");
-        builder.setMessage("Tap the current city name and choose the state on list.");
+        builder.setMessage("Choose the state and the city on the list.");
         builder.setView(rootView);
         builder.setPositiveButton("OK", this.onChangeCityPositiveButton());
         builder.setNegativeButton("CANCEL", this.onChangeCityNegativeButton());
@@ -470,7 +510,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
     /*
        * This method creates the listener for the positive button
-       * of the change ciry alert.
+       * of the change city alert.
        * This method also should:
        *   Connect to WS to communicate that the city changed
        *   Update current city local field
@@ -482,7 +522,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String city = newCity.getText().toString();
+                String city = optionCities.getSelectedItem().toString();
                 String state = optionStates.getSelectedItem().toString();
 
                 String nameState = states.get(state);
@@ -490,10 +530,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
                 MockSingleton.INSTANCE.userChangeCity = city;
                 MockSingleton.INSTANCE.userChangeState = nameState;
 
-                //MockSingleton.INSTANCE.user.setCity(city);
-               // MockSingleton.INSTANCE.user.setState(nameState);
-
-                SwappersToast.makeText(getActivity(), "City changed successfully", Toast.LENGTH_SHORT).show();
+                SwappersToast.makeText(getActivity(), "City changed to " + city + "," + state, Toast.LENGTH_SHORT).show();
 
             }
         };

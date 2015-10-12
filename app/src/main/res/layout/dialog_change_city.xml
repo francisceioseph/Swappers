@@ -6,21 +6,19 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical">
 
-    <EditText
-        android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/new_current_city_edit_text"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="5dp"
-        android:theme="@style/SWEditTextTheme"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
-
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:id="@+id/option_state_spinner"
         android:theme="@style/SWEditTextTheme"
-        android:layout_weight="0.9" />
+        android:layout_marginLeft="20dp" />
+
+    <Spinner
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/option_city_spinner"
+        android:theme="@style/SWEditTextTheme"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp" />
 
 </LinearLayout>
