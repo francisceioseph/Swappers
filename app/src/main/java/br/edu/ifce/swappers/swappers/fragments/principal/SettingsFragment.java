@@ -1,22 +1,17 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
-import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.media.audiofx.EnvironmentalReverb;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -43,15 +38,15 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
     private ListView settingsListView;
     private static String BIRTHDAY_DATEPICKER_TAG = "BIRTHDAY_DATEPICKER";
-    EditText newCity;
     Spinner optionStates;
     Spinner optionCities;
-    private static final String[] STATES = new String[]{"state", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG",
+    private static String[] cities = new String[]{};
+    private static final String[] STATES = new String[]{"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG",
                                             "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
     private Map<String, String> states = new HashMap<>();
 
     private void createHashStates(){
-        String[] nameStates = new String[]{"state", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
+        String[] nameStates = new String[]{"Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
             "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí",
             "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo",
             "Sergipe", "Tocantins"};
@@ -61,38 +56,62 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         }
     }
 
-    private void initCitiesSpinner(String city){
-        switch (city){
-            case "AC": ArrayAdapter adapter_ac = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
-                                                Settings.getCitiesAC());
-                       adapter_ac.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                       optionCities.setAdapter(adapter_ac);
+    private void initCitiesSpinner(int position){
+        switch (position){
+            case 0: cities = Settings.getCitiesAC();
                 break;
-            case "AL": ArrayAdapter adapter_al = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
-                    Settings.getCitiesAL());
-                adapter_al.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                optionCities.setAdapter(adapter_al);
+            case 1: cities = Settings.getCitiesAL();
                 break;
-            case "AP": ArrayAdapter adapter_ap = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
-                    Settings.getCitiesAP());
-                adapter_ap.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                optionCities.setAdapter(adapter_ap);
+            case 2: cities = Settings.getCitiesAP();
                 break;
-            case "AM": ArrayAdapter adapter_am = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
-                    Settings.getCitiesAM());
-                adapter_am.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                optionCities.setAdapter(adapter_am);
+            case 3: cities = Settings.getCitiesAM();
                 break;
-            case "BA": ArrayAdapter adapter_ba = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
-                    Settings.getCitiesBA());
-                adapter_ba.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                optionCities.setAdapter(adapter_ba);
+            case 4: cities = Settings.getCitiesBA();
                 break;
-            case "CE": ArrayAdapter adapter_ce = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
-                    Settings.getCitiesCE());
-                adapter_ce.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                optionCities.setAdapter(adapter_ce);
-
+            case 5: cities = Settings.getCitiesCE();
+                break;
+            case 6: cities = Settings.getCitiesDF();
+                break;
+            case 7: cities = Settings.getCitiesES();
+                break;
+            case 8: cities = Settings.getCitiesGO();
+                break;
+            case 9: cities = Settings.getCitiesMA();
+                break;
+            case 10: cities = Settings.getCitiesMT();
+                break;
+            case 11: cities = Settings.getCitiesMS();
+                break;
+            case 12: cities = Settings.getCitiesMG();
+                break;
+            case 13: cities = Settings.getCitiesPA();
+                break;
+            case 14: cities = Settings.getCitiesPB();
+                break;
+            case 15: cities = Settings.getCitiesPR();
+                break;
+            case 16: cities = Settings.getCitiesPE();
+                break;
+            case 17: cities = Settings.getCitiesPI();
+                break;
+            case 18: cities = Settings.getCitiesRJ();
+                break;
+            case 19: cities = Settings.getCitiesRN();
+                break;
+            case 20: cities = Settings.getCitiesRS();
+                break;
+            case 21: cities = Settings.getCitiesRO();
+                break;
+            case 22: cities = Settings.getCitiesRR();
+                break;
+            case 23: cities = Settings.getCitiesSC();
+                break;
+            case 24: cities = Settings.getCitiesSP();
+                break;
+            case 25: cities = Settings.getCitiesSE();
+                break;
+            case 26: cities = Settings.getCitiesTO();
+                break;
         }
     }
 
@@ -264,16 +283,30 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         LayoutInflater inflater = getActivity().getLayoutInflater();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
         View rootView = inflater.inflate(R.layout.dialog_change_city, null);
-        //newCity = (EditText) rootView.findViewById(R.id.new_current_city_edit_text);
         optionStates = (Spinner) rootView.findViewById(R.id.option_state_spinner);
         optionCities = (Spinner) rootView.findViewById(R.id.option_city_spinner);
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, STATES);
-        initCitiesSpinner("CE");
+        ArrayAdapter adapterState = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, STATES);
+        adapterState.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        optionStates.setAdapter(adapterState);
 
-        //locateMeImageButton.setOnClickListener(this.onLocateMeImageButtonClick());
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        optionStates.setAdapter(adapter);
+        optionStates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                initCitiesSpinner(position);
+
+                ArrayAdapter adapterCities = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
+                        cities);
+                adapterCities.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                optionCities.setAdapter(adapterCities);
+                optionCities.setSelection(position, false);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         builder.setTitle("Change Current City");
         //builder.setMessage("Type the current city name or click on location button.");
@@ -549,7 +582,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-               // SwappersToast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
             }
         };
     }
