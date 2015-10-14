@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.fourmob.datetimepicker.date.DatePickerDialog;
@@ -19,10 +21,14 @@ import com.fourmob.datetimepicker.date.DatePickerDialog.OnDateSetListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.adapters.SettingsArrayAdapter;
 import br.edu.ifce.swappers.swappers.model.SettingsListItem;
+import br.edu.ifce.swappers.swappers.util.Settings;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 
 /**
@@ -32,6 +38,82 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
     private ListView settingsListView;
     private static String BIRTHDAY_DATEPICKER_TAG = "BIRTHDAY_DATEPICKER";
+    Spinner optionStates;
+    Spinner optionCities;
+    private static String[] cities = new String[]{};
+    private static final String[] STATES = new String[]{"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG",
+                                            "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+    private Map<String, String> states = new HashMap<>();
+
+    private void createHashStates(){
+        String[] nameStates = new String[]{"Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
+            "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí",
+            "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo",
+            "Sergipe", "Tocantins"};
+
+        for (int i = 0; i<nameStates.length; i++){
+            states.put(STATES[i], nameStates[i]);
+        }
+    }
+
+    private void initCitiesSpinner(int position){
+        switch (position){
+            case 0: cities = Settings.getCitiesAC();
+                break;
+            case 1: cities = Settings.getCitiesAL();
+                break;
+            case 2: cities = Settings.getCitiesAP();
+                break;
+            case 3: cities = Settings.getCitiesAM();
+                break;
+            case 4: cities = Settings.getCitiesBA();
+                break;
+            case 5: cities = Settings.getCitiesCE();
+                break;
+            case 6: cities = Settings.getCitiesDF();
+                break;
+            case 7: cities = Settings.getCitiesES();
+                break;
+            case 8: cities = Settings.getCitiesGO();
+                break;
+            case 9: cities = Settings.getCitiesMA();
+                break;
+            case 10: cities = Settings.getCitiesMT();
+                break;
+            case 11: cities = Settings.getCitiesMS();
+                break;
+            case 12: cities = Settings.getCitiesMG();
+                break;
+            case 13: cities = Settings.getCitiesPA();
+                break;
+            case 14: cities = Settings.getCitiesPB();
+                break;
+            case 15: cities = Settings.getCitiesPR();
+                break;
+            case 16: cities = Settings.getCitiesPE();
+                break;
+            case 17: cities = Settings.getCitiesPI();
+                break;
+            case 18: cities = Settings.getCitiesRJ();
+                break;
+            case 19: cities = Settings.getCitiesRN();
+                break;
+            case 20: cities = Settings.getCitiesRS();
+                break;
+            case 21: cities = Settings.getCitiesRO();
+                break;
+            case 22: cities = Settings.getCitiesRR();
+                break;
+            case 23: cities = Settings.getCitiesSC();
+                break;
+            case 24: cities = Settings.getCitiesSP();
+                break;
+            case 25: cities = Settings.getCitiesSE();
+                break;
+            case 26: cities = Settings.getCitiesTO();
+                break;
+        }
+    }
 
     public SettingsFragment() {
 
@@ -48,6 +130,8 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         this.settingsListView = (ListView) rootView.findViewById(R.id.settings_list_view);
         this.settingsListView.setAdapter(personalInfoListViewAdapter);
         this.settingsListView.setOnItemClickListener(this.buildSettingsListDialogListener());
+
+        createHashStates();
 
         return rootView;
     }
@@ -199,12 +283,34 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         LayoutInflater inflater = getActivity().getLayoutInflater();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
         View rootView = inflater.inflate(R.layout.dialog_change_city, null);
-        ImageButton locateMeImageButton = (ImageButton) rootView.findViewById(R.id.locate_me_image_button);
+        optionStates = (Spinner) rootView.findViewById(R.id.option_state_spinner);
+        optionCities = (Spinner) rootView.findViewById(R.id.option_city_spinner);
 
-        locateMeImageButton.setOnClickListener(this.onLocateMeImageButtonClick());
+        ArrayAdapter adapterState = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, STATES);
+        adapterState.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        optionStates.setAdapter(adapterState);
+
+        optionStates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                initCitiesSpinner(position);
+
+                ArrayAdapter adapterCities = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
+                        cities);
+                adapterCities.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                optionCities.setAdapter(adapterCities);
+                optionCities.setSelection(position, false);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         builder.setTitle("Change Current City");
-        builder.setMessage("Type the current city name or click on location button.");
+        //builder.setMessage("Type the current city name or click on location button.");
+        builder.setMessage("Choose the state and the city on the list.");
         builder.setView(rootView);
         builder.setPositiveButton("OK", this.onChangeCityPositiveButton());
         builder.setNegativeButton("CANCEL", this.onChangeCityNegativeButton());
@@ -437,7 +543,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
     /*
        * This method creates the listener for the positive button
-       * of the change ciry alert.
+       * of the change city alert.
        * This method also should:
        *   Connect to WS to communicate that the city changed
        *   Update current city local field
@@ -449,7 +555,16 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity(), "City changed Successfully", Toast.LENGTH_SHORT).show();
+                String city = optionCities.getSelectedItem().toString();
+                String state = optionStates.getSelectedItem().toString();
+
+                String nameState = states.get(state);
+
+                MockSingleton.INSTANCE.userChangeCity = city;
+                MockSingleton.INSTANCE.userChangeState = nameState;
+
+                SwappersToast.makeText(getActivity(), "City changed to " + city + "," + state, Toast.LENGTH_SHORT).show();
+
             }
         };
     }
@@ -467,7 +582,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
             }
         };
     }

@@ -20,6 +20,10 @@ public enum MockSingleton {
     public ArrayList<Place> places = new ArrayList<Place>();
     public ArrayList<User> donators = new ArrayList<>();
 
+    public boolean flagSettingsFragmentCity = false;
+    public String userChangeCity = new String();
+    public String userChangeState = new String();
+
    /* public ArrayList<Place> createMockedPlaceDataSource(double latitude, double longitude) {
         ArrayList<Place> dataSource = new ArrayList<>();
 

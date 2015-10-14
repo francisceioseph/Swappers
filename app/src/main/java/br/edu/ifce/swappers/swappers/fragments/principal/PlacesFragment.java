@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,7 +94,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
         MapsInitializer.initialize(this.getActivity());
 
-        verifyGpsAndWifi();
+        getPlacesInWS();
         eventMarkers();
 
         return view;
@@ -107,7 +108,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         return myPosition;
     }
 
-    private void verifyGpsAndWifi(){
+    private boolean verifyGPS(){
         long timeUpdate = 3000;
         float distance = 0;
 
@@ -119,14 +120,21 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         if(locationUser == null){
-            Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            return false;
         }
         else{
             myPosition = getMyPosition(locationUser);
-            //myPosition = new LatLng(-23.6765722, -46.5625052);
+            return true;
+        }
 
+    }
+
+    private void getPlacesInWS(){
+        boolean statusGPS;
+
+        statusGPS = verifyGPS();
+
+        if (statusGPS == true){
             Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
             List<Address> addresses;
             String city = null;
@@ -143,33 +151,64 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 }
             }
             catch (IOException e) {
-                e.printStackTrace();
+                e.fillInStackTrace();
             }
 
-            if(user.getCity()!=null && user.getState()!=null){
-                cityUser = user.getCity();
-                stateUser = user.getState();
-            }else {
-                user.setCity(city);
-                user.setState(state);
-
+            if(MockSingleton.INSTANCE.userChangeCity==null && MockSingleton.INSTANCE.userChangeState==null){
                 cityUser = "";
                 stateUser = "";
             }
+            else {
+                cityUser = MockSingleton.INSTANCE.userChangeCity;
+                stateUser = MockSingleton.INSTANCE.userChangeState;
+            }
 
             if(city!=null && state!=null && AndroidUtils.isNetworkAvailable(getActivity())){
-                if(city.equals(cityUser) && state.equals(stateUser) && PlaceService.getResponseCode()==200){
-                    updatePlaceNear(places);
-                }else {
-                    PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
-                    task.execute(city, state);
+                user.setCity(city);
+                user.setState(state);
+
+                if(MockSingleton.INSTANCE.flagSettingsFragmentCity==false){
+                    if(cityUser.equals("") && stateUser.equals("")){
+                        PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
+                        task.execute(city, state);
+                     }
+
+                    else {
+                        PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
+                        task.execute(cityUser, stateUser);
+                    }
+
+                    //if(PlaceService.getResponseCode()==200){
+                        MockSingleton.INSTANCE.flagSettingsFragmentCity = true;
+                    //}
                 }
-            } else{
-                Toast toast = SwappersToast.makeText(getActivity(), "Verifique seu GPS e conexão e tente novamente!", Toast.LENGTH_LONG);
+
+                else {
+                    if(cityUser.equals("") && stateUser.equals("")){
+                        updatePlaceNear(places);
+                    }
+                    else {
+                        PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
+                        task.execute(cityUser, stateUser);
+
+                        MockSingleton.INSTANCE.userChangeCity=null;
+                        MockSingleton.INSTANCE.userChangeState=null;
+                    }
+                }
+            }
+
+            else{
+                Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão e tente novamente!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
 
+        }
+
+        else{
+               Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS e tente novamente!", Toast.LENGTH_LONG);
+               toast.setGravity(Gravity.CENTER, 0, 0);
+               toast.show();
         }
     }
 
@@ -218,11 +257,13 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                         countPlace = 0;
                     }
                     LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
+                    if(verifyGPS() == false){
+                        setUpMarkers(placesNear);
+                    }
                     showMarker(placeNow, mapPlace);
-
                     countPlace++;
                 }else if(AndroidUtils.isNetworkAvailable(getActivity()) && placesNear.isEmpty()){
-                    verifyGpsAndWifi();
+                    getPlacesInWS();
                 }else{
                     Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -312,7 +353,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     placesNear = MockSingleton.INSTANCE.places;
                 }
             }else{
-                Toast toast = SwappersToast.makeText(getActivity(), "Desculpe-nos! Ainda não há pontos de troca em sua cidade.", Toast.LENGTH_LONG);
+                Toast toast = SwappersToast.makeText(getActivity(), "Erro no servidor. :( Tente novamente mais tarde!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
