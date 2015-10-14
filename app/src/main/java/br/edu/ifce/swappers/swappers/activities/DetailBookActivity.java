@@ -191,6 +191,8 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ReaderCommentActivity.class);
+                intent.putExtra("CURRENT_BOOK", book);
+
                 startActivity(intent);
             }
         };
@@ -200,20 +202,7 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 registryFavoriteBookWS();
-
-                /*
-                if (flag){
-                    Drawable  drawable  = getResources().getDrawable(R.drawable.ic_is_book_favorite);
-                    imgView.setImageDrawable(drawable);
-                    flag = false;
-                }else {
-                    imgView.setImageDrawable(null);
-                    flag = true;
-                }
-                **/
-
             }
         };
     }

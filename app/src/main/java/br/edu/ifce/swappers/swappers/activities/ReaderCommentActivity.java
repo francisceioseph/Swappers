@@ -1,19 +1,30 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.model.Review;
+import br.edu.ifce.swappers.swappers.util.ImageUtil;
+import br.edu.ifce.swappers.swappers.util.ReviewTask;
+
+import static br.edu.ifce.swappers.swappers.util.ImageUtil.*;
 
 public class ReaderCommentActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    EditText commentEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +34,7 @@ public class ReaderCommentActivity extends AppCompatActivity {
         this.toolbar = (Toolbar) findViewById(R.id.toolbar);
         this.initToolbar();
 
-        EditText commentEditText = (EditText) findViewById(R.id.new_comment_edit_text);
+        commentEditText = (EditText) findViewById(R.id.new_comment_edit_text);
         commentEditText.addTextChangedListener(this.buildTextWatcher());
     }
 
@@ -36,23 +47,35 @@ public class ReaderCommentActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.review_menu){
+            sendReviewToWS();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void sendReviewToWS() {
+        Integer userId      = MockSingleton.INSTANCE.user.getId();
+        Book book           = (Book) getIntent().getExtras().get("CURRENT_BOOK");
+        String reviewText   = commentEditText.getText().toString();
+
+        Review review = new Review(userId, book, reviewText);
+
+        ReviewTask task = new ReviewTask(this);
+        task.execute(review);
+
+    }
+
     private void initToolbar() {
-        toolbar.setTitle("User Name"); /*Inserir a consulta ao banco de dados que retornará o título do livro*/
+        toolbar.setTitle(MockSingleton.INSTANCE.user.getName()); /*Inserir a consulta ao banco de dados que retornará o título do livro*/
         toolbar.setSubtitle("250 caracteres restantes");
-        toolbar.setLogo(R.drawable.ic_star);
+        Bitmap userPhoto = StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+        Bitmap userPhotoResized = Bitmap.createScaledBitmap(userPhoto, 56, 56, false);
+
+        toolbar.setLogo(new BitmapDrawable(getResources(), userPhotoResized));
 
         if (toolbar != null){
             this.setSupportActionBar(toolbar);
