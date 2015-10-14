@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -44,5 +46,36 @@ public class JsonUtil {
         conn.disconnect();
 
         return status_code;
+    }
+
+    public static String retrieveFromServer(URL url) throws IOException {
+
+        HttpURLConnection conn;
+        String parsedResponse = null;
+
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setDoInput(true);
+
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.connect();
+
+        int responseCode = conn.getResponseCode();
+
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    conn.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+
+            in.close();
+            parsedResponse = response.toString();
+        }
+
+        return parsedResponse;
     }
 }

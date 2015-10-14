@@ -47,6 +47,7 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
     CircleImageView photoBook;
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
+
     Book book;
 
     public DetailBookActivity(){
@@ -284,4 +285,7 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
         return placeRetrieved;
     }
 
+    public Book getBook() {
+        return book;
+    }
 }
