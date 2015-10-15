@@ -1,12 +1,12 @@
 package br.edu.ifce.swappers.swappers.fragments.tabs.detail_book;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +14,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
 import br.edu.ifce.swappers.swappers.adapters.CommentRecyclerViewAdapter;
-import br.edu.ifce.swappers.swappers.model.Comment;
 import br.edu.ifce.swappers.swappers.model.Review;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.util.RetrieveReviewsTaskInterface;
@@ -28,7 +26,9 @@ import br.edu.ifce.swappers.swappers.webservice.RetrieveReviewsTask;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReadersCommentsFragment extends Fragment implements RecycleViewOnClickListenerHack, RetrieveReviewsTaskInterface {
+public class ReadersCommentsFragment extends Fragment implements RecycleViewOnClickListenerHack,
+        RetrieveReviewsTaskInterface,
+        DetailBookActivity.RequestRecyclerViewUpdate {
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
@@ -42,12 +42,7 @@ public class ReadersCommentsFragment extends Fragment implements RecycleViewOnCl
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        RetrieveReviewsTask task = new RetrieveReviewsTask(getActivity(), this);
-        DetailBookActivity detailBookActivity = (DetailBookActivity) getActivity();
-
-        task.execute(detailBookActivity.getBook().getId());
-
+        this.loadReaderComments();
     }
 
     @Override
@@ -60,7 +55,6 @@ public class ReadersCommentsFragment extends Fragment implements RecycleViewOnCl
 
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.recyclerView = (RecyclerView) rootView.findViewById(R.id.readers_comments_list);
-
 
         this.recyclerView.setHasFixedSize(true);
         this.recyclerView.setLayoutManager(layoutManager);
@@ -87,5 +81,25 @@ public class ReadersCommentsFragment extends Fragment implements RecycleViewOnCl
         else {
             SwappersToast.makeText(getActivity(), "Seja o primeiro a comentar!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        DetailBookActivity detailBookActivity = (DetailBookActivity) activity;
+        detailBookActivity.setRecyclerViewUpdateCallback(this);
+    }
+
+    @Override
+    public void reloadRecyclerView() {
+        this.loadReaderComments();
+    }
+
+    private void loadReaderComments(){
+        RetrieveReviewsTask task = new RetrieveReviewsTask(getActivity(), this);
+        DetailBookActivity detailBookActivity = (DetailBookActivity) getActivity();
+
+        task.execute(detailBookActivity.getBook().getId());
     }
 }

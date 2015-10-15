@@ -14,6 +14,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -158,6 +159,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         ComponentName cn = new ComponentName(this, SearchViewActivity.class);
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));
+
         return true;
     }
 }

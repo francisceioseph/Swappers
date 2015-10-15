@@ -14,10 +14,7 @@ import br.edu.ifce.swappers.swappers.model.User;
 public class AndroidUtils {
     public final static String SELECTED_BOOK_ID = "SELECTED_BOOK";
 
-    public final static int BOOK_DONATION_INTENT_CODE = 1991;
-    public final static int BOOK_ADOPTION_INTENT_CODE = 1993;
-    public final static String BOOK_INTENT_CODE_ID = "INTENT_CODE";
-
+    public final static int ADD_COMMENT_INTENT_CODE = 1991;
     public final static String USER_SECRET_DATA = "my_awesome_secrets";
 
     public static boolean isNetworkAvailable(Context context) {

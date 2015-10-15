@@ -45,12 +45,18 @@ public class BookTask extends AsyncTask<String,Void,List<Book>> {
     protected void onPostExecute(List<Book> listBook) {
         Toast toast;
         progressDialog.dismiss();
-        if(!listBook.isEmpty()){
-            searchInterface.updateRecycleView(listBook);
-        }else {
-            toast = SwappersToast.makeText(context,"Falha ao obter pesquisa!", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+
+        try {
+            if (!listBook.isEmpty()) {
+                searchInterface.updateRecycleView(listBook);
+            } else {
+                toast = SwappersToast.makeText(context, "Falha ao obter pesquisa!", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+        }
+        catch (NullPointerException e){
+            SwappersToast.makeText(context, "Nenhum resultado encontrado no servidor.", Toast.LENGTH_LONG).show();
         }
     }
 }

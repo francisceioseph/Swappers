@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import java.net.HttpURLConnection;
 
+import br.edu.ifce.swappers.swappers.activities.UploadReviewTaskInterface;
 import br.edu.ifce.swappers.swappers.model.Review;
 import br.edu.ifce.swappers.swappers.webservice.ReviewService;
 
@@ -17,9 +18,11 @@ import br.edu.ifce.swappers.swappers.webservice.ReviewService;
 public class UploadReviewTask extends AsyncTask<Review,Void, Integer> {
     private Context context;
     private ProgressDialog progressDialog;
+    private UploadReviewTaskInterface uploadReviewTaskInterface;
 
-    public UploadReviewTask(Context context) {
+    public UploadReviewTask(Context context, UploadReviewTaskInterface uploadReviewTaskInterface ) {
         this.context = context;
+        this.uploadReviewTaskInterface = uploadReviewTaskInterface;
     }
 
     @Override
@@ -40,14 +43,8 @@ public class UploadReviewTask extends AsyncTask<Review,Void, Integer> {
     @Override
     protected void onPostExecute(Integer status_code) {
         super.onPostExecute(status_code);
-        this.progressDialog.dismiss();
 
-        if (status_code == HttpURLConnection.HTTP_CREATED){
-            SwappersToast.makeText(context, "Comentário enviado com sucesso...", Toast.LENGTH_LONG).show();
-        }
-        else{
-            Log.i("ReviewTask", String.format("%d", status_code));
-            SwappersToast.makeText(context, "Ocorreu um erro... Tente outra vez.", Toast.LENGTH_LONG).show();
-        }
+        this.progressDialog.dismiss();
+        this.uploadReviewTaskInterface.onUploadReviewHadFinished(status_code);
     }
 }

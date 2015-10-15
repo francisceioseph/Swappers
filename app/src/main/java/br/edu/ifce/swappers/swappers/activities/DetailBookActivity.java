@@ -39,6 +39,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailBookActivity extends AppCompatActivity implements BookInterface{
 
+    public interface RequestRecyclerViewUpdate{
+        void reloadRecyclerView();
+    }
+
+    private RequestRecyclerViewUpdate recyclerViewUpdateCallback;
+
     private FragmentTabHost bookDetailTabHost;
     private boolean flag = true;
     TextView nameBook;
@@ -123,6 +129,13 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
         this.bookDetailTabHost = null;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AndroidUtils.ADD_COMMENT_INTENT_CODE && resultCode == RESULT_OK) {
+            this.recyclerViewUpdateCallback.reloadRecyclerView();
+        }
+    }
+
     private void initToolbar() {
         if (toolbar != null){
             this.setSupportActionBar(toolbar);
@@ -194,7 +207,7 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
                 Intent intent = new Intent(getApplicationContext(), ReaderCommentActivity.class);
                 intent.putExtra("CURRENT_BOOK", book);
 
-                startActivity(intent);
+                startActivityForResult(intent, AndroidUtils.ADD_COMMENT_INTENT_CODE);
             }
         };
     }
@@ -287,5 +300,9 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
 
     public Book getBook() {
         return book;
+    }
+
+    public void setRecyclerViewUpdateCallback(RequestRecyclerViewUpdate recyclerViewUpdateCallback) {
+        this.recyclerViewUpdateCallback = recyclerViewUpdateCallback;
     }
 }
