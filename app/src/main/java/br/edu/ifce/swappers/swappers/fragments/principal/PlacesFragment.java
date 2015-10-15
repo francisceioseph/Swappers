@@ -362,14 +362,17 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
     @Override
     public void getDetailPlace(List<Place> places, String idMarker) {
-        Place place = new Place();
-        for (int i=0;i<places.size();i++){
-            if(places.get(i).getId()==mapPlaceMarker.get(idMarker)){
-                place = places.get(i);
+        if (mapPlaceMarker.get(idMarker) != null) {
+            Place place = new Place();
 
-                Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
-                detailPlaceActivityIntent.putExtra("SELECTED_BOOK_PLACE", place);
-                startActivity(detailPlaceActivityIntent);
+            for (int i = 0; i < places.size(); i++) {
+                if (places.get(i).getId() == mapPlaceMarker.get(idMarker)) {
+                    place = places.get(i);
+
+                    Intent detailPlaceActivityIntent = new Intent(getActivity(), DetailPlaceActivity.class);
+                    detailPlaceActivityIntent.putExtra("SELECTED_BOOK_PLACE", place);
+                    startActivity(detailPlaceActivityIntent);
+                }
             }
         }
     }
