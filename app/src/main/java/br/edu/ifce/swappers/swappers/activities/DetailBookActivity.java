@@ -39,6 +39,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailBookActivity extends AppCompatActivity implements BookInterface{
 
+    public interface RequestRecyclerViewUpdate{
+        void reloadRecyclerView();
+    }
+
+    private RequestRecyclerViewUpdate recyclerViewUpdateCallback;
+
     private FragmentTabHost bookDetailTabHost;
     private boolean flag = true;
     TextView nameBook;
@@ -47,6 +53,7 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
     CircleImageView photoBook;
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
+
     Book book;
 
     public DetailBookActivity(){
@@ -122,6 +129,13 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
         this.bookDetailTabHost = null;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AndroidUtils.ADD_COMMENT_INTENT_CODE && resultCode == RESULT_OK) {
+            this.recyclerViewUpdateCallback.reloadRecyclerView();
+        }
+    }
+
     private void initToolbar() {
         if (toolbar != null){
             this.setSupportActionBar(toolbar);
@@ -191,7 +205,9 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ReaderCommentActivity.class);
-                startActivity(intent);
+                intent.putExtra("CURRENT_BOOK", book);
+
+                startActivityForResult(intent, AndroidUtils.ADD_COMMENT_INTENT_CODE);
             }
         };
     }
@@ -200,20 +216,7 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 registryFavoriteBookWS();
-
-                /*
-                if (flag){
-                    Drawable  drawable  = getResources().getDrawable(R.drawable.ic_is_book_favorite);
-                    imgView.setImageDrawable(drawable);
-                    flag = false;
-                }else {
-                    imgView.setImageDrawable(null);
-                    flag = true;
-                }
-                **/
-
             }
         };
     }
@@ -294,4 +297,11 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
         return placeRetrieved;
     }
 
+    public Book getBook() {
+        return book;
+    }
+
+    public void setRecyclerViewUpdateCallback(RequestRecyclerViewUpdate recyclerViewUpdateCallback) {
+        this.recyclerViewUpdateCallback = recyclerViewUpdateCallback;
+    }
 }

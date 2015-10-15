@@ -152,42 +152,22 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
         return super.onOptionsItemSelected(item);
     }
 
-
-
-
-
     @Override
     public void updateRecycleView(List<Book> bookList) {
         mBookListAux.clear();
         mBookListAux.addAll(bookList);
         recyclerView.setVisibility(mBookListAux.isEmpty() ? View.GONE : View.VISIBLE);
-       /* if (mBookListAux.isEmpty()) {
-            tv = new TextView(this);
-            tv.setText("Nenhum livro encontrado.");
-            tv.setTextColor(getResources().getColor(R.color.color_primary));
-            tv.setId(new Integer(1));
-            tv.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-            tv.setGravity(Gravity.CENTER);
-            frameLayout.addView(tv);
-        }else if(frameLayout.findViewById(new Integer(1))!=null){
-            frameLayout.removeView(frameLayout.findViewById(newInteger(1)));
-        }*/
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onClickListener(View view, int position) {
-     //   Intent intentDetailBookActivity = new Intent (getApplicationContext(), DetailBookActivity.class);
-       // startActivity(intentDetailBookActivity);
         adapter = new BookRecyclerViewAdapter (context,mBookListAux);
         Intent intentDetailBookActivity = new Intent (getApplicationContext(), DetailBookActivity.class);
         Book book = adapter.getItem(position);
 
         intentDetailBookActivity.putExtra(AndroidUtils.SELECTED_BOOK_ID, book);
         startActivity(intentDetailBookActivity);
-
-
-
     }
 
 

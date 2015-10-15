@@ -1,19 +1,38 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.net.HttpURLConnection;
+
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.model.Review;
+import br.edu.ifce.swappers.swappers.util.AndroidUtils;
+import br.edu.ifce.swappers.swappers.util.SwappersToast;
+import br.edu.ifce.swappers.swappers.util.UploadReviewTask;
 
-public class ReaderCommentActivity extends AppCompatActivity {
+import static br.edu.ifce.swappers.swappers.util.ImageUtil.*;
+
+public class ReaderCommentActivity extends AppCompatActivity implements UploadReviewTaskInterface {
 
     Toolbar toolbar;
+    EditText commentEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +42,7 @@ public class ReaderCommentActivity extends AppCompatActivity {
         this.toolbar = (Toolbar) findViewById(R.id.toolbar);
         this.initToolbar();
 
-        EditText commentEditText = (EditText) findViewById(R.id.new_comment_edit_text);
+        commentEditText = (EditText) findViewById(R.id.new_comment_edit_text);
         commentEditText.addTextChangedListener(this.buildTextWatcher());
     }
 
@@ -36,23 +55,35 @@ public class ReaderCommentActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.review_menu){
+            sendReviewToWS();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void sendReviewToWS() {
+        Integer userId      = MockSingleton.INSTANCE.user.getId();
+        Book book           = (Book) getIntent().getExtras().get("CURRENT_BOOK");
+        String reviewText   = commentEditText.getText().toString();
+
+        Review review = new Review(userId, book, reviewText);
+
+        UploadReviewTask task = new UploadReviewTask(this, this);
+        task.execute(review);
+
+    }
+
     private void initToolbar() {
-        toolbar.setTitle("User Name"); /*Inserir a consulta ao banco de dados que retornará o título do livro*/
+        toolbar.setTitle(MockSingleton.INSTANCE.user.getName()); /*Inserir a consulta ao banco de dados que retornará o título do livro*/
         toolbar.setSubtitle("250 caracteres restantes");
-        toolbar.setLogo(R.drawable.ic_star);
+        Bitmap userPhoto = StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+        Bitmap userPhotoResized = Bitmap.createScaledBitmap(userPhoto, 56, 56, false);
+
+        toolbar.setLogo(new BitmapDrawable(getResources(), userPhotoResized));
 
         if (toolbar != null){
             this.setSupportActionBar(toolbar);
@@ -86,6 +117,71 @@ public class ReaderCommentActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        };
+    }
+
+    @Override
+    public void onUploadReviewHadFinished(Integer status_code) {
+        AlertDialog alertDialog;
+
+        if (status_code == HttpURLConnection.HTTP_CREATED){
+            alertDialog = buildPostSucessfulDialog("Cometário postado com sucesso.");
+        }
+        else{
+            Log.i("ReviewTask", String.format("%d", status_code));
+            alertDialog = buildErrorAlertDialog("Erro ao postar comentário. Deseja tentar outra vez?");
+        }
+
+        alertDialog.show();
+    }
+
+    private AlertDialog buildErrorAlertDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.SWDialogTheme);
+        builder.setTitle("Error");
+        builder.setMessage(message);
+        builder.setPositiveButton("TRY AGAIN", this.onErrorPostDialogPositiveButton());
+        builder.setNegativeButton("CANCEL", this.onErrorPostDialogNegativeButton());
+
+        return builder.create();
+    }
+
+    private DialogInterface.OnClickListener onErrorPostDialogPositiveButton() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                sendReviewToWS();
+            }
+        };
+    }
+
+    private DialogInterface.OnClickListener onErrorPostDialogNegativeButton() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+    }
+
+    private AlertDialog buildPostSucessfulDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.SWDialogTheme);
+        builder.setTitle("Success");
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", this.onPostSucessfulDialogPositiveButton());
+
+        return builder.create();
+    }
+
+    private DialogInterface.OnClickListener onPostSucessfulDialogPositiveButton() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setResult(RESULT_OK);
+
+                dialog.dismiss();
+                finish();
             }
         };
     }

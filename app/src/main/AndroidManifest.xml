@@ -55,12 +55,14 @@
             android:label="@string/title_activity_login"
             android:theme="@style/SWTheme" >
         </activity>
+
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName=".activities.LoginActivity"
             android:theme="@style/SWTheme" >
         </activity>
+
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
@@ -71,7 +73,7 @@
         <activity
             android:name=".activities.SearchViewActivity"
             android:label="@string/title_activity_main"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:theme="@style/SWTheme"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -82,10 +84,11 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+
         <activity
             android:name=".activities.DetailBookActivity"
             android:label="@string/title_activity_detail_book"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:parentActivityName=".activities.SearchViewActivity"
             android:theme="@style/SWTheme"
             android:screenOrientation="portrait" >
@@ -93,10 +96,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.SearchViewActivity" />
         </activity>
+
         <activity
             android:name=".activities.DetailPlaceActivity"
             android:label="@string/title_activity_detail_place"
-
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/SWTheme"
             android:screenOrientation="portrait" >
@@ -136,14 +139,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
         </activity>
+
         <activity
             android:name=".activities.AdoptionListPointActivity"
-            android:label="@string/title_activity_donations_list_point"
+            android:label="Near Places"
             android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
         </activity>
+
         <activity
             android:name=".activities.BookActivity"
             android:label="@string/title_activity_book"

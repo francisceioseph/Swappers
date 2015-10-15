@@ -1,15 +1,20 @@
 package br.edu.ifce.swappers.swappers.adapters;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Comment;
+import br.edu.ifce.swappers.swappers.model.Review;
 import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -18,10 +23,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecyclerViewAdapter.ViewHolder>{
 
-    private ArrayList<Comment> commentsDataSource;
+    private ArrayList<Review> commentsDataSource;
     private RecycleViewOnClickListenerHack mRecycleViewOnClickListenerHack;
 
-    public CommentRecyclerViewAdapter(ArrayList<Comment> commentsDataSource) {
+    public CommentRecyclerViewAdapter(ArrayList<Review> commentsDataSource) {
         this.commentsDataSource = commentsDataSource;
     }
 
@@ -39,13 +44,14 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Comment comment= this.commentsDataSource.get(position);
+        Review review = this.commentsDataSource.get(position);
 
-        viewHolder.authorNameTextView.setText(comment.getAuthorName());
-        viewHolder.timeStampTextView.setText(comment.getTimeStamp());
-        viewHolder.commentContentTextView.setText(comment.getCommentContent());
-//        viewHolder.authorImageView.setImageDrawable(comment.getAuthorImage());
+        Locale currentLocale        = Locale.getDefault();
+        SimpleDateFormat formatter  = (SimpleDateFormat) SimpleDateFormat.getDateInstance(SimpleDateFormat.FULL, currentLocale);
 
+        viewHolder.authorNameTextView.setText(review.getName());
+        viewHolder.timeStampTextView.setText(formatter.format(review.getDataReview()));
+        viewHolder.commentContentTextView.setText(review.getReview());
     }
 
     @Override
