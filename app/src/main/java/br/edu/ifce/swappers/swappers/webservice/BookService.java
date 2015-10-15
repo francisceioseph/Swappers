@@ -183,7 +183,6 @@ public class BookService {
         return bookList;
     }
 
-
     private static String removeSpecialCharactere(String str){
         return str.replace("à","a").replace("á","a").
                 replace("ã", "a").replace("ú","u").

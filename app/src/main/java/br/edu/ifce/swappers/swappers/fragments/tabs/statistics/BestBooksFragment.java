@@ -10,12 +10,20 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.model.User;
+import br.edu.ifce.swappers.swappers.util.BestBookInterface;
+import br.edu.ifce.swappers.swappers.util.StatisticBookTask;
 import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class BestBooksFragment extends Fragment {
+public class BestBooksFragment extends Fragment implements BestBookInterface{
 
     ImageButton nextBestBookImageButton;
     ImageButton previousBestBookImageButton;
@@ -26,6 +34,9 @@ public class BestBooksFragment extends Fragment {
     TextView authorBestBookTextView;
     TextView retrievedBestBookTextView;
     TextView donatedBestBookTextView;
+    private int index = 0;
+
+    ArrayList<Book> bestBooks = new ArrayList<>();
 
     public BestBooksFragment() {
         // Required empty public constructor
@@ -39,10 +50,8 @@ public class BestBooksFragment extends Fragment {
         this.initViewComponents(rootView);
         this.initViewListeners();
 
-        titleBestBookTextView.setText("A Dança dos Dragões");
-        authorBestBookTextView.setText("George R. R. Martin");
-        retrievedBestBookTextView.setText("Adotado 40 vezes");
-        donatedBestBookTextView.setText("Doado 45 vezes");
+        StatisticBookTask statisticBookTask = new StatisticBookTask(getActivity(),this);
+        statisticBookTask.execute();
 
         return rootView;
     }
@@ -69,7 +78,11 @@ public class BestBooksFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SwappersToast.makeText(getActivity(), "Loading previous book... #SQN", Toast.LENGTH_SHORT).show();
+                if(!bestBooks.isEmpty()) {
+                    index--;
+                    if (index < 0) index = bestBooks.size() - 1;
+                    updateCardView(index);
+                }
             }
         };
     }
@@ -78,10 +91,47 @@ public class BestBooksFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //0SwappersToast.makeText(getActivity(), "Opening next book... #SQN", Toast.LENGTH_SHORT).show();
+                if (!bestBooks.isEmpty()) {
+                    index++;
+                    if (index >= bestBooks.size()) index = 0;
+                    updateCardView(index);
+                }
             }
         };
     }
 
+    @Override
+    public void updateStatisticBook(ArrayList<Book> booksList) {
+        bestBooks = booksList;
+
+        if(!bestBooks.isEmpty()){
+            updateCardView(this.index);
+
+            if(!bestBooks.get(this.index).getPhoto().isEmpty()) {
+                Picasso.with(getActivity()).load(bestBooks.get(this.index).getPhoto()).into(coverBestBookCircleImageView);
+            }else{
+                Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverBestBookCircleImageView);
+            }
+
+        }else{
+            titleBestBookTextView.setText("Não há livros doados ou retirados este mês");
+            authorBestBookTextView.setText("nenhum");
+            retrievedBestBookTextView.setText("Adotado 0 vezes");
+            donatedBestBookTextView.setText("Doado 0 vezes");
+        }
+    }
+
+    private void updateCardView(int index){
+        this.titleBestBookTextView.setText(bestBooks.get(index).getTitle());
+        this.authorBestBookTextView.setText(bestBooks.get(index).getAuthor());
+        this.retrievedBestBookTextView.setText("Adotado "+String.valueOf(bestBooks.get(index).getRecovered())+" vezes");
+        this.donatedBestBookTextView.setText("Doado "+String.valueOf(bestBooks.get(index).getDonation())+" vezes");
+
+        if(!bestBooks.get(this.index).getPhoto().isEmpty()) {
+            Picasso.with(getActivity()).load(bestBooks.get(index).getPhoto()).into(coverBestBookCircleImageView);
+        }else{
+            Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverBestBookCircleImageView);
+        }
+    }
 
 }

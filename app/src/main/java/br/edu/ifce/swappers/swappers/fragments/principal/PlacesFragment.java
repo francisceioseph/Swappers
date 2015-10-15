@@ -126,7 +126,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             myPosition = getMyPosition(locationUser);
             return true;
         }
-
     }
 
     private void getPlacesInWS(){

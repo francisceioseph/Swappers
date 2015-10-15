@@ -257,7 +257,6 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
                 donateListPointIntent.putExtra(AndroidUtils.SELECTED_BOOK_ID, book);
 
                 startActivity(donateListPointIntent);
-
             }
         };
     }
