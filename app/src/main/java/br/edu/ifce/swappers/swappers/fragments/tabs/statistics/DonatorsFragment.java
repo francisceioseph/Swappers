@@ -87,10 +87,11 @@ public class DonatorsFragment extends Fragment implements DonatorsInterface{
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // SwappersToast.makeText(getActivity(), "Loading previous month donator... #SQN", Toast.LENGTH_SHORT).show();
-                index--;
-                if (index<0) index = usersDonators.size()-1;
-                updateCardView(index);
+                if(!usersDonators.isEmpty()) {
+                    index--;
+                    if (index < 0) index = usersDonators.size() - 1;
+                    updateCardView(index);
+                }
             }
         };
     }
@@ -99,10 +100,11 @@ public class DonatorsFragment extends Fragment implements DonatorsInterface{
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SwappersToast.makeText(getActivity(), "Opening next month donator... #SQN", Toast.LENGTH_SHORT).show();
-                index++;
-                if(index>=usersDonators.size()) index = 0;
-                updateCardView(index);
+                if(!usersDonators.isEmpty()) {
+                    index++;
+                    if (index >= usersDonators.size()) index = 0;
+                    updateCardView(index);
+                }
             }
         };
     }

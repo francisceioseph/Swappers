@@ -17,6 +17,8 @@ public class Book implements Serializable{
     private float evaluationAvarage;
     private float userEvaluation;
     private Place place;
+    private int recovered;
+    private int donation;
 
     public Book() {
     }
@@ -117,5 +119,19 @@ public class Book implements Serializable{
         this.place = place;
     }
 
+    public int getRecovered() {
+        return recovered;
+    }
 
+    public void setRecovered(int recovered) {
+        this.recovered = recovered;
+    }
+
+    public int getDonation() {
+        return donation;
+    }
+
+    public void setDonation(int donation) {
+        this.donation = donation;
+    }
 }
