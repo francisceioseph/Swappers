@@ -14,11 +14,11 @@ import br.edu.ifce.swappers.swappers.webservice.ReviewService;
 /**
  * Created by francisco on 14/10/15.
  */
-public class ReviewTask extends AsyncTask<Review,Void, Integer> {
+public class UploadReviewTask extends AsyncTask<Review,Void, Integer> {
     private Context context;
     private ProgressDialog progressDialog;
 
-    public ReviewTask(Context context) {
+    public UploadReviewTask(Context context) {
         this.context = context;
     }
 

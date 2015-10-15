@@ -1,12 +1,16 @@
 package br.edu.ifce.swappers.swappers.adapters;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Comment;
@@ -42,8 +46,11 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Review review = this.commentsDataSource.get(position);
 
+        Locale currentLocale        = Locale.getDefault();
+        SimpleDateFormat formatter  = (SimpleDateFormat) SimpleDateFormat.getDateInstance(SimpleDateFormat.FULL, currentLocale);
+
         viewHolder.authorNameTextView.setText(review.getName());
-        viewHolder.timeStampTextView.setText(review.getDataReview().toString());
+        viewHolder.timeStampTextView.setText(formatter.format(review.getDataReview()));
         viewHolder.commentContentTextView.setText(review.getReview());
     }
 

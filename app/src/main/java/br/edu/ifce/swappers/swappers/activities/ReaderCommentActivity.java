@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -16,8 +15,7 @@ import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Review;
-import br.edu.ifce.swappers.swappers.util.ImageUtil;
-import br.edu.ifce.swappers.swappers.util.ReviewTask;
+import br.edu.ifce.swappers.swappers.util.UploadReviewTask;
 
 import static br.edu.ifce.swappers.swappers.util.ImageUtil.*;
 
@@ -64,7 +62,7 @@ public class ReaderCommentActivity extends AppCompatActivity {
 
         Review review = new Review(userId, book, reviewText);
 
-        ReviewTask task = new ReviewTask(this);
+        UploadReviewTask task = new UploadReviewTask(this);
         task.execute(review);
 
     }
