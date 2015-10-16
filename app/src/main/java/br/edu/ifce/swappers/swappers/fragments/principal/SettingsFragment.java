@@ -240,6 +240,14 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
         //Implementado em MainActivity
     }
 
+    /*
+    *This method shows a change cover picture alert.
+    * */
+    private void changeCoverPicture() {
+        UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment();
+        dialogFragment.show(getActivity().getSupportFragmentManager(), "User Photo Dialog Fragment");
+    }
+
 
     /*
     * This method hows an dialog asking if the user
@@ -274,13 +282,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
     private void showChangePasswordDialog() {
         AlertDialog changePasswordAlertDialog = buildChangePasswordDialog();
         changePasswordAlertDialog.show();
-    }
-
-    /*
-    *This method shows a change cover picture alert.
-    * */
-    private void changeCoverPicture() {
-
     }
 
 
