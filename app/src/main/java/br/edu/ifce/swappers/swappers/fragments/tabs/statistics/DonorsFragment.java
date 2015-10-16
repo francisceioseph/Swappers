@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.User;
-import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.DonatorsInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.DonorsInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
-import br.edu.ifce.swappers.swappers.miscellaneous.tasks.StatisticDonatorsTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.StatisticDonorsTask;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class DonorsFragment extends Fragment implements DonatorsInterface{
+public class DonorsFragment extends Fragment implements DonorsInterface {
 
     ImageButton nextMonthDonatorImageButton;
     ImageButton previousMonthDonatorImageButton;
@@ -46,7 +46,7 @@ public class DonorsFragment extends Fragment implements DonatorsInterface{
         this.initViewListeners();
 
         if(MockSingleton.INSTANCE.getDonators().isEmpty()) {
-            StatisticDonatorsTask task = new StatisticDonatorsTask(getActivity(), this);
+            StatisticDonorsTask task = new StatisticDonorsTask(getActivity(), this);
             task.execute();
         }else{
             usersDonators = MockSingleton.INSTANCE.getDonators();
@@ -115,7 +115,7 @@ public class DonorsFragment extends Fragment implements DonatorsInterface{
         else{
             nameMonthDonatorTextView.setText(usersDonators.get(index).getUsername());
             cityMonthDonatorTextView.setText(usersDonators.get(index).getCity()+", ");
-            donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) + getString(R.string.donations));
+            donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) + " " + getString(R.string.donations));
             coverMonthDonatorCircleImageView.setImageBitmap(ImageUtil.StringToBitMap(usersDonators.get(index).getPhoto2()));
         }
     }

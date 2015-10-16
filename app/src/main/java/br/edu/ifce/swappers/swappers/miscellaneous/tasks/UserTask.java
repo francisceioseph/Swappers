@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
+import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.miscellaneous.CategoryBook;
@@ -31,19 +32,17 @@ public class UserTask extends AsyncTask<String,Void,User> {
     @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Logando...");
+        progressDialog.setMessage(context.getString(R.string.login_task_progress_dialog_message));
         progressDialog.show();
     }
 
     @Override
     protected User doInBackground(String... params) {
-        Log.i("INFO-LOGIN", params[0] + params[1]);
         return UserService.getUserFromWS(params[0], params[1]);
     }
 
     @Override
     protected void onPostExecute(User user) {
-        Log.i("INFO-LOGIN","entrou");
         progressDialog.dismiss();
         progressDialog.cancel();
 
@@ -53,7 +52,7 @@ public class UserTask extends AsyncTask<String,Void,User> {
             taskInterface.startNextActivity();
         }
         else {
-            SwappersToast.makeText(context, "Login ou senha incorretos!!!", Toast.LENGTH_SHORT).show();
+            SwappersToast.makeText(context, context.getString(R.string.login_error_message), Toast.LENGTH_SHORT).show();
         }
 
     }

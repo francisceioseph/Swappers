@@ -57,7 +57,9 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
             makeLoginTask();
         }
         else {
-            AndroidUtils.makeDialog(this, getString(R.string.internet_connection_error_message)).show();
+            AndroidUtils.makeDialog(this,
+                    getString(R.string.dialog_error_title),
+                    getString(R.string.internet_connection_error_message)).show();
         }
     }
 
@@ -78,7 +80,9 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
             this.startActivity(registerActivityIntent);
         }
         else {
-            AndroidUtils.makeDialog(this, getString(R.string.internet_connection_error_message)).show();
+            AndroidUtils.makeDialog(this,
+                    getString(R.string.dialog_error_title),
+                    getString(R.string.internet_connection_error_message)).show();
         }
     }
 

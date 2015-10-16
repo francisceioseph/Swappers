@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 
 import java.util.ArrayList;
 
+import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.BestBookInterface;
 import br.edu.ifce.swappers.swappers.webservice.StatisticBookService;
@@ -26,7 +27,7 @@ public class StatisticBookTask extends AsyncTask<Void,Void,ArrayList<Book>> {
     @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Loading donators, wait...");
+        progressDialog.setMessage(context.getString(R.string.progress_dialog_loading_message));
         progressDialog.show();
     }
 

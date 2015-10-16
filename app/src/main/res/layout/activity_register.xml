@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="User Photo"
+                android:text="@string/user_photo_title"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
@@ -72,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Name"
+                        android:text="@string/name"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp" />
 
@@ -84,13 +84,13 @@
                         android:id="@+id/user_name_edit_text"
                         android:textColor="@color/color_accent_dark"
                         android:theme="@style/SWEditTextTheme"
-                        android:hint="Greather than three letters" />
+                        android:hint="@string/name_hint" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="E-mail Address"
+                        android:text="@string/email_address"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"/>
 
@@ -102,13 +102,13 @@
                         android:id="@+id/user_email_edit_text"
                         android:textColor="@color/color_accent_dark"
                         android:theme="@style/SWEditTextTheme"
-                        android:hint="A valid email address" />
+                        android:hint="@string/email_address_hint" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Password"
+                        android:text="@string/password"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp" />
 
@@ -120,13 +120,13 @@
                         android:id="@+id/user_password_edit_text"
                         android:textColor="@color/color_accent_dark"
                         android:theme="@style/SWEditTextTheme"
-                        android:hint="Greather than 6 characters" />
+                        android:hint="@string/password_hint" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Password Confirmation"
+                        android:text="@string/password_confirmation"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp" />
 
@@ -149,7 +149,7 @@
                 android:background="@color/color_accent_medium"
                 android:textColor="@color/background_material_light"
                 android:layout_margin="10dp"
-                android:text="register now"
+                android:text="@string/register_now_button_title"
                 android:id="@+id/registerButton"/>
 
 

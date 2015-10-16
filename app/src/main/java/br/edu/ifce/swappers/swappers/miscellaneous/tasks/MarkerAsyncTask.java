@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.PlaceInterface;
@@ -27,7 +28,7 @@ public class MarkerAsyncTask extends AsyncTask<Integer,Double,Place> {
     @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Acessando ponto de troca...");
+        progressDialog.setMessage(context.getString(R.string.progress_dialog_loading_message));
         progressDialog.show();
     }
 
@@ -42,7 +43,7 @@ public class MarkerAsyncTask extends AsyncTask<Integer,Double,Place> {
         if(placeInformation!=null){
             //placeInterface.getDetailPlace(placeInformation);
         }else{
-            Toast toast = SwappersToast.makeText(context, "Erro no servidor! Tente novamente mais tarde!", Toast.LENGTH_LONG);
+            Toast toast = SwappersToast.makeText(context, context.getString(R.string.sick_server_error), Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }

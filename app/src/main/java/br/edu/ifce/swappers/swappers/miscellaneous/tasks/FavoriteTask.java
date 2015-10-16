@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
@@ -28,7 +29,7 @@ public class FavoriteTask extends AsyncTask<User,Void,Integer> {
     @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Favoritando ...");
+        progressDialog.setMessage(context.getString(R.string.favourite_task_progress_dialog_message));
         progressDialog.show();
     }
 
@@ -45,7 +46,7 @@ public class FavoriteTask extends AsyncTask<User,Void,Integer> {
             bookInterface.saveFavouriteBookIntoLocalBase();
         }
         else {
-            SwappersToast.makeText(this.context, "Não foi possível favoritar livro.", Toast.LENGTH_LONG).show();
+            SwappersToast.makeText(this.context, context.getString(R.string.favouriting_error_message), Toast.LENGTH_LONG).show();
         }
     }
 }

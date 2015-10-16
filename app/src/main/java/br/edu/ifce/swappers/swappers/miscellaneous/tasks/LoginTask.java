@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.TaskInterface;
 import br.edu.ifce.swappers.swappers.webservice.UserService;
@@ -28,7 +29,7 @@ public class LoginTask extends AsyncTask<String,String,Boolean> {
     @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Processando...");
+        progressDialog.setMessage(context.getString(R.string.login_task_progress_dialog_message));
         progressDialog.show();
     }
 
@@ -47,11 +48,11 @@ public class LoginTask extends AsyncTask<String,String,Boolean> {
         progressDialog.dismiss();
         if (result){
             ti.startNextActivity();
-            toast = SwappersToast.makeText(context, "Login efetuado com sucesso!", Toast.LENGTH_LONG);
+            toast = SwappersToast.makeText(context, context.getString(R.string.login_done_successfully_message), Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }else {
-            toast = SwappersToast.makeText(context,"Atenção! E-mail ou senha incorreto.",Toast.LENGTH_LONG);
+            toast = SwappersToast.makeText(context,context.getString(R.string.login_error_message),Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }

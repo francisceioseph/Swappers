@@ -6,27 +6,28 @@ import android.os.AsyncTask;
 
 import java.util.ArrayList;
 
+import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.User;
-import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.DonatorsInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.DonorsInterface;
 import br.edu.ifce.swappers.swappers.webservice.StatisticDonatorsService;
 
 /**
  * Created by gracyaneoliveira on 28/09/2015.
  */
-public class StatisticDonatorsTask extends AsyncTask<Void,Void,ArrayList<User>> {
+public class StatisticDonorsTask extends AsyncTask<Void,Void,ArrayList<User>> {
     private Context context;
-    private DonatorsInterface donatorsInterface;
+    private DonorsInterface donorsInterface;
     private ProgressDialog progressDialog;
 
-    public StatisticDonatorsTask(Context context,DonatorsInterface donatorsInterface){
+    public StatisticDonorsTask(Context context, DonorsInterface donorsInterface){
         this.context = context;
-        this.donatorsInterface = donatorsInterface;
+        this.donorsInterface = donorsInterface;
     }
 
     @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Loading donators, wait...");
+        progressDialog.setMessage(context.getString(R.string.progress_dialog_loading_message));
         progressDialog.show();
     }
 
@@ -38,6 +39,6 @@ public class StatisticDonatorsTask extends AsyncTask<Void,Void,ArrayList<User>> 
     @Override
     protected void onPostExecute(ArrayList<User> users) {
         progressDialog.dismiss();
-        this.donatorsInterface.updateStatisticDonors(users);
+        this.donorsInterface.updateStatisticDonors(users);
     }
 }

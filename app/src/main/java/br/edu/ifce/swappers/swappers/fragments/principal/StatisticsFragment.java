@@ -39,7 +39,7 @@ public class StatisticsFragment extends Fragment {
 
         donators.setIndicator(getString(R.string.donors_tab_title));
         hotspots.setIndicator(getString(R.string.hot_spots_tab_title));
-        bestBooks.setIndicator(getString(R.string.best_books));
+        bestBooks.setIndicator(getString(R.string.best_books_tab_title));
 
         this.tabHost.addTab(donators, DonorsFragment.class, null);
         this.tabHost.addTab(hotspots, HotSpotsFragment.class, null);

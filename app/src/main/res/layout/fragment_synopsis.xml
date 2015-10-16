@@ -10,78 +10,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:orientation="vertical"-->
-            <!--android:gravity="center_horizontal"-->
-            <!--android:background="@color/background_material_light">-->
-
-
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:elevation="4dp"-->
-                <!--android:layout_margin="8dp">-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_margin="8dp"-->
-                    <!--android:gravity="center_horizontal">-->
-
-
-                    <!--<TextView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:gravity="center_horizontal"-->
-
-                        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-                        <!--android:text="@string/evaluate_book_string"-->
-                        <!--android:id="@+id/evaluate_text_book"-->
-                        <!--android:textAlignment="center"-->
-                        <!--android:layout_margin="8dp"-->
-                        <!--android:textStyle="bold"-->
-                        <!--android:textSize="25dp" />-->
-
-                   <!--<RatingBar-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:id="@+id/avarage_book_rating_bar"-->
-
-                        <!--android:numStars="5"-->
-                        <!--android:stepSize="0.1"-->
-
-                        <!--android:progressTint="@color/color_accent_dark"-->
-                        <!--style="?android:attr/ratingBarStyle"-->
-                        <!--android:progressDrawable="@drawable/rating_stars"-->
-                        <!--android:rating="0"-->
-
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:layout_marginRight="8dp"-->
-                        <!--android:layout_marginLeft="8dp"-->
-                        <!--android:clickable="true" />-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-                        <!--android:textAlignment="center"-->
-                        <!--android:text="@string/book_avarage_text_view"-->
-                        <!--android:id="@+id/book_avarage_text_view"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:gravity="center_horizontal"-->
-                        <!--android:layout_marginLeft="8dp"-->
-                        <!--android:layout_marginRight="8dp"-->
-                        <!--android:textSize="48sp" />-->
-
-                <!--</LinearLayout>-->
-
-            <!--</android.support.v7.widget.CardView>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,7 +33,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:textAlignment="center"
-                            android:text="Synopsis"
+                            android:text="@string/synopsis_card_view_title"
                             android:id="@+id/synopsis_book_label"
                             android:layout_marginBottom="10dp"
                             android:layout_gravity="center_horizontal"

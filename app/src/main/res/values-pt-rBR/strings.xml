@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Strings from BookActivity.java -->
+    <string name="near_books_tab_title">LIVROS PRÓXIMOS</string>
+    <string name="recommendations_tab_title">RECOMENDAÇÕES</string>
+
+    <!-- Strings from DetailBookActivity.java -->
+    <string name="books_detail_toolbar_title">Detalhe de Livro</string>
+    <string name="synopsis_tab_title">RESUMO</string>
+    <string name="readers_comments_tab_title">COMENTÁRIOS</string>
+    <string name="confirm_book_adoption_dialog_message">Você realmente deseja adotar esse livro?</string>
+    <string name="book_adoption_positive_button_title">Adotar</string>
+    <string name="book_not_available_for_adoption">Este livro não está disponível para adoção</string>
+    <string name="dialog_error_title">Oooops...</string>
+    <string name="dialog_success_title">Sucesso</string>
+
+    <!-- String from DetailPlaceActivity.java -->
+    <string name="places_detail_toolbar_title">Detalhe de Lugar</string>
+    <string name="information_tab_title">INFORMAÇÕES</string>
+    <string name="available_books_tab_title">LIVROS DISPONÍVEIS</string>
+
+    <!-- String from DonationsListPointActivity.java -->
+    <string name="near_books__toolbar_title">Lugares Próximos</string>
+    <string name="confirm_book_donation_dialog_message">Você deseja doar esse livro no lugar selecionado?</string>
+    <string name="book_donation_positive_button_title">DOAR</string>
+
+    <!-- Strings from LoginActivity.java -->
+    <string name="internet_connection_error_message">Não foi possível conectar ao servidor. Por favor, tente mais tarde</string>
+
+    <!-- Strings from MainActivity.java -->
+    <string name="profile_section_title">Perfil</string>
+    <string name="books_section_title">Livros</string>
+    <string name="places_section_title">Lugares</string>
+    <string name="statistics_section_title">Estatísticas Mensais</string>
+    <string name="about_section_title">Sobre</string>
+    <string name="settings_section_title">Configurações</string>
+    <string name="guest_email">convidado@exemplo.com</string>
+    <string name="guest_name">Convidado</string>
+    <string name="search_view_hint">Ache um livro</string>
+
+    <!-- Strings from ReaderReviewActivity.java -->
+    <string name="readers_review_toolbar_subtitle_plural">caracteres restantes</string>
+    <string name="readers_review_toolbar_subtitle">carácter restante</string>
+    <string name="success_review_upload_dialog_message">Comentário enviado com sucesso.</string>
+    <string name="error_review_upload_dialog_message">Não foi possível enviar comentário. Deseja tentar novamente?</string>
+    <string name="error_review_upload_dialog_title">Erro</string>
+    <string name="error_review_upload_dialog_positive_button_title">TENTE NOVAMENTE</string>
+
+    <!-- Strings from RegisterActivity.java -->
+    <string name="user_registration_success_message">Bem-vindo ao Swappers for Readers. Faça login e aproveite!</string>
+    <string name="email_validation_error_message">E-mail inválido!</string>
+    <string name="mismatching_password_error_message">As senhas fornecidas são diferentes!</string>
+    <string name="blank_password_error_message">Alguns dos campos de senha estão em branco!</string>
+    <string name="less_characters_name_error_message">Seu noome deve possuir, no mínimo, 3 caracteres !</string>
+
+    <!-- Strings from PlacesFragment.java -->
+    <string name="gps_connection_error_message">Ligue o GPS tente outra vez.</string>
+    <string name="no_books_available_at_place">Não há livros aqui. Por favor, faça uma doação. :)</string>
+    <string name="one_book_available_at_place">1 livro disponível.</string>
+    <string name="many_books_available_at_place">livros disponíveis.</string>
+    <string name="swappers_local_not_available_in_city">Desculpe, ainda não há um ponto do Swappers na sua cidade.  :(</string>
+    <string name="sick_server_error">O servidor do Swappers está se sentindo mal. Por favor, tente em alguns minutos.</string>
+
+    <!-- Strings from ProfileFragment.java -->
+    <string name="donated_tab_title">DOAÇÕES</string>
+    <string name="retrieved_tab_title">ADOÇÕES</string>
+    <string name="favourited_tab_title">FAVORITOS</string>
+    <string name="no_name_found_message">Nenhum nome encontrado...</string>
+    <string name="guest_city">Cidade do Castelo Negro</string>
+
+    <!-- Strings from SettingsFragment.java -->
+    <string name="changed_birth_date_parcial_message">Sua nova data de nascimento é</string>
+    <string name="settings_item_change_profile_picture">Mudar foto de perfil</string>
+    <string name="settings_item_change_cover_picture">Mudar foto de capa</string>
+    <string name="settings_item_change_birth_date">Mudar data de nascimento</string>
+    <string name="settings_item_change_city">Mudar sua cidade atual</string>
+    <string name="settings_item_change_password">Mudar sua senha</string>
+    <string name="settings_item_logout">Sair</string>
+    <string name="settings_item_delete_account">Apagar minha conta</string>
+
+    <string name="dialog_change_password_title">Mudar minha senha</string>
+    <string name="dialog_change_password_message">Insira corretamente as informações nos campos abaixo para mudar sua senha.</string>
+
+    <string name="dialog_delete_account_title">Apagar Conta</string>
+    <string name="dialog_delete_account_message">Você realmente deseja apagar a sua conta?</string>
+
+    <string name="dialog_logout_title">Sair</string>
+    <string name="dialog_logout_message">Você realmente quer sair?</string>
+
+    <string name="dialog_change_city_title">Mudar minha cidade</string>
+    <string name="dialog_change_city_message">Escolha a sua cidade e o seu estado abaixo.</string>
+
+    <string name="service_not_implemented">Serviço ainda não implementado... zZZzzZ</string>
+    <string name="delete_account_dialog_positive_button_message">Conta deletada com sucesso.</string>
+    <string name="delete_account_dialog_negative_button_message">Muito obrigado! Estamos trabalhando muito para te fazer feliz. :]</string>
+    <string name="logout_dialog_positive_button_message">Você saiu.</string>
+    <string name="change_password_dialog_positive_button_message">Senha alterada com sucesso.</string>
+    <string name="change_city_dialog_positive_button_parcial_message">Cidade mudada para</string>
+
+    <!-- Strings from StatisticsFragment.java -->
+    <string name="donors_tab_title">DOADORES</string>
+    <string name="hot_spots_tab_title">MAIS VISITADOS</string>
+    <string name="best_books_tab_title">MELHORES LIVROS</string>
+
+    <!-- Strings from ReadersReviewFragment.java -->
+    <string name="no_comments_found_message">OMG, não há comentários! Seja o primeiro a comentar. ;) </string>
+
+    <!-- Strings from BestBooksFragment.java -->
+    <string name="book_title_for_no_book_statistics_found">Não houve nenhuma doação este mês. :\'( </string>
+    <string name="book_author_for_no_book_statistics_found">Sem Autor</string>
+    <string name="donations_text_for_no_book_statistics_found">0 doações</string>
+    <string name="adoptions_text_for_no_book_statistics_found">0 adoções</string>
+    <string name="donations_text_for_book_statistics">Doado %1$d vezes</string>
+    <string name="adoptions_text_for_book_statistics">Adotado %1$d vezes</string>
+
+    <!-- Strings from DonorsFragment.java -->
+    <string name="donor_name_for_no_month_donors_found">Não houve nenhuma doação este mês. :\'( </string>
+    <string name="donor_age_for_no_month_donors_found">42?</string>
+    <string name="donor_city_name_for_no_month_donors_found">Nortenhos Debaixo das Colinas</string>
+    <string name="donations_text_for_no_month_donors_found">0 doações</string>
+    <string name="donations">donations</string>
+
+    <!-- Strings from BookTask.java -->
+    <string name="error_performing_search_message">Erro durante a pesquisa. Por favor, verifique as suas palavras-chave e tente novamente.</string>
+    <string name="no_results_for_serch_message">Nenhum livro foi encontrado para essas palavras-chave.</string>
+
+    <!-- Strings from DonationTask.java -->
+    <string name="progress_dialog_searching_message">Pesquisar...</string>
+    <string name="donation_processed_successfully_message">Doação processada com sucesso!</string>
+    <string name="error_while_processing_donation_message">Um erro aconteceu durante o processamento. Tente novamente mais tarde.</string>
+
+    <!-- Strings from LoginTask.java -->
+    <string name="login_task_progress_dialog_message">Entrando...</string>
+    <string name="login_done_successfully_message">Seja bem-vindo!</string>
+    <string name="login_error_message">Endereço de e-mail e/ou senha incorretos.</string>
+
+    <!-- Strings from MarkerAsyncTask.java -->
+    <string name="progress_dialog_loading_message">Carregando...</string>
+
+    <!-- Strings from FavoriteTask.java-->
+    <string name="favourite_task_progress_dialog_message">Favoritando...</string>
+    <string name="favouriting_error_message">Não foi possível favoritar esse livro. Tente novamente daqui a pouco.</string>
+
+    <!-- Strings from PlaceAsyncTask.java -->
+    <!-- None -->
+
+    <!-- Strings from RegisterTask.java -->
+    <string name="register_task_progress_dialog_message">Salvando as suas informações...</string>
+    <string name="duplicate_email_error_message">O e-mail fornecido já pertence à outra conta. Por favor, use outro endereço.</string>
+
+    <!-- Strings from RetrievedTask.java -->
+    <string name="adoption_done_successfully_message">Adoção processada com sucesso!</string>
+    <string name="adoption_error_message">Erros aconteceram durante o registro da adoção. Tente novamente.</string>
+
+    <!-- Strings from StatisticBookTask.java -->
+    <!-- Strings from StatisticDonorsTask.java -->
+    <!-- None -->
+
+    <!-- Strings from UploadReviewTask.java -->
+    <string name="progress_dialog_uploading_message">Enviando...</string>
+
+    <!-- Strings from AndroidManifest.xml -->
+    <string name="app_name">Swappers</string>
+
+    <string name="title_activity_splash">Swappers</string>
+    <string name="title_activity_main">Livros</string>
+    <string name="title_activity_login">Entrar</string>
+    <string name="title_activity_register">Cadastrar</string>
+    <string name="title_activity_detail_book">Detalhes do Livro</string>
+    <string name="title_activity_detail_place">Detalhes do Lugar</string>
+    <string name="title_activity_referenced_libraries">Componentes Utilizados</string>
+    <string name="title_activity_profile">Perfil</string>
+    <string name="title_activity_reader_comment">Comentários</string>
+    <string name="title_activity_donations_list_point">Lugares Próximos</string>
+    <string name="title_activity_book">Livros</string>
+
+    <!-- Strings from menus -->
+    <string name="action_settings">Configurações</string>
+    <string name="action_search">Pesquisa</string>
+    <string name="action_send">Enviar</string>
+
+    <string name="List_points_donate_place_near">Pontos do Swappers próximos de você</string>
+    <string name="about_develpment_team_title">Time de Desenvolvimento</string>
+    <string name="about_version_title">versão 1.0</string>
+    <string name="be_a_swapper">Ainda não é membro do Swappers?</string>
+    <string name="see_places_of_near_book">VÁ PARA PONTOS</string>
+
+    <string name="about_alessandra_name">Alessandra Lino</string>
+    <string name="about_francis_name">Francisco Souza</string>
+    <string name="about_gracyane_name">Gracyane Oliveira</string>
+    <string name="about_joamila_name">Joamila Brito</string>
+
+    <string name="floating_action_button_adopt">Adotar</string>
+    <string name="floating_action_button_comment">Comentar</string>
+    <string name="floating_action_button_donate">Doar</string>
+    <string name="floating_action_button_favorite">Favoritar</string>
+
+    <string name="information_fragment_address_title">Endereço</string>
+    <string name="information_fragment_business_hours">Horário de Funcionamento</string>
+    <string name="synopsis_card_view_title">Resumo</string>
+
+    <string name="best_books">Melhores Livros</string>
+
+    <string name="splash_swappers_slogan">Doe leituras, compartilhe sonhos!</string>
+    <string name="user_photo_title">Foto do Usuário</string>
+
+    <string name="sign_in">ENTRAR</string>
+    <string name="sign_up">REGISTRAR</string>
+
+    <string name="email_address">E-mail</string>
+    <string name="email_address_hint">Um endereço de e-mail válido</string>
+
+    <string name="password">Senha</string>
+    <string name="password_hint">Mais de 6 caracteres</string>
+
+    <string name="name">Nome</string>
+    <string name="name_hint">Acima de três caracteres</string>
+
+    <string name="password_confirmation">Confirmação de Senha</string>
+
+    <string name="register_now_button_title">CADASTRAR AGORA</string>
+
+
+</resources>

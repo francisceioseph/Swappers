@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
@@ -37,10 +38,10 @@ public class RetrievedTask extends AsyncTask<User,Void,Integer> {
 
         if(statusCode == 200){
             bookInterface.saveRetrievedBookIntoLocalBase();
-            SwappersToast.makeText(this.context, "Adoção realizada com sucesso!!!", Toast.LENGTH_LONG).show();
+            SwappersToast.makeText(this.context, context.getString(R.string.adoption_done_successfully_message), Toast.LENGTH_LONG).show();
         }
         else {
-            SwappersToast.makeText(this.context, "Erro durante o registro de adoção. Tente em alguns segundos...", Toast.LENGTH_LONG).show();
+            SwappersToast.makeText(this.context, context.getString(R.string.adoption_error_message), Toast.LENGTH_LONG).show();
         }
     }
 }

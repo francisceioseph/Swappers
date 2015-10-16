@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
@@ -37,10 +38,10 @@ public class DonationTask extends AsyncTask<User,Void,Integer> {
 
         if(statusCode == 200){
             bookInterface.saveDonatedBookIntoLocalBase();
-            SwappersToast.makeText(this.context, "Doação realizada com sucesso!!!", Toast.LENGTH_LONG).show();
+            SwappersToast.makeText(this.context, context.getString(R.string.donation_processed_successfully_message), Toast.LENGTH_LONG).show();
         }
         else {
-            SwappersToast.makeText(this.context, "Falha durante ao registrar doação. Tente mais tarde!", Toast.LENGTH_LONG).show();
+            SwappersToast.makeText(this.context, context.getString(R.string.error_while_processing_donation_message), Toast.LENGTH_LONG).show();
         }
     }
 }

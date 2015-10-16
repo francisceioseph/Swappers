@@ -31,7 +31,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Donate readings, share dreams"
+        android:text="@string/splash_swappers_slogan"
         android:id="@+id/textView3"
         android:layout_marginTop="5dp"
         android:textSize="23dp"

@@ -96,14 +96,14 @@ public class AndroidUtils {
         editor.apply();
     }
 
-    public static AlertDialog makeDialog(Context context, String message) {
+    public static AlertDialog makeDialog(Context context, String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.SWDialogTheme);
 
-        builder.setTitle("Alert");
-        builder.setMessage(message);
+        builder.setTitle(alertTitle);
+        builder.setMessage(alertMessage);
         builder.setIcon(R.drawable.ic_alert);
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(context.getString(android.R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }

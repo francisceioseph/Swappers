@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Review;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UploadReviewTaskInterface;
 import br.edu.ifce.swappers.swappers.webservice.ReviewService;
@@ -26,7 +27,7 @@ public class UploadReviewTask extends AsyncTask<Review,Void, Integer> {
         super.onPreExecute();
 
         this.progressDialog = new ProgressDialog(this.context);
-        this.progressDialog.setMessage("Uploading Reviews...");
+        this.progressDialog.setMessage(context.getString(R.string.progress_dialog_uploading_message));
         this.progressDialog.setCancelable(false);
         this.progressDialog.show();
     }

@@ -32,7 +32,6 @@ import static android.view.View.OnClickListener;
 
 public class RegisterActivity extends AppCompatActivity implements UserPhotoDialogFragment.UserPhotoDialogListener,TaskInterface{
 
-
     private static final short CAMERA_INTENT_CODE  = 1015;
     private static final short GALLERY_INTENT_CODE = 1016;
 
@@ -57,7 +56,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
 
         if (requestCode == CAMERA_INTENT_CODE && resultCode == RESULT_OK){
             userPhotoBitmap = this.retrieveImageFromCameraResult(data);
@@ -103,7 +101,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
                     RegisterActivity.this.saveRegisterInformation();
                 }
                 else {
-                    AndroidUtils.makeDialog(getApplicationContext(), getString(R.string.internet_connection_error_message)).show();
+                    AndroidUtils.makeDialog(getApplicationContext(),
+                            getString(R.string.dialog_error_title),
+                            getString(R.string.internet_connection_error_message)).show();
                 }
             }
         };
@@ -121,7 +121,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(mainActivityIntent);
 
-        AndroidUtils.makeDialog(this, getString(R.string.user_registration_success_message)).show();
+        AndroidUtils.makeDialog(this,
+                getString(R.string.dialog_success_title),
+                getString(R.string.user_registration_success_message)).show();
     }
 
     /*

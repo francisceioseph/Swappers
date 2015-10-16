@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.SearchInterface;
@@ -29,7 +30,7 @@ public class BookTask extends AsyncTask<String,Void,List<Book>> {
     @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Buscando...");
+        progressDialog.setMessage(context.getString(R.string.progress_dialog_searching_message));
         progressDialog.show();
     }
 
@@ -52,13 +53,13 @@ public class BookTask extends AsyncTask<String,Void,List<Book>> {
             if (!listBook.isEmpty()) {
                 searchInterface.updateRecycleView(listBook);
             } else {
-                toast = SwappersToast.makeText(context, "Falha ao obter pesquisa!", Toast.LENGTH_LONG);
+                toast = SwappersToast.makeText(context, context.getString(R.string.error_performing_search_message), Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
         }
         catch (NullPointerException e){
-            SwappersToast.makeText(context, "Nenhum resultado encontrado no servidor.", Toast.LENGTH_LONG).show();
+            SwappersToast.makeText(context, context.getString(R.string.no_results_for_serch_message), Toast.LENGTH_LONG).show();
         }
     }
 }

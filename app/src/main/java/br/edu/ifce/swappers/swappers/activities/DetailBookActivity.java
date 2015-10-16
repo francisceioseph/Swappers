@@ -377,7 +377,7 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
                     makeConfirmDialogForBookAdoption().show();
                 }
                 else{
-                    AndroidUtils.makeDialog(DetailBookActivity.this, getString(R.string.book_not_available_for_adoption)).show();
+                    AndroidUtils.makeDialog(DetailBookActivity.this, getString(R.string.dialog_error_title), getString(R.string.book_not_available_for_adoption)).show();
                 }
             }
         };

@@ -122,7 +122,9 @@ public class ReaderReviewActivity extends AppCompatActivity implements UploadRev
         AlertDialog alertDialog;
 
         if (status_code == HttpURLConnection.HTTP_CREATED){
-            alertDialog = AndroidUtils.makeDialog(this, getString(R.string.success_review_upload_dialog_message));
+            alertDialog = AndroidUtils.makeDialog(this,
+                    getString(R.string.dialog_success_title),
+                    getString(R.string.success_review_upload_dialog_message));
         }
         else{
             alertDialog = buildReviewUploadErrorDialog(getString(R.string.error_review_upload_dialog_message));
