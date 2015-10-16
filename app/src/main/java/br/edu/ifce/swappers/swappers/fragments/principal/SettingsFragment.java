@@ -1,8 +1,13 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
+/**
+ * Last modified by Joamila on 16/10/2015
+ */
+
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -25,6 +30,7 @@ import java.util.Map;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.miscellaneous.adapters.SettingsArrayAdapter;
 import br.edu.ifce.swappers.swappers.model.SettingsListItem;
 import br.edu.ifce.swappers.swappers.miscellaneous.Settings;
@@ -33,7 +39,7 @@ import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends Fragment implements OnDateSetListener{
+public class SettingsFragment extends Fragment implements OnDateSetListener, UserPhotoDialogFragment.UserPhotoDialogListener{
 
     private ListView settingsListView;
     private static String BIRTHDAY_DATEPICKER_TAG = "BIRTHDAY_DATEPICKER";
@@ -217,6 +223,25 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     }
 
     /*
+    *This method shows a change profile picture alert.
+    * */
+    private void changeProfilePicture() {
+        UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment();
+        dialogFragment.show(getActivity().getSupportFragmentManager(), "User Photo Dialog Fragment");
+    }
+
+    @Override
+    public void onGalleryClick(DialogFragment dialogFragment) {
+        //Implementado em MainActivity
+    }
+
+    @Override
+    public void onCameraClick(DialogFragment dialogFragment) {
+        //Implementado em MainActivity
+    }
+
+
+    /*
     * This method hows an dialog asking if the user
     * really wants do do a logout from his swappers
     * account
@@ -258,12 +283,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
     }
 
-    /*
-    *This method shows a change profile picture alert.
-    * */
-    private void changeProfilePicture() {
-
-    }
 
     /*
     * This method creates an {@link AlertDialog} to change the current city
@@ -578,4 +597,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
             }
         };
     }
+
+
 }

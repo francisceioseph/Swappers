@@ -1,14 +1,21 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+/**
+ * Last modified by Joamila on 16/10/2015
+ */
+
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
@@ -17,6 +24,7 @@ import android.view.MenuItem;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.AboutFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.BooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
@@ -29,7 +37,10 @@ import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountListener;
 
-public class MainActivity extends MaterialNavigationDrawer implements MaterialAccountListener {
+public class MainActivity extends MaterialNavigationDrawer implements MaterialAccountListener, UserPhotoDialogFragment.UserPhotoDialogListener {
+
+    private static final short CAMERA_INTENT_CODE  = 1015;
+    private static final short GALLERY_INTENT_CODE = 1016;
 
  @Override
     public void init(Bundle savedInstance) {
@@ -160,5 +171,20 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));
 
         return true;
+    }
+
+    @Override
+    public void onGalleryClick(DialogFragment dialogFragment) {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, GALLERY_INTENT_CODE);
+    }
+
+    @Override
+    public void onCameraClick(DialogFragment dialogFragment) {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if(cameraIntent.resolveActivity(getPackageManager() ) != null) {
+            startActivityForResult(cameraIntent, CAMERA_INTENT_CODE);
+        }
     }
 }
