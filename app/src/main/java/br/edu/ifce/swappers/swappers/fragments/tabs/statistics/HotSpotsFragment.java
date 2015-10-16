@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -41,11 +39,11 @@ public class HotSpotsFragment extends Fragment {
         this.initViewComponents(rootView);
         this.initViewListeners();
 
-        nameHotspotTextView.setText("Winterfell");
-        addressHotspotTextView.setText("Norte");
-        cityHotspotTextView.setText("Sete Reinos");
-        retrievedHotspotTextView.setText("55 livros adotados");
-        receivedHotspotTextView.setText("70 livros doados");
+//        nameHotspotTextView.setText("Winterfell");
+//        addressHotspotTextView.setText("Norte");
+//        cityHotspotTextView.setText("Sete Reinos");
+//        retrievedHotspotTextView.setText("55 livros adotados");
+//        receivedHotspotTextView.setText("70 livros doados");
 
 
         return rootView;

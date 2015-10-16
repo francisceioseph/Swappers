@@ -15,8 +15,6 @@ import android.widget.TextView;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.books.NearBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.books.RecommendationsFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
 
 public class BookActivity extends AppCompatActivity {
 
@@ -53,8 +51,8 @@ public class BookActivity extends AppCompatActivity {
         TabHost.TabSpec nearBooksTab     = this.tabHost.newTabSpec("nearBooksTab");
         TabHost.TabSpec recommendationsTab   = this.tabHost.newTabSpec("recommendationsTab");
 
-        nearBooksTab.setIndicator("NEAR BOOKS");
-        recommendationsTab.setIndicator("RECOMMENDATIONS");
+        nearBooksTab.setIndicator(getResources().getString(R.string.near_books_tab_title));
+        recommendationsTab.setIndicator(getResources().getString(R.string.recommendations_tab_title));
 
         this.tabHost.addTab(nearBooksTab, NearBooksFragment.class, null);
         this.tabHost.addTab(recommendationsTab, RecommendationsFragment.class, null);

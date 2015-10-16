@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -26,10 +25,10 @@ import java.util.Map;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.adapters.SettingsArrayAdapter;
+import br.edu.ifce.swappers.swappers.miscellaneous.adapters.SettingsArrayAdapter;
 import br.edu.ifce.swappers.swappers.model.SettingsListItem;
-import br.edu.ifce.swappers.swappers.util.Settings;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
+import br.edu.ifce.swappers.swappers.miscellaneous.Settings;
+import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -138,16 +137,10 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
 
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
-        String message = String.format("Data escolhida: %d - %d - %d", day, month, year);
+        String message = getString(R.string.changed_birth_date_parcial_message) +  String.format(" %d - %d - %d", day, month, year);
         SwappersToast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
 
-    /*
-     * This method builds an {@link SettingsListItem} {@link ArrayList}
-     * that will be used as data source by the settings listview.
-     *
-     * @return an arraylist with the settings menu options.
-     */
     private ArrayList<SettingsListItem> createSettingsDataSource() {
         ArrayList<SettingsListItem> dataSource = new ArrayList<>();
 
@@ -159,13 +152,13 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         Drawable logoutIcon          = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_exit);
         Drawable deleteAccountIcon   = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_delete_black_48dp);
 
-        SettingsListItem changeProfilePicture = new SettingsListItem(profilePictureIcon, "Change Profile Picture");
-        SettingsListItem changeCoverPicture   = new SettingsListItem(profileCoverIcon, "Change Cover Picture");
-        SettingsListItem myBirthDate          = new SettingsListItem(birthDateIcon, "My Birth Date");
-        SettingsListItem myCity               = new SettingsListItem(cityIcon, "My City");
-        SettingsListItem changePassword = new SettingsListItem(changePasswordIcon, "Change Account Password");
-        SettingsListItem logout         = new SettingsListItem(logoutIcon, "Logout");
-        SettingsListItem deleteAccount  = new SettingsListItem(deleteAccountIcon, "Delete Account");
+        SettingsListItem changeProfilePicture = new SettingsListItem(profilePictureIcon, getString(R.string.settings_item_change_profile_picture));
+        SettingsListItem changeCoverPicture   = new SettingsListItem(profileCoverIcon, getString(R.string.settings_item_change_cover_picture));
+        SettingsListItem myBirthDate          = new SettingsListItem(birthDateIcon, getString(R.string.settings_item_change_birth_date));
+        SettingsListItem myCity               = new SettingsListItem(cityIcon, getString(R.string.settings_item_change_city));
+        SettingsListItem changePassword = new SettingsListItem(changePasswordIcon, getString(R.string.settings_item_change_password));
+        SettingsListItem logout         = new SettingsListItem(logoutIcon, getString(R.string.settings_item_logout));
+        SettingsListItem deleteAccount  = new SettingsListItem(deleteAccountIcon, getString(R.string.settings_item_delete_account));
 
         dataSource.add(changeProfilePicture);
         dataSource.add(changeCoverPicture);
@@ -308,12 +301,11 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
             }
         });
 
-        builder.setTitle("Change Current City");
-        //builder.setMessage("Type the current city name or click on location button.");
-        builder.setMessage("Choose the state and the city on the list.");
+        builder.setTitle(getString(R.string.dialog_change_city_title));
+        builder.setMessage(getString(R.string.dialog_change_city_message));
         builder.setView(rootView);
-        builder.setPositiveButton("OK", this.onChangeCityPositiveButton());
-        builder.setNegativeButton("CANCEL", this.onChangeCityNegativeButton());
+        builder.setPositiveButton(getString(android.R.string.ok), this.onChangeCityPositiveButton());
+        builder.setNegativeButton(getString(android.R.string.cancel), this.onChangeCityNegativeButton());
 
         return builder.create();
     }
@@ -329,11 +321,11 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     private AlertDialog buildChangePasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
 
-        builder.setTitle("Change Password");
-        builder.setMessage("Set correctly the fields bellow to change your password.");
+        builder.setTitle(getString(R.string.dialog_change_password_title));
+        builder.setMessage(getString(R.string.dialog_change_password_message));
         builder.setView(R.layout.dialog_change_password);
-        builder.setPositiveButton("OK", this.onChangePasswordPositiveButton());
-        builder.setNegativeButton("CANCEL", this.onChangePasswordNegativeButton());
+        builder.setPositiveButton(getString(android.R.string.ok), this.onChangePasswordPositiveButton());
+        builder.setNegativeButton(getString(android.R.string.cancel), this.onChangePasswordNegativeButton());
 
         return builder.create();
     }
@@ -373,10 +365,10 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     * */
     private AlertDialog buildDeleteAccountDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
-        builder.setTitle("Delete Account");
-        builder.setMessage("Do you really want to delete your account?");
-        builder.setPositiveButton("OK", this.onDeleteAccountPositiveButton());
-        builder.setNegativeButton("CANCEL", this.onDeleteAccountNegativeButton());
+        builder.setTitle(getString(R.string.dialog_delete_account_title));
+        builder.setMessage(getString(R.string.dialog_delete_account_message));
+        builder.setPositiveButton(getString(android.R.string.ok), this.onDeleteAccountPositiveButton());
+        builder.setNegativeButton(getString(android.R.string.cancel), this.onDeleteAccountNegativeButton());
 
         return builder.create();
     }
@@ -391,10 +383,10 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
     * */
     private AlertDialog buildLogoutDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.SWDialogTheme);
-        builder.setTitle("Logout");
-        builder.setMessage("Do you really want to logout from your account?");
-        builder.setPositiveButton("OK", this.onLogoutAccountPositiveButton());
-        builder.setNegativeButton("CANCEL", this.onLogoutAccountNegativeButton());
+        builder.setTitle(getString(R.string.dialog_logout_title));
+        builder.setMessage(getString(R.string.dialog_logout_message));
+        builder.setPositiveButton(getString(android.R.string.ok), this.onLogoutAccountPositiveButton());
+        builder.setNegativeButton(getString(android.R.string.cancel), this.onLogoutAccountNegativeButton());
 
         return builder.create();
     }
@@ -411,7 +403,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
             public void onClick(View v) {
                 //TODO DO Use location services to get the name of the user's current city.
                 //TODO set the current name of the city on the dialog edit text
-                SwappersToast.makeText(getActivity().getApplicationContext(), "Service yet to implement...", Toast.LENGTH_SHORT).show();
+                SwappersToast.makeText(getActivity().getApplicationContext(), getString(R.string.service_not_implemented), Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -432,7 +424,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity().getApplicationContext(), "Account Deleted Successfully", Toast.LENGTH_SHORT).show();
+                SwappersToast.makeText(getActivity().getApplicationContext(), getString(R.string.delete_account_dialog_positive_button_message), Toast.LENGTH_SHORT).show();
                 //TODO send message to ws to disable user account
                 //TODO load inicial screen and go out of current screen.
             }
@@ -453,7 +445,8 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity().getApplicationContext(), "Thanks so much! We're working so hard to make you really happy. :]", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                SwappersToast.makeText(getActivity().getApplicationContext(), getString(R.string.delete_account_dialog_negative_button_message), Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -474,7 +467,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity().getApplicationContext(), "Logout done successfully", Toast.LENGTH_SHORT).show();
+                SwappersToast.makeText(getActivity().getApplicationContext(), getString(R.string.logout_dialog_positive_button_message), Toast.LENGTH_SHORT).show();
                 //TODO send message to ws to disable user account
                 //TODO load inicial screen and go out of current screen.
             }
@@ -495,7 +488,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity().getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         };
     }
@@ -518,7 +511,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity(), "Password changed Successfully", Toast.LENGTH_SHORT).show();
+                SwappersToast.makeText(getActivity(), getString(R.string.change_password_dialog_positive_button_message), Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -536,7 +529,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         };
     }
@@ -563,7 +556,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener{
                 MockSingleton.INSTANCE.userChangeCity = city;
                 MockSingleton.INSTANCE.userChangeState = nameState;
 
-                SwappersToast.makeText(getActivity(), "City changed to " + city + "," + state, Toast.LENGTH_SHORT).show();
+                SwappersToast.makeText(getActivity(), getString(R.string.change_city_dialog_positive_button_parcial_message) + " " + city + "," + state, Toast.LENGTH_SHORT).show();
 
             }
         };

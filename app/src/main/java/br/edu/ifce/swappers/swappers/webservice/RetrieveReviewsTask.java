@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.model.Review;
-import br.edu.ifce.swappers.swappers.util.RetrieveReviewsTaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.RetrieveReviewsTaskInterface;
 
 /**
  * Created by francisco on 14/10/15.

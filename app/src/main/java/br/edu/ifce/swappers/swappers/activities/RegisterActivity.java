@@ -10,8 +10,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,11 +21,11 @@ import java.util.regex.Pattern;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.model.User;
-import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.util.ImageUtil;
-import br.edu.ifce.swappers.swappers.util.RegisterTask;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
-import br.edu.ifce.swappers.swappers.util.TaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.RegisterTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.TaskInterface;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.view.View.OnClickListener;
@@ -105,9 +103,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
                     RegisterActivity.this.saveRegisterInformation();
                 }
                 else {
-                    Toast toast = SwappersToast.makeText(getApplicationContext(), "Atenção! Verifique sua conexão!", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    AndroidUtils.makeDialog(getApplicationContext(), getString(R.string.internet_connection_error_message)).show();
                 }
             }
         };
@@ -125,9 +121,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(mainActivityIntent);
 
-        Toast toast = SwappersToast.makeText(this, "Cadastro efetuado com sucesso! Faça seu Login.", Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
+        AndroidUtils.makeDialog(this, getString(R.string.user_registration_success_message)).show();
     }
 
     /*
@@ -206,7 +200,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
         if(userPhotoBitmap!=null) {
             user.setPhoto2(ImageUtil.BitMapToString(userPhotoBitmap));
-            Log.i("USER-LOGIN-TAG-AWASOME", ImageUtil.BitMapToString(userPhotoBitmap));
         }
 
         registerTask.execute(user);
@@ -217,9 +210,12 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
             if (validateEmailWithMasks(email)){
                 if (validatePassword(usePassword,passwordConfirmation)){
                     return true;
-                }else{return false;}
-            }else{return false;}
-        }else{return false;}
+                }
+                else{return false;}
+            }
+            else{return false;}
+        }
+        else{return false;}
 
     }
 
@@ -229,8 +225,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
         if(matcher.find()){
             return true;
-        }else{
-            SwappersToast.makeText(getApplicationContext(), "Email Incorreto!", Toast.LENGTH_LONG).show();
+        }
+        else{
+            SwappersToast.makeText(getApplicationContext(), getString(R.string.email_validation_error_message), Toast.LENGTH_LONG).show();
             return false;
         }
     }
@@ -239,12 +236,14 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         if (pwd.length() > 5 && pwdConfirmation.length() > 5) {
             if (pwd.equals(pwdConfirmation)) {
                 return true;
-            } else {
-                SwappersToast.makeText(getApplicationContext(), "Atenção! Senhas diferentes.", Toast.LENGTH_LONG).show();
+            }
+            else {
+                SwappersToast.makeText(getApplicationContext(), getString(R.string.mismatching_password_error_message), Toast.LENGTH_LONG).show();
                 return false;
             }
-        }else{
-            SwappersToast.makeText(getApplicationContext(), "Sua senha tem menos que 6 dígitos!.", Toast.LENGTH_LONG).show();
+        }
+        else{
+            SwappersToast.makeText(getApplicationContext(), getString(R.string.blank_password_error_message), Toast.LENGTH_LONG).show();
             return false;
         }
     }
@@ -252,8 +251,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     private boolean validationNameUser(String name){
         if (name.length()>2){
             return true;
-        }else{
-            SwappersToast.makeText(getApplicationContext(), "Seu nome deve ter pelo menos 3 letras.", Toast.LENGTH_LONG).show();
+        }
+        else{
+            SwappersToast.makeText(getApplicationContext(), getString(R.string.less_characters_name_error_message), Toast.LENGTH_LONG).show();
             return false;
         }
     }

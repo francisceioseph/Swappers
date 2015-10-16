@@ -8,7 +8,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,12 +39,11 @@ import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
-import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.util.ListenerGPS;
-import br.edu.ifce.swappers.swappers.util.PlaceAsyncTask;
-import br.edu.ifce.swappers.swappers.util.PlaceInterface;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
-import br.edu.ifce.swappers.swappers.webservice.PlaceService;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
+import br.edu.ifce.swappers.swappers.miscellaneous.ListenerGPS;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.PlaceAsyncTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.PlaceInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 
 
 public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener, PlaceInterface, OnMapReadyCallback{
@@ -197,7 +195,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             }
 
             else{
-                Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão e tente novamente!", Toast.LENGTH_LONG);
+                Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.internet_connection_error_message), Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
@@ -205,7 +203,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         }
 
         else{
-               Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS e tente novamente!", Toast.LENGTH_LONG);
+               Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.gps_connection_error_message), Toast.LENGTH_LONG);
                toast.setGravity(Gravity.CENTER, 0, 0);
                toast.show();
         }
@@ -230,7 +228,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                         if (AndroidUtils.isNetworkAvailable(getActivity()))
                             getDetailPlace(placesNear, marker.getId());
                         else {
-                            Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
+                            Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.internet_connection_error_message), Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
                         }
@@ -264,7 +262,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 }else if(AndroidUtils.isNetworkAvailable(getActivity()) && placesNear.isEmpty()){
                     getPlacesInWS();
                 }else{
-                    Toast toast = SwappersToast.makeText(getActivity(), "Verifique sua conexão!", Toast.LENGTH_LONG);
+                    Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.internet_connection_error_message), Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
@@ -314,9 +312,15 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 for (int j=0; j<markers.size(); j++){
                     if(markerId.equals(markers.get(j).getId())){
                         total_books = places.get(i).getDonation() - places.get(i).getRecovered();
-                        if(total_books == 0) markers.get(j).setSnippet("Não há livros aqui. Faça uma doação!");
-                        else if(total_books == 1) markers.get(j).setSnippet("Há 1 livro disponível aqui.");
-                        else markers.get(j).setSnippet("Há " + String.valueOf(total_books) + " livros disponíveis aqui.");
+
+                        if(total_books == 0)
+                            markers.get(j).setSnippet(getString(R.string.no_books_available_at_place));
+
+                        else if(total_books == 1)
+                            markers.get(j).setSnippet(getString(R.string.one_book_available_at_place));
+
+                        else
+                            markers.get(j).setSnippet(String.valueOf(total_books) + getString(R.string.many_books_available_at_place));
                     }
                 }
 
@@ -331,7 +335,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         if(locationUser == null) {
-            Toast toast = SwappersToast.makeText(getActivity(), "Conecte o GPS!", Toast.LENGTH_LONG);
+            Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.gps_connection_error_message), Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }else {
@@ -341,7 +345,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
             if(placeList!=null) {
                 if(placeList.isEmpty()){
-                    Toast toast = SwappersToast.makeText(getActivity(), "Desculpe-nos! Ainda não há pontos de troca em sua cidade.", Toast.LENGTH_LONG);
+                    Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.swappers_local_not_available_in_city), Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }else {
@@ -352,7 +356,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     placesNear = MockSingleton.INSTANCE.places;
                 }
             }else{
-                Toast toast = SwappersToast.makeText(getActivity(), "Erro no servidor. :( Tente novamente mais tarde!", Toast.LENGTH_LONG);
+                Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.sick_server_error), Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }

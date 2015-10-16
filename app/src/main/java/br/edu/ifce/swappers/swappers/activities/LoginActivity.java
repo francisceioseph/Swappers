@@ -4,19 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
-import br.edu.ifce.swappers.swappers.util.TaskInterface;
-import br.edu.ifce.swappers.swappers.util.UserTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.TaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UserTask;
 
 public class LoginActivity extends AppCompatActivity implements TaskInterface{
 
@@ -43,26 +40,24 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
             @Override
             public void onClick(View v) {
                 verifyInternetAndMakeLogin();
-//                LoginActivity.this.startNextActivity();
             }
         });
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginActivity.this.startRegisterActivity();
+                startRegisterActivity();
             }
         });
     }
 
     //Função a ser usado quando se quiser fazer login com WS
     public void verifyInternetAndMakeLogin(){
-        if(AndroidUtils.isNetworkAvailable(getApplicationContext())){
+        if(AndroidUtils.isNetworkAvailable(this)){
             makeLoginTask();
-        }else {
-            Toast toast = SwappersToast.makeText(getApplicationContext(), "Verifique sua conexão!", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+        }
+        else {
+            AndroidUtils.makeDialog(this, getString(R.string.internet_connection_error_message)).show();
         }
     }
 
@@ -78,13 +73,12 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
 
     public void startRegisterActivity(){
         Intent registerActivityIntent = new Intent(this, RegisterActivity.class);
-        //registerActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
         if(AndroidUtils.isNetworkAvailable(this)){
             this.startActivity(registerActivityIntent);
-        }else {
-            Toast toast = SwappersToast.makeText(this, "Verifique sua conexão!", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+        }
+        else {
+            AndroidUtils.makeDialog(this, getString(R.string.internet_connection_error_message)).show();
         }
     }
 
@@ -97,12 +91,10 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
 
         if(AndroidUtils.userHasBeenLoaded(this)){
             MockSingleton.INSTANCE.user = AndroidUtils.loadUser(this);
-        }else {
+        }
+        else {
             UserTask userTask = new UserTask(this, this);
             userTask.execute(email, password);
-
-//        LoginTask loginTask = new LoginTask(this,this);
-//        loginTask.execute(email,password);
         }
     }
 

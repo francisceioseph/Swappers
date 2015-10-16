@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
-import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment;
+import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersReviewFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.SynopsisFragment;
 
 /**
@@ -44,11 +44,11 @@ public class DetailBookFragment extends Fragment {
         TabHost.TabSpec synopsisTab = this.detailBookTabHost.newTabSpec("synopsisTab");
 
 
-        readersCommentsTab.setIndicator("COMMENTS READERS");
-        synopsisTab.setIndicator("SYNOPSIS");
+        readersCommentsTab.setIndicator(getString(R.string.readers_comments_tab_title));
+        synopsisTab.setIndicator(getString(R.string.synopsis_tab_title));
 
 
-        this.detailBookTabHost.addTab(readersCommentsTab, ReadersCommentsFragment.class, null);
+        this.detailBookTabHost.addTab(readersCommentsTab, ReadersReviewFragment.class, null);
         this.detailBookTabHost.addTab(synopsisTab, SynopsisFragment.class, null);
 
 
@@ -87,7 +87,5 @@ public class DetailBookFragment extends Fragment {
             tabTextView.setTextColor(tabTextColors);
         }
     }
-
-
 
 }

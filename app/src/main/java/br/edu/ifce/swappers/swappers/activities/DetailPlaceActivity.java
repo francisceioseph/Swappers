@@ -15,13 +15,13 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.AvailableBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.detail_place.InformationFragment;
 import br.edu.ifce.swappers.swappers.model.Place;
-import br.edu.ifce.swappers.swappers.util.ImageUtil;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailPlaceActivity extends AppCompatActivity {
 
     private FragmentTabHost placeTabHost;
-    private Place place;
+    private Place currentPlace;
     private CircleImageView photoPlace;
 
     @Override
@@ -34,12 +34,11 @@ public class DetailPlaceActivity extends AppCompatActivity {
         photoPlace = (CircleImageView) findViewById(R.id.adapter_comment_author_image);
 
         Intent currentIntent = getIntent();
-        place = (Place) currentIntent.getSerializableExtra("SELECTED_BOOK_PLACE");
-        placeName.setText(place.getName());
-        placeCity.setText(place.getCity());
+        currentPlace = (Place) currentIntent.getSerializableExtra("SELECTED_BOOK_PLACE");
+        placeName.setText(currentPlace.getName());
+        placeCity.setText(currentPlace.getCity());
 
-        //photoPlace.setImageBitmap(BitmapFactory.decodeByteArray(place.getPhoto(), 0, place.getPhoto().length));
-        photoPlace.setImageBitmap(ImageUtil.StringToBitMap(place.getPhoto2()));
+        photoPlace.setImageBitmap(ImageUtil.StringToBitMap(currentPlace.getPhoto2()));
 
         this.initToolbar();
         this.initTabHost();
@@ -58,6 +57,7 @@ public class DetailPlaceActivity extends AppCompatActivity {
         if (toolbar != null){
             this.setSupportActionBar(toolbar);
 
+            toolbar.setTitle(getString(R.string.places_detail_toolbar_title));
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
@@ -71,8 +71,8 @@ public class DetailPlaceActivity extends AppCompatActivity {
         TabHost.TabSpec placeInformationTab   = this.placeTabHost.newTabSpec("placeInformationTab");
         TabHost.TabSpec availableBooksTab     = this.placeTabHost.newTabSpec("availableBooksTab");
 
-        placeInformationTab.setIndicator("INFORMATION");
-        availableBooksTab.setIndicator("AVAILABLE BOOKS");
+        placeInformationTab.setIndicator(getString(R.string.information_tab_title));
+        availableBooksTab.setIndicator(getString(R.string.available_books_tab_title));
 
         this.placeTabHost.addTab(placeInformationTab, InformationFragment.class, null);
         this.placeTabHost.addTab(availableBooksTab, AvailableBooksFragment.class, null);

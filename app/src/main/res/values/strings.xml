@@ -1,6 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Strings from BookActivity.java -->
+    <string name="near_books_tab_title">NEAR BOOKS</string>
+    <string name="recommendations_tab_title">RECOMMENDATIONS</string>
+
+    <!-- Strings from DetailBookActivity.java -->
+    <string name="books_detail_toolbar_title">Book\'s Detail</string>
+    <string name="synopsis_tab_title">SYNOPSIS</string>
+    <string name="readers_comments_tab_title">READER\'S COMMENTS</string>
+    <string name="confirm_book_adoption_dialog_message">Do you want to adopt this book?</string>
+    <string name="book_adoption_positive_button_title">Adopt</string>
+    <string name="book_not_available_for_adoption">This book aren\'t available for adoption.</string>
+
+    <!-- String from DetailPlaceActivity.java -->
+    <string name="places_detail_toolbar_title">Place\'s Detail</string>
+    <string name="information_tab_title">INFORMATION</string>
+    <string name="available_books_tab_title">AVAILABLE BOOKS</string>
+
+    <!-- String from DonationsListPointActivity.java -->
+    <string name="near_books__toolbar_title">Near Places</string>
+    <string name="confirm_book_donation_dialog_message">Do you want to donate this book in the selected place?</string>
+    <string name="book_donation_positive_button_title">DONATE</string>
+
+    <!-- Strings from LoginActivity.java -->
+    <string name="internet_connection_error_message">Can\'t connect to server. Please, check your internet connection.</string>
+
+    <!-- Strings from MainActivity.java -->
+    <string name="profile_section_title">Profile</string>
+    <string name="books_section_title">Books</string>
+    <string name="places_section_title">Places</string>
+    <string name="statistics_section_title">Month Statistics</string>
+    <string name="about_section_title">About</string>
+    <string name="settings_section_title">Settings</string>
+    <string name="guest_email">guest@example.com</string>
+    <string name="guest_name">Guest</string>
+    <string name="search_view_hint">Find a book</string>
+
+    <!-- Strings from ReaderReviewActivity.java -->
+    <string name="readers_review_toolbar_subtitle_plural">characters_left</string>
+    <string name="readers_review_toolbar_subtitle">character_left</string>
+    <string name="success_review_upload_dialog_message">Review uploaded successfully.</string>
+    <string name="error_review_upload_dialog_message">Can\'t upload review. Do you want to try again?</string>
+    <string name="error_review_upload_dialog_title">Error</string>
+    <string name="error_review_upload_dialog_positive_button_title">TRY AGAIN</string>
+
+    <!-- Strings from RegisterActivity.java -->
+    <string name="user_registration_success_message">Welcome to Swappers for Readers, please do login and enjoy it!</string>
+    <string name="email_validation_error_message">Invalid email!</string>
+    <string name="mismatching_password_error_message">Passwords mismatches!</string>
+    <string name="blank_password_error_message">Some password field is blank!</string>
+    <string name="less_characters_name_error_message">Your name must have 3 characters at least!</string>
+
+    <!-- Strings from PlacesFragment.java -->
+    <string name="gps_connection_error_message">Turn your GPS on and try again.</string>
+    <string name="no_books_available_at_place">There isn\'t books here. Please, donate one. :)</string>
+    <string name="one_book_available_at_place">1 book available here.</string>
+    <string name="many_books_available_at_place">books available here.</string>
+    <string name="swappers_local_not_available_in_city">Sorry, there isn\'t a Swappers Point in your city.  :(</string>
+    <string name="sick_server_error">The Swapper\'s server is feeling sick. Please, try again in a few minutes.</string>
+
+    <!-- Strings from ProfileFragment.java -->
+    <string name="donated_tab_title">DONATED</string>
+    <string name="retrieved_tab_title">RETRIEVED</string>
+    <string name="favourited_tab_title">FAVOURITED</string>
+    <string name="no_name_found_message">No name found...</string>
+    <string name="guest_city">Black Castle City</string>
+
+    <!-- Strings from SettingsFragment.java -->
+    <string name="changed_birth_date_parcial_message">Your new birth date is</string>
+    <string name="settings_item_change_profile_picture">Change profile picture</string>
+    <string name="settings_item_change_cover_picture">Change cover picture</string>
+    <string name="settings_item_change_birth_date">Change your birth date</string>
+    <string name="settings_item_change_city">Change your current city</string>
+    <string name="settings_item_change_password">Change your password</string>
+    <string name="settings_item_logout">Logout</string>
+    <string name="settings_item_delete_account">Delete my account</string>
+
+    <string name="dialog_change_password_title">Change Password</string>
+    <string name="dialog_change_password_message">Set correctly the fields bellow to change your password.</string>
+
+    <string name="dialog_delete_account_title">Delete Account</string>
+    <string name="dialog_delete_account_message">Do you really want to delete your account?</string>
+
+    <string name="dialog_logout_title">Logout</string>
+    <string name="dialog_logout_message">Do you really want to logout from your account?</string>
+
+    <string name="dialog_change_city_title">Logout</string>
+    <string name="dialog_change_city_message">Choose your state and city bellow.</string>
+
+    <string name="service_not_implemented">Service not implemented yet... zZZzzZ</string>
+    <string name="delete_account_dialog_positive_button_message">Account deleted successfully.</string>
+    <string name="delete_account_dialog_negative_button_message">Thanks so much! We\'re working so hard to make you really happy. :]</string>
+    <string name="logout_dialog_positive_button_message">Logout done successfully.</string>
+    <string name="change_password_dialog_positive_button_message">Password changed successfully.</string>
+    <string name="change_city_dialog_positive_button_parcial_message">City changed to</string>
+
+    <!-- Strings from StatisticsFragment.java -->
+    <string name="donors_tab_title">DONORS</string>
+    <string name="hot_spots_tab_title">HOT SPOTS</string>
+    <string name="best_books_tab_title">BEST BOOKS</string>
+
+    <!-- Strings from ReadersReviewFragment.java -->
+    <string name="no_comments_found_message">OMG, no comments found! Be the first to comment. ;) </string>
+
+    <!-- Strings from BestBooksFragment.java -->
+    <string name="book_title_for_no_book_statistics_found">There isn\'t donations this month.</string>
+    <string name="book_author_for_no_book_statistics_found">No Author</string>
+    <string name="donations_text_for_no_book_statistics_found">0 donations</string>
+    <string name="adoptions_text_for_no_book_statistics_found">0 adoptions</string>
+    <string name="donations_text_for_book_statistics">Donated %1$d times</string>
+    <string name="adoptions_text_for_book_statistics">Adopted %1$d times</string>
+
+    <!-- Strings from DonorsFragment.java -->
+    <string name="donor_name_for_no_month_donors_found">There isn\'t donations this month.</string>
+    <string name="donor_age_for_no_month_donors_found">42?</string>
+    <string name="donor_city_name_for_no_month_donors_found">Northerner Under The Hills</string>
+    <string name="donations_text_for_no_month_donors_found">0 donations</string>
+    <string name="donations">donations</string>
+
+    <!-- Not Checked Zone -->
+
+
     <string name="app_name">Swappers</string>
 
     <string name="title_section1">Section 1</string>
@@ -52,13 +173,13 @@
     <string name="sign_up">SIGN UP NOW</string>
 
     <!-- Statistics Fragments -->
-    <string name="month_donator">Month Donators</string>
-    <string name="next_month_donator_button">next_donator_month</string>
-    <string name="previous_month_donator_button">previous_donator_month</string>
-    <string name="name_donator">Name Donator Here</string>
-    <string name="city_donator">City,</string>
-    <string name="age_donator">XX anos</string>
-    <string name="donator_books_donated">Books Donated Here</string>
+    <string name="month_donor">Month Donors</string>
+    <string name="next_month_donor_button">next_donator_month</string>
+    <string name="previous_month_donor_button">previous_donator_month</string>
+    <string name="name_donor">Name Donor Here</string>
+    <string name="city_donor">City,</string>
+    <string name="age_donor">XX anos</string>
+    <string name="donor_books_donated">Books Donated Here</string>
 
     <string name="best_places">Best Places</string>
     <string name="name_hotspot">Name Hotspot Here</string>

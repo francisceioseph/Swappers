@@ -1,7 +1,5 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -13,15 +11,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Review;
-import br.edu.ifce.swappers.swappers.model.User;
-import br.edu.ifce.swappers.swappers.util.JsonUtil;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.JsonUtil;
 
 /**
  * Created by francisco on 14/10/15.

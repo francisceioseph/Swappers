@@ -135,7 +135,7 @@
             android:layout_marginRight="10dp"
             android:src="@drawable/ic_navigate_next"
             android:background="@color/color_primary_dark"
-            android:contentDescription="@string/next_month_donator_button"/>
+            android:contentDescription="@string/next_month_donor_button"/>
     </com.andexert.library.RippleView>
 
     <com.andexert.library.RippleView
@@ -155,7 +155,7 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/ic_navigate_before"
             android:background="@color/color_primary_dark"
-            android:contentDescription="@string/previous_month_donator_button" />
+            android:contentDescription="@string/previous_month_donor_button" />
     </com.andexert.library.RippleView>
 
 </FrameLayout>

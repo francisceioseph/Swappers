@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
+import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecommendationsFragment extends Fragment {
@@ -65,7 +65,7 @@ public class RecommendationsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // SwappersToast.makeText(getActivity(), "Opening Map... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), getString(R.string.service_not_implemented), Toast.LENGTH_SHORT).show();;
             }
         };
     }
@@ -74,7 +74,7 @@ public class RecommendationsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  SwappersToast.makeText(getActivity(), "Loading previous book... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), getString(R.string.service_not_implemented), Toast.LENGTH_SHORT).show();;
             }
         };
     }
@@ -83,7 +83,7 @@ public class RecommendationsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  SwappersToast.makeText(getActivity(), "Opening next book... #SQN", Toast.LENGTH_SHORT).show();;
+                SwappersToast.makeText(getActivity(), getString(R.string.service_not_implemented), Toast.LENGTH_SHORT).show();;
             }
         };
     }

@@ -16,12 +16,11 @@ import java.util.ArrayList;
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
-import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
+import br.edu.ifce.swappers.swappers.miscellaneous.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.model.Book;
-import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.model.Place;
-import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,8 +65,13 @@ public class AvailableBooksFragment extends Fragment implements RecycleViewOnCli
 
     @Override
     public void onClickListener(View view, int position) {
+
         Intent detailBookFragmentIntent = new Intent(this.getActivity().getApplicationContext(), DetailBookActivity.class);
         detailBookFragmentIntent.putExtra(AndroidUtils.SELECTED_BOOK_ID, place.getBooks().get(position));
+        detailBookFragmentIntent.putExtra(AndroidUtils.SELECTED_PLACE_ID, place.getId());
+
+        detailBookFragmentIntent.putExtra(AndroidUtils.ORIGIN_DETAIL_BOOK_TITLE, AndroidUtils.FROM_DETAIL_PLACE_INTENT_CODE);
+
         this.startActivity(detailBookFragmentIntent);
     }
 }

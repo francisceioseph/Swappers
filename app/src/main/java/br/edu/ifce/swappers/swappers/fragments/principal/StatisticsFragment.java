@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.statistics.BestBooksFragment;
-import br.edu.ifce.swappers.swappers.fragments.tabs.statistics.DonatorsFragment;
+import br.edu.ifce.swappers.swappers.fragments.tabs.statistics.DonorsFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.statistics.HotSpotsFragment;
 
 public class StatisticsFragment extends Fragment {
@@ -37,11 +37,11 @@ public class StatisticsFragment extends Fragment {
         TabHost.TabSpec hotspots = this.tabHost.newTabSpec("hotspots");
         TabHost.TabSpec bestBooks = this.tabHost.newTabSpec("bestBooks");
 
-        donators.setIndicator("DONATORS");
-        hotspots.setIndicator("HOTSPOTS");
-        bestBooks.setIndicator("BEST BOOKS");
+        donators.setIndicator(getString(R.string.donors_tab_title));
+        hotspots.setIndicator(getString(R.string.hot_spots_tab_title));
+        bestBooks.setIndicator(getString(R.string.best_books));
 
-        this.tabHost.addTab(donators, DonatorsFragment.class, null);
+        this.tabHost.addTab(donators, DonorsFragment.class, null);
         this.tabHost.addTab(hotspots, HotSpotsFragment.class, null);
         this.tabHost.addTab(bestBooks, BestBooksFragment.class, null);
 

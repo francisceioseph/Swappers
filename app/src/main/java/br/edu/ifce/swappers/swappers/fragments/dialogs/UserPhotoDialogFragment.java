@@ -65,7 +65,8 @@ public class UserPhotoDialogFragment extends DialogFragment {
 
         try{
             this.userPhotoDialogListener = (UserPhotoDialogListener) activity;
-        }catch (ClassCastException e){
+        }
+        catch (ClassCastException e){
             throw new ClassCastException(activity.toString() + " must implement NoticeDialogListener");
         }
     }

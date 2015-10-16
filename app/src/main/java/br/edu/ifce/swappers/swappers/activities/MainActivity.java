@@ -14,7 +14,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -24,7 +23,7 @@ import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.ProfileFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.SettingsFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.StatisticsFragment;
-import br.edu.ifce.swappers.swappers.util.ImageUtil;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
@@ -54,12 +53,12 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         Drawable aboutSectionIcon       = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_help);
         Drawable settingsSectionIcon    = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_settings);
 
-        MaterialSection profileSection     = this.newSection("Profile", profileSectionIcon, new ProfileFragment());
-        MaterialSection booksSection       = this.newSection("Books", booksSectionIcon, new BooksFragment());
-        MaterialSection placesSection      = this.newSection("Places", placesSectionIcon, new PlacesFragment());
-        MaterialSection statisticsSection  = this.newSection("Statistics", statisticsSectionIcon, new StatisticsFragment());
-        MaterialSection aboutSection       = this.newSection("About", aboutSectionIcon, new AboutFragment());
-        MaterialSection settingsSection    = this.newSection("Settings", settingsSectionIcon, new SettingsFragment());
+        MaterialSection profileSection     = this.newSection(getString(R.string.profile_section_title), profileSectionIcon, new ProfileFragment());
+        MaterialSection booksSection       = this.newSection(getString(R.string.books_section_title), booksSectionIcon, new BooksFragment());
+        MaterialSection placesSection      = this.newSection(getString(R.string.places_section_title), placesSectionIcon, new PlacesFragment());
+        MaterialSection statisticsSection  = this.newSection(getString(R.string.statistics_section_title), statisticsSectionIcon, new StatisticsFragment());
+        MaterialSection aboutSection       = this.newSection(getString(R.string.about_section_title), aboutSectionIcon, new AboutFragment());
+        MaterialSection settingsSection    = this.newSection(getString(R.string.settings_section_title), settingsSectionIcon, new SettingsFragment());
 
         this.addSection(profileSection);
         this.addSection(booksSection);
@@ -111,7 +110,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             email = MockSingleton.INSTANCE.user.getEmail();
         }
         catch (NullPointerException e){
-            email = "guest@swappers.com";
+            email = getString(R.string.guest_email);
         }
 
         return email;
@@ -124,7 +123,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             userName = MockSingleton.INSTANCE.user.getName();
         }
         catch (NullPointerException e) {
-            userName = "Guest";
+            userName = getString(R.string.guest_name);
         }
 
         return userName;
@@ -150,12 +149,12 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ){
             searchView = (SearchView) searchItem.getActionView();
-            searchView.setQueryHint("buscar livro");
         }
         else{
             searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-            searchView.setQueryHint("buscar livro");
         }
+
+        searchView.setQueryHint(getString(R.string.search_view_hint));
         ComponentName cn = new ComponentName(this, SearchViewActivity.class);
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));

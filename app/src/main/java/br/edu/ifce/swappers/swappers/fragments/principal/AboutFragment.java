@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.ReferencedLibrariesActivity;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
+import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AboutFragment extends Fragment {

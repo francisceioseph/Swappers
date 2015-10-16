@@ -20,7 +20,7 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.DonatedBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.FavoriteBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.RetrievedBooksFragment;
-import br.edu.ifce.swappers.swappers.util.ImageUtil;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
@@ -62,9 +62,9 @@ public class ProfileFragment extends Fragment {
         TabHost.TabSpec retrievedBooksTab = this.profileTabHost.newTabSpec("retrievedBooksTab");
         TabHost.TabSpec favoriteBooksTab  = this.profileTabHost.newTabSpec("favoriteBooksTab");
 
-        donatedBooksTab.setIndicator("DONATED");
-        retrievedBooksTab.setIndicator("RETRIEVED");
-        favoriteBooksTab.setIndicator("FAVORITES");
+        donatedBooksTab.setIndicator(getString(R.string.donated_tab_title));
+        retrievedBooksTab.setIndicator(getString(R.string.retrieved_tab_title));
+        favoriteBooksTab.setIndicator(getString(R.string.favourited_tab_title));
 
         this.profileTabHost.addTab(donatedBooksTab, DonatedBooksFragment.class, null);
         this.profileTabHost.addTab(retrievedBooksTab, RetrievedBooksFragment.class, null);
@@ -111,11 +111,11 @@ public class ProfileFragment extends Fragment {
             username = MockSingleton.INSTANCE.user.getName();
 
             if (username.isEmpty()) {
-                username = "No name found...";
+                username = getString(R.string.no_name_found_message);
             }
         }
         catch (NullPointerException e){
-            username = "Guest";
+            username = getString(R.string.guest_name);
         }
 
         return username;
@@ -128,11 +128,11 @@ public class ProfileFragment extends Fragment {
             city = MockSingleton.INSTANCE.user.getCity();
 
             if (city.isEmpty()) {
-                city = "X-Land City";
+                city = getString(R.string.guest_city);
             }
         }
         catch (NullPointerException e){
-            city = "X-Land City";
+            city = getString(R.string.guest_city);
         }
 
         return city;

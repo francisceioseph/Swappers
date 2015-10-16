@@ -2,14 +2,12 @@ package br.edu.ifce.swappers.swappers.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.webservice.RetrieveReviewsTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
 
 
 public class SplashActivity extends Activity{

@@ -37,8 +37,8 @@ public class BooksFragment extends Fragment {
         TabHost.TabSpec nearBooks       = this.tabHost.newTabSpec("nearBooks");
         TabHost.TabSpec recommendations = this.tabHost.newTabSpec("recommendations");
 
-        nearBooks.setIndicator("NEAR BOOKS");
-        recommendations.setIndicator("RECOMMENDATIONS");
+        nearBooks.setIndicator(getString(R.string.near_books_tab_title));
+        recommendations.setIndicator(getString(R.string.recommendations_tab_title));
 
         this.tabHost.addTab(nearBooks, NearBooksFragment.class, null);
         this.tabHost.addTab(recommendations, RecommendationsFragment.class, null);

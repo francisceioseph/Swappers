@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -16,10 +15,8 @@ import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Book;
-import br.edu.ifce.swappers.swappers.model.User;
-import br.edu.ifce.swappers.swappers.util.BestBookInterface;
-import br.edu.ifce.swappers.swappers.util.StatisticBookTask;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.BestBookInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.StatisticBookTask;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -114,22 +111,27 @@ public class BestBooksFragment extends Fragment implements BestBookInterface{
             }
 
         }else{
-            titleBestBookTextView.setText("Não há livros doados ou retirados este mês");
-            authorBestBookTextView.setText("nenhum");
-            retrievedBestBookTextView.setText("Adotado 0 vezes");
-            donatedBestBookTextView.setText("Doado 0 vezes");
+            titleBestBookTextView.setText(getString(R.string.book_title_for_no_book_statistics_found));
+            authorBestBookTextView.setText(getString(R.string.book_author_for_no_book_statistics_found));
+            retrievedBestBookTextView.setText(getString(R.string.adoptions_text_for_no_book_statistics_found));
+            donatedBestBookTextView.setText(getString(R.string.donations_text_for_no_book_statistics_found));
         }
     }
 
     private void updateCardView(int index){
         this.titleBestBookTextView.setText(bestBooks.get(index).getTitle());
         this.authorBestBookTextView.setText(bestBooks.get(index).getAuthor());
-        this.retrievedBestBookTextView.setText("Adotado "+String.valueOf(bestBooks.get(index).getRecovered())+" vezes");
-        this.donatedBestBookTextView.setText("Doado "+String.valueOf(bestBooks.get(index).getDonation())+" vezes");
+
+        int recovered = bestBooks.get(index).getRecovered();
+        int donated   = bestBooks.get(index).getDonation();
+
+        this.retrievedBestBookTextView.setText(String.format(getString(R.string.adoptions_text_for_book_statistics), recovered));
+        this.donatedBestBookTextView.setText(String.format(getString(R.string.donations_text_for_book_statistics), donated));
 
         if(!bestBooks.get(this.index).getPhoto().isEmpty()) {
             Picasso.with(getActivity()).load(bestBooks.get(index).getPhoto()).into(coverBestBookCircleImageView);
-        }else{
+        }
+        else{
             Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverBestBookCircleImageView);
         }
     }

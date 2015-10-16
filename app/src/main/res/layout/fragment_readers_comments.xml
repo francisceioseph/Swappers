@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersCommentsFragment">
+    tools:context="br.edu.ifce.swappers.swappers.fragments.tabs.detail_book.ReadersReviewFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/readers_comments_list"

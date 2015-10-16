@@ -1,7 +1,6 @@
 package br.edu.ifce.swappers.swappers.fragments.tabs.profile;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,12 +14,11 @@ import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.activities.DetailBookActivity;
-import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
+import br.edu.ifce.swappers.swappers.miscellaneous.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.model.Book;
-import br.edu.ifce.swappers.swappers.util.CategoryBook;
-import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
+import br.edu.ifce.swappers.swappers.miscellaneous.CategoryBook;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.RecycleViewOnClickListenerHack;
 
 /**
  * A simple {@link Fragment} subclass.

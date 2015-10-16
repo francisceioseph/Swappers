@@ -117,11 +117,7 @@
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.ProfileActivity"
-            android:label="@string/title_activity_profile" >
-        </activity>
-        <activity
-            android:name=".activities.ReaderCommentActivity"
+            android:name=".activities.ReaderReviewActivity"
             android:label="@string/title_activity_reader_comment"
             android:launchMode="singleInstance"
             android:parentActivityName=".activities.DetailBookActivity"
@@ -135,15 +131,6 @@
             android:label="@string/title_activity_donations_list_point"
             android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
-        </activity>
-
-        <activity
-            android:name=".activities.AdoptionListPointActivity"
-            android:label="Near Places"
-            android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />

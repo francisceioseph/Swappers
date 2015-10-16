@@ -27,13 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.adapters.BookRecyclerViewAdapter;
+import br.edu.ifce.swappers.swappers.miscellaneous.adapters.BookRecyclerViewAdapter;
 import br.edu.ifce.swappers.swappers.model.Book;
-import br.edu.ifce.swappers.swappers.util.AndroidUtils;
-import br.edu.ifce.swappers.swappers.util.BookTask;
-import br.edu.ifce.swappers.swappers.util.RecycleViewOnClickListenerHack;
-import br.edu.ifce.swappers.swappers.util.SearchInterface;
-import br.edu.ifce.swappers.swappers.util.SwappersToast;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.BookTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.RecycleViewOnClickListenerHack;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.SearchInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 
 
 public class SearchViewActivity extends AppCompatActivity implements SearchInterface, RecycleViewOnClickListenerHack {
@@ -137,7 +137,7 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
             searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         }
 
-        searchView.setQueryHint("buscar livro");
+        searchView.setQueryHint(getString(R.string.search_view_hint));
 
         ComponentName cn = new ComponentName(this, SearchViewActivity.class);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));
