@@ -13,8 +13,6 @@
         android:layout_height="wrap_content"
         android:theme="@style/SWToolbarTheme"
         app:popupTheme="@style/SWToolbarMenuTheme"
-        android:title="@string/title_detail_place"
-
         />
 
        <LinearLayout
@@ -70,7 +68,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/place_name_content"
                         android:textColor="@color/primary_text_default_material_light"
                         android:layout_marginBottom="5dp"
                         android:shadowColor="@color/white"
@@ -82,7 +79,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="@string/place_city_content"
                         android:textColor="@color/primary_text_default_material_light"
                         android:elegantTextHeight="false"
                         android:focusableInTouchMode="false"

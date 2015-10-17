@@ -214,5 +214,11 @@
     <string name="about_swappers_slogan">Donate readings, share dreams</string>
     <string name="progress_dialog_retrieving_reviews_message">Retrieving reviews...</string>
     <string name="new_reader_review_text">New Review</string>
+    <string name="month_donor">Month Donors</string>
+    <string name="best_places">Best Places</string>
+    <string name="userPhotoDialogTitle">Set Profile Picture</string>
+    <string name="new_profile_picture_camera">Camera</string>
+    <string name="new_profile_picture_gallery">Gallery</string>
+    <string name="new_profile_picture_message">Select how you want to provide us your profile picture</string>
 
 </resources>

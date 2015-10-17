@@ -184,9 +184,9 @@
     <!-- None-->
 
     <!-- DetailBookActivity xml place holders -->
-    <string name="title_detail_book">Title Book</string>
-    <string name="author_detail_book">Authors Book</string>
-    <string name="editor_detail_book">Editor Book</string>
+    <string name="title_detail_book">Lorem Ipsum</string>
+    <string name="author_detail_book">Lorem Ipsum</string>
+    <string name="editor_detail_book">Lorem Ipsum</string>
     <string name="synopsis_book">Lorem ipsum dolor sit amet, mutat dicit scriptorem in sed,
     mea tractatos instructior ad, virtute discere maluisset ei has.
     Delenit denique laboramus ei pri, est id assentior necessitatibus,
@@ -317,5 +317,8 @@
     <string name="dialog_password_confirmation_title">Your new password confirmation</string>
     <string name="progress_dialog_retrieving_reviews_message">Retrieving Reviews...</string>
     <string name="new_reader_review_text">New Review</string>
+    <string name="new_profile_picture_gallery">Gallery</string>
+    <string name="new_profile_picture_message">Select how you want to provide us your profile picture</string>
+    <string name="new_profile_picture_camera">Camera</string>
 
 </resources>

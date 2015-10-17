@@ -39,7 +39,7 @@ public class FavoriteBooksFragment extends Fragment implements RecycleViewOnClic
         if (!bookDAO.getBookAllByCategory(CategoryBook.FAVORITE.toString()).isEmpty()) {
             dataSource = bookDAO.getBookAllByCategory(CategoryBook.FAVORITE.toString());
         }else{
-            dataSource = MockSingleton.INSTANCE.createMockedBookDataSource();
+            dataSource = new ArrayList<>();
         }
     }
 
