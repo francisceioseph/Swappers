@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -76,10 +78,6 @@ public class ReaderReviewActivity extends AppCompatActivity implements UploadRev
     private void initToolbar() {
         toolbar.setTitle(getString(R.string.new_reader_review_text)); /*Inserir a consulta ao banco de dados que retornará o título do livro*/
         toolbar.setSubtitle("250 " + getString(R.string.readers_review_toolbar_subtitle_plural));
-        Bitmap userPhoto = StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
-        Bitmap userPhotoResized = Bitmap.createScaledBitmap(userPhoto, 56, 56, false);
-
-        toolbar.setLogo(new BitmapDrawable(getResources(), userPhotoResized));
 
         if (toolbar != null){
             this.setSupportActionBar(toolbar);
@@ -129,8 +127,15 @@ public class ReaderReviewActivity extends AppCompatActivity implements UploadRev
             alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialogInterface) {
-                    setResult(RESULT_OK);
-                    onBackPressed();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            setResult(RESULT_OK);
+                            onBackPressed();
+                        }
+                    }, 200);
+
                 }
             });
         }
