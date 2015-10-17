@@ -205,5 +205,14 @@
     <string name="name_hint">Greather than three letters</string>
     <string name="synopsis_card_view_title">Synopsis</string>
     <string name="best_books">Best Books</string>
+    <string name="floating_action_button_comment">Comment</string>
+    <string name="floating_action_button_donate">Donate</string>
+    <string name="floating_action_button_favorite">Favourite</string>
+    <string name="dialog_current_password_title">Your current password</string>
+    <string name="dialog_new_password_title">Your new password</string>
+    <string name="dialog_password_confirmation_title">Confirm your new password</string>
+    <string name="about_swappers_slogan">Donate readings, share dreams</string>
+    <string name="progress_dialog_retrieving_reviews_message">Retrieving reviews...</string>
+    <string name="new_reader_review_text">New Review</string>
 
 </resources>

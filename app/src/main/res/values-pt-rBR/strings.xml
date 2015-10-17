@@ -176,7 +176,7 @@
 
     <!-- Strings from menus -->
     <string name="action_settings">Configurações</string>
-    <string name="action_search">Pesquisa</string>
+    <string name="action_search">Pesquisar</string>
     <string name="action_send">Enviar</string>
 
     <string name="List_points_donate_place_near">Pontos do Swappers próximos de você</string>
@@ -219,6 +219,12 @@
     <string name="password_confirmation">Confirmação de Senha</string>
 
     <string name="register_now_button_title">CADASTRAR AGORA</string>
+    <string name="dialog_current_password_title">Senha atual</string>
+    <string name="dialog_new_password_title">Nova senha</string>
+    <string name="dialog_password_confirmation_title">Confirme a sua nova senha</string>
+    <string name="about_swappers_slogan">Doe leituras, compartilhe sonhos!</string>
+    <string name="progress_dialog_retrieving_reviews_message">Carregando comentários...</string>
+    <string name="new_reader_review_text">Novo Comentário</string>
 
 
 </resources>

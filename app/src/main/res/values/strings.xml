@@ -202,7 +202,7 @@
     <string name="times_donated_books">Donated XX times</string>
     <string name="swappers_about_name">Swappers</string>
 
-    <string name="about_swappers_slogan">The swappers slogan.</string>
+    <string name="about_swappers_slogan">Donate readings, share dreams</string>
     <string name="about_develpment_team_title">Development Team</string>
     <string name="about_alessandra_name">Alessandra Lino</string>
     <string name="about_gracyane_name">Gracyane Oliveira</string>
@@ -312,5 +312,10 @@
     <string name="password_confirmation">Password Confirmation</string>
     <string name="register_now_button_title">register now</string>
     <string name="synopsis_card_view_title">Synopsis</string>
+    <string name="dialog_current_password_title">Your current password</string>
+    <string name="dialog_new_password_title">Your new password</string>
+    <string name="dialog_password_confirmation_title">Your new password confirmation</string>
+    <string name="progress_dialog_retrieving_reviews_message">Retrieving Reviews...</string>
+    <string name="new_reader_review_text">New Review</string>
 
 </resources>

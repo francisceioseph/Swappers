@@ -74,7 +74,7 @@ public class ReaderReviewActivity extends AppCompatActivity implements UploadRev
     }
 
     private void initToolbar() {
-        toolbar.setTitle(MockSingleton.INSTANCE.user.getName()); /*Inserir a consulta ao banco de dados que retornará o título do livro*/
+        toolbar.setTitle(getString(R.string.new_reader_review_text)); /*Inserir a consulta ao banco de dados que retornará o título do livro*/
         toolbar.setSubtitle("250 " + getString(R.string.readers_review_toolbar_subtitle_plural));
         Bitmap userPhoto = StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
         Bitmap userPhotoResized = Bitmap.createScaledBitmap(userPhoto, 56, 56, false);
@@ -125,6 +125,14 @@ public class ReaderReviewActivity extends AppCompatActivity implements UploadRev
             alertDialog = AndroidUtils.makeDialog(this,
                     getString(R.string.dialog_success_title),
                     getString(R.string.success_review_upload_dialog_message));
+
+            alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    setResult(RESULT_OK);
+                    onBackPressed();
+                }
+            });
         }
         else{
             alertDialog = buildReviewUploadErrorDialog(getString(R.string.error_review_upload_dialog_message));

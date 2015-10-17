@@ -21,7 +21,7 @@ import br.edu.ifce.swappers.swappers.model.Review;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.RetrieveReviewsTaskInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
-import br.edu.ifce.swappers.swappers.webservice.RetrieveReviewsTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.RetrieveReviewsTask;
 
 /**
  * A simple {@link Fragment} subclass.

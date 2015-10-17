@@ -32,7 +32,7 @@ public class PlaceAsyncTask extends AsyncTask<String,String,ArrayList<Place>> {
     @Override
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage(context.getString(R.string.progress_dialog_searching_message));
+        progressDialog.setMessage(context.getString(R.string.progress_dialog_loading_message));
         progressDialog.show();
     }
 
