@@ -1,5 +1,6 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -119,14 +121,22 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     * */
     @Override
     public void startNextActivity() {
-        Intent mainActivityIntent = new Intent(this, LoginActivity.class);
+        final Intent mainActivityIntent = new Intent(this, MainActivity.class);
 
-        mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(mainActivityIntent);
-
-        AndroidUtils.makeDialog(this,
+        AlertDialog alert = AndroidUtils.makeDialog(this,
                 getString(R.string.dialog_success_title),
-                getString(R.string.user_registration_success_message)).show();
+                getString(R.string.user_registration_success_message));
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                startActivity(mainActivityIntent);
+
+                onBackPressed();
+            }
+        });
+
+        alert.show();
     }
 
     /*

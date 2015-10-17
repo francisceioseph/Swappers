@@ -105,7 +105,11 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         Bitmap userPhotoBitmap;
 
         try {
-            userPhotoBitmap = ImageUtil.StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+            if (MockSingleton.INSTANCE.user.getPhoto2().isEmpty()) {
+                userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person_giant)).getBitmap();
+            } else {
+                userPhotoBitmap = ImageUtil.StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+            }
         }
         catch (Exception e){
             userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person_giant)).getBitmap();

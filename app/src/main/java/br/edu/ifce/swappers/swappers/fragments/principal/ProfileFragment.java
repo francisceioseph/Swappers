@@ -142,7 +142,11 @@ public class ProfileFragment extends Fragment {
         Bitmap userPhotoBitmap;
 
         try {
-            userPhotoBitmap = ImageUtil.StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+            if (MockSingleton.INSTANCE.user.getPhoto2().isEmpty()) {
+                userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.ic_person_giant)).getBitmap();
+            } else {
+                userPhotoBitmap = ImageUtil.StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+            }
         }
         catch (Exception e){
             userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.ic_person_giant)).getBitmap();

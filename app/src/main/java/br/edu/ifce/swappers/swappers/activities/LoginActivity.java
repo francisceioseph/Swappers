@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
 
         if(AndroidUtils.isNetworkAvailable(this)){
             this.startActivity(registerActivityIntent);
+            this.finish();
         }
         else {
             AndroidUtils.makeDialog(this,
