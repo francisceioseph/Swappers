@@ -4,17 +4,20 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -149,8 +152,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     private Bitmap retrieveImageFromCameraResult(Intent data){
         Bundle extras = data.getExtras();
+        Bitmap bitmap = (Bitmap) extras.get("data");
 
-        return (Bitmap) extras.get("data");
+        return ImageUtil.getScaledBitMap(bitmap, 256);
     }
 
     private Bitmap retrieveImageFromGalleryResult(Intent data){
@@ -172,8 +176,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
         cursor.close();
 
-        return BitmapFactory.decodeFile(picturePath);
+        return ImageUtil.prepareImageFromGallery(picturePath);
     }
+
 
     /*
     *
