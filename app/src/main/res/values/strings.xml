@@ -306,9 +306,9 @@
     <string name="settings_account_header">Account Settings</string>
     <string name="user_photo_title">User Photo</string>
     <string name="name">Name</string>
-    <string name="name_hint">Greather than three letters</string>
+    <string name="name_hint">Greater than three letters</string>
     <string name="email_address_hint">A valid email address</string>
-    <string name="password_hint">Greather than 6 characters</string>
+    <string name="password_hint">Greater than 6 characters</string>
     <string name="password_confirmation">Password Confirmation</string>
     <string name="register_now_button_title">register now</string>
     <string name="synopsis_card_view_title">Synopsis</string>

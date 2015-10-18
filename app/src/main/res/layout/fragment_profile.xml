@@ -27,7 +27,7 @@
                 android:layout_height="160dp"
                 android:contentDescription="@string/profile_cover_photo_description"
                 android:background="@color/accent_material_dark"
-                android:src="@drawable/background_splash"
+                android:src="@drawable/menu_back"
                 android:scaleType="centerCrop"
                 android:elevation="3dp"/>
 

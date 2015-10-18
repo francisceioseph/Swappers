@@ -122,6 +122,7 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     @Override
     public void startNextActivity() {
         final Intent mainActivityIntent = new Intent(this, MainActivity.class);
+        mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         AlertDialog alert = AndroidUtils.makeDialog(this,
                 getString(R.string.dialog_success_title),

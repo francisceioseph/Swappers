@@ -57,7 +57,6 @@ public class NearBooksFragment extends Fragment {
                     for(int j=0; j<nearPlaces.get(i).getBooks().size(); j++){
                         idPlaces.add(nearPlaces.get(i).getId());
                     }
-
                 }
             }
 
