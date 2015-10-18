@@ -123,7 +123,7 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
     private void updateCardView(int index){
         nameMonthDonatorTextView.setText(usersDonators.get(index).getUsername());
         cityMonthDonatorTextView.setText(usersDonators.get(index).getCity() + ", ");
-        donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) + getString(R.string.donations));
+        donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) + " " + getString(R.string.donations));
         coverMonthDonatorCircleImageView.setImageBitmap(ImageUtil.StringToBitMap(usersDonators.get(index).getPhoto2()));
     }
 }

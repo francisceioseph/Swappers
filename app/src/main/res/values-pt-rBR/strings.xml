@@ -118,7 +118,7 @@
     <string name="donor_age_for_no_month_donors_found">42?</string>
     <string name="donor_city_name_for_no_month_donors_found">Nortenhos Debaixo das Colinas</string>
     <string name="donations_text_for_no_month_donors_found">0 doações</string>
-    <string name="donations">donations</string>
+    <string name="donations">doações</string>
 
     <!-- Strings from BookTask.java -->
     <string name="error_performing_search_message">Erro durante a pesquisa. Por favor, verifique as suas palavras-chave e tente novamente.</string>

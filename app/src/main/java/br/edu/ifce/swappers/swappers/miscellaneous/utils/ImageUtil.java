@@ -1,9 +1,12 @@
 package br.edu.ifce.swappers.swappers.miscellaneous.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
+import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 import android.util.Log;
 
@@ -12,6 +15,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
+
+import br.edu.ifce.swappers.swappers.R;
 
 /**
  * Created by FAMILIA on 11/06/2015.
@@ -108,4 +114,51 @@ public class ImageUtil {
         return matrix;
     }
 
+    public static Bitmap getProfileCoverPhoto(Context context, int drawableID) {
+        BitmapDrawable coverPhotoDrawable = (BitmapDrawable) ContextCompat.getDrawable(context, drawableID);
+
+        return coverPhotoDrawable.getBitmap();
+    }
+
+    public static int getRandomCoverDrawableID() {
+        int drawableID;
+        int option;
+        Random randomizer;
+
+        randomizer = new Random();
+        randomizer.setSeed(System.currentTimeMillis());
+
+        option = randomizer.nextInt(6) + 1;
+
+        switch (option) {
+            case 1:
+                drawableID = R.drawable.back_01;
+                break;
+
+            case 2:
+                drawableID = R.drawable.back_02;
+                break;
+
+            case 3:
+                drawableID = R.drawable.back_03;
+                break;
+
+            case 4:
+                drawableID = R.drawable.back_04;
+                break;
+
+            case 5:
+                drawableID = R.drawable.back_05;
+                break;
+
+            case 6:
+                drawableID = R.drawable.back_06;
+                break;
+
+            default:
+                drawableID = R.drawable.back_07;
+        }
+
+        return drawableID;
+    }
 }

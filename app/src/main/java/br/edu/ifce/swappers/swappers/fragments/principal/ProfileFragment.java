@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.DonatedBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.FavoriteBooksFragment;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.RetrievedBooksFragment;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,7 +48,9 @@ public class ProfileFragment extends Fragment {
         TextView usernameTextView = (TextView) rootView.findViewById(R.id.user_name_text_view);
         TextView userCityTextView = (TextView) rootView.findViewById(R.id.user_city_text_view);
         CircleImageView userImageView = (CircleImageView) rootView.findViewById(R.id.user_image_view);
+        ImageView coverPhoto = (ImageView) rootView.findViewById(R.id.user_cover_photo);
 
+        coverPhoto.setImageBitmap(this.getUserCoverPhoto());
         userImageView.setImageBitmap(this.getUserPhoto());
         usernameTextView.setText(this.getUserNameFromSingleton());
         userCityTextView.setText(this.getUserCityFromSingleton());
@@ -153,5 +157,10 @@ public class ProfileFragment extends Fragment {
         }
 
         return userPhotoBitmap;
+    }
+
+    private Bitmap getUserCoverPhoto() {
+        int coverId = AndroidUtils.loadUserCoverID(getActivity().getApplicationContext());
+        return ImageUtil.getProfileCoverPhoto(getActivity().getApplicationContext(), coverId);
     }
 }

@@ -69,6 +69,7 @@ public class AndroidUtils {
         editor.putString("photo", user.getPhoto2());
         editor.putString("name", user.getName());
         editor.putInt("id", user.getId());
+        editor.putInt("cover_drawable_id", ImageUtil.getRandomCoverDrawableID());
 
         editor.apply();
     }
@@ -89,6 +90,17 @@ public class AndroidUtils {
         }
 
         return user;
+    }
+
+    public static int loadUserCoverID(Context context) {
+        int coverId = R.drawable.back_07;
+
+        if (userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+            coverId = manager.getInt("cover_drawable_id", R.drawable.back_07);
+        }
+
+        return coverId;
     }
 
     public static void deleteUser(Context context) {
