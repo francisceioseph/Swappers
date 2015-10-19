@@ -63,7 +63,7 @@ public class StatisticPlaceService {
                 in.close();
                 Log.i("PLACES-BEST",responseJson.toString());
                 JSONObject jsonObject = new JSONObject(responseJson.toString());
-                placeList = parseUserFromJSON2(jsonObject);
+                placeList = parseUserFromJSON(jsonObject);
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -74,25 +74,6 @@ public class StatisticPlaceService {
     }
 
     private static ArrayList<Place> parseUserFromJSON(JSONObject jsonObject) throws JSONException {
-        ArrayList<Place> places = new ArrayList<>();
-
-        Object object = jsonObject.get("place");
-
-        if (JSONArray.class.isInstance(object)){
-            String jsonPlace = jsonObject.get("place").toString();
-            Type collectionType = new TypeToken<ArrayList<Place>>(){}.getType();
-            places = new Gson().fromJson(jsonPlace, collectionType);
-
-        }else if (JSONObject.class.isInstance(object)){
-            String jsonPlace = jsonObject.get("place").toString();
-            Place place = new Gson().fromJson(jsonPlace, Place.class);
-            places.add(place);
-        }
-
-        return places;
-    }
-
-    private static ArrayList<Place> parseUserFromJSON2(JSONObject jsonObject) throws JSONException {
         ArrayList<Place> places = new ArrayList<>();
 
         Object object = jsonObject.get("place");
@@ -129,6 +110,4 @@ public class StatisticPlaceService {
 
         return places;
     }
-
-
 }
