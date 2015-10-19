@@ -9,11 +9,19 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.BestPlaceInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.StatisticPlaceTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
+import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.model.Place;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class HotSpotsFragment extends Fragment {
+public class HotSpotsFragment extends Fragment implements BestPlaceInterface{
 
     ImageButton nextHotspotImageButton;
     ImageButton previousHotspotImageButton;
@@ -25,6 +33,9 @@ public class HotSpotsFragment extends Fragment {
     TextView cityHotspotTextView;
     TextView retrievedHotspotTextView;
     TextView receivedHotspotTextView;
+    private int index = 0;
+
+    ArrayList<Place> bestPlace = new ArrayList<>();
 
 
     public HotSpotsFragment() {
@@ -45,6 +56,8 @@ public class HotSpotsFragment extends Fragment {
 //        retrievedHotspotTextView.setText("55 livros adotados");
 //        receivedHotspotTextView.setText("70 livros doados");
 
+        StatisticPlaceTask statisticPlaceTask = new StatisticPlaceTask(getActivity(),this);
+        statisticPlaceTask.execute();
 
         return rootView;
     }
@@ -60,7 +73,6 @@ public class HotSpotsFragment extends Fragment {
         this.cityHotspotTextView = (TextView) rootView.findViewById(R.id.best_place_city);
         this.retrievedHotspotTextView = (TextView) rootView.findViewById(R.id.retrieved_hotspot_text_view);
         this.receivedHotspotTextView = (TextView) rootView.findViewById(R.id.received_hotspot_text_view);
-
     }
 
     private void initViewListeners() {
@@ -72,7 +84,11 @@ public class HotSpotsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SwappersToast.makeText(getActivity(), "Loading previous hotspot... #SQN", Toast.LENGTH_SHORT).show();
+                if(!bestPlace.isEmpty()) {
+                    index--;
+                    if (index < 0) index = bestPlace.size() - 1;
+                    updateCardView(index);
+                }
             }
         };
     }
@@ -81,9 +97,37 @@ public class HotSpotsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SwappersToast.makeText(getActivity(), "Loading next hotspot... #SQN", Toast.LENGTH_SHORT).show();
+                if (!bestPlace.isEmpty()) {
+                    index++;
+                    if (index >= bestPlace.size()) index = 0;
+                    updateCardView(index);
+                }
             }
         };
     }
 
+    @Override
+    public void updateStatisticPlace(ArrayList<Place> placesList) {
+        bestPlace = placesList;
+
+        if(!bestPlace.isEmpty()){
+            updateCardView(this.index);
+        }else{
+            this.nameHotspotTextView.setText("Não houve nem doacao adocao este mês.");
+            this.addressHotspotTextView.setText("Nenhum lugar");
+            this.cityHotspotTextView.setText("Nenhuma cidade");
+            this.receivedHotspotTextView.setText("0 livros doados");
+            this.retrievedHotspotTextView.setText("0 livros adotados");
+        }
+    }
+
+    private void updateCardView(int index){
+        this.nameHotspotTextView.setText(bestPlace.get(index).getName());
+        this.addressHotspotTextView.setText(bestPlace.get(index).getStreet() + ", " +bestPlace.get(index).getNumber());
+        this.cityHotspotTextView.setText(bestPlace.get(index).getCity());
+        this.receivedHotspotTextView.setText(bestPlace.get(index).getDonation() + " livros doados");
+        this.retrievedHotspotTextView.setText(bestPlace.get(index).getRecovered() + " livros adotados");
+
+        this.coverHotspotCircleImageView.setImageBitmap(ImageUtil.StringToBitMap(bestPlace.get(index).getPhoto2()));
+    }
 }
