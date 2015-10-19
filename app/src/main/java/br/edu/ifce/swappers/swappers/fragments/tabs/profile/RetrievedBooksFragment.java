@@ -39,7 +39,7 @@ public class RetrievedBooksFragment extends Fragment implements RecycleViewOnCli
         if (!bookDAO.getBookAllByCategory(CategoryBook.RETRIEVED.toString()).isEmpty()) {
             dataSource = bookDAO.getBookAllByCategory(CategoryBook.RETRIEVED.toString());
         }else{
-            dataSource = MockSingleton.INSTANCE.createMockedBookDataSource();
+            dataSource = new ArrayList<>();
         }
     }
 

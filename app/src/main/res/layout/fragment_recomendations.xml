@@ -26,7 +26,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="180dp"
                 android:layout_height="180dp"
-                android:src="@drawable/mock_books_recommendation"
+                android:src="@drawable/blue_book"
                 android:id="@+id/cover_recommendation_book"
                 app:border_width="1dp"
                 app:border_color="@color/transparent"

@@ -38,10 +38,11 @@ public class DonatedBooksFragment extends Fragment implements RecycleViewOnClick
         super.onCreate(savedInstanceState);
 
         BookDAO bookDAO = new BookDAO(getActivity());
+
         if (!bookDAO.getBookAllByCategory(CategoryBook.DONATION.toString()).isEmpty()) {
             dataSource = bookDAO.getBookAllByCategory(CategoryBook.DONATION.toString());
         }else{
-            dataSource = MockSingleton.INSTANCE.createMockedBookDataSource();
+            dataSource = new ArrayList<>();
         }
     }
 

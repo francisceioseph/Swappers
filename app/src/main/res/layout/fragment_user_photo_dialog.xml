@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Select how you want to provide us your profile picture"
+        android:text="@string/new_profile_picture_message"
         android:id="@+id/textSelectPicture"
         android:layout_gravity="center_horizontal"
         android:layout_marginRight="20dp"
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Camera"
+                android:text="@string/new_profile_picture_camera"
                 android:id="@+id/cameraTextView" />
 
         </LinearLayout>
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Gallery"
+                android:text="@string/new_profile_picture_gallery"
                 android:id="@+id/galleryTextView" />
 
         </LinearLayout>

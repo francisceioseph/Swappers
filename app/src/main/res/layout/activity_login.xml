@@ -10,14 +10,12 @@
     android:background="@drawable/book_background"
     android:backgroundTintMode="multiply">
 
-    <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/SWToolbarTheme"
-        app:popupTheme="@style/SWToolbarMenuTheme"
-        />
+        app:popupTheme="@style/SWToolbarMenuTheme" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -190,7 +188,6 @@
                     />
 
             </com.andexert.library.RippleView>
-
 
         </LinearLayout>
 
