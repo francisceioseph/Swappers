@@ -199,7 +199,7 @@
     <string name="name">Name</string>
     <string name="email_address_hint">A valid email address</string>
     <string name="password_confirmation">Password Confirmation</string>
-    <string name="password_hint">Greather than 6 characters</string>
+    <string name="password_hint">Greater than 6 characters</string>
     <string name="register_now_button_title">REGISTER NOW</string>
     <string name="user_photo_title">User Photo</string>
     <string name="name_hint">Greather than three letters</string>
@@ -214,5 +214,11 @@
     <string name="about_swappers_slogan">Donate readings, share dreams</string>
     <string name="progress_dialog_retrieving_reviews_message">Retrieving reviews...</string>
     <string name="new_reader_review_text">New Review</string>
+    <string name="month_donor">Month Donors</string>
+    <string name="best_places">Best Places</string>
+    <string name="userPhotoDialogTitle">Set Profile Picture</string>
+    <string name="new_profile_picture_camera">Camera</string>
+    <string name="new_profile_picture_gallery">Gallery</string>
+    <string name="new_profile_picture_message">Select how you want to provide us your profile picture</string>
 
 </resources>

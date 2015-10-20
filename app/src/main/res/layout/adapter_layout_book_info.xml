@@ -23,7 +23,6 @@
                 android:layout_margin="10dp"
                 android:adjustViewBounds="false"
                 android:scaleType="fitCenter"
-                android:src="@drawable/blue_book"
                 android:cropToPadding="false" />
 
             <LinearLayout
@@ -36,37 +35,44 @@
                 android:layout_marginRight="10dp">
 
                 <TextView
-                android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/adapter_book_title"
-                android:id="@+id/adapter_book_title"
-                    android:textStyle="bold" />
+                    android:id="@+id/adapter_book_title"
+                    android:textStyle="bold"
+                    android:autoText="false"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="4dp" />
 
                 <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/adapter_book_authors"
-                android:id="@+id/adapter_book_authors"/>
+                    android:id="@+id/adapter_book_authors"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="4dp"
+                    android:autoText="false" />
 
                 <TextView
-                android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/adapter_book_publisher"
-                android:id="@+id/adapter_book_publisher"
-                    android:layout_marginBottom="0dp" />
+                    android:id="@+id/adapter_book_publisher"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="4dp"
+                    android:autoText="false" />
 
                 <TextView
-                android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="4.7"
-                android:id="@+id/adapter_book_avarage"
+                    android:id="@+id/adapter_book_avarage"
                 android:textSize="50sp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="8dp"
+                    android:autoText="false" />
 
                 <RatingBar
                 android:layout_width="wrap_content"
@@ -81,7 +87,8 @@
                 android:progressTint="@color/color_accent_dark"
                 style="?android:attr/ratingBarStyleIndicator"
                 android:progressDrawable="@drawable/rating_stars"
-                android:rating="0" />
+                    android:rating="0"
+                    android:layout_marginLeft="4dp" />
 
             </LinearLayout>
 

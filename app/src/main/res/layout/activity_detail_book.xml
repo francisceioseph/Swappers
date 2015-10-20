@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:theme="@style/SWToolbarTheme"
         app:popupTheme="@style/SWToolbarMenuTheme"
-        android:title="@string/title_detail_book"
         />
 
     <FrameLayout
@@ -77,7 +76,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/title_detail_book"
                         android:textColor="@color/primary_text_default_material_light"
                         android:layout_marginBottom="5dp"
                         android:layout_toRightOf="@+id/photoBook"
@@ -195,7 +193,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 fab:fab_colorNormal="@color/color_accent_dark"
-                fab:fab_title="@string/floating_action_button_adopt"
                 fab:fab_addButtonSize="mini"
                 fab:fab_colorPressed="@color/color_accent_medium"
                 app:fab_icon="@drawable/ic_get"/>
@@ -206,7 +203,6 @@
                 android:layout_height="wrap_content"
                 fab:fab_colorNormal="@color/color_accent_dark"
                 fab:fab_size="mini"
-                fab:fab_title="@string/floating_action_button_donate"
                 fab:fab_colorPressed="@color/color_accent_medium"
                 app:fab_icon="@drawable/ic_up"/>
 
@@ -216,7 +212,6 @@
                 android:layout_height="wrap_content"
                 fab:fab_colorNormal="@color/color_accent_dark"
                 fab:fab_size="mini"
-                fab:fab_title="@string/floating_action_button_favorite"
                 fab:fab_colorPressed="@color/color_accent_medium"
                 app:fab_icon="@drawable/ic_favorite"/>
 
@@ -226,7 +221,6 @@
                 android:layout_height="wrap_content"
                 fab:fab_colorNormal="@color/color_accent_dark"
                 fab:fab_size="mini"
-                fab:fab_title="@string/floating_action_button_comment"
                 fab:fab_colorPressed="@color/color_accent_medium"
                 app:fab_icon="@drawable/ic_comment"/>
 

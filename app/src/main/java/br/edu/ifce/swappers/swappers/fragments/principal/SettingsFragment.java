@@ -4,6 +4,7 @@ package br.edu.ifce.swappers.swappers.fragments.principal;
  * Last modified by Joamila on 16/10/2015
  */
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.miscellaneous.adapters.SettingsArrayAdapter;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
 import br.edu.ifce.swappers.swappers.model.SettingsListItem;
 import br.edu.ifce.swappers.swappers.miscellaneous.Settings;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
@@ -412,34 +414,17 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
     }
 
     /*
-    * This method creates a listener to the image button on
-    * the dialog of current city changes.
-    * It should use the Android's location services to provide
-    * in a EditText the name of the current user's city.
-    * */
-    private View.OnClickListener onLocateMeImageButtonClick() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO DO Use location services to get the name of the user's current city.
-                //TODO set the current name of the city on the dialog edit text
-                SwappersToast.makeText(getActivity().getApplicationContext(), getString(R.string.service_not_implemented), Toast.LENGTH_SHORT).show();
-            }
-        };
-    }
-
-    /*
-   * This method creates the listener for the positive button
-   * of the delete account alert.
-   * This method also should:
-   *   Connect to WS to communicate account deletion
-   *   Clean the user account from the device
-   *   Do a logout from the app
-   *   Load the Sign In screen and clean the stack.
-   *
-   * @return The listener for the positive button of the delete
-   * account listener.
-   * */
+* This method creates the listener for the positive button
+* of the delete account alert.
+* This method also should:
+*   Connect to WS to communicate account deletion
+*   Clean the user account from the device
+*   Do a logout from the app
+*   Load the Sign In screen and clean the stack.
+*
+* @return The listener for the positive button of the delete
+* account listener.
+* */
     private DialogInterface.OnClickListener onDeleteAccountPositiveButton() {
         return new DialogInterface.OnClickListener() {
             @Override
@@ -487,9 +472,11 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity().getApplicationContext(), getString(R.string.logout_dialog_positive_button_message), Toast.LENGTH_SHORT).show();
-                //TODO send message to ws to disable user account
-                //TODO load inicial screen and go out of current screen.
+                Context context = getActivity().getApplicationContext();
+
+                AndroidUtils.deleteUser(context);
+                SwappersToast.makeText(context, getString(R.string.logout_dialog_positive_button_message), Toast.LENGTH_SHORT).show();
+                AndroidUtils.startSignInActivity(context);
             }
         };
     }

@@ -31,6 +31,7 @@ import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.ProfileFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.SettingsFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.StatisticsFragment;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
@@ -96,16 +97,19 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     }
 
     private Bitmap loadCoverPhoto() {
-        BitmapDrawable coverPhotoDrawable = (BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.background_splash);
-        Bitmap coverPhotoBitmap = coverPhotoDrawable.getBitmap();
-        return coverPhotoBitmap;
+        int coverId = AndroidUtils.loadUserCoverID(this);
+        return ImageUtil.getProfileCoverPhoto(this, coverId);
     }
 
     private Bitmap loadUserPhoto() {
         Bitmap userPhotoBitmap;
 
         try {
-            userPhotoBitmap = ImageUtil.StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+            if (MockSingleton.INSTANCE.user.getPhoto2().isEmpty()) {
+                userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person_giant)).getBitmap();
+            } else {
+                userPhotoBitmap = ImageUtil.StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+            }
         }
         catch (Exception e){
             userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person_giant)).getBitmap();

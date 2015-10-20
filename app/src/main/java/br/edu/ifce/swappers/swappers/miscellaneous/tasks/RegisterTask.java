@@ -46,13 +46,14 @@ public class RegisterTask extends AsyncTask<User,String,Integer>{
     protected void onPostExecute(Integer result) {
         Toast toast;
         progressDialog.dismiss();
+
         if (result==201) {
             ti.startNextActivity();
-        }else if(result==500){
+        } else if (result == 500) {
             toast = Toast.makeText(context,context.getString(R.string.sick_server_error),Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-        }else if(result==409){
+        } else if (result == 409) {
             toast = Toast.makeText(context,context.getString(R.string.duplicate_email_error_message),Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();

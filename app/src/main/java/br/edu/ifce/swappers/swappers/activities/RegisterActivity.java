@@ -1,20 +1,25 @@
 package br.edu.ifce.swappers.swappers.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -116,14 +121,23 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     * */
     @Override
     public void startNextActivity() {
-        Intent mainActivityIntent = new Intent(this, LoginActivity.class);
-
+        final Intent mainActivityIntent = new Intent(this, MainActivity.class);
         mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(mainActivityIntent);
 
-        AndroidUtils.makeDialog(this,
+        AlertDialog alert = AndroidUtils.makeDialog(this,
                 getString(R.string.dialog_success_title),
-                getString(R.string.user_registration_success_message)).show();
+                getString(R.string.user_registration_success_message));
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                startActivity(mainActivityIntent);
+
+                onBackPressed();
+            }
+        });
+
+        alert.show();
     }
 
     /*
@@ -149,8 +163,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
     private Bitmap retrieveImageFromCameraResult(Intent data){
         Bundle extras = data.getExtras();
+        Bitmap bitmap = (Bitmap) extras.get("data");
 
-        return (Bitmap) extras.get("data");
+        return ImageUtil.getScaledBitMap(bitmap, 256);
     }
 
     private Bitmap retrieveImageFromGalleryResult(Intent data){
@@ -172,8 +187,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
         cursor.close();
 
-        return BitmapFactory.decodeFile(picturePath);
+        return ImageUtil.prepareImageFromGallery(picturePath);
     }
+
 
     /*
     *

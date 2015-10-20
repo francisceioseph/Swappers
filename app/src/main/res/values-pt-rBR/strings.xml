@@ -230,12 +230,20 @@
     <string name="password_confirmation">Confirmação de Senha</string>
 
     <string name="register_now_button_title">CADASTRAR AGORA</string>
+
     <string name="dialog_current_password_title">Senha atual</string>
     <string name="dialog_new_password_title">Nova senha</string>
     <string name="dialog_password_confirmation_title">Confirme a sua nova senha</string>
+
     <string name="about_swappers_slogan">Doe leituras, compartilhe sonhos!</string>
     <string name="progress_dialog_retrieving_reviews_message">Carregando comentários...</string>
     <string name="new_reader_review_text">Novo Comentário</string>
+    <string name="month_donor">Doadores do Mês</string>
+    <string name="best_places">Melhores Lugares</string>
+    <string name="userPhotoDialogTitle">Nova Foto de Perfil</string>
+    <string name="new_profile_picture_camera">Câmera</string>
+    <string name="new_profile_picture_gallery">Galeria</string>
+    <string name="new_profile_picture_message">Escolha como você deseja nos fornecer a sua nova foto de perfil.</string>
 
 
 </resources>
