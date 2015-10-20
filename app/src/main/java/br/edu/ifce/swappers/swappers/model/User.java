@@ -161,4 +161,6 @@ public class User implements Serializable{
     public void setBookFavoriteList(ArrayList<Book> bookFavoriteList) {
         this.bookFavoriteList = bookFavoriteList;
     }
+
+
 }

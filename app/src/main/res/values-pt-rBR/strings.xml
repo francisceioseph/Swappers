@@ -101,6 +101,7 @@
     <string name="donors_tab_title">DOADORES</string>
     <string name="hot_spots_tab_title">MAIS VISITADOS</string>
     <string name="best_books_tab_title">MELHORES LIVROS</string>
+    <string name="place_city_state_not_found">"Não conseguimos localizar sua cidade, retorne para o mapa e verifique seu GPS!"</string>
 
     <!-- Strings from ReadersReviewFragment.java -->
     <string name="no_comments_found_message">OMG, não há comentários! Seja o primeiro a comentar. ;) </string>
@@ -112,6 +113,16 @@
     <string name="adoptions_text_for_no_book_statistics_found">0 adoções</string>
     <string name="donations_text_for_book_statistics">Doado %1$d vezes</string>
     <string name="adoptions_text_for_book_statistics">Adotado %1$d vezes</string>
+
+    <!-- Strings from HotsPost -->
+    <string name="place_name_for_no_place_statistics_found">Não houve doação|adoção este mês. :\'( </string>
+    <string name="place_address_for_no_place_statistics_found">Nenhum lugar visitado este mês. :\'( </string>
+    <string name="place_city_for_no_place_statistics_found">Nenhuma cidade. :\'( </string>
+    <string name="donations_text_for_place_statistics">Doado %1$d vezes</string>
+    <string name="adoptions_text_for_place_statistics">Adotado %1$d vezes</string>
+    <string name="donations_text_for_no_month_found">0 livros doados</string>
+    <string name="adoptions_text_for_no_month_found">0 livros adotados</string>
+
 
     <!-- Strings from DonorsFragment.java -->
     <string name="donor_name_for_no_month_donors_found">Não houve nenhuma doação este mês. :\'( </string>

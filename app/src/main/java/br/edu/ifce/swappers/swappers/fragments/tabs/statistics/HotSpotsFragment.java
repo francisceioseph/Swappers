@@ -3,17 +3,28 @@ package br.edu.ifce.swappers.swappers.fragments.tabs.statistics;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.BestPlaceInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.StatisticPlaceTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
+import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.model.Place;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class HotSpotsFragment extends Fragment {
+public class HotSpotsFragment extends Fragment implements BestPlaceInterface{
 
     ImageButton nextHotspotImageButton;
     ImageButton previousHotspotImageButton;
@@ -25,6 +36,9 @@ public class HotSpotsFragment extends Fragment {
     TextView cityHotspotTextView;
     TextView retrievedHotspotTextView;
     TextView receivedHotspotTextView;
+    private int index = 0;
+
+    ArrayList<Place> bestPlace = new ArrayList<>();
 
 
     public HotSpotsFragment() {
@@ -39,13 +53,19 @@ public class HotSpotsFragment extends Fragment {
         this.initViewComponents(rootView);
         this.initViewListeners();
 
-//        nameHotspotTextView.setText("Winterfell");
-//        addressHotspotTextView.setText("Norte");
-//        cityHotspotTextView.setText("Sete Reinos");
-//        retrievedHotspotTextView.setText("55 livros adotados");
-//        receivedHotspotTextView.setText("70 livros doados");
-
-
+        if(MockSingleton.INSTANCE.getStatisticPlace().isEmpty()) {
+            String city = MockSingleton.INSTANCE.city;
+            String state = MockSingleton.INSTANCE.state;
+            if(!city.equals("")) {
+                StatisticPlaceTask statisticPlaceTask = new StatisticPlaceTask(getActivity(), this);
+                statisticPlaceTask.execute(city, state);
+            }else{
+                Toast.makeText(getActivity(),getString(R.string.place_city_state_not_found),Toast.LENGTH_LONG).show();
+            }
+        }else{
+            bestPlace = MockSingleton.INSTANCE.getStatisticPlace();
+            updateCardView(index);
+        }
         return rootView;
     }
 
@@ -60,7 +80,6 @@ public class HotSpotsFragment extends Fragment {
         this.cityHotspotTextView = (TextView) rootView.findViewById(R.id.best_place_city);
         this.retrievedHotspotTextView = (TextView) rootView.findViewById(R.id.retrieved_hotspot_text_view);
         this.receivedHotspotTextView = (TextView) rootView.findViewById(R.id.received_hotspot_text_view);
-
     }
 
     private void initViewListeners() {
@@ -72,7 +91,11 @@ public class HotSpotsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SwappersToast.makeText(getActivity(), "Loading previous hotspot... #SQN", Toast.LENGTH_SHORT).show();
+                if(!bestPlace.isEmpty()) {
+                    index--;
+                    if (index < 0) index = bestPlace.size() - 1;
+                    updateCardView(index);
+                }
             }
         };
     }
@@ -81,9 +104,42 @@ public class HotSpotsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SwappersToast.makeText(getActivity(), "Loading next hotspot... #SQN", Toast.LENGTH_SHORT).show();
+                if (!bestPlace.isEmpty()) {
+                    index++;
+                    if (index >= bestPlace.size()) index = 0;
+                    updateCardView(index);
+                }
             }
         };
     }
 
+    @Override
+    public void updateStatisticPlace(ArrayList<Place> placesList) {
+        bestPlace = placesList;
+        MockSingleton.INSTANCE.statisticPlace = bestPlace;
+
+        if(!bestPlace.isEmpty()){
+            updateCardView(this.index);
+        }else{
+            this.nameHotspotTextView.setText(getString(R.string.place_name_for_no_place_statistics_found));
+            this.addressHotspotTextView.setText(getString(R.string.place_address_for_no_place_statistics_found));
+            this.cityHotspotTextView.setText(getString(R.string.place_city_for_no_place_statistics_found));
+            this.receivedHotspotTextView.setText(getString(R.string.donations_text_for_no_month_found));
+            this.retrievedHotspotTextView.setText(getString(R.string.adoptions_text_for_no_month_found));
+        }
+    }
+
+    private void updateCardView(int index){
+        this.nameHotspotTextView.setText(bestPlace.get(index).getName());
+        this.addressHotspotTextView.setText(bestPlace.get(index).getStreet() + ", " +bestPlace.get(index).getNumber());
+        this.cityHotspotTextView.setText(bestPlace.get(index).getCity());
+
+        int recovered = bestPlace.get(index).getRecovered();
+        int donated   = bestPlace.get(index).getDonation();
+
+        this.receivedHotspotTextView.setText(String.format(getString(R.string.donations_text_for_place_statistics), recovered));
+        this.retrievedHotspotTextView.setText(String.format(getString(R.string.adoptions_text_for_place_statistics), donated));
+
+        this.coverHotspotCircleImageView.setImageBitmap(ImageUtil.StringToBitMap(bestPlace.get(index).getPhoto2()));
+    }
 }

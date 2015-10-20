@@ -14,7 +14,7 @@ import br.edu.ifce.swappers.swappers.webservice.StatisticDonatorsService;
 /**
  * Created by gracyaneoliveira on 28/09/2015.
  */
-public class StatisticDonorsTask extends AsyncTask<Void,Void,ArrayList<User>> {
+public class StatisticDonorsTask extends AsyncTask<String,Void,ArrayList<User>> {
     private Context context;
     private DonorsInterface donorsInterface;
     private ProgressDialog progressDialog;
@@ -32,8 +32,8 @@ public class StatisticDonorsTask extends AsyncTask<Void,Void,ArrayList<User>> {
     }
 
     @Override
-    protected ArrayList<User> doInBackground(Void... params) {
-        return StatisticDonatorsService.getStatisticDonatorsForMonthWS();
+    protected ArrayList<User> doInBackground(String... params) {
+        return StatisticDonatorsService.getStatisticDonatorsForMonthWS(params[0],params[1]);
     }
 
     @Override
