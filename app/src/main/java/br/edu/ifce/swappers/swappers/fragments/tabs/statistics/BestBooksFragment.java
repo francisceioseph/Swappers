@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.BestBookInterface;
@@ -47,9 +48,13 @@ public class BestBooksFragment extends Fragment implements BestBookInterface{
         this.initViewComponents(rootView);
         this.initViewListeners();
 
-        StatisticBookTask statisticBookTask = new StatisticBookTask(getActivity(),this);
-        statisticBookTask.execute();
-
+        if(MockSingleton.INSTANCE.getStatisticBook().isEmpty()) {
+            StatisticBookTask statisticBookTask = new StatisticBookTask(getActivity(), this);
+            statisticBookTask.execute();
+        }else{
+            bestBooks = MockSingleton.INSTANCE.getStatisticBook();
+            updateCardView(index);
+        }
         return rootView;
     }
 
@@ -100,6 +105,7 @@ public class BestBooksFragment extends Fragment implements BestBookInterface{
     @Override
     public void updateStatisticBook(ArrayList<Book> booksList) {
         bestBooks = booksList;
+        MockSingleton.INSTANCE.statisticBook = bestBooks;
 
         if(!bestBooks.isEmpty()){
             updateCardView(this.index);

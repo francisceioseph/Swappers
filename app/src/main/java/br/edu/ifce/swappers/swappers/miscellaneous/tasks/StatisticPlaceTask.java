@@ -14,7 +14,7 @@ import br.edu.ifce.swappers.swappers.webservice.StatisticPlaceService;
 /**
  * Created by gracyaneoliveira on 18/10/2015.
  */
-public class StatisticPlaceTask extends AsyncTask<Void,Void,ArrayList<Place>> {
+public class StatisticPlaceTask extends AsyncTask<String,Void,ArrayList<Place>> {
 
     private Context context;
     private BestPlaceInterface bestPlaceInterface;
@@ -33,8 +33,8 @@ public class StatisticPlaceTask extends AsyncTask<Void,Void,ArrayList<Place>> {
     }
 
     @Override
-    protected ArrayList<Place> doInBackground(Void... params) {
-        return StatisticPlaceService.getBestPlacesCurrentMonth();
+    protected ArrayList<Place> doInBackground(String... params) {
+        return StatisticPlaceService.getBestPlacesCurrentMonth(params[0],params[1]);
     }
 
     @Override

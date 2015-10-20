@@ -19,10 +19,15 @@ public enum MockSingleton {
     public User user;
     public ArrayList<Place> places = new ArrayList<Place>();
     public ArrayList<User> donators = new ArrayList<>();
+    public ArrayList<Place> statisticPlace = new ArrayList<>();
+    public ArrayList<Book> statisticBook = new ArrayList<>();
 
     public boolean flagSettingsFragmentCity = false;
     public String userChangeCity = new String();
     public String userChangeState = new String();
+    public String city = new String();
+    public String state = new String();
+
 
    /* public ArrayList<Place> createMockedPlaceDataSource(double latitude, double longitude) {
         ArrayList<Place> dataSource = new ArrayList<>();
@@ -86,4 +91,21 @@ public enum MockSingleton {
     public void setDonators(ArrayList<User> donators) {
         this.donators = donators;
     }
+
+    public ArrayList<Place> getStatisticPlace() {
+        return statisticPlace;
+    }
+
+    public void setStatisticPlace(ArrayList<Place> statisticPlace) {
+        this.statisticPlace = statisticPlace;
+    }
+
+    public ArrayList<Book> getStatisticBook() {
+        return statisticBook;
+    }
+
+    public void setStatisticBook(ArrayList<Book> statisticBook) {
+        this.statisticBook = statisticBook;
+    }
+
 }

@@ -1,17 +1,6 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
-import android.util.Base64;
 import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,9 +9,10 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
@@ -35,33 +25,35 @@ public class StatisticPlaceService {
 
     private static final String URL ="http://swappersws-oliv.rhcloud.com/swappersws/swappersws/place/statistic";
 
-    public static ArrayList<Place> getBestPlacesCurrentMonth() {
+    public static ArrayList<Place> getBestPlacesCurrentMonth(String city, String state) {
         ArrayList<Place> placeList=new ArrayList<Place>();
-        java.net.URL url = null;
+        URL url = null;
         HttpURLConnection conn = null;
 
         try {
-            url = new URL(URL);
+            String urlPlace = buildURLtoGetPlace(URL,city,state);
+
+            url = new URL(urlPlace);
             conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(30000);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.setRequestProperty("Content-Type", "application/json");
-
             conn.connect();
 
             int responseCode = conn.getResponseCode();
-
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         conn.getInputStream()));
-                String inputLine;
+                String inputLine=null;
                 StringBuffer responseJson = new StringBuffer();
 
                 while ((inputLine = in.readLine()) != null) {
                     responseJson.append(inputLine);
                 }
                 in.close();
-                Log.i("PLACES-BEST",responseJson.toString());
+
                 JSONObject jsonObject = new JSONObject(responseJson.toString());
                 placeList = parseUserFromJSON(jsonObject);
             }
@@ -71,6 +63,20 @@ public class StatisticPlaceService {
             conn.disconnect();
         }
         return placeList;
+    }
+
+    private static String buildURLtoGetPlace(String url, String city, String state) throws UnsupportedEncodingException {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(url);
+        stringBuilder.append("?");
+        stringBuilder.append("city");
+        stringBuilder.append("=");
+        stringBuilder.append(URLEncoder.encode(city, "UTF-8"));
+        stringBuilder.append("&");
+        stringBuilder.append("state");
+        stringBuilder.append("=");
+        stringBuilder.append(URLEncoder.encode(state, "UTF-8"));
+        return stringBuilder.toString();
     }
 
     private static ArrayList<Place> parseUserFromJSON(JSONObject jsonObject) throws JSONException {

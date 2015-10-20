@@ -36,6 +36,7 @@ public class StatisticBookService {
         try {
             url = new URL(URL);
             conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(30000);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.setRequestProperty("Content-Type", "application/json");

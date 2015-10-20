@@ -11,11 +11,13 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,16 +31,20 @@ public class StatisticDonatorsService {
 
     private final static String URL = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/donors";
 
-    public static ArrayList<User> getStatisticDonatorsForMonthWS() {
+    public static ArrayList<User> getStatisticDonatorsForMonthWS(String city, String state) {
         ArrayList<User> users = new ArrayList<User>();
 
         java.net.URL url = null;
         HttpURLConnection conn = null;
 
         try {
-            url = new URL(URL);
+            String urlPlace = buildURLtoGetDonators(URL, city, state);
+            Log.i("USER-INFO-LOCAL",urlPlace);
+            url = new URL(urlPlace);
 
             conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(30000);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
 
@@ -74,6 +80,19 @@ public class StatisticDonatorsService {
         return users;
     }
 
+    private static String buildURLtoGetDonators(String url, String city, String state) throws UnsupportedEncodingException {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(url);
+        stringBuilder.append("?");
+        stringBuilder.append("city");
+        stringBuilder.append("=");
+        stringBuilder.append(URLEncoder.encode(city, "UTF-8"));
+        stringBuilder.append("&");
+        stringBuilder.append("state");
+        stringBuilder.append("=");
+        stringBuilder.append(URLEncoder.encode(state, "UTF-8"));
+        return stringBuilder.toString();
+    }
 
 
     private static ArrayList<User> parseUserFromJSON(JSONObject jsonObject) throws JSONException{

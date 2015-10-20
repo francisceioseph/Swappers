@@ -145,6 +145,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 if (addresses.size() > 0){
                     city = addresses.get(0).getLocality();
                     state = addresses.get(0).getAdminArea();
+
+                    MockSingleton.INSTANCE.city = city;
+                    MockSingleton.INSTANCE.state = state;
                 }
             }
             catch (IOException e) {

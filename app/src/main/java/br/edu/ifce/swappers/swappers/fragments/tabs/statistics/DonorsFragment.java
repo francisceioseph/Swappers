@@ -2,16 +2,19 @@ package br.edu.ifce.swappers.swappers.fragments.tabs.statistics;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.StatisticPlaceTask;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.DonorsInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
@@ -46,8 +49,14 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
         this.initViewListeners();
 
         if(MockSingleton.INSTANCE.getDonators().isEmpty()) {
-            StatisticDonorsTask task = new StatisticDonorsTask(getActivity(), this);
-            task.execute();
+            String city = MockSingleton.INSTANCE.city;
+            String state = MockSingleton.INSTANCE.state;
+            if(!city.equals("")) {
+                StatisticDonorsTask task = new StatisticDonorsTask(getActivity(), this);
+                task.execute(city,state);
+            }else{
+                Toast.makeText(getActivity(), getString(R.string.place_city_state_not_found), Toast.LENGTH_LONG).show();
+            }
         }else{
             usersDonators = MockSingleton.INSTANCE.getDonators();
             updateCardView(index);
@@ -114,8 +123,8 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
         }
         else{
             nameMonthDonatorTextView.setText(usersDonators.get(index).getUsername());
-            cityMonthDonatorTextView.setText(usersDonators.get(index).getCity()+", ");
-            donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) + " " + getString(R.string.donations));
+            cityMonthDonatorTextView.setText(usersDonators.get(index).getCity() + ", ");
+            donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) +" "+ getString(R.string.donations));
             coverMonthDonatorCircleImageView.setImageBitmap(ImageUtil.StringToBitMap(usersDonators.get(index).getPhoto2()));
         }
     }
@@ -123,7 +132,7 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
     private void updateCardView(int index){
         nameMonthDonatorTextView.setText(usersDonators.get(index).getUsername());
         cityMonthDonatorTextView.setText(usersDonators.get(index).getCity() + ", ");
-        donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) + getString(R.string.donations));
+        donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) +" "+ getString(R.string.donations));
         coverMonthDonatorCircleImageView.setImageBitmap(ImageUtil.StringToBitMap(usersDonators.get(index).getPhoto2()));
     }
 }
