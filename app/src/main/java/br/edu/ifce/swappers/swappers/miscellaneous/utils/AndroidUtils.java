@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
 import br.edu.ifce.swappers.swappers.R;
@@ -60,16 +63,20 @@ public class AndroidUtils {
         return false;
     }
 
-    public static void create(Context context, User user){
+    public static void createUser(Context context, User user){
         SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = manager.edit();
+
+        int coverPhotoDrawableID  = ImageUtil.getRandomCoverDrawableID();
+        Bitmap coverPhotoDrawable = ((BitmapDrawable) ContextCompat.getDrawable(context, coverPhotoDrawableID)).getBitmap();
+        String coverPhotoBase64   = ImageUtil.BitMapToString(coverPhotoDrawable);
 
         editor.putString("email", user.getEmail());
         editor.putString("password", user.getPassword());
         editor.putString("photo", user.getPhoto2());
+        editor.putString("photo_cover", coverPhotoBase64);
         editor.putString("name", user.getName());
         editor.putInt("id", user.getId());
-        editor.putInt("cover_drawable_id", ImageUtil.getRandomCoverDrawableID());
 
         editor.apply();
     }
@@ -92,23 +99,54 @@ public class AndroidUtils {
         return user;
     }
 
-    public static int loadUserCoverID(Context context) {
-        int coverId = R.drawable.back_07;
-
-        if (userHasBeenLoaded(context)) {
-            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
-            coverId = manager.getInt("cover_drawable_id", R.drawable.back_07);
-        }
-
-        return coverId;
-    }
-
     public static void deleteUser(Context context) {
         SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = manager.edit();
 
         editor.clear();
         editor.apply();
+    }
+
+    public static String loadProfilePictureBase64(Context context) {
+        String photoBase64 = null;
+
+        if (userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+            photoBase64 = manager.getString("photo", null);
+        }
+
+        return photoBase64;
+    }
+
+    public static void saveProfilePicture(Context context, String encodedImage){
+        if(userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = manager.edit();
+
+            editor.putString("photo", encodedImage);
+            editor.apply();
+        }
+    }
+
+    public static String loadCoverPictureBase64(Context context) {
+        String photoBase64 = null;
+
+        if (userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+            photoBase64 = manager.getString("photo_cover", null);
+        }
+
+        return photoBase64;
+    }
+
+    public static void saveCoverPicture(Context context, String encodedImage){
+        if(userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = manager.edit();
+
+            editor.putString("photo_cover", encodedImage);
+            editor.apply();
+        }
     }
 
     public static AlertDialog makeDialog(Context context, String alertTitle, String alertMessage) {

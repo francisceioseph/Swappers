@@ -2,7 +2,6 @@ package br.edu.ifce.swappers.swappers.fragments.tabs.statistics;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
-import br.edu.ifce.swappers.swappers.miscellaneous.tasks.StatisticPlaceTask;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.DonorsInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
@@ -125,7 +123,7 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
             nameMonthDonatorTextView.setText(usersDonators.get(index).getUsername());
             cityMonthDonatorTextView.setText(usersDonators.get(index).getCity() + ", ");
             donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) +" "+ getString(R.string.donations));
-            coverMonthDonatorCircleImageView.setImageBitmap(ImageUtil.StringToBitMap(usersDonators.get(index).getPhoto2()));
+            coverMonthDonatorCircleImageView.setImageBitmap(ImageUtil.stringToBitMap(usersDonators.get(index).getPhoto2()));
         }
     }
 
@@ -133,6 +131,6 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
         nameMonthDonatorTextView.setText(usersDonators.get(index).getUsername());
         cityMonthDonatorTextView.setText(usersDonators.get(index).getCity() + ", ");
         donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) +" "+ getString(R.string.donations));
-        coverMonthDonatorCircleImageView.setImageBitmap(ImageUtil.StringToBitMap(usersDonators.get(index).getPhoto2()));
+        coverMonthDonatorCircleImageView.setImageBitmap(ImageUtil.stringToBitMap(usersDonators.get(index).getPhoto2()));
     }
 }

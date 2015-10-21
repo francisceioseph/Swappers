@@ -63,11 +63,11 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == CAMERA_INTENT_CODE && resultCode == RESULT_OK){
-            userPhotoBitmap = this.retrieveImageFromCameraResult(data);
+            userPhotoBitmap = ImageUtil.retrieveImageFromCameraResult(data);
             this.userPhotoCircleImageView.setImageBitmap(userPhotoBitmap);
         }
         else if (requestCode == GALLERY_INTENT_CODE && resultCode == RESULT_OK) {
-            userPhotoBitmap = this.retrieveImageFromGalleryResult(data);
+            userPhotoBitmap = ImageUtil.retrieveImageFromGalleryResult(data, this);
             this.userPhotoCircleImageView.setImageBitmap(userPhotoBitmap);
         }
     }
@@ -160,36 +160,6 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
             startActivityForResult(cameraIntent, CAMERA_INTENT_CODE);
         }
     }
-
-    private Bitmap retrieveImageFromCameraResult(Intent data){
-        Bundle extras = data.getExtras();
-        Bitmap bitmap = (Bitmap) extras.get("data");
-
-        return ImageUtil.getScaledBitMap(bitmap, 256);
-    }
-
-    private Bitmap retrieveImageFromGalleryResult(Intent data){
-        Uri selectedImageUri;
-
-        String picturePath;
-        String[] filePathColumn;
-
-        Cursor cursor;
-        int columnIndex;
-
-        selectedImageUri = data.getData();
-        filePathColumn = new String[]{ MediaStore.Images.Media.DATA };
-        cursor = getContentResolver().query(selectedImageUri, filePathColumn, null, null, null);
-
-        cursor.moveToFirst();
-        columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-        picturePath = cursor.getString(columnIndex);
-
-        cursor.close();
-
-        return ImageUtil.prepareImageFromGallery(picturePath);
-    }
-
 
     /*
     *

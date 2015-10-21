@@ -3,7 +3,6 @@ package br.edu.ifce.swappers.swappers.fragments.tabs.statistics;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
@@ -19,7 +17,6 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.BestPlaceInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.StatisticPlaceTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
-import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Place;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -140,6 +137,6 @@ public class HotSpotsFragment extends Fragment implements BestPlaceInterface{
         this.receivedHotspotTextView.setText(String.format(getString(R.string.donations_text_for_place_statistics), recovered));
         this.retrievedHotspotTextView.setText(String.format(getString(R.string.adoptions_text_for_place_statistics), donated));
 
-        this.coverHotspotCircleImageView.setImageBitmap(ImageUtil.StringToBitMap(bestPlace.get(index).getPhoto2()));
+        this.coverHotspotCircleImageView.setImageBitmap(ImageUtil.stringToBitMap(bestPlace.get(index).getPhoto2()));
     }
 }

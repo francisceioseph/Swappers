@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
 
     @Override
     public void startNextActivity() {
-        AndroidUtils.create(this, MockSingleton.INSTANCE.user);
+        AndroidUtils.createUser(this, MockSingleton.INSTANCE.user);
         AndroidUtils.startMainActivity(this);
     }
 

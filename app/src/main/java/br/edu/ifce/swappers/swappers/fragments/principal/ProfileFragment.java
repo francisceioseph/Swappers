@@ -23,6 +23,7 @@ import br.edu.ifce.swappers.swappers.fragments.tabs.profile.FavoriteBooksFragmen
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.RetrievedBooksFragment;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
+import br.edu.ifce.swappers.swappers.model.User;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
@@ -52,6 +53,7 @@ public class ProfileFragment extends Fragment {
 
         coverPhoto.setImageBitmap(this.getUserCoverPhoto());
         userImageView.setImageBitmap(this.getUserPhoto());
+
         usernameTextView.setText(this.getUserNameFromSingleton());
         userCityTextView.setText(this.getUserCityFromSingleton());
 
@@ -109,34 +111,30 @@ public class ProfileFragment extends Fragment {
     }
 
     public String getUserNameFromSingleton() {
-        String username;
+        User user  = MockSingleton.INSTANCE.user;
+        String username = getString(R.string.guest_name);
 
         try {
-            username = MockSingleton.INSTANCE.user.getName();
-
-            if (username.isEmpty()) {
-                username = getString(R.string.no_name_found_message);
-            }
+            if (!user.getName().isEmpty())
+                username = user.getName();
         }
-        catch (NullPointerException e){
-            username = getString(R.string.guest_name);
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         return username;
     }
 
     public String getUserCityFromSingleton() {
-        String city;
+        User user = MockSingleton.INSTANCE.user;
+        String city = getString(R.string.guest_city);
 
-        try {
-            city = MockSingleton.INSTANCE.user.getCity();
-
-            if (city.isEmpty()) {
-                city = getString(R.string.guest_city);
-            }
+        try{
+            if (!user.getCity().isEmpty())
+                city = user.getCity();
         }
-        catch (NullPointerException e){
-            city = getString(R.string.guest_city);
+        catch (Exception e){
+           e.printStackTrace();
         }
 
         return city;
@@ -144,13 +142,18 @@ public class ProfileFragment extends Fragment {
 
     private Bitmap getUserPhoto() {
         Bitmap userPhotoBitmap;
+        User user = MockSingleton.INSTANCE.user;
 
         try {
-            if (MockSingleton.INSTANCE.user.getPhoto2().isEmpty()) {
-                userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.ic_person_giant)).getBitmap();
-            } else {
-                userPhotoBitmap = ImageUtil.StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+
+            if (!user.getPhoto2().isEmpty()) {
+                String photoBase64 = AndroidUtils.loadProfilePictureBase64(getActivity().getApplicationContext());
+                userPhotoBitmap = ImageUtil.stringToBitMap(photoBase64);
             }
+            else {
+                userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.ic_person_giant)).getBitmap();
+            }
+
         }
         catch (Exception e){
             userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.ic_person_giant)).getBitmap();
@@ -160,7 +163,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private Bitmap getUserCoverPhoto() {
-        int coverId = AndroidUtils.loadUserCoverID(getActivity().getApplicationContext());
-        return ImageUtil.getProfileCoverPhoto(getActivity().getApplicationContext(), coverId);
+        String photoBase64 = AndroidUtils.loadCoverPictureBase64(getActivity().getApplicationContext());
+        return ImageUtil.stringToBitMap(photoBase64);
     }
 }

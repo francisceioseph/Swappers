@@ -42,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:autoText="false" />
+                android:autoText="false"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/authors_near_book"

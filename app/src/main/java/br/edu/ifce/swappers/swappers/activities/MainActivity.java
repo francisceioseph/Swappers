@@ -8,10 +8,12 @@ import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -97,8 +99,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     }
 
     private Bitmap loadCoverPhoto() {
-        int coverId = AndroidUtils.loadUserCoverID(this);
-        return ImageUtil.getProfileCoverPhoto(this, coverId);
+        return ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_05)).getBitmap();
     }
 
     private Bitmap loadUserPhoto() {
@@ -108,7 +109,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             if (MockSingleton.INSTANCE.user.getPhoto2().isEmpty()) {
                 userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person_giant)).getBitmap();
             } else {
-                userPhotoBitmap = ImageUtil.StringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
+                userPhotoBitmap = ImageUtil.stringToBitMap(MockSingleton.INSTANCE.user.getPhoto2());
             }
         }
         catch (Exception e){
@@ -189,6 +190,23 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         if(cameraIntent.resolveActivity(getPackageManager() ) != null) {
             startActivityForResult(cameraIntent, CAMERA_INTENT_CODE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_INTENT_CODE && resultCode == RESULT_OK){
+            Bitmap userPhotoBitmap = ImageUtil.retrieveImageFromCameraResult(data);
+            String photoBase64     = ImageUtil.BitMapToString(userPhotoBitmap);
+
+            AndroidUtils.saveProfilePicture(this, photoBase64);
+
+        }
+        else if (requestCode == GALLERY_INTENT_CODE && resultCode == RESULT_OK) {
+            Bitmap userPhotoBitmap = ImageUtil.retrieveImageFromGalleryResult(data, this);
+            String photoBase64     = ImageUtil.BitMapToString(userPhotoBitmap);
+
+            AndroidUtils.saveCoverPicture(this, photoBase64);
         }
     }
 }

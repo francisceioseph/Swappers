@@ -38,7 +38,7 @@ public class DetailPlaceActivity extends AppCompatActivity {
         placeName.setText(currentPlace.getName());
         placeCity.setText(currentPlace.getCity());
 
-        photoPlace.setImageBitmap(ImageUtil.StringToBitMap(currentPlace.getPhoto2()));
+        photoPlace.setImageBitmap(ImageUtil.stringToBitMap(currentPlace.getPhoto2()));
 
         this.initToolbar();
         this.initTabHost();

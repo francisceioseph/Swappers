@@ -1,11 +1,16 @@
 package br.edu.ifce.swappers.swappers.miscellaneous.utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 import android.util.Log;
@@ -33,7 +38,7 @@ public class ImageUtil {
         return temp;
     }
 
-    public static Bitmap StringToBitMap(String encodedString){
+    public static Bitmap stringToBitMap(String encodedString){
         try {
             byte [] encodeByte = Base64.decode(encodedString,Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -49,12 +54,12 @@ public class ImageUtil {
             return image.getBytes("UTF-8");
     }
 
-    public static Bitmap getScaledBitMap(Bitmap bitmap, int newWidth) {
+    private static Bitmap getScaledBitMap(Bitmap bitmap, int newWidth) {
         float newHeight = ((float) newWidth / bitmap.getWidth()) * bitmap.getHeight();
         return Bitmap.createScaledBitmap(bitmap, newWidth, Math.round(newHeight), true);
     }
 
-    public static Bitmap prepareImageFromGallery(String picturePath) {
+    private static Bitmap prepareImageFromGallery(String picturePath) {
         Bitmap scaledBitmap = ImageUtil.getScaledBitMap(BitmapFactory.decodeFile(picturePath), 256);
 
         try {
@@ -65,6 +70,48 @@ public class ImageUtil {
         }
 
         return scaledBitmap;
+    }
+
+    public static int getRandomCoverDrawableID() {
+        int drawableID;
+        int option;
+        Random randomizer;
+
+        randomizer = new Random();
+        randomizer.setSeed(System.currentTimeMillis());
+
+        option = randomizer.nextInt(6) + 1;
+
+        switch (option) {
+            case 1:
+                drawableID = R.drawable.back_01;
+                break;
+
+            case 2:
+                drawableID = R.drawable.back_02;
+                break;
+
+            case 3:
+                drawableID = R.drawable.back_03;
+                break;
+
+            case 4:
+                drawableID = R.drawable.back_04;
+                break;
+
+            case 5:
+                drawableID = R.drawable.back_05;
+                break;
+
+            case 6:
+                drawableID = R.drawable.back_06;
+                break;
+
+            default:
+                drawableID = R.drawable.back_07;
+        }
+
+        return drawableID;
     }
 
     private static Matrix createFixMatrix(Bitmap bitmap, String imagePath) throws IOException {
@@ -114,51 +161,33 @@ public class ImageUtil {
         return matrix;
     }
 
-    public static Bitmap getProfileCoverPhoto(Context context, int drawableID) {
-        BitmapDrawable coverPhotoDrawable = (BitmapDrawable) ContextCompat.getDrawable(context, drawableID);
+    public static Bitmap retrieveImageFromCameraResult(Intent data){
+        Bundle extras = data.getExtras();
+        Bitmap bitmap = (Bitmap) extras.get("data");
 
-        return coverPhotoDrawable.getBitmap();
+        return getScaledBitMap(bitmap, 256);
     }
 
-    public static int getRandomCoverDrawableID() {
-        int drawableID;
-        int option;
-        Random randomizer;
+    public static Bitmap retrieveImageFromGalleryResult(Intent data, Context context){
+        Uri selectedImageUri;
 
-        randomizer = new Random();
-        randomizer.setSeed(System.currentTimeMillis());
+        String picturePath;
+        String[] filePathColumn;
 
-        option = randomizer.nextInt(6) + 1;
+        Cursor cursor;
+        int columnIndex;
 
-        switch (option) {
-            case 1:
-                drawableID = R.drawable.back_01;
-                break;
+        selectedImageUri = data.getData();
+        filePathColumn = new String[]{ MediaStore.Images.Media.DATA };
+        cursor = context.getContentResolver().query(selectedImageUri, filePathColumn, null, null, null);
 
-            case 2:
-                drawableID = R.drawable.back_02;
-                break;
+        cursor.moveToFirst();
+        columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        picturePath = cursor.getString(columnIndex);
 
-            case 3:
-                drawableID = R.drawable.back_03;
-                break;
+        cursor.close();
 
-            case 4:
-                drawableID = R.drawable.back_04;
-                break;
-
-            case 5:
-                drawableID = R.drawable.back_05;
-                break;
-
-            case 6:
-                drawableID = R.drawable.back_06;
-                break;
-
-            default:
-                drawableID = R.drawable.back_07;
-        }
-
-        return drawableID;
+        return prepareImageFromGallery(picturePath);
     }
+
 }

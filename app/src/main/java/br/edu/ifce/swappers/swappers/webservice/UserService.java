@@ -60,7 +60,7 @@ public class UserService {
                 Log.i("STATUSCODE",String.valueOf(status_code));
                 if(status_code==HttpURLConnection.HTTP_CREATED){
                     user.setId(getIdFromLocation(conn.getHeaderField("Location")));
-                    AndroidUtils.create(context, user);
+                    AndroidUtils.createUser(context, user);
                 }
                 MockSingleton.INSTANCE.user = user;
                 Log.i("USER-LOGIN-TAG-AWASOME", conn.getHeaderField("Location"));
