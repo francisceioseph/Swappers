@@ -66,10 +66,6 @@ public class UserService {
                 Log.i("USER-LOGIN-TAG-AWASOME", conn.getHeaderField("Location"));
                 MockSingleton.INSTANCE.user.setId(getIdFromLocation(conn.getHeaderField("Location")));
 
-                //InputStream response = conn.getInputStream();
-                //String jsonReply = convertStreamToString(response);
-                //Log.i("POST-RESPONSE", conn.getHeaderField("Location"));
-
                 os.close();
                 conn.disconnect();
             } catch (MalformedURLException e) {
@@ -108,6 +104,8 @@ public class UserService {
             url = new URL(urlLogin);
 
             conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(10000);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
 
@@ -265,9 +263,6 @@ public class UserService {
         }else{
             user.setBookFavoriteList(new ArrayList<Book>());
         }
-        Log.i("SIZE-BOOK",String.valueOf(user.getBookDonationList().size()));
-        Log.i("SIZE-BOOK",String.valueOf(user.getBookRetrievedList().size()));
-        Log.i("SIZE-BOOK",String.valueOf(user.getBookFavoriteList().size()));
 
         return user;
     }

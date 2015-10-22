@@ -31,6 +31,7 @@ import java.util.Map;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
+import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.miscellaneous.adapters.SettingsArrayAdapter;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
@@ -155,7 +156,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
         Drawable profilePictureIcon  = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_portrait);
         Drawable profileCoverIcon    = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_cover_photo);
         Drawable birthDateIcon       = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_cake);
-        Drawable cityIcon            = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_city);
+        Drawable cityIcon            = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_location_city);
         Drawable changePasswordIcon  = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_lock);
         Drawable logoutIcon          = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_exit);
         Drawable deleteAccountIcon   = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_delete_black_48dp);
@@ -475,6 +476,8 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
                 Context context = getActivity().getApplicationContext();
 
                 AndroidUtils.deleteUser(context);
+                BookDAO bookDAO = new BookDAO(getActivity());
+                bookDAO.delete();
                 SwappersToast.makeText(context, getString(R.string.logout_dialog_positive_button_message), Toast.LENGTH_SHORT).show();
                 AndroidUtils.startSignInActivity(context);
             }
