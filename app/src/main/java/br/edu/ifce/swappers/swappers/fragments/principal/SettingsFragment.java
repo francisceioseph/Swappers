@@ -48,15 +48,11 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
     Spinner optionStates;
     Spinner optionCities;
     private static String[] cities = new String[]{};
-    private static final String[] STATES = new String[]{"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG",
-                                            "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+    private static final String[] STATES = new String[]{"CE", "SP"};
     private Map<String, String> states = new HashMap<>();
 
     private void createHashStates(){
-        String[] nameStates = new String[]{"Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
-            "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí",
-            "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo",
-            "Sergipe", "Tocantins"};
+        String[] nameStates = new String[]{"Ceará", "São Paulo",};
 
         for (int i = 0; i<nameStates.length; i++){
             states.put(STATES[i], nameStates[i]);
@@ -65,59 +61,9 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
 
     private void initCitiesSpinner(int position){
         switch (position){
-            case 0: cities = Settings.getCitiesAC();
+            case 0: cities = Settings.getCitiesAvailableCE();
                 break;
-            case 1: cities = Settings.getCitiesAL();
-                break;
-            case 2: cities = Settings.getCitiesAP();
-                break;
-            case 3: cities = Settings.getCitiesAM();
-                break;
-            case 4: cities = Settings.getCitiesBA();
-                break;
-            case 5: cities = Settings.getCitiesCE();
-                break;
-            case 6: cities = Settings.getCitiesDF();
-                break;
-            case 7: cities = Settings.getCitiesES();
-                break;
-            case 8: cities = Settings.getCitiesGO();
-                break;
-            case 9: cities = Settings.getCitiesMA();
-                break;
-            case 10: cities = Settings.getCitiesMT();
-                break;
-            case 11: cities = Settings.getCitiesMS();
-                break;
-            case 12: cities = Settings.getCitiesMG();
-                break;
-            case 13: cities = Settings.getCitiesPA();
-                break;
-            case 14: cities = Settings.getCitiesPB();
-                break;
-            case 15: cities = Settings.getCitiesPR();
-                break;
-            case 16: cities = Settings.getCitiesPE();
-                break;
-            case 17: cities = Settings.getCitiesPI();
-                break;
-            case 18: cities = Settings.getCitiesRJ();
-                break;
-            case 19: cities = Settings.getCitiesRN();
-                break;
-            case 20: cities = Settings.getCitiesRS();
-                break;
-            case 21: cities = Settings.getCitiesRO();
-                break;
-            case 22: cities = Settings.getCitiesRR();
-                break;
-            case 23: cities = Settings.getCitiesSC();
-                break;
-            case 24: cities = Settings.getCitiesSP();
-                break;
-            case 25: cities = Settings.getCitiesSE();
-                break;
-            case 26: cities = Settings.getCitiesTO();
+            case 1: cities = Settings.getCitiesAvailableSP();
                 break;
         }
     }
