@@ -19,6 +19,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -183,8 +186,11 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     }
 
     private void callAsyncTask(String name, String email, String usePassword){
+
+        String passwordCodec = new String(Hex.encodeHex(DigestUtils.sha256(usePassword.getBytes())));
+
         RegisterTask registerTask = new RegisterTask(this,this);
-        User user = new User(name, email, usePassword);
+        User user = new User(name, email, passwordCodec);
 
         if(userPhotoBitmap!=null) {
             user.setPhoto2(ImageUtil.BitMapToString(userPhotoBitmap));

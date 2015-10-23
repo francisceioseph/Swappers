@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -93,8 +97,14 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
             MockSingleton.INSTANCE.user = AndroidUtils.loadUser(this);
         }
         else {
+
+            //String digest = DigestUtils.sha256Hex(password.getBytes());
+            //String pwdCodec = new String(Hex.encodeHex(digest.getBytes()));
+            //String passwordCodec = new String(Hex.encodeHex(DigestUtils.sha256Hex(password.getBytes()).getBytes()));
+            String passwordCodec = new String(Hex.encodeHex(DigestUtils.sha256(password.getBytes())));
+
             UserTask userTask = new UserTask(this, this);
-            userTask.execute(email, password);
+            userTask.execute(email,passwordCodec);
         }
     }
 

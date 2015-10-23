@@ -37,6 +37,10 @@ public class BookDAO {
         db.insert("book", null, values);
     }
 
+    public void delete(){
+        db.delete("book",null,null);
+    }
+
     public void insertMultiple(ArrayList<Book> books, CategoryBook type) {
         ContentValues values = new ContentValues();
         try {

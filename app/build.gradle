@@ -53,6 +53,8 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     //Gson
     compile 'com.google.code.gson:gson:2.3.1'
+    //security
+    compile 'commons-codec:commons-codec:1.10'
 
 
 }
