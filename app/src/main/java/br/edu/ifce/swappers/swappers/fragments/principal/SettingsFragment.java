@@ -156,7 +156,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
         Drawable profilePictureIcon  = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_portrait);
         Drawable profileCoverIcon    = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_cover_photo);
         Drawable birthDateIcon       = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_cake);
-        Drawable cityIcon            = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_location_city);
+        Drawable cityIcon            = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_city);
         Drawable changePasswordIcon  = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_lock);
         Drawable logoutIcon          = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_exit);
         Drawable deleteAccountIcon   = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.ic_delete_black_48dp);
