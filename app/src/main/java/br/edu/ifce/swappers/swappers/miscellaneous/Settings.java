@@ -71,6 +71,13 @@ public abstract class Settings {
 
     public static String[] getCitiesTO() { return citiesTO; }
 
+    public static String[] getCitiesAvailableCE() {return citiesAvailableCE;}
+
+    public static String[] getCitiesAvailableSP() {return citiesAvailableSP;}
+
+    private static String[] citiesAvailableCE = new String[]{"Caucaia", "Fortaleza"};
+    private static String[] citiesAvailableSP = new String[]{"São Bernardo do Campo", "São Paulo"};
+
     private static final String[] citiesAC = new String []{"Acrelândia", "Assis Brasil", "Brasiléia", "Bujari", "Capixaba", "Cruzeiro do Sul",
             "Epitaciolândia", "Feijó", "Jordão", "Mâncio Lima", "Manoel Urbano", "Marechal Thaumaturgo", "Plácido de Castro", "Porto Acre",
             "Porto Walter", "Rio Branco", "Rodrigues Alves", "Santa Rosa do Purus", "Sena Madureira", "Senador Guiomard", "Tarauacá", "Xapuri"};

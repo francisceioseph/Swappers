@@ -51,7 +51,7 @@
     <string name="email_validation_error_message">E-mail inválido!</string>
     <string name="mismatching_password_error_message">As senhas fornecidas são diferentes!</string>
     <string name="blank_password_error_message">Alguns dos campos de senha estão em branco!</string>
-    <string name="less_characters_name_error_message">Seu noome deve possuir, no mínimo, 3 caracteres !</string>
+    <string name="less_characters_name_error_message">Seu nome deve possuir, no mínimo, 3 caracteres !</string>
 
     <!-- Strings from PlacesFragment.java -->
     <string name="gps_connection_error_message">Ligue o GPS tente outra vez.</string>
@@ -194,7 +194,7 @@
     <string name="about_develpment_team_title">Time de Desenvolvimento</string>
     <string name="about_version_title">versão 1.0</string>
     <string name="be_a_swapper">Ainda não é membro do Swappers?</string>
-    <string name="see_places_of_near_book">VÁ PARA PONTOS</string>
+    <string name="see_places_of_near_book">VÁ PARA O PONTO</string>
 
     <string name="about_alessandra_name">Alessandra Lino</string>
     <string name="about_francis_name">Francisco Souza</string>
