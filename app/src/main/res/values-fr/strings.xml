@@ -23,7 +23,7 @@
     <string name="book_donation_positive_button_title">DONNER</string>
 
     <!-- Strings from LoginActivity.java -->
-    <string name="internet_connection_error_message">Impossible se connecter au serveur. SVP, ressayez plus tard!</string>
+    <string name="internet_connection_error_message">Impossible se connecter au serveur. SVP, réessayez plus tard!</string>
 
     <!-- Strings from MainActivity.java -->
     <string name="profile_section_title">Profile</string>
@@ -40,9 +40,9 @@
     <string name="readers_review_toolbar_subtitle_plural">caractères restants</string>
     <string name="readers_review_toolbar_subtitle">caractère restant</string>
     <string name="success_review_upload_dialog_message">Le commentaire a été envoyé avec succès.</string>
-    <string name="error_review_upload_dialog_message">Impossible d\'envoyer le commentaire. Vous voulez ressayer?</string>
+    <string name="error_review_upload_dialog_message">Impossible d\'envoyer le commentaire. Vous voulez réessayer?</string>
     <string name="error_review_upload_dialog_title">Erreur</string>
-    <string name="error_review_upload_dialog_positive_button_title">RESSAYEZ</string>
+    <string name="error_review_upload_dialog_positive_button_title">RÉESSAYEZ</string>
 
     <!-- Strings from RegisterActivity.java -->
     <string name="user_registration_success_message">Soyez bienvenu au Swappers for Readers. Connectez-vous et profitez!</string>
@@ -51,12 +51,12 @@
     <string name="less_characters_name_error_message">Votre nom doit avoir, au moins, 3 caractères!</string>
 
     <!-- Strings from PlacesFragment.java -->
-    <string name="gps_connection_error_message">Connectez le GPS et ressayez.</string>
+    <string name="gps_connection_error_message">Connectez le GPS et réessayez.</string>
     <string name="no_books_available_at_place">Il n\'y a pas des livres ici. SVP, faites un don! :)</string>
     <string name="one_book_available_at_place">1 livre disponible.</string>
     <string name="many_books_available_at_place">livres disponibles.</string>
     <string name="swappers_local_not_available_in_city">Pardon, il n\'a pas encore un point du Swappers dans votre ville. :(</string>
-    <string name="sick_server_error">Le serveur du Swappers se sent malade. SVP, ressayez plus tard!</string>
+    <string name="sick_server_error">Le serveur du Swappers se sent malade. SVP, réessayez plus tard!</string>
 
     <!-- Strings from ProfileFragment.java -->
     <string name="donated_tab_title">DONATIONS</string>
@@ -127,13 +127,13 @@
     <string name="donations">donations</string>
 
     <!-- Strings from BookTask.java -->
-    <string name="error_performing_search_message">Un erreur se produit pendant la recherche. SVP, verifiez vos mots-clés et ressayez.</string>
+    <string name="error_performing_search_message">Un erreur se produit pendant la recherche. SVP, verifiez vos mots-clés et réessayez.</string>
     <string name="no_results_for_serch_message">Aucun livre a été trouvé pour ces mots-clé.</string>
 
     <!-- Strings from DonationTask.java -->
     <string name="progress_dialog_searching_message">Chercher...</string>
     <string name="donation_processed_successfully_message">La donation a été traitée avec succès!</string>
-    <string name="error_while_processing_donation_message">Un erreur se produit pendant le traitement. Ressayez plus tard.</string>
+    <string name="error_while_processing_donation_message">Un erreur se produit pendant le traitement. Réessayez plus tard.</string>
 
     <!-- Strings from LoginTask.java -->
     <string name="login_task_progress_dialog_message">En train d\'entrer...</string>
@@ -145,7 +145,7 @@
 
     <!-- Strings from FavoriteTask.java-->
     <string name="favourite_task_progress_dialog_message">Rendre favori...</string>
-    <string name="favouriting_error_message">Impossible rendre ce livre un favori. Ressayez plus tard.</string>
+    <string name="favouriting_error_message">Impossible rendre ce livre un favori. Réessayez plus tard.</string>
 
     <!-- Strings from PlaceAsyncTask.java -->
     <!-- None -->
@@ -155,7 +155,7 @@
 
     <!-- Strings from RetrievedTask.java -->
     <string name="adoption_done_successfully_message">L\'adoption a été traitée avec succès!</string>
-    <string name="adoption_error_message">Des erreurs sont arrivées pendant le registre de l\'adoption. Ressayez!</string>
+    <string name="adoption_error_message">Des erreurs sont arrivées pendant le registre de l\'adoption. Réessayez!</string>
 
     <!-- Strings from StatisticBookTask.java -->
     <!-- Strings from StatisticDonorsTask.java -->
@@ -234,7 +234,7 @@
     <string name="new_reader_review_text">Nouveau Commentaire</string>
     <string name="month_donor">Donateurs du Mois</string>
     <string name="best_places">Meilleures Places</string>
-    <string name="userPhotoDialogTitle">Nouveau Photo du Profile</string>
+    <string name="userPhotoDialogTitle">Nouvelle Photo du Profile</string>
     <string name="new_profile_picture_camera">Caméra</string>
     <string name="new_profile_picture_gallery">Galerie</string>
     <string name="new_profile_picture_message">Choisissez comment vous voulez nous fournir votre nouvelle photo.</string>
