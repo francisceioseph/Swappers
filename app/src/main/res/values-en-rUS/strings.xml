@@ -55,9 +55,10 @@
 
     <!-- Strings from PlacesFragment.java -->
     <string name="gps_connection_error_message">Turn your GPS on and try again.</string>
-    <string name="no_books_available_at_place">There isn\'t books here. Please, donate one. :)</string>
-    <string name="one_book_available_at_place">1 book available here.</string>
-    <string name="many_books_available_at_place">books available here.</string>
+    <string name="no_books_available_at_place">There aren\'t books here. Please, donate one. :)</string>
+    <string name="one_book_available_at_place">There is 1 book available here.</string>
+    <string name="marker_there">There are </string>
+    <string name="many_books_available_at_place"> books available here.</string>
     <string name="swappers_local_not_available_in_city">Sorry, there isn\'t a Swappers Point in your city.  :(</string>
     <string name="sick_server_error">The Swapper\'s server is feeling sick. Please, try again in a few minutes.</string>
 

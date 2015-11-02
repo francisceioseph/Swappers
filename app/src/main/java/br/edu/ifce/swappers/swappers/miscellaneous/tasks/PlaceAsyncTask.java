@@ -47,8 +47,6 @@ public class PlaceAsyncTask extends AsyncTask<String,String,ArrayList<Place>> {
     protected void onPostExecute(ArrayList<Place> placeList) {
         progressDialog.dismiss();
         if(PlaceService.getResponseCode() == 200){
-            MockSingleton.INSTANCE.flagPlaces = true;
-
             placeInterface.updatePlaceNear(placeList);
 
             placeSingleton = PlaceSingleton.getInstance();

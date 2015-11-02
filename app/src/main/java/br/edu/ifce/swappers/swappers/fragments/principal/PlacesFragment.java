@@ -45,6 +45,7 @@ import br.edu.ifce.swappers.swappers.miscellaneous.ListenerGPS;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.PlaceAsyncTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.PlaceInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
+import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 
 
 public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener, PlaceInterface, OnMapReadyCallback{
@@ -160,7 +161,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         statusGPS = verifyGPS();
 
         //Primeira busca
-        if (statusGPS == true && MockSingleton.INSTANCE.flagPlaces == false) {
+        if (statusGPS == true && PlaceService.getResponseCode()!=200) {
             verifyLocation(statusGPS);
             if (MockSingleton.INSTANCE.user.getCity() != null && MockSingleton.INSTANCE.user.getState() != null && AndroidUtils.isNetworkAvailable(getActivity())) {
                 PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
@@ -172,13 +173,13 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             }
         }
         //GPS não identificado
-        else if (statusGPS == false && MockSingleton.INSTANCE.flagPlaces == false) {
+        else if (statusGPS == false && PlaceService.getResponseCode()!=200) {
             Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.gps_connection_error_message), Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
         //A partir da segunda busca
-        else if (MockSingleton.INSTANCE.flagPlaces == true) {
+        else if (PlaceService.getResponseCode()==200) {
             //Sem mudança de cidade
             if(MockSingleton.INSTANCE.userChangeCity==null && MockSingleton.INSTANCE.userChangeState==null){
                 updatePlaceNear(places);
@@ -268,9 +269,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
                 int total_books = placesCity.get(i).getDonation() - placesCity.get(i).getRecovered();
-                if(total_books == 0) marker.setSnippet("Não há livros aqui. Faça uma doação!");
-                else if(total_books == 1) marker.setSnippet("Há 1 livro disponível aqui.");
-                else marker.setSnippet("Há " + String.valueOf(total_books) + " livros disponíveis aqui.");
+                if(total_books == 0) marker.setSnippet(getString(R.string.no_books_available_at_place));
+                else if(total_books == 1) marker.setSnippet(getString(R.string.one_book_available_at_place));
+                else marker.setSnippet(getString(R.string.marker_there) + " " + String.valueOf(total_books) +
+                            " " + getString(R.string.many_books_available_at_place));
 
                 mapPlaceMarker.put(marker.getId(), placesCity.get(i).getId());
                 mapPlaceMarkerAux.put(placesCity.get(i).getId(), marker.getId());

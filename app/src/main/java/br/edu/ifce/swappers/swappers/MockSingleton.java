@@ -22,7 +22,6 @@ public enum MockSingleton {
     public ArrayList<Place> statisticPlace = new ArrayList<>();
     public ArrayList<Book> statisticBook = new ArrayList<>();
 
-    public boolean flagPlaces = false;
     public String userChangeCity = null;
     public String userChangeState = null;
     //public String city = new String();

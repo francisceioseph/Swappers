@@ -56,8 +56,9 @@
     <!-- Strings from PlacesFragment.java -->
     <string name="gps_connection_error_message">Ligue o GPS tente outra vez.</string>
     <string name="no_books_available_at_place">Não há livros aqui. Por favor, faça uma doação. :)</string>
-    <string name="one_book_available_at_place">1 livro disponível.</string>
-    <string name="many_books_available_at_place">livros disponíveis.</string>
+    <string name="one_book_available_at_place">Há 1 livro disponível aqui.</string>
+    <string name="marker_there">Há </string>
+    <string name="many_books_available_at_place"> livros disponíveis.</string>
     <string name="swappers_local_not_available_in_city">Desculpe, ainda não há um ponto do Swappers na sua cidade.  :(</string>
     <string name="sick_server_error">O servidor do Swappers está se sentindo mal. Por favor, tente em alguns minutos.</string>
 
