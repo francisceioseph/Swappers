@@ -51,8 +51,8 @@ public class HotSpotsFragment extends Fragment implements BestPlaceInterface{
         this.initViewListeners();
 
         if(MockSingleton.INSTANCE.getStatisticPlace().isEmpty()) {
-            String city = MockSingleton.INSTANCE.city;
-            String state = MockSingleton.INSTANCE.state;
+            String city = MockSingleton.INSTANCE.user.getCity();
+            String state = MockSingleton.INSTANCE.user.getState();
             if(!city.equals("")) {
                 StatisticPlaceTask statisticPlaceTask = new StatisticPlaceTask(getActivity(), this);
                 statisticPlaceTask.execute(city, state);

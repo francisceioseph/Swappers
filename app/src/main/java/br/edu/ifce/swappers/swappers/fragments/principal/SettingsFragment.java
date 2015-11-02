@@ -509,6 +509,8 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
 
                 String nameState = states.get(state);
 
+                MockSingleton.INSTANCE.user.setCity(city);
+                MockSingleton.INSTANCE.user.setState(state);
                 MockSingleton.INSTANCE.userChangeCity = city;
                 MockSingleton.INSTANCE.userChangeState = nameState;
 

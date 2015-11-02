@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ import br.edu.ifce.swappers.swappers.miscellaneous.ListenerGPS;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.PlaceAsyncTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.PlaceInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
+import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 
 
 public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener, PlaceInterface, OnMapReadyCallback{
@@ -126,89 +128,71 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         }
     }
 
-    private void getPlacesInWS(){
-        boolean statusGPS;
-
-        statusGPS = verifyGPS();
-
-        if (statusGPS == true){
+    private void verifyLocation(boolean statusGPS) {
+        if(statusGPS == true){
             Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
             List<Address> addresses;
             String city = null;
-            String cityUser = null;
             String state = null;
-            String stateUser = null;
-            ArrayList<Place> places = MockSingleton.INSTANCE.places;
 
             try {
                 addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
-                if (addresses.size() > 0){
+                if (addresses.size() > 0) {
                     city = addresses.get(0).getLocality();
                     state = addresses.get(0).getAdminArea();
 
-                    MockSingleton.INSTANCE.city = city;
-                    MockSingleton.INSTANCE.state = state;
+                    MockSingleton.INSTANCE.user.setCity(city);
+                    MockSingleton.INSTANCE.user.setState(state);
                 }
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.fillInStackTrace();
             }
+        }else {
+            Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.gps_connection_error_message), Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+    }
 
-            if(MockSingleton.INSTANCE.userChangeCity==null && MockSingleton.INSTANCE.userChangeState==null){
-                cityUser = "";
-                stateUser = "";
-            }
-            else {
-                cityUser = MockSingleton.INSTANCE.userChangeCity;
-                stateUser = MockSingleton.INSTANCE.userChangeState;
-            }
+    private void getPlacesInWS(){
+        boolean statusGPS;
+        ArrayList<Place> places = MockSingleton.INSTANCE.places;
 
-            if(city!=null && state!=null && AndroidUtils.isNetworkAvailable(getActivity())){
-                user.setCity(city);
-                user.setState(state);
+        statusGPS = verifyGPS();
 
-                if(MockSingleton.INSTANCE.flagSettingsFragmentCity==false){
-                    if(cityUser.equals("") && stateUser.equals("")){
-                        PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
-                        task.execute(city, state);
-                     }
-
-                    else {
-                        PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
-                        task.execute(cityUser, stateUser);
-                    }
-
-                    //if(PlaceService.getResponseCode()==200){
-                        MockSingleton.INSTANCE.flagSettingsFragmentCity = true;
-                    //}
-                }
-
-                else {
-                    if(cityUser.equals("") && stateUser.equals("")){
-                        updatePlaceNear(places);
-                    }
-                    else {
-                        PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
-                        task.execute(cityUser, stateUser);
-
-                        MockSingleton.INSTANCE.userChangeCity=null;
-                        MockSingleton.INSTANCE.userChangeState=null;
-                    }
-                }
-            }
-
-            else{
+        //Primeira busca
+        if (statusGPS == true && PlaceService.getResponseCode()!=200) {
+            verifyLocation(statusGPS);
+            if (MockSingleton.INSTANCE.user.getCity() != null && MockSingleton.INSTANCE.user.getState() != null && AndroidUtils.isNetworkAvailable(getActivity())) {
+                PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
+                task.execute(MockSingleton.INSTANCE.user.getCity(), MockSingleton.INSTANCE.user.getState());
+            } else {
                 Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.internet_connection_error_message), Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
-
         }
+        //GPS não identificado
+        else if (statusGPS == false && PlaceService.getResponseCode()!=200) {
+            Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.gps_connection_error_message), Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+        //A partir da segunda busca
+        else if (PlaceService.getResponseCode()==200) {
+            //Sem mudança de cidade
+            if(MockSingleton.INSTANCE.userChangeCity==null && MockSingleton.INSTANCE.userChangeState==null){
+                updatePlaceNear(places);
+            }
+            //Com mudança de cidade
+            else {
+                PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
+                task.execute(MockSingleton.INSTANCE.userChangeCity, MockSingleton.INSTANCE.userChangeState);
 
-        else{
-               Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.gps_connection_error_message), Toast.LENGTH_LONG);
-               toast.setGravity(Gravity.CENTER, 0, 0);
-               toast.show();
+                MockSingleton.INSTANCE.userChangeCity=null;
+                MockSingleton.INSTANCE.userChangeState=null;
+            }
+
         }
     }
 
@@ -250,7 +234,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             int countPlace = 0;
             @Override
             public void onClick(View v) {
-                v.startAnimation(buttonClick);
                 if (AndroidUtils.isNetworkAvailable(getActivity()) && !placesNear.isEmpty()) {
 
                     if (countPlace > placesNear.size() - 1) {
@@ -286,9 +269,10 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
                 int total_books = placesCity.get(i).getDonation() - placesCity.get(i).getRecovered();
-                if(total_books == 0) marker.setSnippet("Não há livros aqui. Faça uma doação!");
-                else if(total_books == 1) marker.setSnippet("Há 1 livro disponível aqui.");
-                else marker.setSnippet("Há " + String.valueOf(total_books) + " livros disponíveis aqui.");
+                if(total_books == 0) marker.setSnippet(getString(R.string.no_books_available_at_place));
+                else if(total_books == 1) marker.setSnippet(getString(R.string.one_book_available_at_place));
+                else marker.setSnippet(getString(R.string.marker_there) + " " + String.valueOf(total_books) +
+                            " " + getString(R.string.many_books_available_at_place));
 
                 mapPlaceMarker.put(marker.getId(), placesCity.get(i).getId());
                 mapPlaceMarkerAux.put(placesCity.get(i).getId(), marker.getId());

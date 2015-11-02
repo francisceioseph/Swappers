@@ -22,11 +22,10 @@ public enum MockSingleton {
     public ArrayList<Place> statisticPlace = new ArrayList<>();
     public ArrayList<Book> statisticBook = new ArrayList<>();
 
-    public boolean flagSettingsFragmentCity = false;
-    public String userChangeCity = new String();
-    public String userChangeState = new String();
-    public String city = new String();
-    public String state = new String();
+    public String userChangeCity = null;
+    public String userChangeState = null;
+    //public String city = new String();
+    //public String state = new String();
 
 
    /* public ArrayList<Place> createMockedPlaceDataSource(double latitude, double longitude) {
