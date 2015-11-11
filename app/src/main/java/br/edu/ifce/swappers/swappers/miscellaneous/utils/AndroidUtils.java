@@ -10,10 +10,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.LoginActivity;
 import br.edu.ifce.swappers.swappers.activities.MainActivity;
+import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.model.User;
 
 
@@ -99,6 +101,10 @@ public class AndroidUtils {
         return user;
     }
 
+    public static SharedPreferences getSharedPreferences(Context context){
+        return context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+    }
+
     public static void deleteUser(Context context) {
         SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = manager.edit();
@@ -124,6 +130,16 @@ public class AndroidUtils {
             SharedPreferences.Editor editor = manager.edit();
 
             editor.putString("photo", encodedImage);
+            editor.apply();
+        }
+    }
+
+    public static void updatePasswordSharedPreferences(Context context, String newPassword){
+        if(userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = manager.edit();
+
+            editor.putString("password", newPassword);
             editor.apply();
         }
     }
@@ -175,4 +191,5 @@ public class AndroidUtils {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
+
 }

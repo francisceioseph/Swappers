@@ -34,6 +34,7 @@ public class UserService {
     private static final String URL_REGISTER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login";
     private static final String URL_LOGIN_SERVICE    = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/dologin";
     private static final String URL_GET_USER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/users";
+    private static final String URL_UPDATE_PWD_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/pwd";
 
     public static int registerUserWithWS(Context context,User user) {
         int status_code = 0;
@@ -207,6 +208,50 @@ public class UserService {
 
 
         return user;
+    }
+
+    public static int updatePwdUserService(User user) {
+        int status_code = 0;
+        try {
+            URL url = new URL(URL_UPDATE_PWD_SERVICE);
+
+            JSONObject jsonParam = fillParamJsonToUpdate(user);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(10000);
+            conn.setRequestMethod("PUT");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.connect();
+
+            OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
+            os.write(jsonParam.toString());
+            os.flush();
+
+            status_code = conn.getResponseCode();
+
+            os.close();
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return status_code;
+    }
+
+    private static JSONObject fillParamJsonToUpdate(User user) throws JSONException, UnsupportedEncodingException {
+        JSONObject jsonParam = new JSONObject();
+        jsonParam.put("username", user.getName());
+        jsonParam.put("email", user.getEmail());
+        jsonParam.put("password", user.getPassword());
+
+        return jsonParam;
     }
 
     private static User parseUserFromJSON(JSONObject jsonObject) throws JSONException{
