@@ -79,6 +79,12 @@
     <string name="settings_item_logout">Sair</string>
     <string name="settings_item_delete_account">Apagar minha conta</string>
 
+    <string name="settings_error_update_password_message">Não foi possível atualizar sua senha, tente novamente mais tarde.</string>
+    <string name="settings_sucess_update_password_message">Sua senha foi atualizada.</string>
+
+    <string name="settings_error_update_birthday_message">Não foi possível atualizar a data de nascimento, tente novamente mais tarde.</string>
+    <string name="settings_sucess_update_birthday_message">Sua data de nascimento foi atualizada com sucesso.</string>
+
     <string name="dialog_change_password_title">Mudar minha senha</string>
     <string name="dialog_change_password_message">Insira corretamente as informações nos campos abaixo para mudar sua senha.</string>
 
@@ -97,6 +103,8 @@
     <string name="logout_dialog_positive_button_message">Você saiu.</string>
     <string name="change_password_dialog_positive_button_message">Senha alterada com sucesso.</string>
     <string name="change_city_dialog_positive_button_parcial_message">Cidade mudada para</string>
+    <string name="current_password_message">Por favor entre com sua senha atual.</string>
+    <string name="current_error_password_message">Senha atual incorreta.</string>
 
     <!-- Strings from StatisticsFragment.java -->
     <string name="donors_tab_title">DOADORES</string>

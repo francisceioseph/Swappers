@@ -34,6 +34,8 @@ public class UserService {
     private static final String URL_REGISTER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login";
     private static final String URL_LOGIN_SERVICE    = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/dologin";
     private static final String URL_GET_USER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/users";
+    private static final String URL_UPDATE_PWD_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/pwd";
+    private static final String URL_UPDATE_BIRTHDAY_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/birthday";
 
     public static int registerUserWithWS(Context context,User user) {
         int status_code = 0;
@@ -165,7 +167,7 @@ public class UserService {
 
         try {
             String urlLogin = buildURLtoLogin(URL_GET_USER_SERVICE,email,password);
-            Log.i("INFO-LOGIN",urlLogin);
+            Log.i("INFO-LOGIN", urlLogin);
             url = new URL(urlLogin);
 
             conn = (HttpURLConnection) url.openConnection();
@@ -176,7 +178,7 @@ public class UserService {
             conn.connect();
 
             int responseCode = conn.getResponseCode();
-            Log.i("INFO-LOGIN",String.valueOf(responseCode));
+            Log.i("INFO-LOGIN", String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         conn.getInputStream()));
@@ -209,6 +211,93 @@ public class UserService {
         return user;
     }
 
+    public static int updatePwdUserService(User user) {
+        int status_code = 0;
+        try {
+            URL url = new URL(URL_UPDATE_PWD_SERVICE);
+
+            JSONObject jsonParam = fillParamJsonToUpdate(user);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(10000);
+            conn.setRequestMethod("PUT");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.connect();
+
+            OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
+            os.write(jsonParam.toString());
+            os.flush();
+
+            status_code = conn.getResponseCode();
+
+            os.close();
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return status_code;
+    }
+
+    public static int updateBirthDayUserService(User user) {
+        int status_code = 0;
+        try {
+            URL url = new URL(URL_UPDATE_BIRTHDAY_SERVICE);
+
+            JSONObject jsonParam =  fillParamJsonToBirthdayUpdate(user);
+            Log.i("BIRTHDAY", jsonParam.toString());
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(10000);
+            conn.setRequestMethod("PUT");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.connect();
+
+            OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
+            os.write(jsonParam.toString());
+            os.flush();
+
+            status_code = conn.getResponseCode();
+
+            os.close();
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return status_code;
+    }
+
+    private static JSONObject fillParamJsonToUpdate(User user) throws JSONException, UnsupportedEncodingException {
+        JSONObject jsonParam = new JSONObject();
+        jsonParam.put("username", user.getName());
+        jsonParam.put("email", user.getEmail());
+        jsonParam.put("password", user.getPassword());
+
+        return jsonParam;
+    }
+
+    private static JSONObject fillParamJsonToBirthdayUpdate(User user) throws JSONException, UnsupportedEncodingException {
+        JSONObject jsonParam = new JSONObject();
+        jsonParam.put("email", user.getEmail());
+        jsonParam.put("birthday", user.getBirthday());
+        return jsonParam;
+    }
+
     private static User parseUserFromJSON(JSONObject jsonObject) throws JSONException{
         User user = new User();
         String codedPhoto = jsonObject.getString("photo2");
@@ -218,6 +307,14 @@ public class UserService {
         user.setName(jsonObject.getString("username"));
         user.setEmail(jsonObject.getString("email"));
         user.setPassword(jsonObject.getString("password"));
+
+        if(jsonObject.has("birthday")){
+            user.setBirthday(jsonObject.getLong("birthday"));
+        }
+
+        if(jsonObject.has("cover")){
+            user.setCover(jsonObject.getString("cover"));
+        }
 
         //Log.i("TAG-booksDonation", jsonObject.get("booksDonation").toString());
         if(jsonObject.has("booksDonation") && jsonObject.get("booksDonation").toString().contains("[")){

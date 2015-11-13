@@ -11,6 +11,11 @@ import android.net.NetworkInfo;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+
+import java.util.Date;
+
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.LoginActivity;
 import br.edu.ifce.swappers.swappers.activities.MainActivity;
@@ -94,9 +99,15 @@ public class AndroidUtils {
             user.setEmail(manager.getString("email", null));
             user.setPassword(manager.getString("password", null));
             user.setPhoto2(manager.getString("photo", null));
+            user.setBirthday(manager.getLong("birthday", 0L));
+            user.setCover(manager.getString("cover",null));
         }
 
         return user;
+    }
+
+    public static SharedPreferences getSharedPreferences(Context context){
+        return context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
     }
 
     public static void deleteUser(Context context) {
@@ -128,6 +139,26 @@ public class AndroidUtils {
         }
     }
 
+    public static void updatePasswordSharedPreferences(Context context, String newPassword){
+        if(userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = manager.edit();
+
+            editor.putString("password", newPassword);
+            editor.apply();
+        }
+    }
+
+    public static void updateBirthDaySharedPreferences(Context context, Long newBirthDay){
+        if(userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = manager.edit();
+
+            editor.putLong("birthday", newBirthDay);
+            editor.apply();
+        }
+    }
+
     public static String loadCoverPictureBase64(Context context) {
         String photoBase64 = null;
 
@@ -137,6 +168,10 @@ public class AndroidUtils {
         }
 
         return photoBase64;
+    }
+
+    public static String codecSHA256(String str){
+        return new String(Hex.encodeHex(DigestUtils.sha256(str.getBytes())));
     }
 
     public static void saveCoverPicture(Context context, String encodedImage){
@@ -175,4 +210,5 @@ public class AndroidUtils {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
+
 }

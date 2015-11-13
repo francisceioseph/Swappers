@@ -6,17 +6,20 @@ package br.edu.ifce.swappers.swappers.fragments.principal;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,25 +27,35 @@ import android.widget.Toast;
 import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.fourmob.datetimepicker.date.DatePickerDialog.OnDateSetListener;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.miscellaneous.adapters.SettingsArrayAdapter;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdateBirthDayTaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdatePwdTaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdateUserBirthDayTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdateUserPwdTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
 import br.edu.ifce.swappers.swappers.model.SettingsListItem;
 import br.edu.ifce.swappers.swappers.miscellaneous.Settings;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
+import br.edu.ifce.swappers.swappers.model.User;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends Fragment implements OnDateSetListener, UserPhotoDialogFragment.UserPhotoDialogListener{
+public class SettingsFragment extends Fragment implements OnDateSetListener, UserPhotoDialogFragment.UserPhotoDialogListener,UpdatePwdTaskInterface,UpdateBirthDayTaskInterface {
 
     private ListView settingsListView;
     private static String BIRTHDAY_DATEPICKER_TAG = "BIRTHDAY_DATEPICKER";
@@ -51,6 +64,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
     private static String[] cities = new String[]{};
     private static final String[] STATES = new String[]{"CE", "SP"};
     private Map<String, String> states = new HashMap<>();
+    private AlertDialog changePasswordAlertDialog;
 
     private void createHashStates(){
         String[] nameStates = new String[]{"Ceará", "São Paulo",};
@@ -92,8 +106,30 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
 
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
-        String message = getString(R.string.changed_birth_date_parcial_message) +  String.format(" %d - %d - %d", day, month, year);
-        SwappersToast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+        Long birthDayDate = buildBirthDayToUpdate(year,month,day);
+        updateBirthServerServer(birthDayDate);
+    }
+
+    private Long buildBirthDayToUpdate(int year, int month, int day){
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day);
+        return c.getTime().getTime();
+    }
+
+    private void updateBirthServerServer(Long birthDayDate){
+          User user = AndroidUtils.loadUser(getActivity());
+          Log.i("BIRTHDAY",String.valueOf(birthDayDate));
+          user.setBirthday(birthDayDate);
+
+          UpdateUserBirthDayTask updateUserBirthDayTask = new UpdateUserBirthDayTask(getActivity(),this);
+          updateUserBirthDayTask.execute(user);
+    }
+
+    @Override
+    public void onUpdateBirthDayHadFinished(Long birthday) {
+        AndroidUtils.updateBirthDaySharedPreferences(getActivity(), birthday);
+        MockSingleton.INSTANCE.user = AndroidUtils.loadUser(getActivity());
+        SwappersToast.makeText(getActivity(),getString(R.string.settings_sucess_update_birthday_message),Toast.LENGTH_LONG).show();
     }
 
     private ArrayList<SettingsListItem> createSettingsDataSource() {
@@ -229,8 +265,8 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
     *This method shows a change password account alert.
     * */
     private void showChangePasswordDialog() {
-        AlertDialog changePasswordAlertDialog = buildChangePasswordDialog();
-        changePasswordAlertDialog.show();
+        this.changePasswordAlertDialog = buildChangePasswordDialog();
+        this.changePasswordAlertDialog.show();
     }
 
 
@@ -467,10 +503,85 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity(), getString(R.string.change_password_dialog_positive_button_message), Toast.LENGTH_SHORT).show();
+                updatePasswordServer();
+
             }
         };
     }
+
+    private boolean validateCurrentPassword(){
+
+        EditText currentPasswordEditText = (EditText) this.changePasswordAlertDialog.findViewById(R.id.current_password);
+        String currentPassword = currentPasswordEditText.getText().toString();
+
+        SharedPreferences manager = AndroidUtils.getSharedPreferences(getActivity());
+
+        String password = manager.getString("password", null);
+
+        if(currentPassword !=null && !currentPassword.equals("")) {
+
+            String currentPasswordCodec = AndroidUtils.codecSHA256(currentPassword);
+
+            if (password != null && currentPasswordCodec.equals(password)) {
+                return true;
+            }else{
+                SwappersToast.makeText(getActivity(),getString(R.string.current_error_password_message),Toast.LENGTH_LONG).show();
+            }
+        }else{
+            SwappersToast.makeText(getActivity(),getString(R.string.current_password_message),Toast.LENGTH_LONG).show();
+        }
+
+        return false;
+    }
+
+
+    private boolean validatePassword(String pwd , String pwdConfirmation) {
+        if (pwd.length() > 5 && pwdConfirmation.length() > 5) {
+            if (pwd.equals(pwdConfirmation)) {
+                return true;
+            }
+            else {
+                SwappersToast.makeText(getActivity(), getString(R.string.mismatching_password_error_message), Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+        else{
+            SwappersToast.makeText(getActivity(), getString(R.string.blank_password_error_message), Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+    private void updatePasswordServer(){
+
+        EditText newPasswordEditText = (EditText) this.changePasswordAlertDialog.findViewById(R.id.new_password);
+        EditText newPasswordConfirmationEditText = (EditText) this.changePasswordAlertDialog.findViewById(R.id.new_password_confirmation);
+
+        String newPassword = newPasswordEditText.getText().toString();
+        String newPasswordConfirmation = newPasswordConfirmationEditText.getText().toString();
+
+        if(validateCurrentPassword()){
+            if (validatePassword(newPassword,newPasswordConfirmation)){
+
+                User user = AndroidUtils.loadUser(getActivity());
+                String newPasswordCodec = AndroidUtils.codecSHA256(newPassword);
+                user.setPassword(newPasswordCodec);
+
+                UpdateUserPwdTask updateUserPwdTask = new UpdateUserPwdTask(getActivity(),this);
+                updateUserPwdTask.execute(user);
+            }
+        }
+    }
+
+    @Override
+    public void onUpdatePwdHadFinished() {
+        EditText newPasswordEditText = (EditText) this.changePasswordAlertDialog.findViewById(R.id.new_password);
+        String newPassword = newPasswordEditText.getText().toString();
+        String newPasswordCodec = new String(Hex.encodeHex(DigestUtils.sha256(newPassword.getBytes())));
+        AndroidUtils.updatePasswordSharedPreferences(getActivity(),newPasswordCodec);
+        MockSingleton.INSTANCE.user = AndroidUtils.loadUser(getActivity());
+        SwappersToast.makeText(getActivity(),getString(R.string.settings_sucess_update_password_message),Toast.LENGTH_LONG).show();
+    }
+
 
     /*
       * This method creates the listener for the negative button
@@ -536,6 +647,5 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
             }
         };
     }
-
 
 }

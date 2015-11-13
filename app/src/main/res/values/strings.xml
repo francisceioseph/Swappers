@@ -51,7 +51,7 @@
     <string name="user_registration_success_message">Welcome to Swappers for Readers, please do login and enjoy it!</string>
     <string name="email_validation_error_message">Invalid email!</string>
     <string name="mismatching_password_error_message">Passwords mismatches!</string>
-    <string name="blank_password_error_message">Some password field is blank!</string>
+    <string name="blank_password_error_message">Some passwords field must have at least 5 characters!</string>
     <string name="less_characters_name_error_message">Your name must have 3 characters at least!</string>
 
     <!-- Strings from PlacesFragment.java -->
@@ -79,6 +79,12 @@
     <string name="settings_item_logout">Logout</string>
     <string name="settings_item_delete_account">Delete my account</string>
 
+    <string name="settings_error_update_password_message">Could not update your password, please try again later.</string>
+    <string name="settings_sucess_update_password_message">Successfully updated password.</string>
+
+    <string name="settings_error_update_birthday_message">Could not update your birthday, please try again later.</string>
+    <string name="settings_sucess_update_birthday_message">Successfully updated birthday.</string>
+
     <string name="dialog_change_password_title">Change Password</string>
     <string name="dialog_change_password_message">Set correctly the fields bellow to change your password.</string>
 
@@ -97,6 +103,8 @@
     <string name="logout_dialog_positive_button_message">Logout done successfully.</string>
     <string name="change_password_dialog_positive_button_message">Password changed successfully.</string>
     <string name="change_city_dialog_positive_button_parcial_message">City changed to</string>
+    <string name="current_password_message">Please enter your current password</string>
+    <string name="current_error_password_message">Incorrect current password</string>
 
     <!-- Strings from StatisticsFragment.java -->
     <string name="donors_tab_title">DONORS</string>
@@ -159,6 +167,7 @@
 
     <!-- Strings from UploadReviewTask.java -->
     <string name="progress_dialog_uploading_message">Uploading...</string>
+    <string name="progress_dialog_update_pwd_message">Update...</string>
 
     <!-- Strings from AndroidManifest.xml -->
     <string name="app_name">Swappers</string>
