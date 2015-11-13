@@ -22,7 +22,7 @@ public class User implements Serializable{
     private Book book;
     private ArrayList<Book> bookRetrievedList;
     private ArrayList<Book> bookDonationList;
-    private byte[] cover;
+    private String cover;
     private Long birthday;
 
 
@@ -70,11 +70,11 @@ public class User implements Serializable{
         this.email = email;
     }
 
-    public byte[] getCover() {
+    public String getCover() {
         return cover;
     }
 
-    public void setCover(byte[] cover) {
+    public void setCover(String cover) {
         this.cover = cover;
     }
 

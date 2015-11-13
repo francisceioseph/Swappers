@@ -308,6 +308,14 @@ public class UserService {
         user.setEmail(jsonObject.getString("email"));
         user.setPassword(jsonObject.getString("password"));
 
+        if(jsonObject.has("birthday")){
+            user.setBirthday(jsonObject.getLong("birthday"));
+        }
+
+        if(jsonObject.has("cover")){
+            user.setCover(jsonObject.getString("cover"));
+        }
+
         //Log.i("TAG-booksDonation", jsonObject.get("booksDonation").toString());
         if(jsonObject.has("booksDonation") && jsonObject.get("booksDonation").toString().contains("[")){
             String jsonBooks = jsonObject.get("booksDonation").toString();

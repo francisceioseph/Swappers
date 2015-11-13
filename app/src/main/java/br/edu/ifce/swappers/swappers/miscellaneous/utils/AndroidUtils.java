@@ -81,7 +81,6 @@ public class AndroidUtils {
         editor.putString("photo", user.getPhoto2());
         editor.putString("photo_cover", coverPhotoBase64);
         editor.putString("name", user.getName());
-        editor.putLong("birthday",0L);
         editor.putInt("id", user.getId());
 
         editor.apply();
@@ -101,6 +100,7 @@ public class AndroidUtils {
             user.setPassword(manager.getString("password", null));
             user.setPhoto2(manager.getString("photo", null));
             user.setBirthday(manager.getLong("birthday", 0L));
+            user.setCover(manager.getString("cover",null));
         }
 
         return user;

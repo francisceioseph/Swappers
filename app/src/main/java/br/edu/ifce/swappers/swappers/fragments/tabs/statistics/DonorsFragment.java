@@ -49,7 +49,7 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
         if(MockSingleton.INSTANCE.getDonators().isEmpty()) {
             String city = MockSingleton.INSTANCE.user.getCity();
             String state = MockSingleton.INSTANCE.user.getState();
-            if(!city.equals("")) {
+            if(city !=null && !"".equals(city)) {
                 StatisticDonorsTask task = new StatisticDonorsTask(getActivity(), this);
                 task.execute(city,state);
             }else{
