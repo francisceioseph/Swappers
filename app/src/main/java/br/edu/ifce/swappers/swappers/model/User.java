@@ -22,8 +22,11 @@ public class User implements Serializable{
     private Book book;
     private ArrayList<Book> bookRetrievedList;
     private ArrayList<Book> bookDonationList;
-    private ArrayList<Book> bookFavoriteList;
+    private byte[] cover;
+    private Long birthday;
 
+
+    private ArrayList<Book> bookFavoriteList;
 
     public User() {
 
@@ -42,9 +45,6 @@ public class User implements Serializable{
     public void setPhoto2(String photo2) {
         this.photo2 = photo2;
     }
-
-    private byte[] cover;
-    private Date bithday;
 
     public Integer getId() {
         return id;
@@ -78,12 +78,12 @@ public class User implements Serializable{
         this.cover = cover;
     }
 
-    public Date getBithday() {
-        return bithday;
+    public Long getBirthday() {
+        return birthday;
     }
 
-    public void setBithday(Date bithday) {
-        this.bithday = bithday;
+    public void setBirthday(Long birthday) {
+        this.birthday = birthday;
     }
 
     public byte[] getPhoto() {

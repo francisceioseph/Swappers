@@ -10,12 +10,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.widget.Toast;
+
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+
+import java.util.Date;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.LoginActivity;
 import br.edu.ifce.swappers.swappers.activities.MainActivity;
-import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.model.User;
 
 
@@ -78,6 +81,7 @@ public class AndroidUtils {
         editor.putString("photo", user.getPhoto2());
         editor.putString("photo_cover", coverPhotoBase64);
         editor.putString("name", user.getName());
+        editor.putLong("birthday",0L);
         editor.putInt("id", user.getId());
 
         editor.apply();
@@ -96,6 +100,7 @@ public class AndroidUtils {
             user.setEmail(manager.getString("email", null));
             user.setPassword(manager.getString("password", null));
             user.setPhoto2(manager.getString("photo", null));
+            user.setBirthday(manager.getLong("birthday", 0L));
         }
 
         return user;
@@ -144,6 +149,16 @@ public class AndroidUtils {
         }
     }
 
+    public static void updateBirthDaySharedPreferences(Context context, Long newBirthDay){
+        if(userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = manager.edit();
+
+            editor.putLong("birthday", newBirthDay);
+            editor.apply();
+        }
+    }
+
     public static String loadCoverPictureBase64(Context context) {
         String photoBase64 = null;
 
@@ -153,6 +168,10 @@ public class AndroidUtils {
         }
 
         return photoBase64;
+    }
+
+    public static String codecSHA256(String str){
+        return new String(Hex.encodeHex(DigestUtils.sha256(str.getBytes())));
     }
 
     public static void saveCoverPicture(Context context, String encodedImage){
