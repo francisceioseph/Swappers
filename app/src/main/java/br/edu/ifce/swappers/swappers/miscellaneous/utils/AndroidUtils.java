@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -79,10 +80,17 @@ public class AndroidUtils {
         editor.putString("email", user.getEmail());
         editor.putString("password", user.getPassword());
         editor.putString("photo", user.getPhoto2());
-        editor.putString("photo_cover", coverPhotoBase64);
+
+        if(user.getCover()!=null){
+            editor.putString("photo_cover", user.getCover());
+        }else{
+            editor.putString("photo_cover", coverPhotoBase64);
+        }
         editor.putString("name", user.getName());
         editor.putInt("id", user.getId());
-
+        if(user.getBirthday()!=null) {
+            editor.putLong("birthday", user.getBirthday());
+        }
         editor.apply();
     }
 
@@ -100,7 +108,7 @@ public class AndroidUtils {
             user.setPassword(manager.getString("password", null));
             user.setPhoto2(manager.getString("photo", null));
             user.setBirthday(manager.getLong("birthday", 0L));
-            user.setCover(manager.getString("cover",null));
+            user.setCover(manager.getString("cover", null));
         }
 
         return user;
@@ -168,6 +176,15 @@ public class AndroidUtils {
         }
 
         return photoBase64;
+    }
+
+    public static Long loadBirthDayUser(Context context) {
+        Long birhtdayLong = null;
+        if (userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+             birhtdayLong = manager.getLong("birthday", 0L);
+        }
+        return birhtdayLong;
     }
 
     public static String codecSHA256(String str){

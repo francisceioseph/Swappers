@@ -82,6 +82,9 @@
     <string name="settings_error_update_password_message">Não foi possível atualizar sua senha, tente novamente mais tarde.</string>
     <string name="settings_sucess_update_password_message">Sua senha foi atualizada.</string>
 
+    <string name="settings_error_update_image_message">Não foi possível atualizar imagem, tente novamente.</string>
+    <string name="settings_sucess_update_image_message">Sua imagem foi atualizada.</string>
+
     <string name="settings_error_update_birthday_message">Não foi possível atualizar a data de nascimento, tente novamente mais tarde.</string>
     <string name="settings_sucess_update_birthday_message">Sua data de nascimento foi atualizada com sucesso.</string>
 

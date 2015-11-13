@@ -32,10 +32,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -118,7 +116,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
 
     private void updateBirthServerServer(Long birthDayDate){
           User user = AndroidUtils.loadUser(getActivity());
-          Log.i("BIRTHDAY",String.valueOf(birthDayDate));
           user.setBirthday(birthDayDate);
 
           UpdateUserBirthDayTask updateUserBirthDayTask = new UpdateUserBirthDayTask(getActivity(),this);

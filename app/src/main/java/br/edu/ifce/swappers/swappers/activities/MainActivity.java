@@ -21,6 +21,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -33,22 +34,28 @@ import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.ProfileFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.SettingsFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.StatisticsFragment;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdateImageTaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdateCoverUserTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdatePhotoProfileUserTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
+import br.edu.ifce.swappers.swappers.model.User;
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountListener;
 
-public class MainActivity extends MaterialNavigationDrawer implements MaterialAccountListener, UserPhotoDialogFragment.UserPhotoDialogListener {
+public class MainActivity extends MaterialNavigationDrawer implements MaterialAccountListener, UserPhotoDialogFragment.UserPhotoDialogListener,UpdateImageTaskInterface {
 
     private static final short CAMERA_INTENT_CODE  = 1015;
     private static final short GALLERY_INTENT_CODE = 1016;
+    private String photoCoverBase64,photoProfileBase64;
+    private MaterialAccount userAccount;
 
  @Override
     public void init(Bundle savedInstance) {
 
-        MaterialAccount userAccount = this.loadAccount();
+        this.userAccount = this.loadAccount();
 
         this.addAccount(userAccount);
         this.setAccountListener(this);
@@ -147,12 +154,10 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     @Override
     public void onAccountOpening(MaterialAccount materialAccount) {
-
     }
 
     @Override
     public void onChangeAccount(MaterialAccount materialAccount) {
-
     }
 
     @Override
@@ -199,14 +204,44 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             Bitmap userPhotoBitmap = ImageUtil.retrieveImageFromCameraResult(data);
             String photoBase64     = ImageUtil.BitMapToString(userPhotoBitmap);
 
-            AndroidUtils.saveProfilePicture(this, photoBase64);
+            this.photoProfileBase64 = photoBase64;
+
+            User user = AndroidUtils.loadUser(this);
+            user.setPhoto2(this.photoProfileBase64);
+
+            UpdatePhotoProfileUserTask updatePhotoProfileUserTask = new UpdatePhotoProfileUserTask(this,this);
+            updatePhotoProfileUserTask.execute(user);
+
+            //AndroidUtils.saveProfilePicture(this, photoBase64);
 
         }
         else if (requestCode == GALLERY_INTENT_CODE && resultCode == RESULT_OK) {
             Bitmap userPhotoBitmap = ImageUtil.retrieveImageFromGalleryResult(data, this);
             String photoBase64     = ImageUtil.BitMapToString(userPhotoBitmap);
 
-            AndroidUtils.saveCoverPicture(this, photoBase64);
+            this.photoCoverBase64 = photoBase64;
+
+            User user = AndroidUtils.loadUser(this);
+            user.setCover(this.photoCoverBase64);
+
+            UpdateCoverUserTask updateCoverUserTask = new UpdateCoverUserTask(this,this);
+            updateCoverUserTask.execute(user);
+
+            //AndroidUtils.saveCoverPicture(this, photoBase64);
         }
+    }
+
+    @Override
+    public void onUpdateImageCoverHadFinished() {
+        AndroidUtils.saveCoverPicture(this, this.photoCoverBase64);
+        MockSingleton.INSTANCE.user = AndroidUtils.loadUser(this);
+
+    }
+
+    @Override
+    public void onUpdateImageProfileHadFinished() {
+        AndroidUtils.saveProfilePicture(this, this.photoProfileBase64);
+        MockSingleton.INSTANCE.user = AndroidUtils.loadUser(this);
+        this.userAccount.setPhoto(ImageUtil.stringToBitMap(MockSingleton.INSTANCE.user.getPhoto2()));
     }
 }
