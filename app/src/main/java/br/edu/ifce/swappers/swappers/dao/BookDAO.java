@@ -82,15 +82,20 @@ public class BookDAO {
             do {
                 Book book = new Book();
                 book.setId(cursor.getString(0));
-                book.setTitle(cursor.getString(1));
-                book.setAuthor(cursor.getString(2));
-                book.setPublisher(cursor.getString(3));
-                book.setPhoto(cursor.getString(4));
-                book.setNumberPage(cursor.getInt(5));
-                book.setSynopsis(cursor.getString(6));
-                book.setEvaluationAvarage(cursor.getInt(7));
 
-                bookList.add(book);
+                if (!bookList.contains(book)) {
+
+                    book.setTitle(cursor.getString(1));
+                    book.setAuthor(cursor.getString(2));
+                    book.setPublisher(cursor.getString(3));
+                    book.setPhoto(cursor.getString(4));
+                    book.setNumberPage(cursor.getInt(5));
+                    book.setSynopsis(cursor.getString(6));
+                    book.setEvaluationAvarage(cursor.getInt(7));
+
+                    bookList.add(book);
+                }
+
             }while (cursor.moveToNext());
         }
         return bookList;
