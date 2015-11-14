@@ -1,7 +1,7 @@
 package br.edu.ifce.swappers.swappers.activities;
 
 /**
- * Last modified by Joamila on 16/10/2015
+ * Last modified by Joamila on 14/11/2015
  */
 
 import android.app.SearchManager;
@@ -24,6 +24,7 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -198,12 +199,11 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_INTENT_CODE && resultCode == RESULT_OK){
-            Bitmap userPhotoBitmap = ImageUtil.retrieveImageFromCameraResult(data);
-            String photoBase64     = ImageUtil.BitMapToString(userPhotoBitmap);
+    public void usePhotoCamera(Intent data){
+        Bitmap userPhotoBitmap = ImageUtil.retrieveImageFromCameraResult(data);
+        String photoBase64     = ImageUtil.BitMapToString(userPhotoBitmap);
 
+        if(MockSingleton.INSTANCE.codePhoto == 10){
             this.photoProfileBase64 = photoBase64;
 
             User user = AndroidUtils.loadUser(this);
@@ -211,14 +211,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
             UpdatePhotoProfileUserTask updatePhotoProfileUserTask = new UpdatePhotoProfileUserTask(this,this);
             updatePhotoProfileUserTask.execute(user);
-
-            //AndroidUtils.saveProfilePicture(this, photoBase64);
-
         }
-        else if (requestCode == GALLERY_INTENT_CODE && resultCode == RESULT_OK) {
-            Bitmap userPhotoBitmap = ImageUtil.retrieveImageFromGalleryResult(data, this);
-            String photoBase64     = ImageUtil.BitMapToString(userPhotoBitmap);
-
+        else if(MockSingleton.INSTANCE.codePhoto == 20){
             this.photoCoverBase64 = photoBase64;
 
             User user = AndroidUtils.loadUser(this);
@@ -226,8 +220,44 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
             UpdateCoverUserTask updateCoverUserTask = new UpdateCoverUserTask(this,this);
             updateCoverUserTask.execute(user);
+        }
 
-            //AndroidUtils.saveCoverPicture(this, photoBase64);
+        MockSingleton.INSTANCE.codePhoto = 0;
+    }
+
+    public void usePhotoGallery(Intent data){
+        Bitmap userPhotoBitmap = ImageUtil.retrieveImageFromGalleryResult(data, this);
+        String photoBase64     = ImageUtil.BitMapToString(userPhotoBitmap);
+
+        if(MockSingleton.INSTANCE.codePhoto == 10){
+            this.photoProfileBase64 = photoBase64;
+
+            User user = AndroidUtils.loadUser(this);
+            user.setPhoto2(this.photoProfileBase64);
+
+            UpdatePhotoProfileUserTask updatePhotoProfileUserTask = new UpdatePhotoProfileUserTask(this,this);
+            updatePhotoProfileUserTask.execute(user);
+        }
+        else if(MockSingleton.INSTANCE.codePhoto == 20){
+            this.photoCoverBase64 = photoBase64;
+
+            User user = AndroidUtils.loadUser(this);
+            user.setCover(this.photoCoverBase64);
+
+            UpdateCoverUserTask updateCoverUserTask = new UpdateCoverUserTask(this,this);
+            updateCoverUserTask.execute(user);
+        }
+
+        MockSingleton.INSTANCE.codePhoto = 0;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_INTENT_CODE && resultCode == RESULT_OK){
+            usePhotoCamera(data);
+        }
+        else if (requestCode == GALLERY_INTENT_CODE && resultCode == RESULT_OK) {
+            usePhotoGallery(data);
         }
     }
 
