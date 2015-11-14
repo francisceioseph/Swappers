@@ -1,6 +1,10 @@
 package br.edu.ifce.swappers.swappers.fragments.dialogs;
 
 
+/**
+ * Last modified by Joamila on 14/11/2015
+ */
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,11 +14,15 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import at.markushi.ui.CircleButton;
 import br.edu.ifce.swappers.swappers.R;
 
 public class UserPhotoDialogFragment extends DialogFragment {
+
+    private String title = new String();
+    private String description = new String();
 
     public interface UserPhotoDialogListener {
         void onGalleryClick(DialogFragment dialogFragment);
@@ -22,7 +30,11 @@ public class UserPhotoDialogFragment extends DialogFragment {
     }
 
     public UserPhotoDialogFragment() {
+    }
 
+    public UserPhotoDialogFragment(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
     UserPhotoDialogListener userPhotoDialogListener;
@@ -34,6 +46,11 @@ public class UserPhotoDialogFragment extends DialogFragment {
         AlertDialog.Builder dialogBuilder   = new AlertDialog.Builder(currentActivity);
         LayoutInflater dialogLayoutInflater = currentActivity.getLayoutInflater();
         View dialogView                     = dialogLayoutInflater.inflate(R.layout.fragment_user_photo_dialog, null);
+
+        TextView dialogTitleTextView = (TextView) dialogView.findViewById(R.id.textView2);
+        dialogTitleTextView.setText(this.title);
+        TextView dialogDescriptionTextView = (TextView) dialogView.findViewById(R.id.textSelectPicture);
+        dialogDescriptionTextView.setText(this.description);
 
         CircleButton galleryCircleButton    = (CircleButton) dialogView.findViewById(R.id.galleryCircleButton);
         CircleButton cameraCircleButton     = (CircleButton) dialogView.findViewById(R.id.cameraCircleButton);

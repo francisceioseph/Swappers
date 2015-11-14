@@ -238,13 +238,15 @@
     <string name="userPhotoDialogTitle">Nouvelle Photo du Profile</string>
     <string name="new_profile_picture_camera">Caméra</string>
     <string name="new_profile_picture_gallery">Galerie</string>
-    <string name="new_profile_picture_message">Choisissez comment vous voulez nous fournir votre nouvelle photo.</string>
+    <string name="new_profile_picture_message">Choisissez comment vous voulez nous fournir votre nouvelle photo de profile.</string>
     <string name="blank_password_error_message">Certains champs de mot de passe sont vides!</string>
-    <string name="book_not_available_for_adoption">Ce livre n\'est pas disponible pour l adoption.</string>
+    <string name="book_not_available_for_adoption">Ce livre n\'est pas disponible pour l\'adoption.</string>
     <string name="change_password_dialog_positive_button_message">Le mot de passe a été changé avec succès!</string>
     <string name="confirm_book_adoption_dialog_message">Est-ce que vous voulez vraiment adopter ce livre?</string>
     <string name="delete_account_dialog_positive_button_message">La compte a été supprimée avec succès.</string>
     <string name="duplicate_email_error_message">L\'e-mail fourni fait partie d\'une autre compte. SVP, indiquez d\'autre courriel.</string>
+    <string name="new_cover_picture_message">Choisissez comment vous voulez nous fournir votre nouvelle photo de couverture.</string>
+    <string name="coverPhotoDialogTitle">Nouvelle Photo de Couverture</string>
 
 
 </resources>

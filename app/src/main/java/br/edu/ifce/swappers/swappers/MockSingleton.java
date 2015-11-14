@@ -1,5 +1,9 @@
 package br.edu.ifce.swappers.swappers;
 
+/**
+ * Last modified by Joamila on 14/11/2015
+ */
+
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -24,6 +28,8 @@ public enum MockSingleton {
 
     public String userChangeCity = null;
     public String userChangeState = null;
+
+    public int codePhoto = 0;
     //public String city = new String();
     //public String state = new String();
 

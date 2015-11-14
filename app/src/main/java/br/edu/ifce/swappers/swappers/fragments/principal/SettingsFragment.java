@@ -1,7 +1,7 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
 /**
- * Last modified by Joamila on 16/10/2015
+ * Last modified by Joamila on 14/11/2015
  */
 
 import android.content.Context;
@@ -208,7 +208,9 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
     *This method shows a change profile picture alert.
     * */
     private void changeProfilePicture() {
-        UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment();
+        UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment(getString(R.string.userPhotoDialogTitle),
+                getString(R.string.new_profile_picture_message));
+        MockSingleton.INSTANCE.codePhoto = 10;
         dialogFragment.show(getActivity().getSupportFragmentManager(), "User Photo Dialog Fragment");
     }
 
@@ -226,7 +228,9 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
     *This method shows a change cover picture alert.
     * */
     private void changeCoverPicture() {
-        UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment();
+        UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment(getString(R.string.coverPhotoDialogTitle),
+                getString(R.string.new_cover_picture_message));
+        MockSingleton.INSTANCE.codePhoto = 20;
         dialogFragment.show(getActivity().getSupportFragmentManager(), "User Photo Dialog Fragment");
     }
 
