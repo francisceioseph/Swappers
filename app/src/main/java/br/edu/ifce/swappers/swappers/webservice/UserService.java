@@ -39,6 +39,7 @@ public class UserService {
     private static final String URL_UPDATE_COVER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/cover";
     private static final String URL_UPDATE_PHOTO_PROFILE_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/photoperfil";
     private static final String URL_DELETE_USER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/delete";
+    private static final String URL_UPDATE_USER_LOCATION_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/location";
 
     public static int registerUserWithWS(Context context,User user) {
         int status_code = 0;
@@ -355,6 +356,41 @@ public class UserService {
         return status_code;
     }
 
+    public static int updateCityStateUserService(User user) {
+        int status_code = 0;
+        try {
+            URL url = new URL(URL_UPDATE_USER_LOCATION_SERVICE);
+
+            JSONObject jsonParam =  fillParamJsonToCityStateUpdate(user);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(10000);
+            conn.setRequestMethod("PUT");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.connect();
+
+            OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
+            os.write(jsonParam.toString());
+            os.flush();
+
+            status_code = conn.getResponseCode();
+
+            os.close();
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return status_code;
+    }
+
     public static int deleteUserService(int idUser) {
         int status_code = 0;
 
@@ -408,6 +444,14 @@ public class UserService {
         JSONObject jsonParam = new JSONObject();
         jsonParam.put("email", user.getEmail());
         jsonParam.put("photo2", user.getPhoto2());
+        return jsonParam;
+    }
+
+    private static JSONObject fillParamJsonToCityStateUpdate(User user) throws JSONException, UnsupportedEncodingException {
+        JSONObject jsonParam = new JSONObject();
+        jsonParam.put("email", user.getEmail());
+        jsonParam.put("city", user.getCity());
+        jsonParam.put("state", user.getState());
         return jsonParam;
     }
 

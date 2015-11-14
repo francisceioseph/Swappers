@@ -85,6 +85,9 @@
     <string name="settings_error_update_image_message">Não foi possível atualizar imagem, tente novamente.</string>
     <string name="settings_sucess_update_image_message">Sua imagem foi atualizada.</string>
 
+    <string name="settings_error_update_city_state_user_message">Não foi possível salvar sua Cidade/Estado.</string>
+    <string name="settings_sucess_update_city_state_user_message">Sua Cidade/Estado foi salva.</string>
+
     <string name="settings_error_delete_user_message">Não foi possível deletar sua conta, tente novamente.</string>
     <string name="settings_sucess_delete_user_message">Sua conta foi excluída com sucesso.</string>
 
