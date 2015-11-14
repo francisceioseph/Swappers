@@ -256,6 +256,8 @@
     <string name="new_profile_picture_camera">Câmera</string>
     <string name="new_profile_picture_gallery">Galeria</string>
     <string name="new_profile_picture_message">Escolha como você deseja nos fornecer a sua nova foto de perfil.</string>
+    <string name="new_cover_picture_message">Escolha como você deseja nos fornecer sua nova foto de capa.</string>
+    <string name="coverPhotoDialogTitle">Nova Foto de Capa</string>
 
 
 </resources>
