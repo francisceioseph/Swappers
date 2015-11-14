@@ -98,7 +98,7 @@ public class BookDAO {
                     book.setPhoto(cursor.getString(4));
                     book.setNumberPage(cursor.getInt(5));
                     book.setSynopsis(cursor.getString(6));
-                    book.setEvaluationAvarage(cursor.getInt(7));
+                    book.setEvaluationAvarage(cursor.getFloat(7));
 
                     bookList.add(book);
                 }
