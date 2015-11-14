@@ -134,4 +134,21 @@ public class Book implements Serializable{
     public void setDonation(int donation) {
         this.donation = donation;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        boolean result = false;
+
+        if (object == null || object.getClass() != this.getClass()) {
+            result = false;
+        }
+        else {
+            Book anotherBook = (Book) object;
+            if (anotherBook.id.equals(this.id)) {
+                result = true;
+            }
+        }
+
+        return result;
+    }
 }

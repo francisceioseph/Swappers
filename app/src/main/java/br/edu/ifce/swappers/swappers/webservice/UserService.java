@@ -38,6 +38,8 @@ public class UserService {
     private static final String URL_UPDATE_BIRTHDAY_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/birthday";
     private static final String URL_UPDATE_COVER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/cover";
     private static final String URL_UPDATE_PHOTO_PROFILE_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/photoperfil";
+    private static final String URL_DELETE_USER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/delete";
+
     public static int registerUserWithWS(Context context,User user) {
         int status_code = 0;
             try {
@@ -348,6 +350,32 @@ public class UserService {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return status_code;
+    }
+
+    public static int deleteUserService(int idUser) {
+        int status_code = 0;
+
+        String urlDelete = URL_DELETE_USER_SERVICE + "/"+idUser;
+        Log.i("#URL_DELETE",urlDelete);
+
+        try {
+            URL url = new URL(urlDelete);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(10000);
+            conn.setRequestMethod("DELETE");
+            conn.connect();
+
+            status_code = conn.getResponseCode();
+
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return status_code;

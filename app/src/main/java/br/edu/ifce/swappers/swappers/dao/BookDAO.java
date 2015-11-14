@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -91,7 +90,19 @@ public class BookDAO {
                 book.setSynopsis(cursor.getString(6));
                 book.setEvaluationAvarage(cursor.getFloat(7));
 
-                bookList.add(book);
+                if (!bookList.contains(book)) {
+
+                    book.setTitle(cursor.getString(1));
+                    book.setAuthor(cursor.getString(2));
+                    book.setPublisher(cursor.getString(3));
+                    book.setPhoto(cursor.getString(4));
+                    book.setNumberPage(cursor.getInt(5));
+                    book.setSynopsis(cursor.getString(6));
+                    book.setEvaluationAvarage(cursor.getInt(7));
+
+                    bookList.add(book);
+                }
+
             }while (cursor.moveToNext());
         }
         return bookList;

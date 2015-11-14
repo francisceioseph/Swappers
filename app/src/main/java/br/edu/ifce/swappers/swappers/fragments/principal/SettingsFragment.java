@@ -40,8 +40,10 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.miscellaneous.adapters.SettingsArrayAdapter;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.DeleteUserTaskInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdateBirthDayTaskInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdatePwdTaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.DeleteUserTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdateUserBirthDayTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdateUserPwdTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
@@ -53,7 +55,7 @@ import br.edu.ifce.swappers.swappers.model.User;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends Fragment implements OnDateSetListener, UserPhotoDialogFragment.UserPhotoDialogListener,UpdatePwdTaskInterface,UpdateBirthDayTaskInterface {
+public class SettingsFragment extends Fragment implements OnDateSetListener, UserPhotoDialogFragment.UserPhotoDialogListener,UpdatePwdTaskInterface,UpdateBirthDayTaskInterface,DeleteUserTaskInterface {
 
     private ListView settingsListView;
     private static String BIRTHDAY_DATEPICKER_TAG = "BIRTHDAY_DATEPICKER";
@@ -104,7 +106,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
 
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
-        Long birthDayDate = buildBirthDayToUpdate(year,month,day);
+        Long birthDayDate = buildBirthDayToUpdate(year, month, day);
         updateBirthServerServer(birthDayDate);
     }
 
@@ -410,14 +412,36 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
 * account listener.
 * */
     private DialogInterface.OnClickListener onDeleteAccountPositiveButton() {
+
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SwappersToast.makeText(getActivity().getApplicationContext(), getString(R.string.delete_account_dialog_positive_button_message), Toast.LENGTH_SHORT).show();
+
+                //SwappersToast.makeText(getActivity().getApplicationContext(), getString(R.string.delete_account_dialog_positive_button_message), Toast.LENGTH_SHORT).show();
                 //TODO send message to ws to disable user account
                 //TODO load inicial screen and go out of current screen.
+
+                callDeleteUserTask();
             }
         };
+
+    }
+
+
+    public void callDeleteUserTask(){
+        User user = MockSingleton.INSTANCE.user;
+        DeleteUserTask deleteUserTask = new DeleteUserTask(getActivity(),this);
+        deleteUserTask.execute(user.getId());
+    }
+
+
+    @Override
+    public void onDeleteUserHadFinished() {
+        AndroidUtils.deleteUser(getActivity());
+        BookDAO bookDAO = new BookDAO(getActivity());
+        bookDAO.delete();
+        AndroidUtils.startSignInActivity(getActivity());
+        SwappersToast.makeText(getActivity(),getActivity().getString(R.string.settings_sucess_delete_user_message),Toast.LENGTH_LONG).show();
     }
 
     /*

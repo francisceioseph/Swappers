@@ -195,6 +195,7 @@
                 fab:fab_colorNormal="@color/color_accent_dark"
                 fab:fab_addButtonSize="mini"
                 fab:fab_colorPressed="@color/color_accent_medium"
+                app:fab_title="@string/floating_action_button_adopt"
                 app:fab_icon="@drawable/ic_get"/>
 
             <com.getbase.floatingactionbutton.FloatingActionButton
@@ -203,6 +204,7 @@
                 android:layout_height="wrap_content"
                 fab:fab_colorNormal="@color/color_accent_dark"
                 fab:fab_size="mini"
+                app:fab_title="@string/floating_action_button_donate"
                 fab:fab_colorPressed="@color/color_accent_medium"
                 app:fab_icon="@drawable/ic_up"/>
 
@@ -210,6 +212,7 @@
                 android:id="@+id/floating_action_favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:fab_title="@string/floating_action_button_favorite"
                 fab:fab_colorNormal="@color/color_accent_dark"
                 fab:fab_size="mini"
                 fab:fab_colorPressed="@color/color_accent_medium"
@@ -221,6 +224,7 @@
                 android:layout_height="wrap_content"
                 fab:fab_colorNormal="@color/color_accent_dark"
                 fab:fab_size="mini"
+                app:fab_title="@string/floating_action_button_comment"
                 fab:fab_colorPressed="@color/color_accent_medium"
                 app:fab_icon="@drawable/ic_comment"/>
 
