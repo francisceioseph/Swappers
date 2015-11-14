@@ -107,13 +107,28 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     }
 
     private Bitmap loadCoverPhoto() {
-        return ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_05)).getBitmap();
+
+        Bitmap coverPhotoBitmap;
+        String coverPhotoBase64 = AndroidUtils.loadCoverPictureBase64(this);
+
+        try {
+            if (coverPhotoBase64.isEmpty()) {
+                coverPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_05)).getBitmap();
+            } else {
+                coverPhotoBitmap = ImageUtil.stringToBitMap(coverPhotoBase64);
+            }
+        }
+        catch (Exception e){
+            coverPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_05)).getBitmap();
+        }
+
+        return coverPhotoBitmap;
     }
 
     private Bitmap loadUserPhoto() {
         Bitmap userPhotoBitmap;
-
         try {
+
             if (MockSingleton.INSTANCE.user.getPhoto2().isEmpty()) {
                 userPhotoBitmap = ((BitmapDrawable) ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person_giant)).getBitmap();
             } else {
@@ -266,12 +281,17 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         AndroidUtils.saveCoverPicture(this, this.photoCoverBase64);
         MockSingleton.INSTANCE.user = AndroidUtils.loadUser(this);
 
+        String coverPhotoBase64 = AndroidUtils.loadCoverPictureBase64(this);
+        if (coverPhotoBase64 != null & !coverPhotoBase64.isEmpty()) {
+            this.userAccount.setBackground(ImageUtil.stringToBitMap(coverPhotoBase64));
+        }
     }
 
     @Override
     public void onUpdateImageProfileHadFinished() {
         AndroidUtils.saveProfilePicture(this, this.photoProfileBase64);
         MockSingleton.INSTANCE.user = AndroidUtils.loadUser(this);
+
         this.userAccount.setPhoto(ImageUtil.stringToBitMap(MockSingleton.INSTANCE.user.getPhoto2()));
     }
 }
