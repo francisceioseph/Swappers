@@ -36,7 +36,8 @@ public class UserService {
     private static final String URL_GET_USER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/users";
     private static final String URL_UPDATE_PWD_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/pwd";
     private static final String URL_UPDATE_BIRTHDAY_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/birthday";
-
+    private static final String URL_UPDATE_COVER_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/cover";
+    private static final String URL_UPDATE_PHOTO_PROFILE_SERVICE = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/login/update/photoperfil";
     public static int registerUserWithWS(Context context,User user) {
         int status_code = 0;
             try {
@@ -211,6 +212,76 @@ public class UserService {
         return user;
     }
 
+    public static int updateCoverUserService(User user) {
+        int status_code = 0;
+        try {
+            URL url = new URL(URL_UPDATE_COVER_SERVICE);
+
+            JSONObject jsonParam = fillParamJsonToCoverUpdate(user);
+            Log.i("#COVER", jsonParam.toString());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(10000);
+            conn.setRequestMethod("PUT");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.connect();
+
+            OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
+            os.write(jsonParam.toString());
+            os.flush();
+
+            status_code = conn.getResponseCode();
+
+            os.close();
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return status_code;
+    }
+
+    public static int updatePhotoProfileUserService(User user) {
+        int status_code = 0;
+        try {
+            URL url = new URL(URL_UPDATE_PHOTO_PROFILE_SERVICE);
+
+            JSONObject jsonParam = fillParamJsonToProfileUpdate(user);
+            Log.i("#COVER", jsonParam.toString());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(10000);
+            conn.setRequestMethod("PUT");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.connect();
+
+            OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
+            os.write(jsonParam.toString());
+            os.flush();
+
+            status_code = conn.getResponseCode();
+
+            os.close();
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return status_code;
+    }
+
     public static int updatePwdUserService(User user) {
         int status_code = 0;
         try {
@@ -298,6 +369,20 @@ public class UserService {
         return jsonParam;
     }
 
+    private static JSONObject fillParamJsonToCoverUpdate(User user) throws JSONException, UnsupportedEncodingException {
+        JSONObject jsonParam = new JSONObject();
+        jsonParam.put("email", user.getEmail());
+        jsonParam.put("cover", user.getCover());
+        return jsonParam;
+    }
+
+    private static JSONObject fillParamJsonToProfileUpdate(User user) throws JSONException, UnsupportedEncodingException {
+        JSONObject jsonParam = new JSONObject();
+        jsonParam.put("email", user.getEmail());
+        jsonParam.put("photo2", user.getPhoto2());
+        return jsonParam;
+    }
+
     private static User parseUserFromJSON(JSONObject jsonObject) throws JSONException{
         User user = new User();
         String codedPhoto = jsonObject.getString("photo2");
@@ -313,6 +398,7 @@ public class UserService {
         }
 
         if(jsonObject.has("cover")){
+            Log.i("#HASCOVER","entrou");
             user.setCover(jsonObject.getString("cover"));
         }
 

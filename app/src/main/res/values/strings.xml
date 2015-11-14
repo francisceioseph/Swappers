@@ -82,6 +82,9 @@
     <string name="settings_error_update_password_message">Could not update your password, please try again later.</string>
     <string name="settings_sucess_update_password_message">Successfully updated password.</string>
 
+    <string name="settings_error_update_image_message">Failed to update image, try again.</string>
+    <string name="settings_sucess_update_image_message">Successfully updated image.</string>
+
     <string name="settings_error_update_birthday_message">Could not update your birthday, please try again later.</string>
     <string name="settings_sucess_update_birthday_message">Successfully updated birthday.</string>
 
