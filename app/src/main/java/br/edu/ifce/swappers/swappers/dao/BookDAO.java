@@ -38,7 +38,7 @@ public class BookDAO {
     }
 
     public void delete(){
-        db.delete("book",null,null);
+        db.delete("book", null, null);
     }
 
     public void insertMultiple(ArrayList<Book> books, CategoryBook type) {
@@ -94,5 +94,27 @@ public class BookDAO {
             }while (cursor.moveToNext());
         }
         return bookList;
+    }
+
+    public void removeBookFromCategory(String bookId, String category) {
+        String tableName = "book";
+        String whereClause = "_id=? and type=?";
+        String[] whereArgs = new String[] {bookId, category};
+
+        db.delete(tableName, whereClause, whereArgs);
+    }
+
+    public boolean isBookFavourited(String bookId){
+        String sql = "select * from book where _id=? and type=?";
+        String[] selectionArgs = new String[] {bookId, CategoryBook.FAVORITE.toString()};
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+
+        boolean isFavourited = false;
+
+        if (cursor.moveToFirst()) {
+            isFavourited = true;
+        }
+
+        return isFavourited;
     }
 }

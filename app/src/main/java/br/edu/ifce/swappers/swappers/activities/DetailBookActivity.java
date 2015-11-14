@@ -43,8 +43,6 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
         void reloadRecyclerView();
     }
 
-    private boolean isBookFavourited = true;
-
     private Book book;
     private CircleImageView photoBook;
     private FragmentTabHost bookDetailTabHost;
@@ -53,7 +51,7 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
     private TextView authourBook;
     private TextView editorBook;
     private Toolbar toolbar;
-
+    private ImageView favouritedImageView;
     public DetailBookActivity(){
 
     }
@@ -70,6 +68,9 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
         editorBook = (TextView) findViewById(R.id.editor_detail_book);
         photoBook = (CircleImageView) findViewById(R.id.photoBook);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        favouritedImageView = (ImageView) findViewById(R.id.is_book_favorite);
+
+        favouritedImageView.setImageDrawable(null);
 
         book = (Book) currentIntent.getSerializableExtra(AndroidUtils.SELECTED_BOOK_ID);
 
@@ -107,13 +108,14 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
         if(!book.getPhoto().isEmpty()) {
             Picasso.with(DetailBookActivity.this).load(book.getPhoto()).into(photoBook);
         }
-        else{
+        else {
             Picasso.with(DetailBookActivity.this).load(R.drawable.blue_book).into(photoBook);
         }
 
         this.initFloatingButtons();
         this.initToolbar();
         this.initTabHost();
+        this.displayFavouriteBook();
 
     }
 
@@ -209,26 +211,31 @@ public class DetailBookActivity extends AppCompatActivity implements BookInterfa
 
 //  Some local and WS Save Methods.
 
-    private void setFavoriteBookView(){
-        ImageView favouritedImageView =(ImageView) findViewById(R.id.is_book_favorite);
+    private void displayFavouriteBook(){
+        BookDAO bookDAO = new BookDAO(this);
+        boolean isBookFavourited = bookDAO.isBookFavourited(book.getId());
 
         if (isBookFavourited){
             Drawable  heartDrawable  = ContextCompat.getDrawable(this, R.drawable.ic_is_book_favorite);
             favouritedImageView.setImageDrawable(heartDrawable);
-            isBookFavourited = false;
         }
         else {
             favouritedImageView.setImageDrawable(null);
-            isBookFavourited = true;
         }
     }
 
     @Override
     public void saveFavouriteBookIntoLocalBase() {
         BookDAO bookDAO = new BookDAO(this);
-        bookDAO.insert(book, CategoryBook.FAVORITE);
 
-        setFavoriteBookView();
+        if (bookDAO.isBookFavourited(book.getId()) == false) {
+            bookDAO.insert(book, CategoryBook.FAVORITE);
+        }
+        else {
+            bookDAO.removeBookFromCategory(book.getId(), CategoryBook.FAVORITE.toString());
+        }
+
+        displayFavouriteBook();
     }
 
     @Override
