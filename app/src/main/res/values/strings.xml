@@ -85,6 +85,9 @@
     <string name="settings_error_update_image_message">Failed to update image, try again.</string>
     <string name="settings_sucess_update_image_message">Successfully updated image.</string>
 
+    <string name="settings_error_delete_user_message">Could not delete your account, please try again later.</string>
+    <string name="settings_sucess_delete_user_message">Successfully delete account.</string>
+
     <string name="settings_error_update_birthday_message">Could not update your birthday, please try again later.</string>
     <string name="settings_sucess_update_birthday_message">Successfully updated birthday.</string>
 
