@@ -37,6 +37,8 @@ import java.util.Map;
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdateCityStateUserTaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdateCityStateUserTask;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
@@ -48,7 +50,7 @@ import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 
 
-public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener, PlaceInterface, OnMapReadyCallback{
+public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener, PlaceInterface, OnMapReadyCallback,UpdateCityStateUserTaskInterface {
 
     private static GoogleMap mapPlace;
     public static GoogleMap getMapPlace() {
@@ -143,6 +145,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
                     MockSingleton.INSTANCE.user.setCity(city);
                     MockSingleton.INSTANCE.user.setState(state);
+
+                    callUpdateCityStateTask();
                 }
             } catch (IOException e) {
                 e.fillInStackTrace();
@@ -394,5 +398,22 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
+    }
+
+    public void callUpdateCityStateTask(){
+        if(!AndroidUtils.userHasCityState(getActivity())){
+            User user = MockSingleton.INSTANCE.user;
+
+            UpdateCityStateUserTask updateCityStateUserTask = new UpdateCityStateUserTask(getActivity(),this);
+            updateCityStateUserTask.execute(user);
+        }
+    }
+
+    @Override
+    public void onUpdateCityStateUserHadFinished() {
+        String city = MockSingleton.INSTANCE.user.getCity();
+        String state = MockSingleton.INSTANCE.user.getState();
+        AndroidUtils.saveCityState(getActivity(),city,state);
+        SwappersToast.makeText(getActivity(),getActivity().getString(R.string.settings_sucess_update_city_state_user_message),Toast.LENGTH_LONG).show();
     }
 }

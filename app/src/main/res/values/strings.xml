@@ -85,6 +85,9 @@
     <string name="settings_error_update_image_message">Failed to update image, try again.</string>
     <string name="settings_sucess_update_image_message">Successfully updated image.</string>
 
+    <string name="settings_error_update_city_state_user_message">Could not save your city / state.</string>
+    <string name="settings_sucess_update_city_state_user_message">Your City/Town was saved.</string>
+
     <string name="settings_error_delete_user_message">Could not delete your account, please try again later.</string>
     <string name="settings_sucess_delete_user_message">Successfully delete account.</string>
 

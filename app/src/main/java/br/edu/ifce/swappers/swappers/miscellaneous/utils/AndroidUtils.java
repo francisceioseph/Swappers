@@ -69,6 +69,20 @@ public class AndroidUtils {
         return false;
     }
 
+    public static boolean userHasCityState(Context context){
+        SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+        String name, password;
+
+        name = manager.getString("city", null);
+        password = manager.getString("state", null);
+
+        if (name != null && password != null){
+            return true;
+        }
+
+        return false;
+    }
+
     public static void createUser(Context context, User user){
         SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = manager.edit();
@@ -109,6 +123,8 @@ public class AndroidUtils {
             user.setPhoto2(manager.getString("photo", null));
             user.setBirthday(manager.getLong("birthday", 0L));
             user.setCover(manager.getString("cover", null));
+            user.setCity(manager.getString("city",null));
+            user.setState(manager.getString("state", null));
         }
 
         return user;
@@ -143,6 +159,17 @@ public class AndroidUtils {
             SharedPreferences.Editor editor = manager.edit();
 
             editor.putString("photo", encodedImage);
+            editor.apply();
+        }
+    }
+
+    public static void saveCityState(Context context, String city,String state){
+        if(userHasBeenLoaded(context)) {
+            SharedPreferences manager = context.getSharedPreferences(USER_SECRET_DATA, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = manager.edit();
+
+            editor.putString("state", state);
+            editor.putString("city", city);
             editor.apply();
         }
     }

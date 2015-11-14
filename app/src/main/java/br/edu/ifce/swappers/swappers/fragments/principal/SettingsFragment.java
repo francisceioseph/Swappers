@@ -42,8 +42,11 @@ import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.miscellaneous.adapters.SettingsArrayAdapter;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.DeleteUserTaskInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdateBirthDayTaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdateCityStateUserTaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdateImageTaskInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdatePwdTaskInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.DeleteUserTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdateCityStateUserTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdateUserBirthDayTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdateUserPwdTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
@@ -55,12 +58,13 @@ import br.edu.ifce.swappers.swappers.model.User;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends Fragment implements OnDateSetListener, UserPhotoDialogFragment.UserPhotoDialogListener,UpdatePwdTaskInterface,UpdateBirthDayTaskInterface,DeleteUserTaskInterface {
+public class SettingsFragment extends Fragment implements OnDateSetListener, UserPhotoDialogFragment.UserPhotoDialogListener,UpdatePwdTaskInterface,UpdateBirthDayTaskInterface,DeleteUserTaskInterface,UpdateCityStateUserTaskInterface {
 
     private ListView settingsListView;
     private static String BIRTHDAY_DATEPICKER_TAG = "BIRTHDAY_DATEPICKER";
     Spinner optionStates;
     Spinner optionCities;
+    private String cityOptionCities, stateOptionStates;
     private static String[] cities = new String[]{};
     private static final String[] STATES = new String[]{"CE", "SP"};
     private Map<String, String> states = new HashMap<>();
@@ -640,20 +644,45 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String city = optionCities.getSelectedItem().toString();
-                String state = optionStates.getSelectedItem().toString();
+//                String city = optionCities.getSelectedItem().toString();
+//                String state = optionStates.getSelectedItem().toString();
+//
+//                String nameState = states.get(state);
+//
+//                MockSingleton.INSTANCE.user.setCity(city);
+//                MockSingleton.INSTANCE.user.setState(state);
+//                MockSingleton.INSTANCE.userChangeCity = city;
+//                MockSingleton.INSTANCE.userChangeState = nameState;
 
-                String nameState = states.get(state);
-
-                MockSingleton.INSTANCE.user.setCity(city);
-                MockSingleton.INSTANCE.user.setState(state);
-                MockSingleton.INSTANCE.userChangeCity = city;
-                MockSingleton.INSTANCE.userChangeState = nameState;
-
-                SwappersToast.makeText(getActivity(), getString(R.string.change_city_dialog_positive_button_parcial_message) + " " + city + "," + state, Toast.LENGTH_SHORT).show();
-
+                //SwappersToast.makeText(getActivity(), getString(R.string.change_city_dialog_positive_button_parcial_message) + " " + city + "," + state, Toast.LENGTH_SHORT).show();
+                callTaskUpdateCityStateServer();
             }
         };
+    }
+
+    public void callTaskUpdateCityStateServer(){
+        cityOptionCities = optionCities.getSelectedItem().toString();
+        stateOptionStates = optionStates.getSelectedItem().toString();
+
+        User user = MockSingleton.INSTANCE.user;
+        user.setCity(cityOptionCities);
+        user.setState(stateOptionStates);
+
+        UpdateCityStateUserTask updateCityStateUserTask = new UpdateCityStateUserTask(getActivity(),this);
+        updateCityStateUserTask.execute(user);
+    }
+
+    @Override
+    public void onUpdateCityStateUserHadFinished() {
+        String nameState = states.get(stateOptionStates);
+
+        MockSingleton.INSTANCE.user.setCity(cityOptionCities);
+        MockSingleton.INSTANCE.user.setState(stateOptionStates);
+        MockSingleton.INSTANCE.userChangeCity = cityOptionCities;
+        MockSingleton.INSTANCE.userChangeState = nameState;
+
+        SwappersToast.makeText(getActivity(), getString(R.string.change_city_dialog_positive_button_parcial_message) + " " + cityOptionCities + "," + stateOptionStates, Toast.LENGTH_SHORT).show();
+        AndroidUtils.saveCityState(getActivity(),cityOptionCities,stateOptionStates);
     }
 
     /*
