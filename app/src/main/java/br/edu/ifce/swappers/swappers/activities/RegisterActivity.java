@@ -94,7 +94,8 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment();
+                UserPhotoDialogFragment dialogFragment = new UserPhotoDialogFragment(getString(R.string.userPhotoDialogTitle),
+                        getString(R.string.new_profile_picture_message));
                 dialogFragment.show(getSupportFragmentManager(), "User Photo Dialog Fragment");
             }
         };
