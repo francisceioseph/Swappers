@@ -69,7 +69,6 @@ public class UserService {
                     AndroidUtils.createUser(context, user);
                 }
                 MockSingleton.INSTANCE.user = user;
-                Log.i("USER-LOGIN-TAG-AWASOME", conn.getHeaderField("Location"));
                 MockSingleton.INSTANCE.user.setId(getIdFromLocation(conn.getHeaderField("Location")));
 
                 os.close();
