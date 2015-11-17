@@ -16,6 +16,9 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.tabs.profile.DonatedBooksFragment;
@@ -54,9 +57,13 @@ public class ProfileFragment extends Fragment {
         coverPhoto.setImageBitmap(this.getUserCoverPhoto());
         userImageView.setImageBitmap(this.getUserPhoto());
 
-        usernameTextView.setText(this.getUserNameFromSingleton());
+        if(MockSingleton.INSTANCE.user.getBirthday() != null){
+            usernameTextView.setText(this.getUserNameFromSingleton() + ", " + this.getUserAge());
+        }
+        else {
+            usernameTextView.setText(this.getUserNameFromSingleton());
+        }
         userCityTextView.setText(this.getUserCityFromSingleton());
-
     }
 
     private void initTabHost(View rootView) {
@@ -138,6 +145,31 @@ public class ProfileFragment extends Fragment {
         }
 
         return city;
+    }
+
+    public int getUserAge(){
+        int age;
+
+        Calendar dateOfToday = Calendar.getInstance();
+
+        Calendar birthDateCalendar = new GregorianCalendar();
+        birthDateCalendar.setTimeInMillis(MockSingleton.INSTANCE.user.getBirthday());
+
+        if(dateOfToday.get(Calendar.MONTH) > birthDateCalendar.get(Calendar.MONTH)){
+            age = dateOfToday.get(Calendar.YEAR) - birthDateCalendar.get(Calendar.YEAR);
+        }
+        else if (dateOfToday.get(Calendar.MONTH) == birthDateCalendar.get(Calendar.MONTH)){
+            if (dateOfToday.get(Calendar.DAY_OF_MONTH) >= birthDateCalendar.get(Calendar.DAY_OF_MONTH)){
+                age = dateOfToday.get(Calendar.YEAR) - birthDateCalendar.get(Calendar.YEAR);
+            }
+            else
+                age = (dateOfToday.get(Calendar.YEAR) - birthDateCalendar.get(Calendar.YEAR))-1;
+        }
+        else {
+            age = (dateOfToday.get(Calendar.YEAR) - birthDateCalendar.get(Calendar.YEAR))-1;
+        }
+
+        return age;
     }
 
     private Bitmap getUserPhoto() {
