@@ -1,7 +1,7 @@
 package br.edu.ifce.swappers.swappers;
 
 /**
- * Last modified by Joamila on 14/11/2015
+ * Last modified by Joamila on 07/12/2015
  */
 
 import android.util.Log;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Book;
+import br.edu.ifce.swappers.swappers.model.BookWithPlace;
 import br.edu.ifce.swappers.swappers.model.Comment;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
@@ -21,10 +22,12 @@ public enum MockSingleton {
     INSTANCE;
 
     public User user;
+
     public ArrayList<Place> places = new ArrayList<Place>();
     public ArrayList<User> donators = new ArrayList<>();
     public ArrayList<Place> statisticPlace = new ArrayList<>();
     public ArrayList<Book> statisticBook = new ArrayList<>();
+    public ArrayList<BookWithPlace> nearBooks = new ArrayList<>();
 
     public String userChangeCity = null;
     public String userChangeState = null;

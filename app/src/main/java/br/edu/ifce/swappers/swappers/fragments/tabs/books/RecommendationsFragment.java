@@ -1,3 +1,7 @@
+/**
+ * Last modified by Joamila on 07/12/2015
+ */
+
 package br.edu.ifce.swappers.swappers.fragments.tabs.books;
 
 
@@ -22,6 +26,8 @@ import java.util.List;
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
+import br.edu.ifce.swappers.swappers.dao.BookDAO;
+import br.edu.ifce.swappers.swappers.miscellaneous.CategoryBook;
 import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.BookWithPlace;
@@ -55,39 +61,65 @@ public class RecommendationsFragment extends Fragment {
         this.initViewComponents(rootView);
         this.initViewListeners();
 
-        Log.i("INDEX", String.valueOf(indexBookRec));
+        setRecommendations();
 
-        if (nearPlaces!=null) {
-            for (int i = 0; i < nearPlaces.size(); i++) {
-                if (nearPlaces.get(i).getBooks().size()>0) {
-                    for (int j = 0; j<nearPlaces.get(i).getBooks().size(); j++){
-                        recommendationBooks.add(new BookWithPlace(nearPlaces.get(i).getBooks().get(j), nearPlaces.get(i).getId()));
+        return rootView;
+    }
+
+    private void setRecommendations(){
+
+        if (nearPlaces!=null && MockSingleton.INSTANCE.nearBooks.size()>0) {
+            ArrayList<String> authorsForRecommendation = getAuthorsForRecommendations();
+
+            for(int i = 0; i < MockSingleton.INSTANCE.nearBooks.size(); i++){
+                for (int j = 0; j < authorsForRecommendation.size(); j++){
+                    if(MockSingleton.INSTANCE.nearBooks.get(i).getBook().getAuthor().equals(authorsForRecommendation.get(j))){
+                        recommendationBooks.add(MockSingleton.INSTANCE.nearBooks.get(i));
                     }
                 }
             }
 
-            Collections.shuffle(recommendationBooks);
-
-            if(!recommendationBooks.isEmpty()) {
+            if(recommendationBooks.isEmpty()){
+                Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverRecommendationCircleImageView);
+                titleRecommendationTextView.setText("Ainda não há recomendações.");
+                authorsRecommendationTextView.setText("Estamos trabalhando nisso.");
+            }
+            else if(!recommendationBooks.isEmpty()) {
                 Picasso.with(getActivity()).load(recommendationBooks.get(0).getBook().getPhoto()).into(coverRecommendationCircleImageView);
                 titleRecommendationTextView.setText(recommendationBooks.get(0).getBook().getTitle());
                 authorsRecommendationTextView.setText(recommendationBooks.get(0).getBook().getAuthor());
-            }else{
-                Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverRecommendationCircleImageView);
-                titleRecommendationTextView.setText("Ainda não há recomendações.");
-                authorsRecommendationTextView.setText("");
             }
+
         }else {
             Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverRecommendationCircleImageView);
             titleRecommendationTextView.setText("Ainda não há recomendações.");
             authorsRecommendationTextView.setText("");
         }
+    }
 
+    private ArrayList<String> getAuthorsForRecommendations(){
+        BookDAO bookDAO = new BookDAO(getActivity());
+        ArrayList<Book> booksFavorites;
+        ArrayList<Book> booksAdopted;
+        ArrayList<String> authors = new ArrayList<>();
 
-        //titleRecommendationTextView.setText("O Segundo Sexo");
-        //authorsRecommendationTextView.setText("Simone de Beauvoir");
+        if (!bookDAO.getBookAllByCategory(CategoryBook.FAVORITE.toString()).isEmpty()) {
+            booksFavorites = bookDAO.getBookAllByCategory(CategoryBook.FAVORITE.toString());
 
-        return rootView;
+            for(int i = 0; i < booksFavorites.size(); i++){
+                authors.add(booksFavorites.get(i).getAuthor());
+            }
+        }
+
+        if (!bookDAO.getBookAllByCategory(CategoryBook.RETRIEVED.toString()).isEmpty()) {
+            booksAdopted = bookDAO.getBookAllByCategory(CategoryBook.RETRIEVED.toString());
+
+            for(int i = 0; i < booksAdopted.size(); i++){
+                authors.add(booksAdopted.get(i).getAuthor());
+            }
+        }
+
+        return authors;
     }
 
     private void initViewComponents(View rootView) {
@@ -135,8 +167,6 @@ public class RecommendationsFragment extends Fragment {
                         }
                     }
                 }
-
-
             }
         };
     }
@@ -145,17 +175,9 @@ public class RecommendationsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SwappersToast.makeText(getActivity(), getString(R.string.service_not_implemented), Toast.LENGTH_SHORT).show();;
-                Log.i("INDEX", String.valueOf(indexBookRec));
                 if(!recommendationBooks.isEmpty()){
-                    if(recommendationBooks.size()<=5){
-                        indexBookRec--;
-                        if (indexBookRec<0) indexBookRec = 0;
-                    }
-                    else if (recommendationBooks.size()>5){
-                        indexBookRec--;
-                        if (indexBookRec<0) indexBookRec = 4;// (recommendationBooks.size()/4)-1;
-                    }
+                    indexBookRec--;
+                    if (indexBookRec<0) indexBookRec = recommendationBooks.size()-1;
 
                     titleRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getTitle());
                     authorsRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getAuthor());
@@ -178,14 +200,8 @@ public class RecommendationsFragment extends Fragment {
                 //SwappersToast.makeText(getActivity(), getString(R.string.service_not_implemented), Toast.LENGTH_SHORT).show();;
 
                 if(!recommendationBooks.isEmpty()){
-                    if (recommendationBooks.size()<=5){
-                        indexBookRec++;
-                        if(indexBookRec>0) indexBookRec = 0;
-                    }
-                    else if (recommendationBooks.size()>5){
-                        indexBookRec++;
-                        if(indexBookRec>=5) indexBookRec = 0;
-                    }
+                    indexBookRec++;
+                    if(indexBookRec>=recommendationBooks.size()) indexBookRec = 0;
 
                     titleRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getTitle());
                     authorsRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getAuthor());
@@ -197,7 +213,6 @@ public class RecommendationsFragment extends Fragment {
                         Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverRecommendationCircleImageView);
                     }
                 }
-
             }
         };
     }
