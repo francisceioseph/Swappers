@@ -12,14 +12,16 @@ import br.edu.ifce.swappers.swappers.miscellaneous.CategoryBook;
 
 /**
  * Created by gracyane on 03/09/2015.
+ * Last modified by Joamila on 07/12/2015
  */
 public class BookDAO {
 
     private SQLiteDatabase db;
 
     public BookDAO(Context context){
-        DBHelper dbHelper = new DBHelper(context);
-        db = dbHelper.getWritableDatabase();
+        //DBHelper dbHelper = new DBHelper(context);
+        //db = dbHelper.getWritableDatabase();
+        db = DBHelper.getInstance(context).getWritableDatabase();
     }
 
     public void insert(Book book , CategoryBook type){

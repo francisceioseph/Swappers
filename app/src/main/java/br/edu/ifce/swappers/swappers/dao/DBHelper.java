@@ -6,14 +6,25 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by gracyane on 03/09/2015.
+ * Last modified by Joamila on 07/12/2015.
  */
 public class DBHelper extends SQLiteOpenHelper {
+
+    private static DBHelper mInstance = null;
 
     private static final String NOME_DB = "swappers";
     private static final int VERSAO_DB = 1;
 
     public DBHelper(Context context) {
         super(context, NOME_DB, null,VERSAO_DB);
+    }
+
+    public static DBHelper getInstance (Context context){
+        if (mInstance == null){
+            mInstance = new DBHelper(context.getApplicationContext());
+        }
+
+        return mInstance;
     }
 
     @Override

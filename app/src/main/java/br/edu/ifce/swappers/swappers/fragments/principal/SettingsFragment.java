@@ -1,7 +1,7 @@
 package br.edu.ifce.swappers.swappers.fragments.principal;
 
 /**
- * Last modified by Joamila on 14/11/2015
+ * Last modified by Joamila on 07/12/2015
  */
 
 import android.content.Context;
@@ -682,7 +682,9 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
         MockSingleton.INSTANCE.userChangeState = nameState;
 
         SwappersToast.makeText(getActivity(), getString(R.string.change_city_dialog_positive_button_parcial_message) + " " + cityOptionCities + "," + stateOptionStates, Toast.LENGTH_SHORT).show();
-        AndroidUtils.saveCityState(getActivity(),cityOptionCities,stateOptionStates);
+        AndroidUtils.saveCityState(getActivity(), cityOptionCities, stateOptionStates);
+
+        MockSingleton.INSTANCE.nearBooks.clear();
     }
 
     /*
