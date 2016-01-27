@@ -27,33 +27,34 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.1.1'
-    compile 'com.google.android.gms:play-services:7.3.0'
-    compile 'com.android.support:recyclerview-v7:22.1.1'
     //    Material Navigation Drawer
-    compile 'it.neokree:MaterialNavigationDrawer:1.3.3'
     //    Card View
-    compile 'com.android.support:cardview-v7:22.1.1'
     //    Circular Image View
-    compile 'de.hdodenhof:circleimageview:1.3.0'
     //    Circular Button
-    compile 'com.github.markushi:circlebutton:1.1'
     //    WebService
-    compile 'com.loopj.android:android-async-http:1.4.5'
     //    App intro
-    compile 'com.github.paolorotolo:appintro:1.1.0'
     //Ripple Efects
-    compile 'com.github.traex.rippleeffect:library:1.3'
     // Floating Action Button
-    compile 'com.github.futuresimple:android-floating-action-button:1.10.0'
     //  load Image RecycleView
-    compile 'com.squareup.picasso:picasso:2.3.4'
     //DateTimePicker
-    compile 'com.github.flavienlaurent.datetimepicker:library:0.0.2'
-    compile 'com.android.support:design:22.2.0'
     //Gson
-    compile 'com.google.code.gson:gson:2.3.1'
     //security
-    compile 'commons-codec:commons-codec:1.10'
     compile files('/Users/francisco/Documents/SWAPPERS/CODE/Swappers/lib/com.ubertesters.sdk.jar')
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.google.android.gms:play-services:7.5.0'
+    compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'it.neokree:MaterialNavigationDrawer:1.3.3'
+    compile 'com.android.support:cardview-v7:22.2.1'
+    compile 'de.hdodenhof:circleimageview:1.3.0'
+    compile 'com.github.markushi:circlebutton:1.1'
+    compile 'com.loopj.android:android-async-http:1.4.5'
+    compile 'com.github.paolorotolo:appintro:1.1.0'
+    compile 'com.github.traex.rippleeffect:library:1.3'
+    compile 'com.github.futuresimple:android-floating-action-button:1.10.0'
+    compile 'com.squareup.picasso:picasso:2.3.4'
+    compile 'com.github.flavienlaurent.datetimepicker:library:0.0.2'
+    compile 'com.android.support:design:22.2.1'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'commons-codec:commons-codec:1.10'
+    compile 'com.android.support:support-v4:22.2.1'
 }

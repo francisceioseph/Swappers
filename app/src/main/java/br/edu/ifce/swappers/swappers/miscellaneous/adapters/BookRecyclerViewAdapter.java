@@ -43,8 +43,6 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         return booksDataSource.get(positon);
     }
 
-
-
     public void setRecycleViewOnClickListenerHack(RecycleViewOnClickListenerHack r) {
         this.mRecycleViewOnClickListenerHack = r;
     }
