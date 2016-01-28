@@ -342,5 +342,10 @@
     <!-- Fragment Notification-->
     <string name="progress_dialog_retrieving_notification_message">Retrieving Notifications...</string>
     <string name="not_load_notification_message">Could not load ... his city was not identified.</string>
+    <string name="notification_section_title">Notifications</string>
+    <string name="founder_alessandra_email">ale.lino.00@gmail.com</string>
+    <string name="founder_gracyane_email">gracyane_oliveira@hotmail.com</string>
+    <string name="founder_francis_email">francisceioseph@gmail.com</string>
+    <string name="founder_joamila_email">joamila.brito@gmail.com</string>
 
 </resources>

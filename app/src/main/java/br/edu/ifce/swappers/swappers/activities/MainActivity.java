@@ -69,7 +69,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     private void buildMainMenu() {
 
-        Drawable notificationSectionIcon = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_help);
+        Drawable notificationSectionIcon = ContextCompat.getDrawable(getApplicationContext(), R.drawable.notification);
         Drawable profileSectionIcon      = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person);
         Drawable booksSectionIcon        = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_book);
         Drawable placesSectionIcon       = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_room);
@@ -77,7 +77,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         Drawable aboutSectionIcon        = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_help);
         Drawable settingsSectionIcon     = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_settings);
 
-        MaterialSection notificationSection = this.newSection("Notification", notificationSectionIcon, new NotificationsFragment());
+        MaterialSection notificationSection = this.newSection(getString(R.string.notification_section_title), notificationSectionIcon, new NotificationsFragment());
         MaterialSection profileSection      = this.newSection(getString(R.string.profile_section_title), profileSectionIcon, new ProfileFragment());
         MaterialSection booksSection        = this.newSection(getString(R.string.books_section_title), booksSectionIcon, new BooksFragment());
         MaterialSection placesSection       = this.newSection(getString(R.string.places_section_title), placesSectionIcon, new PlacesFragment());

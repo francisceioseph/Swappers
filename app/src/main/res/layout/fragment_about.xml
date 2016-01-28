@@ -120,6 +120,16 @@
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="@string/founder_alessandra_email"
+                            android:id="@+id/alessandra_email"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/white"
+                            android:textSize="11dp" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -147,6 +157,17 @@
                             android:layout_gravity="center_horizontal"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="@string/founder_gracyane_email"
+                            android:id="@+id/gracyane_email"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:textSize="11dp" />
 
                     </LinearLayout>
 
@@ -185,7 +206,18 @@
                             android:id="@+id/francis_name"
                             android:layout_gravity="center_horizontal"
                             android:textColor="@color/white"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="@string/founder_francis_email"
+                            android:id="@+id/francis_email"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/white"
+                            android:textSize="11dp" />
 
                     </LinearLayout>
 
@@ -214,6 +246,16 @@
                             android:layout_gravity="center_horizontal"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="@string/founder_joamila_email"
+                            android:id="@+id/joamila_email"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/white"
+                            android:textSize="11dp" />
 
                     </LinearLayout>
 

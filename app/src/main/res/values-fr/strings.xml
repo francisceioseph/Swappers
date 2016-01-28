@@ -247,6 +247,7 @@
     <string name="duplicate_email_error_message">L\'e-mail fourni fait partie d\'une autre compte. SVP, indiquez d\'autre courriel.</string>
     <string name="new_cover_picture_message">Choisissez comment vous voulez nous fournir votre nouvelle photo de couverture.</string>
     <string name="coverPhotoDialogTitle">Nouvelle Photo de Couverture</string>
+    <string name="notification_section_title">Notifications</string>
 
 
 </resources>
