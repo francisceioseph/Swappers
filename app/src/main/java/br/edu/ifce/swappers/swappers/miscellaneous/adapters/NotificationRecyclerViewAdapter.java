@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.RecycleViewOnClickListenerHack;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.ImageUtil;
 import br.edu.ifce.swappers.swappers.model.Notification;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -69,7 +70,7 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
         }
 
         if(notification.getPhotoUser()!=null) {
-            Picasso.with(context).load(notification.getPhotoUser()).into(holder.notificationImage);
+            holder.notificationImage.setImageBitmap(ImageUtil.stringToBitMap(notification.getPhotoUser()));
         }else{
             Picasso.with(context).load(R.drawable.ic_person_giant).into(holder.notificationImage);
         }
@@ -80,11 +81,16 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
 
         if(notification.getEventType() !=null){
             if(notification.getEventType().equals("donation")){
-                message = "Livro doado :"+notification.getBookTitle() + "| Local da doação :" + notification.getPlaceName();
+                message = "Livro doado : "+notification.getBookTitle()
+                        + " | \nLocal da doação : " + notification.getPlaceName()
+                        + " - "+notification.getCity() + " - "+notification.getRegion();
             }else if(notification.getEventType().equals("recovered")){
-                message = "Livro retirado :"+notification.getBookTitle()+ "| Local da retirada :" + notification.getPlaceName();
+                message = "Livro retirado : "+notification.getBookTitle()
+                        + " | \nLocal da retirada : " + notification.getPlaceName()
+                        + " - "+notification.getCity() + " - "+notification.getRegion();
             }else if(notification.getEventType().equals("review")) {
-                message =  "Livro resenhado :"+notification.getBookTitle();
+                message = "Livro : "+ notification.getBookTitle()
+                        + " | \nComentario : "+notification.getReviewText();
             }
         }else {
             message = "Nenhum evento...";

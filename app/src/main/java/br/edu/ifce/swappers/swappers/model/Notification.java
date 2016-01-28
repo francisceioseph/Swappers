@@ -14,6 +14,7 @@ public class Notification {
     private String region;
     private String eventType;
     private Date timestamp;
+    private String reviewText;
 
     public Notification() {
     }
@@ -90,5 +91,13 @@ public class Notification {
 
     public void setPhotoUser(String photoUser) {
         this.photoUser = photoUser;
+    }
+
+    public String getReviewText() {
+        return reviewText;
+    }
+
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
     }
 }

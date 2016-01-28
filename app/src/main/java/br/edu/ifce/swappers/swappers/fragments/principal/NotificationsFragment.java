@@ -30,6 +30,7 @@ public class NotificationsFragment extends Fragment implements RecycleViewOnClic
     private RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     ArrayList<Notification> dataSource;
+    private NotificationRecyclerViewAdapter adapter;
 
     public NotificationsFragment() {
     }
@@ -52,7 +53,7 @@ public class NotificationsFragment extends Fragment implements RecycleViewOnClic
         View rootView = inflater.inflate(R.layout.fragment_notifications, container, false);
 
 
-        NotificationRecyclerViewAdapter adapter = new NotificationRecyclerViewAdapter(getActivity(),this.dataSource);
+        adapter = new NotificationRecyclerViewAdapter(getActivity(),this.dataSource);
         adapter.setmRecycleViewOnClickListenerHack(this);
 
         this.layoutManager = new LinearLayoutManager(getActivity());
@@ -71,7 +72,7 @@ public class NotificationsFragment extends Fragment implements RecycleViewOnClic
 
         String state = MockSingleton.INSTANCE.user.getState();
         if(state !=null) {
-            NotificationTask notificationTask = new NotificationTask(getActivity().getApplication(), this);
+            NotificationTask notificationTask = new NotificationTask(getActivity(), this);
             notificationTask.execute(state);
         }else{
            Notification notification = new Notification();
@@ -91,5 +92,6 @@ public class NotificationsFragment extends Fragment implements RecycleViewOnClic
     @Override
     public void onReceiveNotification(ArrayList<Notification> notifications) {
         this.dataSource.addAll(notifications);
+        this.adapter.notifyDataSetChanged();
     }
 }
