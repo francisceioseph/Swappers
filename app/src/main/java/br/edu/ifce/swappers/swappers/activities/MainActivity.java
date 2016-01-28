@@ -31,6 +31,7 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.AboutFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.BooksFragment;
+import br.edu.ifce.swappers.swappers.fragments.principal.NotificationsFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.PlacesFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.ProfileFragment;
 import br.edu.ifce.swappers.swappers.fragments.principal.SettingsFragment;
@@ -68,20 +69,23 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     private void buildMainMenu() {
 
-        Drawable profileSectionIcon     = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person);
-        Drawable booksSectionIcon       = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_book);
-        Drawable placesSectionIcon      = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_room);
-        Drawable statisticsSectionIcon  = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_dashboard);
-        Drawable aboutSectionIcon       = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_help);
-        Drawable settingsSectionIcon    = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_settings);
+        Drawable notificationSectionIcon = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_help);
+        Drawable profileSectionIcon      = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person);
+        Drawable booksSectionIcon        = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_book);
+        Drawable placesSectionIcon       = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_room);
+        Drawable statisticsSectionIcon   = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_dashboard);
+        Drawable aboutSectionIcon        = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_help);
+        Drawable settingsSectionIcon     = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_settings);
 
-        MaterialSection profileSection     = this.newSection(getString(R.string.profile_section_title), profileSectionIcon, new ProfileFragment());
-        MaterialSection booksSection       = this.newSection(getString(R.string.books_section_title), booksSectionIcon, new BooksFragment());
-        MaterialSection placesSection      = this.newSection(getString(R.string.places_section_title), placesSectionIcon, new PlacesFragment());
-        MaterialSection statisticsSection  = this.newSection(getString(R.string.statistics_section_title), statisticsSectionIcon, new StatisticsFragment());
-        MaterialSection aboutSection       = this.newSection(getString(R.string.about_section_title), aboutSectionIcon, new AboutFragment());
-        MaterialSection settingsSection    = this.newSection(getString(R.string.settings_section_title), settingsSectionIcon, new SettingsFragment());
+        MaterialSection notificationSection = this.newSection("Notification", notificationSectionIcon, new NotificationsFragment());
+        MaterialSection profileSection      = this.newSection(getString(R.string.profile_section_title), profileSectionIcon, new ProfileFragment());
+        MaterialSection booksSection        = this.newSection(getString(R.string.books_section_title), booksSectionIcon, new BooksFragment());
+        MaterialSection placesSection       = this.newSection(getString(R.string.places_section_title), placesSectionIcon, new PlacesFragment());
+        MaterialSection statisticsSection   = this.newSection(getString(R.string.statistics_section_title), statisticsSectionIcon, new StatisticsFragment());
+        MaterialSection aboutSection        = this.newSection(getString(R.string.about_section_title), aboutSectionIcon, new AboutFragment());
+        MaterialSection settingsSection     = this.newSection(getString(R.string.settings_section_title), settingsSectionIcon, new SettingsFragment());
 
+        this.addSection(notificationSection);
         this.addSection(profileSection);
         this.addSection(booksSection);
         this.addSection(placesSection);
