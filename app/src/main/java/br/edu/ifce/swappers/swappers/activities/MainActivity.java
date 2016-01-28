@@ -69,7 +69,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     private void buildMainMenu() {
 
-        Drawable notificationSectionIcon = ContextCompat.getDrawable(getApplicationContext(), R.drawable.notification);
+        Drawable notificationSectionIcon = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_help);
         Drawable profileSectionIcon      = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_person);
         Drawable booksSectionIcon        = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_book);
         Drawable placesSectionIcon       = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_room);

@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.RecycleViewOnClickListenerHack;
@@ -22,9 +25,11 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
 
     private ArrayList<Notification> dataSource;
     private RecycleViewOnClickListenerHack mRecycleViewOnClickListenerHack;
+    private Context context;
 
-    public NotificationRecyclerViewAdapter(ArrayList<Notification> dataSource) {
+    public NotificationRecyclerViewAdapter(Context context,ArrayList<Notification> dataSource) {
         this.dataSource = dataSource;
+        this.context = context;
     }
 
     public Notification getItem(int position){
@@ -52,8 +57,40 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
     public void onBindViewHolder(ViewHolder holder, int position) {
         Notification notification = this.dataSource.get(position);
 
+        Locale currentLocale        = Locale.getDefault();
+        SimpleDateFormat formatter  = (SimpleDateFormat) SimpleDateFormat.getDateInstance(SimpleDateFormat.FULL, currentLocale);
+
+
         holder.notificationUserName.setText(notification.getUserName());
-        holder.notificationText.setText("Some Text Here...");
+        holder.notificationText.setText(setUpMessage(notification));
+
+        if(notification.getTimestamp()!=null) {
+            holder.notificationDate.setText(formatter.format(notification.getTimestamp()));
+        }
+
+        if(notification.getPhotoUser()!=null) {
+            Picasso.with(context).load(notification.getPhotoUser()).into(holder.notificationImage);
+        }else{
+            Picasso.with(context).load(R.drawable.ic_person_giant).into(holder.notificationImage);
+        }
+    }
+
+    public String setUpMessage(Notification notification){
+        String message = "";
+
+        if(notification.getEventType() !=null){
+            if(notification.getEventType().equals("donation")){
+                message = "Livro doado :"+notification.getBookTitle() + "| Local da doação :" + notification.getPlaceName();
+            }else if(notification.getEventType().equals("recovered")){
+                message = "Livro retirado :"+notification.getBookTitle()+ "| Local da retirada :" + notification.getPlaceName();
+            }else if(notification.getEventType().equals("review")) {
+                message =  "Livro resenhado :"+notification.getBookTitle();
+            }
+        }else {
+            message = "Nenhum evento...";
+        }
+
+        return message;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

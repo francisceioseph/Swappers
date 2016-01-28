@@ -1,21 +1,24 @@
 package br.edu.ifce.swappers.swappers.model;
 
+import java.util.Date;
+
 /**
  * Created by francisco on 27/01/16.
  */
 public class Notification {
     private String userName;
     private String placeName;
+    private String photoUser;
     private String bookTitle;
     private String city;
     private String region;
     private String eventType;
-    private String timestamp;
+    private Date timestamp;
 
     public Notification() {
     }
 
-    public Notification(String userName, String placeName, String bookTitle, String city, String region, String eventType, String timestamp) {
+    public Notification(String userName, String placeName, String bookTitle, String city, String region, String eventType, Date timestamp) {
         this.userName = userName;
         this.placeName = placeName;
         this.bookTitle = bookTitle;
@@ -73,11 +76,19 @@ public class Notification {
         this.eventType = eventType;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getPhotoUser() {
+        return photoUser;
+    }
+
+    public void setPhotoUser(String photoUser) {
+        this.photoUser = photoUser;
     }
 }

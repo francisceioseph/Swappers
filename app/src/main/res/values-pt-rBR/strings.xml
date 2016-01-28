@@ -265,5 +265,9 @@
     <string name="new_cover_picture_message">Escolha como você deseja nos fornecer sua nova foto de capa.</string>
     <string name="coverPhotoDialogTitle">Nova Foto de Capa</string>
 
+    <!-- Fragment Notification-->
+    <string name="progress_dialog_retrieving_notification_message">Recebendo informações...</string>
+    <string name="not_load_notification_message">Não foi possível carregar as informações ... sua cidade não pôde ser identificada.</string>
+
 
 </resources>
