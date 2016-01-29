@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Strings from wifi -->
+    <string name="internet_not_connection_message">Não foi possível carregar as informações. Verifique sua conexão.</string>
+
     <!-- Strings from BookActivity.java -->
     <string name="near_books_tab_title">LIVROS PRÓXIMOS</string>
     <string name="recommendations_tab_title">RECOMENDAÇÕES</string>

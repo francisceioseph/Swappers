@@ -20,6 +20,7 @@ import br.edu.ifce.swappers.swappers.miscellaneous.adapters.NotificationRecycler
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.NotificationTaskInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.NotificationTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Notification;
 
@@ -41,7 +42,12 @@ public class NotificationsFragment extends Fragment implements RecycleViewOnClic
 
         this.dataSource = new ArrayList<Notification>();
 
-        loadNotificationsTask();
+        if(AndroidUtils.isNetworkAvailable(getActivity())) {
+            loadNotificationsTask();
+        }else{
+            Toast toast = SwappersToast.makeText(getActivity().getApplication(), getString(R.string.internet_not_connection_message), Toast.LENGTH_LONG);
+            toast.show();
+        }
 //        Notification notification = new Notification();
 //        notification.setUserName("Francisco José");
 //
