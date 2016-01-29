@@ -44,6 +44,7 @@ public class RecommendationsFragment extends Fragment {
 
     TextView titleRecommendationTextView;
     TextView authorsRecommendationTextView;
+    TextView dateDonationRecommendationTextView;
 
     List<Place> nearPlaces = MockSingleton.INSTANCE.places;
     List<BookWithPlace> recommendationBooks = new ArrayList<>();
@@ -83,17 +84,20 @@ public class RecommendationsFragment extends Fragment {
                 Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverRecommendationCircleImageView);
                 titleRecommendationTextView.setText("Ainda não há recomendações.");
                 authorsRecommendationTextView.setText("Estamos trabalhando nisso.");
+                dateDonationRecommendationTextView.setText("");
             }
             else if(!recommendationBooks.isEmpty()) {
                 Picasso.with(getActivity()).load(recommendationBooks.get(0).getBook().getPhoto()).into(coverRecommendationCircleImageView);
                 titleRecommendationTextView.setText(recommendationBooks.get(0).getBook().getTitle());
                 authorsRecommendationTextView.setText(recommendationBooks.get(0).getBook().getAuthor());
+                dateDonationRecommendationTextView.setText("Doado em ");
             }
 
         }else {
             Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverRecommendationCircleImageView);
             titleRecommendationTextView.setText("Ainda não há recomendações.");
             authorsRecommendationTextView.setText("");
+            dateDonationRecommendationTextView.setText("");
         }
     }
 
@@ -131,6 +135,7 @@ public class RecommendationsFragment extends Fragment {
 
         this.titleRecommendationTextView        = (TextView) rootView.findViewById(R.id.title_recommendation);
         this.authorsRecommendationTextView      = (TextView) rootView.findViewById(R.id.authors_recommendation);
+        this.dateDonationRecommendationTextView = (TextView) rootView.findViewById(R.id.date_donation_recommendation);
     }
 
     private void initViewListeners() {
@@ -181,6 +186,7 @@ public class RecommendationsFragment extends Fragment {
 
                     titleRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getTitle());
                     authorsRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getAuthor());
+                    dateDonationRecommendationTextView.setText("Doado em ");
 
                     if(!recommendationBooks.get(indexBookRec).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(recommendationBooks.get(indexBookRec).getBook().getPhoto()).
@@ -205,6 +211,7 @@ public class RecommendationsFragment extends Fragment {
 
                     titleRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getTitle());
                     authorsRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getAuthor());
+                    dateDonationRecommendationTextView.setText("Doado em ");
 
                     if(!recommendationBooks.get(indexBookRec).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(recommendationBooks.get(indexBookRec).getBook().getPhoto()).
