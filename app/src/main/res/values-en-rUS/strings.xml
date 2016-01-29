@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Strings from wifi -->
+    <string name="internet_not_connection_message">Could not load information. Check your connection.</string>
+
     <!-- Strings from BookActivity.java -->
     <string name="near_books_tab_title">NEAR BOOKS</string>
     <string name="recommendations_tab_title">RECOMMENDATIONS</string>

@@ -7,12 +7,15 @@ package br.edu.ifce.swappers.swappers;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.BookWithPlace;
 import br.edu.ifce.swappers.swappers.model.Comment;
 import br.edu.ifce.swappers.swappers.model.Place;
+import br.edu.ifce.swappers.swappers.model.StateCity;
 import br.edu.ifce.swappers.swappers.model.User;
 
 /**
@@ -28,6 +31,7 @@ public enum MockSingleton {
     public ArrayList<Place> statisticPlace = new ArrayList<>();
     public ArrayList<Book> statisticBook = new ArrayList<>();
     public ArrayList<BookWithPlace> nearBooks = new ArrayList<>();
+    public ArrayList<StateCity> cityStateList = new ArrayList<>();
 
     public String userChangeCity = null;
     public String userChangeState = null;

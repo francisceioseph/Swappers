@@ -1,5 +1,8 @@
 package br.edu.ifce.swappers.swappers.miscellaneous;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Joamila on 10/10/2015.
  */
@@ -813,4 +816,37 @@ public abstract class Settings {
             "São Miguel do Tocantins", "São Salvador do Tocantins", "São Sebastião do Tocantins", "São Valério da Natividade", "Silvanópolis",
             "Sítio Novo do Tocantins", "Sucupira", "Taguatinga", "Taipas do Tocantins", "Talismã", "Tocantínia", "Tocantinópolis", "Tupirama",
             "Tupiratins", "Wanderlândia", "Xambioá"};
+
+        public static Map<String,String> mapAcronymCapital(){
+            Map<String,String> map = new HashMap<String,String>();
+            map.put("Acre","AC");
+            map.put("Alagoas","AL");
+            map.put("Amapá","AP");
+            map.put("Amazonas","AM");
+            map.put("Bahia","BA");
+            map.put("Ceará","CE");
+            map.put("Distrito Federal","DF");
+            map.put("Espírito Santo","ES");
+            map.put("Goiás","GO");
+            map.put("Maranhão","MA");
+            map.put("Mato Grosso","MT");
+            map.put("Mato Grosso do Sul","MS");
+            map.put("Minas Gerais","MG");
+            map.put("Pará","PA");
+            map.put("Paraíba","PB");
+            map.put("Paraná","PR");
+            map.put("Pernambuco","PE");
+            map.put("Piauí","PI");
+            map.put("Rio de Janeiro","RJ");
+            map.put("Rio Grande do Norte","RN");
+            map.put("Rio Grande do Sul","RS");
+            map.put("Rondônia","RO");
+            map.put("Roraima","RR");
+            map.put("Santa Catarina","SC");
+            map.put("São Paulo","SP");
+            map.put("Sergipe","SE");
+            map.put("Tocantins","TO");
+
+            return map;
+        }
 }
