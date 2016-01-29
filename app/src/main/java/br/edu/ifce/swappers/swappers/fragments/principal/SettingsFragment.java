@@ -729,7 +729,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
         MockSingleton.INSTANCE.user.setCity(cityOptionCities);
         MockSingleton.INSTANCE.user.setState(stateOptionStates);
         MockSingleton.INSTANCE.userChangeCity = cityOptionCities;
-        MockSingleton.INSTANCE.userChangeState = nameState;
+        MockSingleton.INSTANCE.userChangeState = stateOptionStates;
 
         SwappersToast.makeText(getActivity(), getString(R.string.change_city_dialog_positive_button_parcial_message) + " " + cityOptionCities + "," + stateOptionStates, Toast.LENGTH_SHORT).show();
         AndroidUtils.saveCityState(getActivity(), cityOptionCities, stateOptionStates);
