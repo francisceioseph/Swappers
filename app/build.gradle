@@ -40,8 +40,8 @@ dependencies {
     //Gson
     //security
 
-    //compile files('C:\\Android\\Projetos\\com.ubertesters.sdk.jar')
-    compile files('/Users/francisco/Documents/SWAPPERS/CODE/Swappers/lib/com.ubertesters.sdk.jar')
+    compile files('C:\\Android\\Projetos\\com.ubertesters.sdk.jar')
+    //compile files('/Users/francisco/Documents/SWAPPERS/CODE/Swappers/lib/com.ubertesters.sdk.jar')
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.android.support:recyclerview-v7:22.2.1'

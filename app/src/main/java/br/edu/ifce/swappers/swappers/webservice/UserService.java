@@ -496,7 +496,7 @@ public class UserService {
             Book book = new Gson().fromJson(jsonBooks, Book.class);
             ArrayList<Book> bookArrayList = new ArrayList<>();
             bookArrayList.add(book);
-            user.setBookDonationList(bookArrayList);
+            user.setBookRetrievedList(bookArrayList);
         }else{
             user.setBookRetrievedList(new ArrayList<Book>());
         }
@@ -511,7 +511,7 @@ public class UserService {
             Book book = new Gson().fromJson(jsonBooks, Book.class);
             ArrayList<Book> bookArrayList = new ArrayList<>();
             bookArrayList.add(book);
-            user.setBookDonationList(bookArrayList);
+            user.setBookFavoriteList(bookArrayList);
         }else{
             user.setBookFavoriteList(new ArrayList<Book>());
         }
