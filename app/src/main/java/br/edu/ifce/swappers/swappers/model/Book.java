@@ -1,6 +1,7 @@
 package br.edu.ifce.swappers.swappers.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by francisco on 16/06/15.
@@ -19,6 +20,7 @@ public class Book implements Serializable{
     private Place place;
     private int recovered;
     private int donation;
+    private Date dateDonation;
 
     public Book() {
     }
@@ -133,6 +135,14 @@ public class Book implements Serializable{
 
     public void setDonation(int donation) {
         this.donation = donation;
+    }
+
+    public Date getDateDonation() {
+        return dateDonation;
+    }
+
+    public void setDateDonation(Date dateDonation) {
+        this.dateDonation = dateDonation;
     }
 
     @Override

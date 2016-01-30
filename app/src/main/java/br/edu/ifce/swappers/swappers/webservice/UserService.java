@@ -469,11 +469,9 @@ public class UserService {
         }
 
         if(jsonObject.has("cover")){
-            Log.i("#HASCOVER","entrou");
             user.setCover(jsonObject.getString("cover"));
         }
 
-        //Log.i("TAG-booksDonation", jsonObject.get("booksDonation").toString());
         if(jsonObject.has("booksDonation") && jsonObject.get("booksDonation").toString().contains("[")){
             String jsonBooks = jsonObject.get("booksDonation").toString();
             Type collectionType = new TypeToken<ArrayList<Book>>(){}.getType();

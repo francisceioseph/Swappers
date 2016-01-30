@@ -9,7 +9,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -107,7 +112,6 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
         };
     }
 
-
     @Override
     public void updateStatisticDonors(ArrayList<User> userList) {
         usersDonators = userList;
@@ -122,8 +126,13 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
         else{
             nameMonthDonatorTextView.setText(usersDonators.get(index).getUsername());
             cityMonthDonatorTextView.setText(usersDonators.get(index).getCity() + ", ");
-            donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) +" "+ getString(R.string.donations));
+            donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) + " " + getString(R.string.donations));
             coverMonthDonatorCircleImageView.setImageBitmap(ImageUtil.stringToBitMap(usersDonators.get(index).getPhoto2()));
+
+            if(usersDonators.get(index).getBirthday()!=null){
+                Long dateMili = usersDonators.get(index).getBirthday();
+                ageMonthDonatorTextView.setText(String.valueOf(getUserAge(dateMili))+ " anos");
+            }
         }
     }
 
@@ -132,5 +141,35 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
         cityMonthDonatorTextView.setText(usersDonators.get(index).getCity() + ", ");
         donationsMonthDonatorTextView.setText(String.valueOf(usersDonators.get(index).getDonationNum()) +" "+ getString(R.string.donations));
         coverMonthDonatorCircleImageView.setImageBitmap(ImageUtil.stringToBitMap(usersDonators.get(index).getPhoto2()));
+
+        if(usersDonators.get(index).getBirthday()!=null){
+            Long dateMili = usersDonators.get(index).getBirthday();
+            ageMonthDonatorTextView.setText(String.valueOf(getUserAge(dateMili))+ " anos");
+        }
+    }
+
+    public int getUserAge(Long dateMili){
+        int age;
+
+        Calendar dateOfToday = Calendar.getInstance();
+
+        Calendar birthDateCalendar = new GregorianCalendar();
+        birthDateCalendar.setTimeInMillis(dateMili);
+
+        if(dateOfToday.get(Calendar.MONTH) > birthDateCalendar.get(Calendar.MONTH)){
+            age = dateOfToday.get(Calendar.YEAR) - birthDateCalendar.get(Calendar.YEAR);
+        }
+        else if (dateOfToday.get(Calendar.MONTH) == birthDateCalendar.get(Calendar.MONTH)){
+            if (dateOfToday.get(Calendar.DAY_OF_MONTH) >= birthDateCalendar.get(Calendar.DAY_OF_MONTH)){
+                age = dateOfToday.get(Calendar.YEAR) - birthDateCalendar.get(Calendar.YEAR);
+            }
+            else
+                age = (dateOfToday.get(Calendar.YEAR) - birthDateCalendar.get(Calendar.YEAR))-1;
+        }
+        else {
+            age = (dateOfToday.get(Calendar.YEAR) - birthDateCalendar.get(Calendar.YEAR))-1;
+        }
+
+        return age;
     }
 }
