@@ -20,7 +20,9 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
@@ -90,7 +92,7 @@ public class RecommendationsFragment extends Fragment {
                 Picasso.with(getActivity()).load(recommendationBooks.get(0).getBook().getPhoto()).into(coverRecommendationCircleImageView);
                 titleRecommendationTextView.setText(recommendationBooks.get(0).getBook().getTitle());
                 authorsRecommendationTextView.setText(recommendationBooks.get(0).getBook().getAuthor());
-                dateDonationRecommendationTextView.setText("Doado em ");
+                dateDonationRecommendationTextView.setText("Doado em " + getBookDateDonation(recommendationBooks.get(0).getBook()));
             }
 
         }else {
@@ -186,7 +188,7 @@ public class RecommendationsFragment extends Fragment {
 
                     titleRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getTitle());
                     authorsRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getAuthor());
-                    dateDonationRecommendationTextView.setText("Doado em ");
+                    dateDonationRecommendationTextView.setText("Doado em " + getBookDateDonation(recommendationBooks.get(indexBookRec).getBook()));
 
                     if(!recommendationBooks.get(indexBookRec).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(recommendationBooks.get(indexBookRec).getBook().getPhoto()).
@@ -211,7 +213,7 @@ public class RecommendationsFragment extends Fragment {
 
                     titleRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getTitle());
                     authorsRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getAuthor());
-                    dateDonationRecommendationTextView.setText("Doado em ");
+                    dateDonationRecommendationTextView.setText("Doado em " + getBookDateDonation(recommendationBooks.get(indexBookRec).getBook()));
 
                     if(!recommendationBooks.get(indexBookRec).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(recommendationBooks.get(indexBookRec).getBook().getPhoto()).
@@ -222,5 +224,18 @@ public class RecommendationsFragment extends Fragment {
                 }
             }
         };
+    }
+
+    public String getBookDateDonation(Book book){
+        String bookDateDonation;
+
+        Calendar dateDonationCalendar = new GregorianCalendar();
+        dateDonationCalendar.setTimeInMillis(book.getDateDonation().getTime());
+
+        bookDateDonation = String.valueOf(dateDonationCalendar.get(Calendar.DAY_OF_MONTH)) + "/" +
+                String.valueOf(dateDonationCalendar.get(Calendar.MONTH)) + "/" +
+                String.valueOf(dateDonationCalendar.get(Calendar.YEAR));
+
+        return bookDateDonation;
     }
 }

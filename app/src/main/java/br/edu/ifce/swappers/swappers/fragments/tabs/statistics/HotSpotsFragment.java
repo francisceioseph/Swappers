@@ -134,8 +134,8 @@ public class HotSpotsFragment extends Fragment implements BestPlaceInterface{
         int recovered = bestPlace.get(index).getRecovered();
         int donated   = bestPlace.get(index).getDonation();
 
-        this.receivedHotspotTextView.setText(String.format(getString(R.string.donations_text_for_place_statistics), recovered));
-        this.retrievedHotspotTextView.setText(String.format(getString(R.string.adoptions_text_for_place_statistics), donated));
+        this.receivedHotspotTextView.setText(String.format(getString(R.string.donations_text_for_place_statistics), donated));
+        this.retrievedHotspotTextView.setText(String.format(getString(R.string.adoptions_text_for_place_statistics), recovered));
 
         this.coverHotspotCircleImageView.setImageBitmap(ImageUtil.stringToBitMap(bestPlace.get(index).getPhoto2()));
     }

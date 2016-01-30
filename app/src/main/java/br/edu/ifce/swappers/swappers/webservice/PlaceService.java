@@ -17,7 +17,10 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.edu.ifce.swappers.swappers.model.Book;
@@ -159,6 +162,7 @@ public class PlaceService {
                     book.setPhoto(arrayJson.getJSONObject(i).getString("photo"));
                     book.setTitle(arrayJson.getJSONObject(i).getString("title"));
                     book.setEvaluationAvarage((float) arrayJson.getJSONObject(i).getDouble("evaluationAverage"));
+                    book.setDateDonation(convertDateFromString(arrayJson.getJSONObject(i).getString("dateDonation")));
                     books.add(book);
                 }
                 placeUnique.setBooks(books);
@@ -172,6 +176,7 @@ public class PlaceService {
                 book.setPhoto(jsonItem.getString("photo"));
                 book.setTitle(jsonItem.getString("title"));
                 book.setEvaluationAvarage((float) jsonItem.getDouble("evaluationAverage"));
+                book.setDateDonation(convertDateFromString(jsonItems.getString("dateDonation")));
                 books.add(book);
 
                 placeUnique.setBooks(books);
@@ -216,6 +221,7 @@ public class PlaceService {
                         book.setPhoto(arrayBook.getJSONObject(j).getString("photo"));
                         book.setTitle(arrayBook.getJSONObject(j).getString("title"));
                         book.setEvaluationAvarage((float) arrayBook.getJSONObject(j).getDouble("evaluationAverage"));
+                        book.setDateDonation(convertDateFromString(arrayBook.getJSONObject(j).getString("dateDonation")));
                         books.add(book);
                     }
                     place.setBooks(books);
@@ -229,6 +235,7 @@ public class PlaceService {
                     book.setPhoto(jsonItem.getString("photo"));
                     book.setTitle(jsonItem.getString("title"));
                     book.setEvaluationAvarage((float) jsonItem.getDouble("evaluationAverage"));
+                    book.setDateDonation(convertDateFromString(jsonItems.getString("dateDonation")));
                     books.add(book);
 
                     place.setBooks(books);
@@ -238,5 +245,17 @@ public class PlaceService {
             }
         }
         return placeList;
+    }
+
+    private static Date convertDateFromString(String dateStr){
+        Date birthDate = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            birthDate = sdf.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return birthDate;
     }
 }
