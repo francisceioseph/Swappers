@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
@@ -38,6 +40,7 @@ public class NearBooksFragment extends Fragment {
 
     TextView titleNearBookTextView;
     TextView authorsNearBookTextView;
+    TextView dateDonationNearBookTextView;
 
     List<Place> nearPlaces = MockSingleton.INSTANCE.places;
     List<BookWithPlace> nearBooks = new ArrayList<>();
@@ -69,15 +72,19 @@ public class NearBooksFragment extends Fragment {
                 Picasso.with(getActivity()).load(nearBooks.get(0).getBook().getPhoto()).into(coverNearBookCircleImageView);
                 titleNearBookTextView.setText(nearBooks.get(0).getBook().getTitle());
                 authorsNearBookTextView.setText(nearBooks.get(0).getBook().getAuthor());
+                dateDonationNearBookTextView.setText(getString(R.string.date_donation_description) + " " +
+                        getBookDateDonation(nearBooks.get(0).getBook()));
             }else{
                 Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverNearBookCircleImageView);
-                titleNearBookTextView.setText("Ainda não há livros.");
-                authorsNearBookTextView.setText("Faça uma doação!");
+                titleNearBookTextView.setText(getString(R.string.no_books_yet));
+                authorsNearBookTextView.setText(getString(R.string.make_a_donation));
+                dateDonationNearBookTextView.setText("");
             }
         }else {
             Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverNearBookCircleImageView);
-            titleNearBookTextView.setText("Ainda não há livros.");
+            titleNearBookTextView.setText(getString(R.string.no_books_yet));
             authorsNearBookTextView.setText("");
+            dateDonationNearBookTextView.setText("");
         }
 
         return rootView;
@@ -92,6 +99,7 @@ public class NearBooksFragment extends Fragment {
 
         this.titleNearBookTextView        = (TextView) rootView.findViewById(R.id.title_near_book);
         this.authorsNearBookTextView      = (TextView) rootView.findViewById(R.id.authors_near_book);
+        this.dateDonationNearBookTextView = (TextView) rootView.findViewById(R.id.date_donation_near_book);
     }
 
     private void initViewListeners() {
@@ -126,8 +134,6 @@ public class NearBooksFragment extends Fragment {
                         }
                     }
                 }
-
-
             }
         };
     }
@@ -142,6 +148,8 @@ public class NearBooksFragment extends Fragment {
 
                     titleNearBookTextView.setText(nearBooks.get(indexBook).getBook().getTitle());
                     authorsNearBookTextView.setText(nearBooks.get(indexBook).getBook().getAuthor());
+                    dateDonationNearBookTextView.setText(getString(R.string.date_donation_description) + " " +
+                            getBookDateDonation(nearBooks.get(indexBook).getBook()));
 
                     if(!nearBooks.get(indexBook).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(nearBooks.get(indexBook).getBook().getPhoto()).into(coverNearBookCircleImageView);
@@ -165,6 +173,8 @@ public class NearBooksFragment extends Fragment {
 
                     titleNearBookTextView.setText(nearBooks.get(indexBook).getBook().getTitle());
                     authorsNearBookTextView.setText(nearBooks.get(indexBook).getBook().getAuthor());
+                    dateDonationNearBookTextView.setText(getString(R.string.date_donation_description) + " " +
+                            getBookDateDonation(nearBooks.get(indexBook).getBook()));
 
                     if(!nearBooks.get(indexBook).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(nearBooks.get(indexBook).getBook().getPhoto()).into(coverNearBookCircleImageView);
@@ -175,5 +185,18 @@ public class NearBooksFragment extends Fragment {
 
             }
         };
+    }
+
+    public String getBookDateDonation(Book book){
+        String bookDateDonation;
+
+        Calendar dateDonationCalendar = new GregorianCalendar();
+        dateDonationCalendar.setTimeInMillis(book.getDateDonation().getTime());
+
+        bookDateDonation = String.valueOf(dateDonationCalendar.get(Calendar.DAY_OF_MONTH)) + "/" +
+                String.valueOf(dateDonationCalendar.get(Calendar.MONTH)) + "/" +
+                String.valueOf(dateDonationCalendar.get(Calendar.YEAR));
+
+        return bookDateDonation;
     }
 }
