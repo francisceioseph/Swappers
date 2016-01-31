@@ -51,12 +51,12 @@
     <string name="less_characters_name_error_message">Votre nom doit avoir, au moins, 3 caractères!</string>
 
     <!-- Strings from PlacesFragment.java -->
-    <string name="gps_connection_error_message">Connectez le GPS et réessayez.</string>
+    <string name="gps_connection_error_message">Connectez le GPS et cliquez sur le livre ci-dessus.</string>
     <string name="no_books_available_at_place">Il n\'y a pas des livres ici. SVP, faites un don! :)</string>
     <string name="one_book_available_at_place">Il y a 1 livre disponible.</string>
     <string name="marker_there">Il y a  </string>
     <string name="many_books_available_at_place"> livres disponibles.</string>
-    <string name="swappers_local_not_available_in_city">Pardon, il n\'a pas encore un point du Swappers dans votre ville. :(</string>
+    <string name="swappers_local_not_available_in_city">Désolé, il n\'a pas encore un point du Swappers dans votre ville. :(</string>
     <string name="sick_server_error">Le serveur du Swappers se sent malade. SVP, réessayez plus tard!</string>
 
     <!-- Strings from ProfileFragment.java -->
@@ -142,7 +142,7 @@
     <string name="login_error_message">E-mail et/ou mot de passe incorrectes.</string>
 
     <!-- Strings from MarkerAsyncTask.java -->
-    <string name="progress_dialog_loading_message">En chargement...</string>
+    <string name="progress_dialog_loading_message">Chargement...</string>
 
     <!-- Strings from FavoriteTask.java-->
     <string name="favourite_task_progress_dialog_message">Rendre favori...</string>
@@ -231,7 +231,7 @@
     <string name="dialog_password_confirmation_title">Confirmez votre nouveau mot de passe</string>
 
     <string name="about_swappers_slogan">Donnez des lectures, partagez des rêves!</string>
-    <string name="progress_dialog_retrieving_reviews_message">En train de charger les commentaires...</string>
+    <string name="progress_dialog_retrieving_reviews_message">Chargement des commentaires...</string>
     <string name="new_reader_review_text">Nouveau Commentaire</string>
     <string name="month_donor">Donateurs du Mois</string>
     <string name="best_places">Meilleures Places</string>
@@ -252,6 +252,7 @@
     <string name="make_a_donation">Faire un don!</string>
     <string name="no_recommendations_yet">Il n\'y a pas des recommendations.</string>
     <string name="we_working">Désolé, mais nous y travaillons.</string>
+    <string name="notifications_section_title">Notifications</string>
 
 
 </resources>

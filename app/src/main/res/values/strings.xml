@@ -29,6 +29,7 @@
     <string name="internet_connection_error_message">Can\'t connect to server. Please, check your internet connection.</string>
 
     <!-- Strings from MainActivity.java -->
+    <string name="notifications_section_title">Notifications</string>
     <string name="profile_section_title">Profile</string>
     <string name="books_section_title">Books</string>
     <string name="places_section_title">Places</string>
@@ -55,7 +56,7 @@
     <string name="less_characters_name_error_message">Your name must have 3 characters at least!</string>
 
     <!-- Strings from PlacesFragment.java -->
-    <string name="gps_connection_error_message">Turn your GPS on and try again.</string>
+    <string name="gps_connection_error_message">Turn your GPS on and click on the book above.</string>
     <string name="no_books_available_at_place">There isn\'t books here. Please, donate one. :)</string>
     <string name="one_book_available_at_place">1 book available here.</string>
     <string name="many_books_available_at_place">books available here.</string>

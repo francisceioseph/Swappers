@@ -58,7 +58,7 @@
     <string name="less_characters_name_error_message">Your name must have 3 characters at least!</string>
 
     <!-- Strings from PlacesFragment.java -->
-    <string name="gps_connection_error_message">Turn your GPS on and try again.</string>
+    <string name="gps_connection_error_message">Turn your GPS on and click on the book above.</string>
     <string name="no_books_available_at_place">There aren\'t books here. Please, donate one. :)</string>
     <string name="one_book_available_at_place">There is 1 book available here.</string>
     <string name="marker_there">There are </string>
@@ -232,5 +232,6 @@
     <string name="make_a_donation">Make a donation!</string>
     <string name="no_recommendations_yet">There are no recommendations.</string>
     <string name="we_working">Sorry, but we are working on it.</string>
+    <string name="notifications_section_title">Notifications</string>
 
 </resources>
