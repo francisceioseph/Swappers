@@ -343,4 +343,13 @@
     <string name="progress_dialog_retrieving_notification_message">Retrieving Notifications...</string>
     <string name="not_load_notification_message">Could not load ... his city was not identified.</string>
 
+    <!-- Fragment NearBooks-->
+    <string name="date_donation_description">Donated in</string>
+    <string name="no_books_yet">There are no books.</string>
+    <string name="make_a_donation">Make a donation!</string>
+
+    <!-- Fragment Recommendations-->
+    <string name="no_recommendations_yet">There are no recommendations.</string>
+    <string name="we_working">Sorry, but we are working on it.</string>
+
 </resources>

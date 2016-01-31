@@ -272,6 +272,11 @@
     <!-- Fragment Notification-->
     <string name="progress_dialog_retrieving_notification_message">Recebendo informações...</string>
     <string name="not_load_notification_message">Não foi possível carregar as informações ... sua cidade não pôde ser identificada.</string>
+    <string name="date_donation_description">Doado em</string>
+    <string name="no_books_yet">Ainda não há livros.</string>
+    <string name="make_a_donation">Faça uma doação!</string>
+    <string name="no_recommendations_yet">Ainda não há recomendações.</string>
+    <string name="we_working">Desculpe, mas estamos trabalhando nisso.</string>
 
 
 </resources>

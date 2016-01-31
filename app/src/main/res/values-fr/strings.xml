@@ -247,6 +247,11 @@
     <string name="duplicate_email_error_message">L\'e-mail fourni fait partie d\'une autre compte. SVP, indiquez d\'autre courriel.</string>
     <string name="new_cover_picture_message">Choisissez comment vous voulez nous fournir votre nouvelle photo de couverture.</string>
     <string name="coverPhotoDialogTitle">Nouvelle Photo de Couverture</string>
+    <string name="date_donation_description">Donné à</string>
+    <string name="no_books_yet">Il n\'y a pas des livres.</string>
+    <string name="make_a_donation">Faire un don!</string>
+    <string name="no_recommendations_yet">Il n\'y a pas des recommendations.</string>
+    <string name="we_working">Désolé, mais nous y travaillons.</string>
 
 
 </resources>

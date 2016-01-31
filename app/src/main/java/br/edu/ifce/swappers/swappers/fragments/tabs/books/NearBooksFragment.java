@@ -72,16 +72,17 @@ public class NearBooksFragment extends Fragment {
                 Picasso.with(getActivity()).load(nearBooks.get(0).getBook().getPhoto()).into(coverNearBookCircleImageView);
                 titleNearBookTextView.setText(nearBooks.get(0).getBook().getTitle());
                 authorsNearBookTextView.setText(nearBooks.get(0).getBook().getAuthor());
-                dateDonationNearBookTextView.setText("Doado em " + getBookDateDonation(nearBooks.get(0).getBook()));
+                dateDonationNearBookTextView.setText(getString(R.string.date_donation_description) + " " +
+                        getBookDateDonation(nearBooks.get(0).getBook()));
             }else{
                 Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverNearBookCircleImageView);
-                titleNearBookTextView.setText("Ainda não há livros.");
-                authorsNearBookTextView.setText("Faça uma doação!");
+                titleNearBookTextView.setText(getString(R.string.no_books_yet));
+                authorsNearBookTextView.setText(getString(R.string.make_a_donation));
                 dateDonationNearBookTextView.setText("");
             }
         }else {
             Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverNearBookCircleImageView);
-            titleNearBookTextView.setText("Ainda não há livros.");
+            titleNearBookTextView.setText(getString(R.string.no_books_yet));
             authorsNearBookTextView.setText("");
             dateDonationNearBookTextView.setText("");
         }
@@ -133,8 +134,6 @@ public class NearBooksFragment extends Fragment {
                         }
                     }
                 }
-
-
             }
         };
     }
@@ -149,7 +148,8 @@ public class NearBooksFragment extends Fragment {
 
                     titleNearBookTextView.setText(nearBooks.get(indexBook).getBook().getTitle());
                     authorsNearBookTextView.setText(nearBooks.get(indexBook).getBook().getAuthor());
-                    dateDonationNearBookTextView.setText("Doado em " + getBookDateDonation(nearBooks.get(indexBook).getBook()));
+                    dateDonationNearBookTextView.setText(getString(R.string.date_donation_description) + " " +
+                            getBookDateDonation(nearBooks.get(indexBook).getBook()));
 
                     if(!nearBooks.get(indexBook).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(nearBooks.get(indexBook).getBook().getPhoto()).into(coverNearBookCircleImageView);
@@ -173,7 +173,8 @@ public class NearBooksFragment extends Fragment {
 
                     titleNearBookTextView.setText(nearBooks.get(indexBook).getBook().getTitle());
                     authorsNearBookTextView.setText(nearBooks.get(indexBook).getBook().getAuthor());
-                    dateDonationNearBookTextView.setText("Doado em " + getBookDateDonation(nearBooks.get(indexBook).getBook()));
+                    dateDonationNearBookTextView.setText(getString(R.string.date_donation_description) + " " +
+                            getBookDateDonation(nearBooks.get(indexBook).getBook()));
 
                     if(!nearBooks.get(indexBook).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(nearBooks.get(indexBook).getBook().getPhoto()).into(coverNearBookCircleImageView);

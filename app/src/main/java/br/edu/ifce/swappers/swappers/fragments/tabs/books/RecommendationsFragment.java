@@ -84,20 +84,21 @@ public class RecommendationsFragment extends Fragment {
 
             if(recommendationBooks.isEmpty()){
                 Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverRecommendationCircleImageView);
-                titleRecommendationTextView.setText("Ainda não há recomendações.");
-                authorsRecommendationTextView.setText("Estamos trabalhando nisso.");
+                titleRecommendationTextView.setText(getString(R.string.no_recommendations_yet));
+                authorsRecommendationTextView.setText(getString(R.string.we_working));
                 dateDonationRecommendationTextView.setText("");
             }
             else if(!recommendationBooks.isEmpty()) {
                 Picasso.with(getActivity()).load(recommendationBooks.get(0).getBook().getPhoto()).into(coverRecommendationCircleImageView);
                 titleRecommendationTextView.setText(recommendationBooks.get(0).getBook().getTitle());
                 authorsRecommendationTextView.setText(recommendationBooks.get(0).getBook().getAuthor());
-                dateDonationRecommendationTextView.setText("Doado em " + getBookDateDonation(recommendationBooks.get(0).getBook()));
+                dateDonationRecommendationTextView.setText(getString(R.string.date_donation_description) + " " +
+                        getBookDateDonation(recommendationBooks.get(0).getBook()));
             }
 
         }else {
             Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverRecommendationCircleImageView);
-            titleRecommendationTextView.setText("Ainda não há recomendações.");
+            titleRecommendationTextView.setText(getString(R.string.no_recommendations_yet));
             authorsRecommendationTextView.setText("");
             dateDonationRecommendationTextView.setText("");
         }
@@ -188,7 +189,8 @@ public class RecommendationsFragment extends Fragment {
 
                     titleRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getTitle());
                     authorsRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getAuthor());
-                    dateDonationRecommendationTextView.setText("Doado em " + getBookDateDonation(recommendationBooks.get(indexBookRec).getBook()));
+                    dateDonationRecommendationTextView.setText(getString(R.string.date_donation_description) + " " +
+                            getBookDateDonation(recommendationBooks.get(indexBookRec).getBook()));
 
                     if(!recommendationBooks.get(indexBookRec).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(recommendationBooks.get(indexBookRec).getBook().getPhoto()).
@@ -213,7 +215,8 @@ public class RecommendationsFragment extends Fragment {
 
                     titleRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getTitle());
                     authorsRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getAuthor());
-                    dateDonationRecommendationTextView.setText("Doado em " + getBookDateDonation(recommendationBooks.get(indexBookRec).getBook()));
+                    dateDonationRecommendationTextView.setText(getString(R.string.date_donation_description) + " " +
+                            getBookDateDonation(recommendationBooks.get(indexBookRec).getBook()));
 
                     if(!recommendationBooks.get(indexBookRec).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(recommendationBooks.get(indexBookRec).getBook().getPhoto()).

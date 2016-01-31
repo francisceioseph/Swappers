@@ -227,5 +227,10 @@
     <string name="new_profile_picture_gallery">Gallery</string>
     <string name="new_profile_picture_message">Select how you want to provide us your profile picture</string>
     <string name="new_cover_picture_message">Select how you want to provide us your cover picture.</string>
+    <string name="date_donation_description">Donated in</string>
+    <string name="no_books_yet">There are no books.</string>
+    <string name="make_a_donation">Make a donation!</string>
+    <string name="no_recommendations_yet">There are no recommendations.</string>
+    <string name="we_working">Sorry, but we are working on it.</string>
 
 </resources>

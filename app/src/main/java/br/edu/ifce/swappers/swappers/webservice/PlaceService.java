@@ -176,7 +176,7 @@ public class PlaceService {
                 book.setPhoto(jsonItem.getString("photo"));
                 book.setTitle(jsonItem.getString("title"));
                 book.setEvaluationAvarage((float) jsonItem.getDouble("evaluationAverage"));
-                book.setDateDonation(convertDateFromString(jsonItems.getString("dateDonation")));
+                book.setDateDonation(convertDateFromString(jsonItem.getString("dateDonation")));
                 books.add(book);
 
                 placeUnique.setBooks(books);
@@ -235,7 +235,7 @@ public class PlaceService {
                     book.setPhoto(jsonItem.getString("photo"));
                     book.setTitle(jsonItem.getString("title"));
                     book.setEvaluationAvarage((float) jsonItem.getDouble("evaluationAverage"));
-                    book.setDateDonation(convertDateFromString(jsonItems.getString("dateDonation")));
+                    book.setDateDonation(convertDateFromString(jsonItem.getString("dateDonation")));
                     books.add(book);
 
                     place.setBooks(books);
