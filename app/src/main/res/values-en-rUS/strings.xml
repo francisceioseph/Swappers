@@ -223,6 +223,6 @@
     <string name="new_profile_picture_gallery">Gallery</string>
     <string name="new_profile_picture_message">Select how you want to provide us your profile picture</string>
     <string name="new_cover_picture_message">Select how you want to provide us your cover picture.</string>
-    <string name="notification_section_title">Notifications</string>
+    <string name="notification_section_title">Timeline</string>
 
 </resources>

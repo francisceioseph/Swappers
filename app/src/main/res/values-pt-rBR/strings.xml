@@ -268,7 +268,7 @@
     <!-- Fragment Notification-->
     <string name="progress_dialog_retrieving_notification_message">Recebendo informações...</string>
     <string name="not_load_notification_message">Não foi possível carregar as informações ... sua cidade não pôde ser identificada.</string>
-    <string name="notification_section_title">Notificações</string>
+    <string name="notification_section_title">Timeline</string>
 
 
 </resources>
