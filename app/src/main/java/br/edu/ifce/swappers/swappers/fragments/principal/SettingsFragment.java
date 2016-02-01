@@ -114,7 +114,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
             }
         }
 
-        List<String> citiesParticularList = new ArrayList<>();
+        ArrayList<String> citiesParticularList = new ArrayList<>();
 
         for (StateCity sc: stateCityListMock){
             if(sc.getState().equals(state)){
@@ -355,7 +355,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
                         cities);
                 adapterCities.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                 optionCities.setAdapter(adapterCities);
-                optionCities.setSelection(position, false);
             }
 
             @Override
