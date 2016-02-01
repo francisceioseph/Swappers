@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Strings from wifi -->
+    <string name="internet_not_connection_message">Não foi possível carregar as informações. Verifique sua conexão.</string>
+
     <!-- Strings from BookActivity.java -->
     <string name="near_books_tab_title">LIVROS PRÓXIMOS</string>
     <string name="recommendations_tab_title">RECOMENDAÇÕES</string>
@@ -8,7 +12,7 @@
     <string name="books_detail_toolbar_title">Detalhe de Livro</string>
     <string name="synopsis_tab_title">RESUMO</string>
     <string name="readers_comments_tab_title">COMENTÁRIOS</string>
-    <string name="confirm_book_adoption_dialog_message">Você realmente deseja adotar esse livro?</string>
+    <string name="confirm_book_adoption_dialog_message">Você realmente deseja adotar este livro?</string>
     <string name="book_adoption_positive_button_title">Adotar</string>
     <string name="book_not_available_for_adoption">Este livro não está disponível para adoção</string>
     <string name="dialog_error_title">Oooops...</string>
@@ -21,7 +25,7 @@
 
     <!-- String from DonationsListPointActivity.java -->
     <string name="near_books__toolbar_title">Lugares Próximos</string>
-    <string name="confirm_book_donation_dialog_message">Você deseja doar esse livro no lugar selecionado?</string>
+    <string name="confirm_book_donation_dialog_message">Você deseja doar este livro no lugar selecionado?</string>
     <string name="book_donation_positive_button_title">DOAR</string>
 
     <!-- Strings from LoginActivity.java -->
@@ -54,7 +58,7 @@
     <string name="less_characters_name_error_message">Seu nome deve possuir, no mínimo, 3 caracteres !</string>
 
     <!-- Strings from PlacesFragment.java -->
-    <string name="gps_connection_error_message">Ligue o GPS tente outra vez.</string>
+    <string name="gps_connection_error_message">Ligue o GPS e clique sobre o livro acima.</string>
     <string name="no_books_available_at_place">Não há livros aqui. Por favor, faça uma doação. :)</string>
     <string name="one_book_available_at_place">Há 1 livro disponível aqui.</string>
     <string name="marker_there">Há </string>
@@ -108,10 +112,10 @@
 
     <string name="service_not_implemented">Serviço ainda não implementado... zZZzzZ</string>
     <string name="delete_account_dialog_positive_button_message">Conta deletada com sucesso.</string>
-    <string name="delete_account_dialog_negative_button_message">Muito obrigado! Estamos trabalhando muito para te fazer feliz. :]</string>
+    <string name="delete_account_dialog_negative_button_message">Muito obrigado! Estamos trabalhando para te fazer feliz. :]</string>
     <string name="logout_dialog_positive_button_message">Você saiu.</string>
     <string name="change_password_dialog_positive_button_message">Senha alterada com sucesso.</string>
-    <string name="change_city_dialog_positive_button_parcial_message">Cidade mudada para</string>
+    <string name="change_city_dialog_positive_button_parcial_message">Cidade alterada para</string>
     <string name="current_password_message">Por favor entre com sua senha atual.</string>
     <string name="current_error_password_message">Senha atual incorreta.</string>
 
@@ -119,7 +123,7 @@
     <string name="donors_tab_title">DOADORES</string>
     <string name="hot_spots_tab_title">MAIS VISITADOS</string>
     <string name="best_books_tab_title">MELHORES LIVROS</string>
-    <string name="place_city_state_not_found">"Não conseguimos localizar sua cidade, retorne para o mapa e verifique seu GPS!"</string>
+    <string name="place_city_state_not_found">Não conseguimos localizar sua cidade, retorne para o mapa e verifique seu GPS!</string>
 
     <!-- Strings from ReadersReviewFragment.java -->
     <string name="no_comments_found_message">OMG, não há comentários! Seja o primeiro a comentar. ;) </string>
@@ -179,7 +183,7 @@
 
     <!-- Strings from RetrievedTask.java -->
     <string name="adoption_done_successfully_message">Adoção processada com sucesso!</string>
-    <string name="adoption_error_message">Erros aconteceram durante o registro da adoção. Tente novamente.</string>
+    <string name="adoption_error_message">Erros aconteceram durante o registro da adoção. Tente novamente!</string>
 
     <!-- Strings from StatisticBookTask.java -->
     <!-- Strings from StatisticDonorsTask.java -->
@@ -269,6 +273,12 @@
     <string name="progress_dialog_retrieving_notification_message">Recebendo informações...</string>
     <string name="not_load_notification_message">Não foi possível carregar as informações ... sua cidade não pôde ser identificada.</string>
     <string name="notification_section_title">Timeline</string>
+    <string name="date_donation_description">Doado em</string>
+    <string name="no_books_yet">Ainda não há livros.</string>
+    <string name="make_a_donation">Faça uma doação!</string>
+    <string name="no_recommendations_yet">Ainda não há recomendações.</string>
+    <string name="we_working">Desculpe, mas estamos trabalhando nisso.</string>
+    <string name="notifications_section_title">Notificações</string>
 
 
 </resources>

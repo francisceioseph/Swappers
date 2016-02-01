@@ -20,7 +20,9 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
@@ -44,6 +46,7 @@ public class RecommendationsFragment extends Fragment {
 
     TextView titleRecommendationTextView;
     TextView authorsRecommendationTextView;
+    TextView dateDonationRecommendationTextView;
 
     List<Place> nearPlaces = MockSingleton.INSTANCE.places;
     List<BookWithPlace> recommendationBooks = new ArrayList<>();
@@ -81,19 +84,23 @@ public class RecommendationsFragment extends Fragment {
 
             if(recommendationBooks.isEmpty()){
                 Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverRecommendationCircleImageView);
-                titleRecommendationTextView.setText("Ainda não há recomendações.");
-                authorsRecommendationTextView.setText("Estamos trabalhando nisso.");
+                titleRecommendationTextView.setText(getString(R.string.no_recommendations_yet));
+                authorsRecommendationTextView.setText(getString(R.string.we_working));
+                dateDonationRecommendationTextView.setText("");
             }
             else if(!recommendationBooks.isEmpty()) {
                 Picasso.with(getActivity()).load(recommendationBooks.get(0).getBook().getPhoto()).into(coverRecommendationCircleImageView);
                 titleRecommendationTextView.setText(recommendationBooks.get(0).getBook().getTitle());
                 authorsRecommendationTextView.setText(recommendationBooks.get(0).getBook().getAuthor());
+                dateDonationRecommendationTextView.setText(getString(R.string.date_donation_description) + " " +
+                        getBookDateDonation(recommendationBooks.get(0).getBook()));
             }
 
         }else {
             Picasso.with(getActivity()).load(R.drawable.blue_book).into(coverRecommendationCircleImageView);
-            titleRecommendationTextView.setText("Ainda não há recomendações.");
+            titleRecommendationTextView.setText(getString(R.string.no_recommendations_yet));
             authorsRecommendationTextView.setText("");
+            dateDonationRecommendationTextView.setText("");
         }
     }
 
@@ -131,6 +138,7 @@ public class RecommendationsFragment extends Fragment {
 
         this.titleRecommendationTextView        = (TextView) rootView.findViewById(R.id.title_recommendation);
         this.authorsRecommendationTextView      = (TextView) rootView.findViewById(R.id.authors_recommendation);
+        this.dateDonationRecommendationTextView = (TextView) rootView.findViewById(R.id.date_donation_recommendation);
     }
 
     private void initViewListeners() {
@@ -181,6 +189,8 @@ public class RecommendationsFragment extends Fragment {
 
                     titleRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getTitle());
                     authorsRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getAuthor());
+                    dateDonationRecommendationTextView.setText(getString(R.string.date_donation_description) + " " +
+                            getBookDateDonation(recommendationBooks.get(indexBookRec).getBook()));
 
                     if(!recommendationBooks.get(indexBookRec).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(recommendationBooks.get(indexBookRec).getBook().getPhoto()).
@@ -205,6 +215,8 @@ public class RecommendationsFragment extends Fragment {
 
                     titleRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getTitle());
                     authorsRecommendationTextView.setText(recommendationBooks.get(indexBookRec).getBook().getAuthor());
+                    dateDonationRecommendationTextView.setText(getString(R.string.date_donation_description) + " " +
+                            getBookDateDonation(recommendationBooks.get(indexBookRec).getBook()));
 
                     if(!recommendationBooks.get(indexBookRec).getBook().getPhoto().isEmpty()) {
                         Picasso.with(getActivity()).load(recommendationBooks.get(indexBookRec).getBook().getPhoto()).
@@ -215,5 +227,18 @@ public class RecommendationsFragment extends Fragment {
                 }
             }
         };
+    }
+
+    public String getBookDateDonation(Book book){
+        String bookDateDonation;
+
+        Calendar dateDonationCalendar = new GregorianCalendar();
+        dateDonationCalendar.setTimeInMillis(book.getDateDonation().getTime());
+
+        bookDateDonation = String.valueOf(dateDonationCalendar.get(Calendar.DAY_OF_MONTH)) + "/" +
+                String.valueOf(dateDonationCalendar.get(Calendar.MONTH)) + "/" +
+                String.valueOf(dateDonationCalendar.get(Calendar.YEAR));
+
+        return bookDateDonation;
     }
 }

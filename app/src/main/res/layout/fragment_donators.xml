@@ -60,17 +60,6 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp" />
 
-                <TextView
-                    android:id="@+id/month_donator_age"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/black_text"
-                    android:textSize="16dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="5dp" />
             </TableRow>
 
             <View

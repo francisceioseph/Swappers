@@ -109,8 +109,6 @@ public class StatisticDonatorsService {
             users.add(user);
         }
 
-        Log.i("PHOTO-USER", users.get(0).getPhoto2());
-
         return users;
     }
 }

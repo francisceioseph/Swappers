@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Strings from wifi -->
+    <string name="internet_not_connection_message">Could not load information. Check your connection.</string>
+
     <!-- Strings from BookActivity.java -->
     <string name="near_books_tab_title">NEAR BOOKS</string>
     <string name="recommendations_tab_title">RECOMMENDATIONS</string>
@@ -54,7 +58,7 @@
     <string name="less_characters_name_error_message">Your name must have 3 characters at least!</string>
 
     <!-- Strings from PlacesFragment.java -->
-    <string name="gps_connection_error_message">Turn your GPS on and try again.</string>
+    <string name="gps_connection_error_message">Turn your GPS on and click on the book above.</string>
     <string name="no_books_available_at_place">There aren\'t books here. Please, donate one. :)</string>
     <string name="one_book_available_at_place">There is 1 book available here.</string>
     <string name="marker_there">There are </string>
@@ -223,6 +227,12 @@
     <string name="new_profile_picture_gallery">Gallery</string>
     <string name="new_profile_picture_message">Select how you want to provide us your profile picture</string>
     <string name="new_cover_picture_message">Select how you want to provide us your cover picture.</string>
+    <string name="date_donation_description">Donated in</string>
+    <string name="no_books_yet">There are no books.</string>
+    <string name="make_a_donation">Make a donation!</string>
+    <string name="no_recommendations_yet">There are no recommendations.</string>
+    <string name="we_working">Sorry, but we are working on it.</string>
+    <string name="notifications_section_title">Notifications</string>
     <string name="notification_section_title">Timeline</string>
 
 </resources>

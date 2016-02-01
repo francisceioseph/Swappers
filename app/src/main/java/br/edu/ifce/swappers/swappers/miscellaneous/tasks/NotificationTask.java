@@ -3,6 +3,7 @@ package br.edu.ifce.swappers.swappers.miscellaneous.tasks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class NotificationTask extends AsyncTask<String, Void, ArrayList<Notifica
     @Override
     protected void onPostExecute(ArrayList<Notification> notifications) {
         super.onPostExecute(notifications);
-
+        Log.i("NOTIFICATION-SIZE", String.valueOf(notifications.size()));
         this.progressDialog.dismiss();
         this.notificationTaskInterface.onReceiveNotification(notifications);
     }
