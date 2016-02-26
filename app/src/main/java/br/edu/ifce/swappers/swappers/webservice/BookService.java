@@ -91,7 +91,6 @@ public class BookService {
         }
 
         stringBuilder.append("&projection=full&maxResults=30&printType=books");
-        Log.i("QUERY-URI",stringBuilder.toString());
         return stringBuilder.toString();
     }
 

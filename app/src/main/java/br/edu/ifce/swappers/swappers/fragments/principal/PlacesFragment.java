@@ -8,7 +8,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,9 +66,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private Map<String,Integer> mapPlaceMarker = new HashMap<>();
     private Map<Integer, String> mapPlaceMarkerAux = new HashMap<>();
     ArrayList<Marker> markers = new ArrayList<>();
-    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
-
-    private final LatLng IFCE_FORTALEZA = new LatLng(-3.744197, -38.535877);
 
     public PlacesFragment() {}
 

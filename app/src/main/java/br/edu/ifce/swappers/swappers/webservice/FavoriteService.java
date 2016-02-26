@@ -27,7 +27,6 @@ public class FavoriteService {
             java.net.URL url = new URL(URL);
 
             String jsonParam = fillParamJson(user);
-            Log.i("JsonParam", jsonParam);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15000);

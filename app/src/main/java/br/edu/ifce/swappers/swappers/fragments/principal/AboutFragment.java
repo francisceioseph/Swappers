@@ -48,7 +48,6 @@ public class AboutFragment extends Fragment {
             public void run() {
 
                 synchronized (AboutFragment.class) {
-                    Log.e("EASTER EGGS", "RESET FRANCIS TAP CUNTER");
                     francisTapCounter = 0;
                 }
             }

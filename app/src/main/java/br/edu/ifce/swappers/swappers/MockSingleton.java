@@ -41,27 +41,10 @@ public enum MockSingleton {
     //public String state = new String();
 
 
-   /* public ArrayList<Place> createMockedPlaceDataSource(double latitude, double longitude) {
-        ArrayList<Place> dataSource = new ArrayList<>();
-
-
-        for (int i = 0; i < 5; i++){
-            Place place = new Place(latitude,longitude);
-            place.setNamePlace("Shopping Benfica");
-            place.setAdressPlace("Av. Carapinima, 2081, Benfica");
-            dataSource.add(place);
-
-        }
-        return dataSource;
-    }*/
-
     public ArrayList<Place> createPlace(ArrayList<Place> place) {
-
-        //ArrayList<Place> dataSource = new ArrayList<>();
         for (int i = 0; i < place.size(); i++){
 
             this.places.add(place.get(i));
-            Log.i("PLACESNEAR", this.places.get(i).getName());
 
         }
         return this.places;

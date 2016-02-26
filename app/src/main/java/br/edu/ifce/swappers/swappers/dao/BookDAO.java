@@ -19,8 +19,6 @@ public class BookDAO {
     private SQLiteDatabase db;
 
     public BookDAO(Context context){
-        //DBHelper dbHelper = new DBHelper(context);
-        //db = dbHelper.getWritableDatabase();
         db = DBHelper.getInstance(context).getWritableDatabase();
     }
 

@@ -44,7 +44,6 @@ public class PlaceService {
 
         try {
             String urlPlace = buildURLtoGetPlace(URL,city,states);
-            Log.i("URLPLACE", urlPlace);
 
             url = new URL(urlPlace);
 
@@ -55,7 +54,6 @@ public class PlaceService {
             conn.connect();
 
             responseCode = conn.getResponseCode();
-            Log.i("STATUS-CODE", String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         conn.getInputStream()));
@@ -66,7 +64,7 @@ public class PlaceService {
                     responseJson.append(inputLine);
                 }
                 in.close();
-                Log.i("RESPONSE-PLACE", responseJson.toString());
+
                 if(responseJson != null)
                     placeList = parseJsonToPlace(responseJson.toString());
                 else {
@@ -113,12 +111,7 @@ public class PlaceService {
         ArrayList<Place> placeList = new ArrayList<>();
         int count = 0;
         boolean verifyJson = false;
-        /**
-         for(int i=0; i<jsonPlace.length(); i++){
-         if(jsonPlace.charAt(i) == '}') count++;
-         }
-         Log.i("tagSIZE", String.valueOf(count));
-         **/
+
         JSONObject jsonObject = new JSONObject(jsonPlace);
         JSONObject dataObject = jsonObject.optJSONObject("place");
         if (dataObject!=null){
@@ -127,7 +120,6 @@ public class PlaceService {
             verifyJson = false;
         }
 
-        //if(!jsonPlace.isEmpty() && count == 4){
         if(verifyJson){
             json = new JSONObject(jsonPlace);
             jsonItems = (JSONObject)json.get("place");
@@ -184,7 +176,6 @@ public class PlaceService {
 
             placeList.add(placeUnique);
 
-            //} else if(!jsonPlace.isEmpty() && count > 4){
         } else if(!jsonPlace.isEmpty() &&!verifyJson){
             json = new JSONObject(jsonPlace);
             jsonArray = json.getJSONArray("place");

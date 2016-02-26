@@ -75,14 +75,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
     private Map<String,String> mapAcronymeCapital;
     private List<StateCity> stateCityListMock;
 
-//    private void createHashStates(){
-//        String[] nameStates = new String[]{"Ceará", "São Paulo",};
-//
-//        for (int i = 0; i<nameStates.length; i++){
-//            states.put(STATES[i], nameStates[i]);
-//        }
-//    }
-
     private void createHashStates2(){
 
         stateCityListMock = MockSingleton.INSTANCE.cityStateList;
@@ -124,15 +116,6 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
 
         cities = citiesParticularList.toArray(new String[citiesParticularList.size()]);
     }
-
-//    private void initCitiesSpinner(int position){
-//        switch (position){
-//            case 0: cities = Settings.getCitiesAvailableCE();
-//                break;
-//            case 1: cities = Settings.getCitiesAvailableSP();
-//                break;
-//        }
-//    }
 
     public SettingsFragment() {
 
@@ -693,17 +676,7 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                String city = optionCities.getSelectedItem().toString();
-//                String state = optionStates.getSelectedItem().toString();
 //
-//                String nameState = states.get(state);
-//
-//                MockSingleton.INSTANCE.user.setCity(city);
-//                MockSingleton.INSTANCE.user.setState(state);
-//                MockSingleton.INSTANCE.userChangeCity = city;
-//                MockSingleton.INSTANCE.userChangeState = nameState;
-
-                //SwappersToast.makeText(getActivity(), getString(R.string.change_city_dialog_positive_button_parcial_message) + " " + city + "," + state, Toast.LENGTH_SHORT).show();
                 callTaskUpdateCityStateServer();
             }
         };

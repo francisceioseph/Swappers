@@ -63,7 +63,6 @@ public class UserService {
                 os.flush();
 
                 status_code = conn.getResponseCode();
-                Log.i("STATUSCODE",String.valueOf(status_code));
                 if(status_code==HttpURLConnection.HTTP_CREATED){
                     user.setId(getIdFromLocation(conn.getHeaderField("Location")));
                     AndroidUtils.createUser(context, user);
@@ -170,7 +169,6 @@ public class UserService {
 
         try {
             String urlLogin = buildURLtoLogin(URL_GET_USER_SERVICE,email,password);
-            Log.i("INFO-LOGIN", urlLogin);
             url = new URL(urlLogin);
 
             conn = (HttpURLConnection) url.openConnection();
@@ -181,20 +179,18 @@ public class UserService {
             conn.connect();
 
             int responseCode = conn.getResponseCode();
-            Log.i("INFO-LOGIN", String.valueOf(responseCode));
+
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         conn.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
-                Log.i("INFO-LOGIN",response.toString());
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
 
                 in.close();
 
-                Log.i("USER-LOGIN-TAG-AWASOME", response.toString());
                 JSONObject jsonObject = new JSONObject(response.toString());
                 user = parseUserFromJSON(jsonObject);
             }
@@ -220,7 +216,6 @@ public class UserService {
             URL url = new URL(URL_UPDATE_COVER_SERVICE);
 
             JSONObject jsonParam = fillParamJsonToCoverUpdate(user);
-            Log.i("#COVER", jsonParam.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(10000);
@@ -255,7 +250,6 @@ public class UserService {
             URL url = new URL(URL_UPDATE_PHOTO_PROFILE_SERVICE);
 
             JSONObject jsonParam = fillParamJsonToProfileUpdate(user);
-            Log.i("#COVER", jsonParam.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(10000);
@@ -325,7 +319,6 @@ public class UserService {
             URL url = new URL(URL_UPDATE_BIRTHDAY_SERVICE);
 
             JSONObject jsonParam =  fillParamJsonToBirthdayUpdate(user);
-            Log.i("BIRTHDAY", jsonParam.toString());
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
@@ -394,7 +387,6 @@ public class UserService {
         int status_code = 0;
 
         String urlDelete = URL_DELETE_USER_SERVICE + "/"+idUser;
-        Log.i("#URL_DELETE",urlDelete);
 
         try {
             URL url = new URL(urlDelete);
@@ -469,11 +461,9 @@ public class UserService {
         }
 
         if(jsonObject.has("cover")){
-            Log.i("#HASCOVER","entrou");
             user.setCover(jsonObject.getString("cover"));
         }
 
-        //Log.i("TAG-booksDonation", jsonObject.get("booksDonation").toString());
         if(jsonObject.has("booksDonation") && jsonObject.get("booksDonation").toString().contains("[")){
             String jsonBooks = jsonObject.get("booksDonation").toString();
             Type collectionType = new TypeToken<ArrayList<Book>>(){}.getType();

@@ -74,7 +74,6 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
 
         this.nameMonthDonatorTextView = (TextView) rootView.findViewById(R.id.month_donator_name);
         this.cityMonthDonatorTextView = (TextView) rootView.findViewById(R.id.month_donator_city);
-        //this.ageMonthDonatorTextView = (TextView) rootView.findViewById(R.id.month_donator_age);
         this.donationsMonthDonatorTextView = (TextView) rootView.findViewById(R.id.month_donator_donations);
 
     }
@@ -119,7 +118,6 @@ public class DonorsFragment extends Fragment implements DonorsInterface {
         if(usersDonators.isEmpty()){
             nameMonthDonatorTextView.setText(getString(R.string.donor_name_for_no_month_donors_found));
             cityMonthDonatorTextView.setText(getString(R.string.donor_city_name_for_no_month_donors_found));
-            //ageMonthDonatorTextView.setText(getString(R.string.donor_age_for_no_month_donors_found));
             donationsMonthDonatorTextView.setText(getString(R.string.donations_text_for_no_month_donors_found));
         }
         else{

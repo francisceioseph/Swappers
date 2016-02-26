@@ -53,7 +53,6 @@ public class UpdateUserBirthDayTask extends AsyncTask<User,Void, Integer> {
         if(status_code== HttpURLConnection.HTTP_OK){
             this.updateBirthDayTaskInterface.onUpdateBirthDayHadFinished(user.getBirthday());
         }else{
-            Log.i("BIRTHDAY", String.valueOf(status_code));
             SwappersToast.makeText(context,context.getString(R.string.settings_error_update_birthday_message),Toast.LENGTH_LONG).show();
         }
     }

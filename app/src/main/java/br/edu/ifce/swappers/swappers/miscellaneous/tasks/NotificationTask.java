@@ -47,7 +47,6 @@ public class NotificationTask extends AsyncTask<String, Void, ArrayList<Notifica
     @Override
     protected void onPostExecute(ArrayList<Notification> notifications) {
         super.onPostExecute(notifications);
-        Log.i("NOTIFICATION-SIZE", String.valueOf(notifications.size()));
         this.progressDialog.dismiss();
         this.notificationTaskInterface.onReceiveNotification(notifications);
     }

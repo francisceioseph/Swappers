@@ -53,10 +53,6 @@ public class StateCityTask extends AsyncTask<Void, Void, ArrayList<StateCity>>  
 
         if(stateCityList!=null){
              MockSingleton.INSTANCE.cityStateList = stateCityList;
-            Log.i("SIGLA-ESTADO","task()");
         }
-
-//        this.progressDialog.dismiss();
-//        this.stateCityTaskInterface.onReceiveStateCity(stateCityList);
     }
 }

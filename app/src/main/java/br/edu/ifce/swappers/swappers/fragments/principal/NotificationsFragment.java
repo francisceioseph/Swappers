@@ -48,10 +48,6 @@ public class NotificationsFragment extends Fragment implements RecycleViewOnClic
             Toast toast = SwappersToast.makeText(getActivity().getApplication(), getString(R.string.internet_not_connection_message), Toast.LENGTH_LONG);
             toast.show();
         }
-//        Notification notification = new Notification();
-//        notification.setUserName("Francisco José");
-//
-//        this.dataSource.add(notification);
     }
 
     @Override

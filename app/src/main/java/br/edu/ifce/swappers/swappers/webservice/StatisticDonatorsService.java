@@ -39,7 +39,6 @@ public class StatisticDonatorsService {
 
         try {
             String urlPlace = buildURLtoGetDonators(URL, city, state);
-            Log.i("USER-INFO-LOCAL",urlPlace);
             url = new URL(urlPlace);
 
             conn = (HttpURLConnection) url.openConnection();

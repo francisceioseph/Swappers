@@ -60,9 +60,7 @@ public class DistancePlaces{
             place.setHour_func(places.get(i).getHour_func());
             place.setPhoto2(places.get(i).getPhoto2());
 
-            //placeList.add(new Place(places.get(i).getLatitude(), places.get(i).getLongitude(), distanceBetweenPlaces));
             placeList.add(place);
-            Log.i("NOME", places.get(i).getName());
         }
 
         Collections.sort(placeList);

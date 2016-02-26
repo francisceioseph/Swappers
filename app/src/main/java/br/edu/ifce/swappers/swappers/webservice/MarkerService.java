@@ -35,7 +35,6 @@ public class MarkerService {
 
         try {
             String urlPlace = buildURLtoGetDetailPlace(URL, idPlace);
-            Log.i("URLPLACE", urlPlace);
 
             url = new URL(urlPlace);
 
@@ -46,7 +45,6 @@ public class MarkerService {
             conn.connect();
 
             int responseCode = conn.getResponseCode();
-            Log.i("STATUS-CODE", String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         conn.getInputStream()));
@@ -57,7 +55,6 @@ public class MarkerService {
                     responseJson.append(inputLine);
                 }
                 in.close();
-                Log.i("RESPONSE-PLACE-1", responseJson.toString());
 
                 placeInformation = parseJsonToDetailPlace(responseJson.toString());
 
@@ -111,9 +108,6 @@ public class MarkerService {
         placeInformation.setDonation(json.getInt("donation"));
         placeInformation.setRecovered(json.getInt("recovered"));
         placeInformation.setPhoto2(new String(json.getString("photo").getBytes(Charset.forName("UTF-8"))));
-
-        Log.i("PHOTO-BYTES-PLACE", String.valueOf(json.getString("photo").getBytes(Charset.forName("UTF-8"))));
-        Log.i("PHOTO-BYTES-PLACE",new String(placeInformation.getPhoto2()));
 
         if(json.has("books")){
             if(json.toString().contains("[")){

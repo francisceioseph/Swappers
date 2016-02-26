@@ -48,7 +48,6 @@ public class DeleteUserTask extends AsyncTask<Integer,Void, Integer> {
     protected void onPostExecute(Integer status_code) {
         super.onPostExecute(status_code);
         this.progressDialog.dismiss();
-        Log.i("#URL_DELETE", String.valueOf(status_code));
         if(status_code== HttpURLConnection.HTTP_OK){
             this.deleteUserTaskInterface.onDeleteUserHadFinished();
         }else{

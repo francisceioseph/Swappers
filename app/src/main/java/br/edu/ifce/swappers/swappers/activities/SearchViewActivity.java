@@ -107,7 +107,6 @@ public class SearchViewActivity extends AppCompatActivity implements SearchInter
     public void searchBook(String query) {
         mBookListAux.clear();
             if(AndroidUtils.isNetworkAvailable(getApplicationContext())){
-                Log.i("QUERY1",query);
                 initSearchWS(query);
             }else {
                 Toast toast = SwappersToast.makeText(this, "Verifique sua conexão!", Toast.LENGTH_LONG);

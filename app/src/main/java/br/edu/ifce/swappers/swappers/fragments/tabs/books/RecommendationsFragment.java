@@ -151,8 +151,6 @@ public class RecommendationsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SwappersToast.makeText(getActivity(), getString(R.string.service_not_implemented), Toast.LENGTH_SHORT).show();;
-
                 if(!recommendationBooks.isEmpty()){
                     for (int j=0; j<nearPlaces.size(); j++){
                         if(recommendationBooks.get(indexBookRec).getIdPlace() == nearPlaces.get(j).getId()){
@@ -207,8 +205,6 @@ public class RecommendationsFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SwappersToast.makeText(getActivity(), getString(R.string.service_not_implemented), Toast.LENGTH_SHORT).show();;
-
                 if(!recommendationBooks.isEmpty()){
                     indexBookRec++;
                     if(indexBookRec>=recommendationBooks.size()) indexBookRec = 0;
