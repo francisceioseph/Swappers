@@ -33,9 +33,8 @@ public class PlaceService {
 
     private static final String URL = "http://swappersws-oliv.rhcloud.com/swappersws/swappersws/place";
     private static int responseCode;
-    public static int getResponseCode() {
-        return responseCode;
-    }
+    public static int getResponseCode() { return responseCode; }
+    public static void setResponseCode(int resCode) { responseCode = resCode; }
 
     public static ArrayList<Place> getPlaceWS(String city, String states){
         URL url = null;
