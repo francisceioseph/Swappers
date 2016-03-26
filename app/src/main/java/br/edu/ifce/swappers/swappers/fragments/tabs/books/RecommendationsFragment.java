@@ -8,20 +8,17 @@ package br.edu.ifce.swappers.swappers.fragments.tabs.books;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -30,7 +27,6 @@ import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
 import br.edu.ifce.swappers.swappers.miscellaneous.CategoryBook;
-import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.BookWithPlace;
 import br.edu.ifce.swappers.swappers.model.Place;
@@ -226,14 +222,16 @@ public class RecommendationsFragment extends Fragment {
     }
 
     public String getBookDateDonation(Book book){
-        String bookDateDonation;
+        String bookDateDonation ="";
 
         Calendar dateDonationCalendar = new GregorianCalendar();
-        dateDonationCalendar.setTimeInMillis(book.getDateDonation().getTime());
+        if(book.getDateDonation()!=null){
+            dateDonationCalendar.setTimeInMillis(book.getDateDonation().getTime());
 
-        bookDateDonation = String.valueOf(dateDonationCalendar.get(Calendar.DAY_OF_MONTH)) + "/" +
-                String.valueOf(dateDonationCalendar.get(Calendar.MONTH)) + "/" +
-                String.valueOf(dateDonationCalendar.get(Calendar.YEAR));
+            bookDateDonation = String.valueOf(dateDonationCalendar.get(Calendar.DAY_OF_MONTH)) + "/" +
+                    String.valueOf(dateDonationCalendar.get(Calendar.MONTH)) + "/" +
+                    String.valueOf(dateDonationCalendar.get(Calendar.YEAR));
+        }
 
         return bookDateDonation;
     }
