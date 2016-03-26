@@ -111,6 +111,8 @@ public class PlaceService {
         int count = 0;
         boolean verifyJson = false;
 
+        Log.i("LOG-PLACE", jsonPlace);
+
         JSONObject jsonObject = new JSONObject(jsonPlace);
         JSONObject dataObject = jsonObject.optJSONObject("place");
         if (dataObject!=null){
@@ -158,7 +160,7 @@ public class PlaceService {
                 }
                 placeUnique.setBooks(books);
             }else if(jsonItems.has("books")){
-                JSONObject jsonItem = json.getJSONObject("books");
+                JSONObject jsonItem = jsonItems.getJSONObject("books");
                 Book book= new Book();
                 book.setId(jsonItem.getString("id"));
                 book.setAuthor(jsonItem.getString("author"));
