@@ -59,7 +59,7 @@
 
     <!-- Strings from PlacesFragment.java -->
     <string name="gps_connection_error_message">Turn your GPS on and click on the book above.</string>
-    <string name="no_books_available_at_place">There aren\'t books here. Please, donate one. :)</string>
+    <string name="no_books_available_at_place">There aren\'t registered books here. Please, register your donation! :)</string>
     <string name="one_book_available_at_place">There is 1 book available here.</string>
     <string name="marker_there">There are </string>
     <string name="many_books_available_at_place"> books available here.</string>
@@ -108,7 +108,7 @@
     <string name="best_books_tab_title">BEST BOOKS</string>
 
     <!-- Strings from ReadersReviewFragment.java -->
-    <string name="no_comments_found_message">OMG, no comments found! Be the first to comment. ;) </string>
+    <string name="no_comments_found_message">No comments found. Be the first! ;)</string>
 
     <!-- Strings from BestBooksFragment.java -->
     <string name="book_title_for_no_book_statistics_found">There isn\'t donations this month.</string>

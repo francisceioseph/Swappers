@@ -335,6 +335,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                     Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.swappers_local_not_available_in_city), Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
+                    PlaceService.setResponseCode(0);
                 }else {
                     setUpMarkers(placeList);
 
@@ -346,6 +347,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.sick_server_error), Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
+                PlaceService.setResponseCode(0);
             }
         }
     }

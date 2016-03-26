@@ -21,7 +21,6 @@ import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.NotificationTaskIn
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.RecycleViewOnClickListenerHack;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.NotificationTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
-import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.Notification;
 
 /**
@@ -53,7 +52,6 @@ public class NotificationsFragment extends Fragment implements RecycleViewOnClic
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_notifications, container, false);
-
 
         adapter = new NotificationRecyclerViewAdapter(getActivity(),this.dataSource);
         adapter.setmRecycleViewOnClickListenerHack(this);
@@ -93,7 +91,9 @@ public class NotificationsFragment extends Fragment implements RecycleViewOnClic
 
     @Override
     public void onReceiveNotification(ArrayList<Notification> notifications) {
-        this.dataSource.addAll(notifications);
-        this.adapter.notifyDataSetChanged();
+        if(notifications!=null){
+            this.dataSource.addAll(notifications);
+            this.adapter.notifyDataSetChanged();
+        }
     }
 }

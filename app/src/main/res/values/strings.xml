@@ -249,7 +249,6 @@
     <string name="user_readers_comments">Francis Thomas</string>
     <string name="floating_action_button_donate">Donate this Book!</string>
     <string name="floating_action_button_adopt">Adopt this Book!</string>
-    <string name="floating_action_button_favorite">Favorite this Book!</string>
     <string name="floating_action_button_comment">Comment this Book!</string>
     <string name="find_place">FIND A NEAR PLACE</string>
 
@@ -357,5 +356,6 @@
     <!-- Fragment Recommendations-->
     <string name="no_recommendations_yet">There are no recommendations.</string>
     <string name="we_working">Sorry, but we are working on it.</string>
+    <string name="floating_action_button_favorite">Favorite this Book!</string>
 
 </resources>

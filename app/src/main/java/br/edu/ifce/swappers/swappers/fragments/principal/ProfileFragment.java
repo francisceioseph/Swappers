@@ -57,7 +57,7 @@ public class ProfileFragment extends Fragment {
         coverPhoto.setImageBitmap(this.getUserCoverPhoto());
         userImageView.setImageBitmap(this.getUserPhoto());
 
-        if(MockSingleton.INSTANCE.user.getBirthday() != null){
+        if(MockSingleton.INSTANCE.user.getBirthday() != null && MockSingleton.INSTANCE.user.getBirthday() != 0){
             usernameTextView.setText(this.getUserNameFromSingleton() + ", " + this.getUserAge());
         }
         else {

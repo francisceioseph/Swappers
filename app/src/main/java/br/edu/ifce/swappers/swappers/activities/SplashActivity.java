@@ -29,8 +29,9 @@ public class SplashActivity extends Activity{
     }
 
     private void doAutoLogin(){
+        loadCityStateFromServer();
+
         if (AndroidUtils.userHasBeenLoaded(this) && AndroidUtils.isNetworkAvailable(this)) {
-            loadCityStateFromServer();
             MockSingleton.INSTANCE.user = AndroidUtils.loadUser(this);
             AndroidUtils.startMainActivity(this);
         }

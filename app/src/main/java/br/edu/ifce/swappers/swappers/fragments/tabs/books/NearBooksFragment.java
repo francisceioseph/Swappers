@@ -188,14 +188,16 @@ public class NearBooksFragment extends Fragment {
     }
 
     public String getBookDateDonation(Book book){
-        String bookDateDonation;
+        String bookDateDonation = "";
 
         Calendar dateDonationCalendar = new GregorianCalendar();
-        dateDonationCalendar.setTimeInMillis(book.getDateDonation().getTime());
+        if(book.getDateDonation()!=null){
+            dateDonationCalendar.setTimeInMillis(book.getDateDonation().getTime());
 
-        bookDateDonation = String.valueOf(dateDonationCalendar.get(Calendar.DAY_OF_MONTH)) + "/" +
-                String.valueOf(dateDonationCalendar.get(Calendar.MONTH)) + "/" +
-                String.valueOf(dateDonationCalendar.get(Calendar.YEAR));
+            bookDateDonation = String.valueOf(dateDonationCalendar.get(Calendar.DAY_OF_MONTH)) + "/" +
+                    String.valueOf(dateDonationCalendar.get(Calendar.MONTH)) + "/" +
+                    String.valueOf(dateDonationCalendar.get(Calendar.YEAR));
+        }
 
         return bookDateDonation;
     }
