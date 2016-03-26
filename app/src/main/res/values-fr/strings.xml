@@ -52,7 +52,7 @@
 
     <!-- Strings from PlacesFragment.java -->
     <string name="gps_connection_error_message">Connectez le GPS et cliquez sur le livre ci-dessus.</string>
-    <string name="no_books_available_at_place">Il n\'y a pas des livres ici. SVP, faites un don! :)</string>
+    <string name="no_books_available_at_place">Il n\'y a pas des livres enregistrés ici. SVP, enregistrez votre don! :)</string>
     <string name="one_book_available_at_place">Il y a 1 livre disponible.</string>
     <string name="marker_there">Il y a  </string>
     <string name="many_books_available_at_place"> livres disponibles.</string>
@@ -100,7 +100,7 @@
     <string name="place_city_state_not_found">Impossible localiser votre ville. Retournez vers le map et verifiez le GPS!</string>
 
     <!-- Strings from ReadersReviewFragment.java -->
-    <string name="no_comments_found_message">OMG, il n\'y a pas de commentaires! Soyez le premier à commenter. ;)</string>
+    <string name="no_comments_found_message">Il n\'y a pas encore des commentaires! C\'est parti! ;)</string>
 
     <!-- Strings from BestBooksFragment.java -->
     <string name="book_title_for_no_book_statistics_found">Il n\'y avait pas de don ce mois-ci. :\'(</string>
