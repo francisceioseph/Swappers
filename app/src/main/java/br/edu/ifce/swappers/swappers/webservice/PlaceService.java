@@ -1,7 +1,5 @@
 package br.edu.ifce.swappers.swappers.webservice;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -110,8 +108,6 @@ public class PlaceService {
         ArrayList<Place> placeList = new ArrayList<>();
         int count = 0;
         boolean verifyJson = false;
-
-        Log.i("LOG-PLACE", jsonPlace);
 
         JSONObject jsonObject = new JSONObject(jsonPlace);
         JSONObject dataObject = jsonObject.optJSONObject("place");

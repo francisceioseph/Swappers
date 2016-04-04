@@ -39,7 +39,7 @@
         android:theme="@style/SWTheme"
         >
 
-        <meta-data android:name="ubertesters_organization_token" android:value="a7611a6c-8afe-11e5-a4a5-22000a9127ac"/>
+        <meta-data android:name="ubertesters_organization_token" android:value="1a6f631c-f817-11e5-8b80-22000a9127ac"/>
 
         <meta-data
             android:name="android.app.default_searchable"

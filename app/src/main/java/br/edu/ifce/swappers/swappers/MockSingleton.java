@@ -4,12 +4,7 @@ package br.edu.ifce.swappers.swappers;
  * Last modified by Joamila on 07/12/2015
  */
 
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.BookWithPlace;
@@ -37,6 +32,8 @@ public enum MockSingleton {
     public String userChangeState = null;
 
     public int codePhoto = 0;
+
+    public boolean statusGPS = false;
     //public String city = new String();
     //public String state = new String();
 
