@@ -12,7 +12,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -36,20 +35,21 @@ import java.util.Map;
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.activities.DetailPlaceActivity;
+import br.edu.ifce.swappers.swappers.miscellaneous.ListenerGPS;
+import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
+import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.PlaceInterface;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.UpdateCityStateUserTaskInterface;
+import br.edu.ifce.swappers.swappers.miscellaneous.tasks.PlaceAsyncTask;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.UpdateCityStateUserTask;
+import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
 import br.edu.ifce.swappers.swappers.model.DistancePlaces;
 import br.edu.ifce.swappers.swappers.model.Place;
 import br.edu.ifce.swappers.swappers.model.User;
-import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
-import br.edu.ifce.swappers.swappers.miscellaneous.ListenerGPS;
-import br.edu.ifce.swappers.swappers.miscellaneous.tasks.PlaceAsyncTask;
-import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.PlaceInterface;
-import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.webservice.PlaceService;
 
 
-public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener, PlaceInterface, OnMapReadyCallback,UpdateCityStateUserTaskInterface {
+public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickListener, PlaceInterface, OnMapReadyCallback,
+        UpdateCityStateUserTaskInterface{
 
     private static GoogleMap mapPlace;
     public static GoogleMap getMapPlace() {
@@ -63,9 +63,12 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private ArrayList<Place> placesNear = new ArrayList<Place>();
     private User user = MockSingleton.INSTANCE.user;
     private ListenerGPS listenerGPS = new ListenerGPS();
+    private Location locationUser;
+    private Location locationUser2;
     private Map<String,Integer> mapPlaceMarker = new HashMap<>();
     private Map<Integer, String> mapPlaceMarkerAux = new HashMap<>();
     ArrayList<Marker> markers = new ArrayList<>();
+    LatLng TESTE = new LatLng(-19.9425715, -43.9184524);
 
     public PlacesFragment() {}
 
@@ -106,8 +109,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         return myPosition;
     }
 
-    private boolean verifyGPS(){
-        long timeUpdate = 3000;
+    private void verifyGPS(){
+        long timeUpdate = 0;
         float distance = 0;
 
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -115,19 +118,20 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, timeUpdate, distance, listenerGPS);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, timeUpdate, distance, listenerGPS);
 
-        Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        locationUser2 = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-        if(locationUser == null){
-            return false;
-        }
-        else{
+        if(locationUser!=null){
             myPosition = getMyPosition(locationUser);
-            return true;
+        }
+        else if(locationUser2!=null){
+            myPosition = getMyPosition(locationUser2);
         }
     }
 
-    private void verifyLocation(boolean statusGPS) {
-        if(statusGPS == true){
+     void verifyLocation() {
+         verifyGPS();
+         if(myPosition !=null){
             Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
             List<Address> addresses;
             String city = null;
@@ -158,11 +162,11 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
         boolean statusGPS;
         ArrayList<Place> places = MockSingleton.INSTANCE.places;
 
-        statusGPS = verifyGPS();
+        verifyLocation();
 
         //Primeira busca
-        if (statusGPS == true && PlaceService.getResponseCode()!=200) {
-            verifyLocation(statusGPS);
+        if (myPosition!= null && PlaceService.getResponseCode()!=200) {
+
             if (MockSingleton.INSTANCE.user.getCity() != null && MockSingleton.INSTANCE.user.getState() != null && AndroidUtils.isNetworkAvailable(getActivity())) {
                 PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
                 task.execute(MockSingleton.INSTANCE.user.getCity(), MockSingleton.INSTANCE.user.getState());
@@ -173,7 +177,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             }
         }
         //GPS não identificado
-        else if (statusGPS == false && PlaceService.getResponseCode()!=200) {
+        else if (myPosition == null && PlaceService.getResponseCode()!=200) {
             Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.gps_connection_error_message), Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
@@ -240,7 +244,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                         countPlace = 0;
                     }
                     LatLng placeNow = new LatLng(placesNear.get(countPlace).getLatitude(), placesNear.get(countPlace).getLongitude());
-                    if(verifyGPS() == false){
+                    if(myPosition == null){
                         setUpMarkers(placesNear);
                     }
                     showMarker(placeNow, mapPlace);
@@ -319,14 +323,21 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     @Override
     public void updatePlaceNear(ArrayList<Place> placeList) {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        LatLng myCurrentPosition;
+        //Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        if(locationUser == null) {
+        if(locationUser == null && locationUser2 == null) {
             Toast toast = SwappersToast.makeText(getActivity(), getString(R.string.gps_connection_error_message), Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }else {
-            LatLng myCurrentPosition = getMyPosition(locationUser);
+            if(locationUser!=null){
+                myCurrentPosition = getMyPosition(locationUser);
+            }
+            else{
+                myCurrentPosition = getMyPosition(locationUser2);
+            }
+
             getMapPlace().addMarker(new MarkerOptions().position(myCurrentPosition).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_history)));
             getMapPlace().moveCamera(CameraUpdateFactory.newLatLngZoom(myCurrentPosition, 18));
 
@@ -411,7 +422,7 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     public void onUpdateCityStateUserHadFinished() {
         String city = MockSingleton.INSTANCE.user.getCity();
         String state = MockSingleton.INSTANCE.user.getState();
-        AndroidUtils.saveCityState(getActivity(),city,state);
+        AndroidUtils.saveCityState(getActivity(), city, state);
         SwappersToast.makeText(getActivity(),getActivity().getString(R.string.settings_sucess_update_city_state_user_message),Toast.LENGTH_LONG).show();
     }
 }
