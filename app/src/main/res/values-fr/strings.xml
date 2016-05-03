@@ -254,6 +254,7 @@
     <string name="no_recommendations_yet">Il n\'y a pas des recommendations.</string>
     <string name="we_working">Désolé, mais nous y travaillons.</string>
     <string name="notifications_section_title">Notifications</string>
+    <string name="message_snippet">Cliquez à noveau pour voir les details du point</string>
 
 
 </resources>

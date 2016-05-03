@@ -357,5 +357,6 @@
     <string name="no_recommendations_yet">There are no recommendations.</string>
     <string name="we_working">Sorry, but we are working on it.</string>
     <string name="floating_action_button_favorite">Favorite this Book!</string>
+    <string name="message_snippet">Click again and see the details of the point</string>
 
 </resources>

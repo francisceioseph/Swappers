@@ -279,6 +279,7 @@
     <string name="no_recommendations_yet">Ainda não há recomendações.</string>
     <string name="we_working">Desculpe, mas estamos trabalhando nisso.</string>
     <string name="notifications_section_title">Notificações</string>
+    <string name="message_snippet">Clique mais uma vez e veja os detalhes do ponto</string>
 
 
 </resources>

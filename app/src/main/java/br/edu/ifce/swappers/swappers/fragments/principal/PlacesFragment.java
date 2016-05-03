@@ -68,7 +68,6 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private Map<String,Integer> mapPlaceMarker = new HashMap<>();
     private Map<Integer, String> mapPlaceMarkerAux = new HashMap<>();
     ArrayList<Marker> markers = new ArrayList<>();
-    LatLng TESTE = new LatLng(-19.9425715, -43.9184524);
 
     public PlacesFragment() {}
 
@@ -271,12 +270,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
                 Marker marker = mapPlace.addMarker(new MarkerOptions().position(coordinate)
                         .title(placesCity.get(i).getName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
-                int total_books = placesCity.get(i).getDonation() - placesCity.get(i).getRecovered();
-                if(total_books == 0) marker.setSnippet(getString(R.string.no_books_available_at_place));
-                else if(total_books == 1) marker.setSnippet(getString(R.string.one_book_available_at_place));
-                else marker.setSnippet(getString(R.string.marker_there) + " " + String.valueOf(total_books) +
-                            " " + getString(R.string.many_books_available_at_place));
+                
+                marker.setSnippet(getResources().getString(R.string.message_snippet));
 
                 mapPlaceMarker.put(marker.getId(), placesCity.get(i).getId());
                 mapPlaceMarkerAux.put(placesCity.get(i).getId(), marker.getId());

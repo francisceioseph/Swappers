@@ -234,5 +234,6 @@
     <string name="we_working">Sorry, but we are working on it.</string>
     <string name="notifications_section_title">Notifications</string>
     <string name="notification_section_title">Timeline</string>
+    <string name="message_snippet">Click again and see the details of the point</string>
 
 </resources>
