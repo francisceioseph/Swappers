@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.edu.ifce.swappers.swappers" >
+    android:installLocation="preferExternal"
+    package="br.edu.ifce.swappers.swappers">
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -36,11 +37,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/SWTheme"
-        >
-
-        <meta-data android:name="ubertesters_organization_token" android:value="1a6f631c-f817-11e5-8b80-22000a9127ac"/>
-
+        android:theme="@style/SWTheme">
+        <meta-data
+            android:name="ubertesters_organization_token"
+            android:value="1a6f631c-f817-11e5-8b80-22000a9127ac" />
         <meta-data
             android:name="android.app.default_searchable"
             android:value=".SearchViewActivity" />
@@ -51,7 +51,7 @@
         <activity
             android:name=".activities.SplashActivity"
             android:label="@string/title_activity_splash"
-            android:theme="@style/SWTheme" >
+            android:theme="@style/SWTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,29 +61,24 @@
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/SWTheme" >
-        </activity>
-
+            android:theme="@style/SWTheme"></activity>
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName=".activities.LoginActivity"
-            android:theme="@style/SWTheme" >
-        </activity>
-
+            android:theme="@style/SWTheme"></activity>
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleTop"
-            android:theme="@style/SWTheme"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/SWTheme"></activity>
         <activity
             android:name=".activities.SearchViewActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleTop"
-            android:theme="@style/SWTheme"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/SWTheme">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -92,25 +87,23 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
         <activity
             android:name=".activities.DetailBookActivity"
             android:label="@string/title_activity_detail_book"
             android:launchMode="singleTop"
             android:parentActivityName=".activities.SearchViewActivity"
-            android:theme="@style/SWTheme"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/SWTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.SearchViewActivity" />
         </activity>
-
         <activity
             android:name=".activities.DetailPlaceActivity"
             android:label="@string/title_activity_detail_place"
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/SWTheme"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/SWTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
@@ -119,7 +112,7 @@
             android:name=".activities.ReferencedLibrariesActivity"
             android:label="@string/title_activity_referenced_libraries"
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/SWTheme" >
+            android:theme="@style/SWTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
@@ -129,7 +122,7 @@
             android:label="@string/title_activity_reader_comment"
             android:launchMode="singleInstance"
             android:parentActivityName=".activities.DetailBookActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.DetailBookActivity" />
@@ -138,21 +131,23 @@
             android:name=".activities.DonationsListPointActivity"
             android:label="@string/title_activity_donations_list_point"
             android:parentActivityName=".activities.MainActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
         </activity>
-
         <activity
             android:name=".activities.BookActivity"
             android:label="@string/title_activity_book"
             android:parentActivityName=".activities.MainActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.swappers.swappers.activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.AppIntroActivity"
+            android:label="@string/title_activity_app_intro"></activity>
     </application>
 
 </manifest>

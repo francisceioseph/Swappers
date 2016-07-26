@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -62,9 +63,9 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     private DistancePlaces distancePlaces =null;
     private ArrayList<Place> placesNear = new ArrayList<Place>();
     private User user = MockSingleton.INSTANCE.user;
-    private ListenerGPS listenerGPS = new ListenerGPS();
     private Location locationUser;
     private Location locationUser2;
+    private boolean locationFlag = false;
     private Map<String,Integer> mapPlaceMarker = new HashMap<>();
     private Map<Integer, String> mapPlaceMarkerAux = new HashMap<>();
     ArrayList<Marker> markers = new ArrayList<>();
@@ -114,8 +115,8 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
 
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, timeUpdate, distance, listenerGPS);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, timeUpdate, distance, listenerGPS);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, timeUpdate, distance, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, timeUpdate, distance, locationListener);
 
         locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         locationUser2 = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -158,13 +159,13 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
     }
 
     private void getPlacesInWS(){
-        boolean statusGPS;
         ArrayList<Place> places = MockSingleton.INSTANCE.places;
 
         verifyLocation();
 
         //Primeira busca
         if (myPosition!= null && PlaceService.getResponseCode()!=200) {
+            locationFlag=true;
 
             if (MockSingleton.INSTANCE.user.getCity() != null && MockSingleton.INSTANCE.user.getState() != null && AndroidUtils.isNetworkAvailable(getActivity())) {
                 PlaceAsyncTask task = new PlaceAsyncTask(getActivity(), this);
@@ -374,6 +375,32 @@ public class PlacesFragment extends Fragment implements GoogleMap.OnMarkerClickL
             }
         }
     }
+
+
+
+    LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            if(!locationFlag){
+                getPlacesInWS();
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
+    };
 
     @Override
     public boolean onMarkerClick(Marker marker) {

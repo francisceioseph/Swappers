@@ -1,6 +1,7 @@
 package br.edu.ifce.swappers.swappers.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -23,7 +24,15 @@ public class SplashActivity extends Activity{
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                doAutoLogin();
+                Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isFirstRun", true);
+                if (isFirstRun) {
+                    Intent intent = new Intent(SplashActivity.this, AppIntroActivity.class);
+                    startActivity(intent);
+                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isFirstRun", false).commit();
+                }
+                else{
+                    doAutoLogin();
+                }
             }
         }, SPLASH_TIME_OUT);
     }

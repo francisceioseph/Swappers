@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -65,7 +66,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         this.getToolbar().setTitleTextColor(Color.WHITE);
 
         this.buildMainMenu();
-    }
+ }
 
     private void buildMainMenu() {
 
