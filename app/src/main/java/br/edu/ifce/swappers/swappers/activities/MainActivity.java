@@ -8,12 +8,10 @@ import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,11 +19,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
@@ -47,6 +42,8 @@ import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountListener;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 public class MainActivity extends MaterialNavigationDrawer implements MaterialAccountListener, UserPhotoDialogFragment.UserPhotoDialogListener,UpdateImageTaskInterface {
 
@@ -55,18 +52,18 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     private String photoCoverBase64,photoProfileBase64;
     private MaterialAccount userAccount;
 
- @Override
-    public void init(Bundle savedInstance) {
+     @Override
+        public void init(Bundle savedInstance) {
 
-        this.userAccount = this.loadAccount();
+            this.userAccount = this.loadAccount();
 
-        this.addAccount(userAccount);
-        this.setAccountListener(this);
+            this.addAccount(userAccount);
+            this.setAccountListener(this);
 
-        this.getToolbar().setTitleTextColor(Color.WHITE);
+            this.getToolbar().setTitleTextColor(Color.WHITE);
 
-        this.buildMainMenu();
- }
+            this.buildMainMenu();
+     }
 
     private void buildMainMenu() {
 

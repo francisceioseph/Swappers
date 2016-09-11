@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="facebook_app_id">1273858492626640</string>
 
     <!-- Strings from BookActivity.java -->
     <string name="near_books_tab_title">NEAR BOOKS</string>

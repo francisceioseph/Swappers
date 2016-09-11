@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.miscellaneous.tasks.StateCityTask;
@@ -45,6 +48,8 @@ public class SplashActivity extends Activity{
             AndroidUtils.startMainActivity(this);
         }
         else {
+            FacebookSdk.sdkInitialize(getApplicationContext());
+            AppEventsLogger.activateApp(this);
             AndroidUtils.startSignInActivity(this);
         }
     }
