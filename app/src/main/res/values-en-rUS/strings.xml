@@ -235,5 +235,6 @@
     <string name="notifications_section_title">Notifications</string>
     <string name="notification_section_title">Timeline</string>
     <string name="message_snippet">Click again and see the details of the point</string>
+    <string name="error_waiver_login">Sorry,  it seems you gave up!</string>
 
 </resources>

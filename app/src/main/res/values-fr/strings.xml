@@ -255,6 +255,7 @@
     <string name="we_working">Désolé, mais nous y travaillons.</string>
     <string name="notifications_section_title">Notifications</string>
     <string name="message_snippet">Cliquez à noveau pour voir les details du point</string>
+    <string name="error_waiver_login">Pardon, mais il paraît que vous avez abandonné!</string>
 
 
 </resources>

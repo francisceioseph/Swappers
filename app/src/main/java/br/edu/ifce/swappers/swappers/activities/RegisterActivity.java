@@ -19,13 +19,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.fragments.dialogs.UserPhotoDialogFragment;
 import br.edu.ifce.swappers.swappers.model.User;
@@ -47,6 +62,10 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
     private CircleImageView userPhotoCircleImageView;
     public Bitmap userPhotoBitmap;
 
+    private CallbackManager callbackManager;
+    private User user = new User();
+    private boolean flagFb = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,13 +76,20 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
 
         Button registerButton = (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(this.makeRegisterButtonClickListener());
+        LoginButton registerFacebookButton = (LoginButton) findViewById(R.id.login_button);
+        registerFacebookButton.setOnClickListener(this.makeRegisterFbButtonClickListener());
 
         this.userPhotoCircleImageView = (CircleImageView) findViewById(R.id.user_photo_circle_image_view);
         this.userPhotoCircleImageView.setOnClickListener(this.makeUserPhotoCircleButtonClickListener());
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(flagFb){
+            super.onActivityResult(requestCode, resultCode, data);
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
 
         if (requestCode == CAMERA_INTENT_CODE && resultCode == RESULT_OK){
             userPhotoBitmap = ImageUtil.retrieveImageFromCameraResult(data);
@@ -117,6 +143,26 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
             }
         };
     }
+
+    private OnClickListener makeRegisterFbButtonClickListener() {
+        return new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flagFb = true;
+
+                if(AndroidUtils.isNetworkAvailable(getApplicationContext())) {
+                    RegisterActivity.this.saveRegisterFromFb();
+                }
+                else {
+                    AndroidUtils.makeDialog(getApplicationContext(),
+                            getString(R.string.dialog_error_title),
+                            getString(R.string.internet_connection_error_message)).show();
+                }
+
+            }
+        };
+    }
+
 
     /*
     *
@@ -186,6 +232,53 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         }
     }
 
+    private void saveRegisterFromFb(){
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email","public_profile"));
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Profile profile = Profile.getCurrentProfile();
+                user.setName(profile.getName());
+                final AccessToken pass = loginResult.getAccessToken();
+
+                GraphRequest request = GraphRequest.newMeRequest(
+                    loginResult.getAccessToken(),
+                    new GraphRequest.GraphJSONObjectCallback(){
+                        @Override
+                        public void onCompleted(JSONObject object, GraphResponse response) {
+                            try {
+                                user.setEmail(object.getString("email"));
+                                if(validationRegistryFb(user.getName(), user.getEmail(), pass)){
+                                    callAsyncTask(user.getName(), user.getEmail(), pass.toString());
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+                );
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email");
+                request.setParameters(parameters);
+                request.executeAsync();
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(getApplicationContext(), R.string.error_waiver_login, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                Toast.makeText(getApplicationContext(), R.string.error_while_processing_donation_message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void callAsyncTask(String name, String email, String usePassword){
 
         String passwordCodec = new String(Hex.encodeHex(DigestUtils.sha256(usePassword.getBytes())));
@@ -211,7 +304,17 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
             else{return false;}
         }
         else{return false;}
+    }
 
+    private boolean validationRegistryFb(String name, String email, AccessToken token){
+        if(validationNameUser(name)){
+            if(validateEmailWithMasks(email)){
+                token.getToken();
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private boolean validateEmailWithMasks(String email){

@@ -360,5 +360,6 @@
     <string name="floating_action_button_favorite">Favorite this Book!</string>
     <string name="message_snippet">Click again and see the details of the point</string>
     <string name="title_activity_app_intro">AppIntroActivity</string>
+    <string name="error_waiver_login">Sorry,  it seems you gave up!</string>
 
 </resources>

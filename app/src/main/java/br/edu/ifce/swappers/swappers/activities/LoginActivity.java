@@ -44,8 +44,6 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
         Button signInButton = (Button) findViewById(R.id.sign_in_button);
         Button signUpButton = (Button) findViewById(R.id.sign_up_button);
 
-        //FacebookSdk.sdkInitialize(getApplicationContext());
-        //AppEventsLogger.activateApp(this);
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
 
         /*Essa linha serve para esconder o teclado, assim o usuário não fica apertando o botão de voltar para escondê-lo.*/
