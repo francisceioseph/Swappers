@@ -11,10 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
@@ -23,6 +26,8 @@ import com.facebook.login.widget.LoginButton;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -44,6 +49,8 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
         Button signInButton = (Button) findViewById(R.id.sign_in_button);
         Button signUpButton = (Button) findViewById(R.id.sign_up_button);
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
 
         /*Essa linha serve para esconder o teclado, assim o usuário não fica apertando o botão de voltar para escondê-lo.*/
@@ -97,19 +104,37 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Profile profile = Profile.getCurrentProfile();
-                Toast.makeText(getApplicationContext(), "Olá " + profile.getName(), Toast.LENGTH_SHORT).show();
+                final AccessToken pass = loginResult.getAccessToken();
+
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback(){
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                try {
+                                    makeLoginFbTask(object.getString("email"), "");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        }
+                );
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email");
+                request.setParameters(parameters);
+                request.executeAsync();
+
             }
 
             @Override
             public void onCancel() {
-                Toast.makeText(getApplicationContext(), "caiu!", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(), R.string.error_waiver_login, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException exception) {
-                Toast.makeText(getApplicationContext(), "Deu erro!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.error_while_processing_donation_message, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -155,6 +180,18 @@ public class LoginActivity extends AppCompatActivity implements TaskInterface{
             //String pwdCodec = new String(Hex.encodeHex(digest.getBytes()));
             //String passwordCodec = new String(Hex.encodeHex(DigestUtils.sha256Hex(password.getBytes()).getBytes()));
             String passwordCodec = new String(Hex.encodeHex(DigestUtils.sha256(password.getBytes())));
+
+            UserTask userTask = new UserTask(this, this);
+            userTask.execute(email,passwordCodec);
+        }
+    }
+
+    public void makeLoginFbTask(String email, String pass){
+        if(AndroidUtils.userHasBeenLoaded(this)){
+            MockSingleton.INSTANCE.user = AndroidUtils.loadUser(this);
+        }
+        else {
+            String passwordCodec = new String(Hex.encodeHex(DigestUtils.sha256(pass.getBytes())));
 
             UserTask userTask = new UserTask(this, this);
             userTask.execute(email,passwordCodec);

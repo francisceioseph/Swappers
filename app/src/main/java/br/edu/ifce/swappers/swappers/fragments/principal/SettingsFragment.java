@@ -24,6 +24,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.fourmob.datetimepicker.date.DatePickerDialog.OnDateSetListener;
 
@@ -517,8 +520,15 @@ public class SettingsFragment extends Fragment implements OnDateSetListener, Use
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Context context = getActivity().getApplicationContext();
+                FacebookSdk.sdkInitialize(context);
+                AppEventsLogger.activateApp(context);
 
                 AndroidUtils.deleteUser(context);
+
+                if(LoginManager.getInstance()!=null){
+                    LoginManager.getInstance().logOut();
+                }
+
                 BookDAO bookDAO = new BookDAO(getActivity());
                 bookDAO.delete();
                 SwappersToast.makeText(context, getString(R.string.logout_dialog_positive_button_message), Toast.LENGTH_SHORT).show();

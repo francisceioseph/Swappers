@@ -6,6 +6,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+
 import br.edu.ifce.swappers.swappers.MockSingleton;
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.dao.BookDAO;
@@ -52,6 +56,8 @@ public class UserTask extends AsyncTask<String,Void,User> {
             taskInterface.startNextActivity();
         }
         else {
+            LoginManager.getInstance().logOut();
+
             SwappersToast.makeText(context, context.getString(R.string.login_error_message), Toast.LENGTH_SHORT).show();
         }
 

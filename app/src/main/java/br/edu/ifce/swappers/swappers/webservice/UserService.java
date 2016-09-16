@@ -2,6 +2,7 @@ package br.edu.ifce.swappers.swappers.webservice;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,6 +23,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import br.edu.ifce.swappers.swappers.MockSingleton;
+import br.edu.ifce.swappers.swappers.miscellaneous.SwappersToast;
 import br.edu.ifce.swappers.swappers.model.Book;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.miscellaneous.utils.AndroidUtils;
@@ -83,8 +85,12 @@ public class UserService {
     }
 
     public static int getIdFromLocation(String location){
-        String string[] = location.split("/");
-        int idUser = Integer.valueOf(string[string.length-1]);
+        int idUser = 0;
+        if(location!=null){
+            String string[] = location.split("/");
+            idUser = Integer.valueOf(string[string.length-1]);
+        }
+
         return idUser;
     }
 

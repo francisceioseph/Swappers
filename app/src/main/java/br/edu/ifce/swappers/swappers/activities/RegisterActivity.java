@@ -250,8 +250,8 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
                         public void onCompleted(JSONObject object, GraphResponse response) {
                             try {
                                 user.setEmail(object.getString("email"));
-                                if(validationRegistryFb(user.getName(), user.getEmail(), pass)){
-                                    callAsyncTask(user.getName(), user.getEmail(), pass.toString());
+                                if(validationRegistryFb(user.getName(), user.getEmail())){
+                                    callAsyncTask(user.getName(), user.getEmail(), "");
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -306,10 +306,9 @@ public class RegisterActivity extends AppCompatActivity implements UserPhotoDial
         else{return false;}
     }
 
-    private boolean validationRegistryFb(String name, String email, AccessToken token){
+    private boolean validationRegistryFb(String name, String email){
         if(validationNameUser(name)){
             if(validateEmailWithMasks(email)){
-                token.getToken();
                 return true;
             }
         }

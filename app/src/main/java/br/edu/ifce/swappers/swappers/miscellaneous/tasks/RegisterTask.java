@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+
 import br.edu.ifce.swappers.swappers.R;
 import br.edu.ifce.swappers.swappers.model.User;
 import br.edu.ifce.swappers.swappers.miscellaneous.interfaces.TaskInterface;
@@ -54,6 +58,12 @@ public class RegisterTask extends AsyncTask<User,String,Integer>{
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         } else if (result == 409) {
+            FacebookSdk.sdkInitialize(context);
+            AppEventsLogger.activateApp(context);
+            if(LoginManager.getInstance()!=null){
+                LoginManager.getInstance().logOut();
+            }
+
             toast = Toast.makeText(context,context.getString(R.string.duplicate_email_error_message),Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
